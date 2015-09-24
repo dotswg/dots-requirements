@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>DDoS Open Threat Signaling Requirements</title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+      /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+      a.info {
+          /* This is the key. */
+          position: relative;
+          z-index: 24;
+          text-decoration: none;
+      }
+      a.info:hover {
+          z-index: 25;
+          color: #FFF; background-color: #900;
+      }
+      a.info span { display: none; }
+      a.info:hover span.info {
+          /* The span will display just on :hover state. */
+          display: block;
+          position: absolute;
+          font-size: smaller;
+          top: 2em; left: -5em; width: 15em;
+          padding: 2px; border: 1px solid #333;
+          color: #900; background-color: #EEE;
+          text-align: left;
+      }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style>
+
+  <link href="#rfc.toc" rel="Contents"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Overview"/>
+<link href="#rfc.section.1.2" rel="Chapter" title="1.2 Terminology"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Requirements"/>
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 General Requirements"/>
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Operational requirements"/>
+<link href="#rfc.section.2.3" rel="Chapter" title="2.3 Data model requirements"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Congestion Control Considerations"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Change Log"/>
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Initial revision"/>
+<link href="#rfc.references" rel="Chapter" title="6 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="6.2 Informative References"/>
+<link href="#rfc.authors" rel="Chapter"/>
+
+
+  <meta name="generator" content="xml2rfc version 2.5.0 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-00" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-9-17" />
+  <meta name="dct.abstract" content="This document defines the requirements for the DDoS Open Threat Signaling (DOTS) protocols coordinating attack response against Distributed Denial of Service (DDoS) attacks." />
+  <meta name="description" content="This document defines the requirements for the DDoS Open Threat Signaling (DOTS) protocols coordinating attack response against Distributed Denial of Service (DDoS) attacks." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+  <td class="left">DOTS Working Group</td>
+  <td class="right">A. Mortensen</td>
+</tr>
+<tr>
+  <td class="left">Internet-Draft</td>
+  <td class="right">Arbor Networks, Inc.</td>
+</tr>
+<tr>
+  <td class="left">Intended status: Informational</td>
+  <td class="right">R. Moskowitz</td>
+</tr>
+<tr>
+  <td class="left">Expires: March 20, 2016</td>
+  <td class="right">HTT Consulting</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">T. Reddy</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">Cisco Systems, Inc.</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">September 17, 2015</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">DDoS Open Threat Signaling Requirements<br />
+  <span class="filename">draft-ietf-dots-requirements-00</span></p>
+  
+  <h1 id="rfc.abstract">
+  <a href="#rfc.abstract">Abstract</a>
+</h1>
+<p>This document defines the requirements for the DDoS Open Threat Signaling (DOTS) protocols coordinating attack response against Distributed Denial of Service (DDoS) attacks.</p>
+<h1 id="rfc.status">
+  <a href="#rfc.status">Status of This Memo</a>
+</h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on March 20, 2016.</p>
+<h1 id="rfc.copyrightnotice">
+  <a href="#rfc.copyrightnotice">Copyright Notice</a>
+</h1>
+<p>Copyright (c) 2015 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<ul><li>1.1.   <a href="#rfc.section.1.1">Overview</a></li>
+<li>1.2.   <a href="#rfc.section.1.2">Terminology</a></li>
+</ul><li>2.   <a href="#rfc.section.2">Requirements</a></li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">General Requirements</a></li>
+<li>2.2.   <a href="#rfc.section.2.2">Operational requirements</a></li>
+<li>2.3.   <a href="#rfc.section.2.3">Data model requirements</a></li>
+</ul><li>3.   <a href="#rfc.section.3">Congestion Control Considerations</a></li>
+<li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">Change Log</a></li>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Initial revision</a></li>
+</ul><li>6.   <a href="#rfc.references">References</a></li>
+<ul><li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>6.2.   <a href="#rfc.references.2">Informative References</a></li>
+</ul><li><a href="#rfc.authors">Authors' Addresses</a></li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#problems" id="problems">Introduction</a></h1>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#overview" id="overview">Overview</a></h1>
+<p id="rfc.section.1.1.p.1">Distributed Denial of Service (DDoS) attacks continue to plague networks around the globe, from Tier-1 service providers on down to enterprises and small businesses. Attack scale and frequency similarly have continued to increase, thanks to software vulnerabilities leading to reflection and amplification attacks. Once staggering attack traffic volume is now the norm <em>REF</em>, and the impact of larger-scale attacks attract the attention of international press agencies. <em>REF GREAT CANNON</em></p>
+<p id="rfc.section.1.1.p.2">The higher profile and greater impact of contemporary DDoS attacks has led to increased focus on coordinated attack response. Many institutions and enterprises lack the resources or expertise to operate on-premise attack prevention solutions themselves. To address that gap, security service providers have begun to offer on-demand traffic scrubbing services. Each service offers its own interface for subscribers to request attack mitigation, tying subcribers to proprietary implementations while also limiting the subset of network elements capable of participating in the attack response. As a result of incompatibility across services, attack response may be fragmentary or otherwise incomplete, leaving key players in the attack path unable to assist in the defense.</p>
+<p id="rfc.section.1.1.p.3">There are many ways to respond to an ongoing DDoS attack, some of them better than others, but the lack of a common method to coordinate a real-time response across layers and network domains inhibits the speed and effectiveness of DDoS attack mitigation.</p>
+<p id="rfc.section.1.1.p.4">DOTS was formed to address this lack. The DOTS protocols are therefore not concerned with the form of response, but rather with communicating the need for a response, supplementing the call for help with pertinent details about the detected attack. To achieve this aim, the protocol must permit the DOTS client to request or withdraw a request for coordinated mitigation; to set the scope of mitigation, restricted to the client&#8217;s network space; and to supply summarized attack information and additional hints the DOTS server elements can use to increase the accuracy and speed of the attack response.</p>
+<p id="rfc.section.1.1.p.5">As the DOTS charter makes clear, the protocol must also continue to operate even in extreme network conditions. It must be resilient enough to ensure a high probability of signal delivery in spite of high packet loss rates. As such, elements should be in regular, bidirectional contact to measure peer health, provide mitigation-related feedback, and allow for active mitigation adjustments.</p>
+<p id="rfc.section.1.1.p.6">Lastly, the protocol must take care to ensure the confidentiality, integrity and authenticity of messages passed between peers to prevent the protocol from being repurposed to contribute to the very attacks it&#8217;s meant to deflect.</p>
+<p id="rfc.section.1.1.p.7">Drawing on the DOTS use cases [I-D.ietf-dots-use-cases] for reference, this document details the requirements for protocols achieving the DOTS goal of standards-based open threat signaling.</p>
+<h1 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2.</a> <a href="#terminology" id="terminology">Terminology</a></h1>
+<p id="rfc.section.1.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.</p>
+<p id="rfc.section.1.2.p.2">The following terms are used to define relationships between elements, the data they exchange, and methods of communication among them:</p>
+<p/>
+
+<dl>
+  <dt>attack telemetry:</dt>
+  <dd style="margin-left: 8">collected network traffic characteristics defining the nature of a DDoS attack.</dd>
+  <dt>mitigation:</dt>
+  <dd style="margin-left: 8">A defensive response against a detected and classified DDoS attack, performed by an entity in the network path between attack sources and the attack target, either through inline deployment or some form of traffic diversion.  The form mitigation takes is out of scope for this document, but is often deployed in such a way that attack traffic is &#8220;scrubbed&#8221; from the data stream while allowing other traffic through. The term &#8220;attack response coordination&#8221; synonymous in this document.</dd>
+  <dt>mitigator:</dt>
+  <dd style="margin-left: 8">A network element or set of network element capable of performing mitigation of a detected and classified DDoS attack.</dd>
+  <dt>client:</dt>
+  <dd style="margin-left: 8">A DOTS-aware network element requesting attack response coordination with another DOTS-aware element, with the expectation that the remote endpoint is capable of helping fend off the attack against the client.</dd>
+  <dt>server:</dt>
+  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a client.  The server may enable mitigation on behalf of the client, if requested, by communicating the client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A server MAY also be a mitigator.</dd>
+  <dt>signal channel:</dt>
+  <dd style="margin-left: 8">A bidirectional, mutually authenticated communication layer between client and server characterized by resilience even in conditions leading to severe packet loss, such as a volumetric DDoS attack causing network congestion.</dd>
+  <dt>beacon:</dt>
+  <dd style="margin-left: 8">A minimized, authenticated and combined status/control message between two DOTS-aware endpoints transmitted over the signal channel, crafted to contribute to the resilience of the signal channel.</dd>
+  <dt>client beacon:</dt>
+  <dd style="margin-left: 8">A beacon sent from a client to a server over the signal channel, indicating the client&#8217;s need for mitigation, and the scope of any requested mitigation, optionally including detected attack telemetry to supplement server-initiated mitigation.</dd>
+  <dt>server beacon:</dt>
+  <dd style="margin-left: 8">A message sent from a server to a client over the signal channel. Note that a server beacon is not a response to client beacon, but a server-initiated status message sent to the client.</dd>
+  <dt>signal relay:</dt>
+  <dd style="margin-left: 8">A DOTS-aware network element acting as server and client. A signal relay receives client beacons and relays them to another server, and passes server beacons back to the client.</dd>
+  <dt>data channel:</dt>
+  <dd style="margin-left: 8">A secure communication layer between client and server used for infrequent bulk exchange of data not easily or appropriately communicated through the signal channel under attack conditions.</dd>
+</dl>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a></h1>
+<p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols. The requirements are aligned with, although not directly derived from, the use cases described in [I-D.ietf-dots-use-cases].</p>
+<p id="rfc.section.2.p.2">DOTS must at a minimum make it possible for a client to request a server&#8217;s aid in mounting a coordinated defense against a detected attack, and client should similarly be able to withdraw that request arbitrarily.  Regular feedback between client and server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity. Bidirectional communication between endpoints is critical</p>
+<p id="rfc.section.2.p.3">Yet the DOTS protocol must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between endpoints even as attack attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection state (when possible given local network policy) with a given network will tend to contribute to robustness called for in the DOTS charter.</p>
+<p id="rfc.section.2.p.4">On the other hand, DOTS must have adequate message confidentiality, integrity and authenticity to keep the protocol from becoming another vector for the very attacks it&#8217;s meant to help fight off. The client must be authenticated to the server, and vice versa, for DOTS to operate safely, meaning the endpoints must have a way to negotiate and agree upon the terms of protocol security.</p>
+<p id="rfc.section.2.p.5">The server and client must also have some common method of defining the scope of any mitigation performed by the mitigator, as well as making adjustments to other commonly configurable features, such as listen ports.</p>
+<p id="rfc.section.2.p.6">Finally, DOTS should provide sufficient extensibility to meet local, vendor or future needs in coordinated attack defense, although this consideration is necessarily superseded by the other operational requirements.</p>
+<h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> <a href="#general-requirements" id="general-requirements">General Requirements</a></h1>
+<p/>
+
+<dl>
+  <dt>G-001</dt>
+  <dd style="margin-left: 8">Interoperability: DOTS&#8217;s objective is to develop a standard mechanism for signaling detected ongoing DDoS attacks. That objective is unattainable without well-defined specifications for any protocols or data models emerging from DOTS. All protocols, data models and interfaces MUST be detailed enough to ensure interoperable implementations.</dd>
+  <dt>G-002</dt>
+  <dd style="margin-left: 8">Extensibility: Any protocols or data models developed as part of DOTS MUST be designed to support future extensions. Provided they do not undermine the interoperability and backward compatibility requirements, extensions are a critical part of keeping DOTS adaptable to changing operational and proprietary needs to keep pace with evolving DDoS attack methods.</dd>
+  <dt>G-003</dt>
+  <dd style="margin-left: 8">Resilience: The signaling protocol MUST be designed to maximize the probability of signal delivery even under the severely constrained network conditions imposed by the attack traffic. The protocol SHOULD be resilient&#8212; that is, continue operating despite message loss and out-of-order or redundant delivery, and without depending on transport retransmission&#8212;as opposed to reliable, as the additional round-trips incurred by reliable transmission will decrease beacon delivery likelihood over congested links.</dd>
+  <dt>G-004</dt>
+  <dd style="margin-left: 8">Bidirectionality: To support peer health detection, to maintain an open signal channel, and to increase the probability of beacon delivery during attack, the signal channel MUST be bidirectional, with client and server transmitting beacons to each other at regular intervals, regardless of any client request for mitigation.</dd>
+  <dt>G-004</dt>
+  <dd style="margin-left: 8">Limited Message Size: To avoid message fragmentation and the consequent additional packet transmission, signaling protocol message size MUST be kept under signaling path Maximum Transmission Unit (MTU), including the byte overheader of any encapsulation, transport headers, and transport- or message-level security.</dd>
+  <dt>G-005</dt>
+  <dd style="margin-left: 8">Message Integrity: DOTS protocols MUST take steps to protect the confidentiality, integrity and authenticity of messages sent between client and server. While specific transport- and message-level security options are not specified, the protocols MUST follow current industry best practices for encryption and message authentication.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">In order for DOTS protocols to remain secure despite advancements in cryptanalysis, DOTS peers MUST be able to negotiate the terms and mechanisms of protocol security, subject to the interoperability and signal message size requirements above.</dd>
+  <dt>G-006</dt>
+  <dd style="margin-left: 8">Bulk Data Exchange: While the resilience requirement above demands a small message size, there are scenarios in which infrequent bulk data exchange between a DOTS client and server are valuable, for example [Move to use cases? -AM]: <ul><li>Population of black- or white-listed source addresses on the mitigator by the client, or similar configuration or hinting that will supplement attack response by the mitigator.</li><li>Client discovery of available server signaling endpoints, allowing the client to establish signal sessions with multiple servers for redundancy.</li><li>Address group aliasing, allowing the client and server to refer to arbitrarily-sized collections of client-controlled prefixes in beacons transmitted between the two.</li><li>Pre-shared keys for transport- or message-level security.</li><li>Exchange of managed incident or similarly organized reports. [Too much overlap with MILE/RID? -AM]</li></ul><p> </p></dd>
+  <dt></dt>
+  <dd style="margin-left: 8">As the resilience requirements above mandate small signal message size, a separate, secure data channel SHOULD be used for bulk data exchange. The mechanism for bulk data exchange is not yet specified.</dd>
+</dl>
+<h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#operational-requirements" id="operational-requirements">Operational requirements</a></h1>
+<p/>
+
+<dl>
+  <dt>OP-001</dt>
+  <dd style="margin-left: 8">Use of Common Transports: DOTS MUST operate over common standardized transport protocols. While the protocol resilience requirement [G-NNN] strongly RECOMMENDS the use of connectionless protocols, in particular the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a>, use of a standardized, connection-oriented protocol like the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be necessary due to network policy or middleware limitations.</dd>
+  <dt>OP-002</dt>
+  <dd style="margin-left: 8">Peer Mutual Authentication: The client and server MUST authenticate each other before a DOTS session is considered active. The method of authentication is not specified, but should follow current industry best practices with respect to any cryptographic mechanisms to authenticate the remote peer.</dd>
+  <dt>OP-003</dt>
+  <dd style="margin-left: 8">Session Health Monitoring: The client and server MUST regularly send beacons to each other after mutual authentication in order to keep the DOTS session open. A session MUST be considered active until a client or server explicity end the session, or either endpoint fails to receive beacons from the other after a mutually negotiated timeout period has elapsed.</dd>
+  <dt>OP-005</dt>
+  <dd style="margin-left: 8">Mitigation Capability Opacity: DOTS is a threat signaling protocol. The server and mitigator MUST NOT make any assumption about the attack detection, classfication, or mitigation capabilities of the client. While the server and mitigator MAY take hints from any attack telemetry included in client beacons, the server and mitigator cannot depend on the client for authoritative attack classification. Similarly, the mitigator cannot assume the client can or will mitigate attack traffic on its own.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">The client likewise MUST NOT make any assumptions about the capabilities of the server or mitigator with respect to detection, classification, and mitigation of DDoS attacks. The form of any attack response undertaken by the mitigator is not in scope.</dd>
+  <dt>OP-006</dt>
+  <dd style="margin-left: 8">Mitigation Status: DOTS clients MUST be able to request or withdraw a request for mitigation from the server. The server MUST honor a client request to withdraw from coordinated attack response.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">A server MAY refuse to engage in coordinated attack response with a client.  To make the status of a client&#8217;s request clear, the server MUST indicate in server beacons whether client-initiated mitigation is active. When a client-initiated mitigation is active, and threat handling details such as mitigation scope and statistics are available to the server, the server SHOULD include those details in server beacons sent to the client.</dd>
+  <dt>OP-007</dt>
+  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST also indicate the the desired address space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, or by a prefix group alias agreed upon with the server through the data channel. If additional information narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, clients SHOULD include that information in client beacons.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the address space requiring intervention.</dd>
+</dl>
+<h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#data-model-requirements" id="data-model-requirements">Data model requirements</a></h1>
+<p id="rfc.section.2.3.p.1">TODO</p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#congestion-control-considerations" id="congestion-control-considerations">Congestion Control Considerations</a></h1>
+<p id="rfc.section.3.p.1">TODO</p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
+<p id="rfc.section.4.p.1">TODO</p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
+<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
+<p id="rfc.section.5.1.p.1">2015-09-24</p>
+<h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="RFC0768">[RFC0768]</b>
+      </td>
+      <td class="top"><a>Postel, J.</a>, "<a href="http://tools.ietf.org/html/rfc768">User Datagram Protocol</a>", STD 6, RFC 768, DOI 10.17487/RFC0768, August 1980.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC0793">[RFC0793]</b>
+      </td>
+      <td class="top"><a>Postel, J.</a>, "<a href="http://tools.ietf.org/html/rfc793">Transmission Control Protocol</a>", STD 7, RFC 793, DOI 10.17487/RFC0793, September 1981.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="RFC1518">[RFC1518]</b>
+      </td>
+      <td class="top"><a>Rekhter, Y.</a> and <a>T. Li</a>, "<a href="http://tools.ietf.org/html/rfc1518">An Architecture for IP Address Allocation with CIDR</a>", RFC 1518, DOI 10.17487/RFC1518, September 1993.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC1519">[RFC1519]</b>
+      </td>
+      <td class="top"><a>Fuller, V.</a>, <a>Li, T.</a>, <a>Yu, J.</a> and <a>K. Varadhan</a>, "<a href="http://tools.ietf.org/html/rfc1519">Classless Inter-Domain Routing (CIDR): an Address Assignment and Aggregation Strategy</a>", RFC 1519, DOI 10.17487/RFC1519, September 1993.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4271">[RFC4271]</b>
+      </td>
+      <td class="top"><a>Rekhter, Y.</a>, <a>Li, T.</a> and <a>S. Hares</a>, "<a href="http://tools.ietf.org/html/rfc4271">A Border Gateway Protocol 4 (BGP-4)</a>", RFC 4271, DOI 10.17487/RFC4271, January 2006.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.authors">
+  <a href="#rfc.authors">Authors' Addresses</a>
+</h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Andrew Mortensen</span> 
+	  <span class="n hidden">
+		<span class="family-name">Mortensen</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Arbor Networks, Inc.</span>
+	<span class="adr">
+	  <span class="vcardline">2727 S. State St</span>
+
+	  <span class="vcardline">
+		<span class="locality">Ann Arbor, MI</span>,  
+		<span class="region"></span>
+		<span class="code">48104</span>
+	  </span>
+	  <span class="country-name vcardline">United States</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:amortensen@arbor.net">amortensen@arbor.net</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Robert Moskowitz</span> 
+	  <span class="n hidden">
+		<span class="family-name">Moskowitz</span>
+	  </span>
+	</span>
+	<span class="org vcardline">HTT Consulting</span>
+	<span class="adr">
+	  <span class="vcardline">n/a</span>
+
+	  <span class="vcardline">
+		<span class="locality">Oak Park, MI</span>,  
+		<span class="region"></span>
+		<span class="code">42837</span>
+	  </span>
+	  <span class="country-name vcardline">United States</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:rgm@htt-consult.com">rgm@htt-consult.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Tirumaleswar Reddy</span> 
+	  <span class="n hidden">
+		<span class="family-name">Reddy</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Cisco Systems, Inc.</span>
+	<span class="adr">
+	  <span class="vcardline">Cessna Business Park, Varthur Hobli</span>
+<span class="vcardline">Sarjapur Marathalli Outer Ring Road</span>
+
+	  <span class="vcardline">
+		<span class="locality">Bangalore, Karnataka</span>,  
+		<span class="region"></span>
+		<span class="code">560103</span>
+	  </span>
+	  <span class="country-name vcardline">India</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:tireddy@cisco.com">tireddy@cisco.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
