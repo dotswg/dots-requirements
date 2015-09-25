@@ -260,10 +260,10 @@ G-004
   client request for mitigation.
 
 G-004
-: Limited Message Size: To avoid message fragmentation and the consequent
-  additional packet transmission, signaling protocol message size MUST be kept
-  under signaling path Maximum Transmission Unit (MTU), including the byte
-  overheader of any encapsulation, transport headers, and transport- or
+: Limited Message Size: To avoid message fragmentation and the consequently
+  decreased probability of message delivery, signaling protocol message size
+  MUST be kept under signaling path Maximum Transmission Unit (MTU), including
+  the byte overhead of any encapsulation, transport headers, and transport- or
   message-level security.
 
 G-005
