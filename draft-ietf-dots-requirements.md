@@ -72,9 +72,9 @@ Distributed Denial of Service (DDoS) attacks continue to plague networks
 around the globe, from Tier-1 service providers on down to enterprises and
 small businesses. Attack scale and frequency similarly have continued to
 increase, thanks to software vulnerabilities leading to reflection and
-amplification attacks. Once staggering attack traffic volume is now the norm *REF*,
+amplification attacks. Once staggering attack traffic volume is now the norm,
 and the impact of larger-scale attacks attract the attention of international
-press agencies. *REF GREAT CANNON*
+press agencies.
 
 The higher profile and greater impact of contemporary DDoS attacks has led to
 increased focus on coordinated attack response. Many institutions and

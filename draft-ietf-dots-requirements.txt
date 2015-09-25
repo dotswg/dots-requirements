@@ -88,9 +88,9 @@ Table of Contents
    enterprises and small businesses.  Attack scale and frequency
    similarly have continued to increase, thanks to software
    vulnerabilities leading to reflection and amplification attacks.
-   Once staggering attack traffic volume is now the norm _REF_, and the
-   impact of larger-scale attacks attract the attention of international
-   press agencies. _REF GREAT CANNON_
+   Once staggering attack traffic volume is now the norm, and the impact
+   of larger-scale attacks attract the attention of international press
+   agencies.
 
    The higher profile and greater impact of contemporary DDoS attacks
    has led to increased focus on coordinated attack response.  Many
