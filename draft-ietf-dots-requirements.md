@@ -152,7 +152,7 @@ client:
 
 server:
 : A DOTS-aware network element handling and responding to messages from a client.
-  The server may enable mitigation on behalf of the client, if requested, by
+  The server MAY enable mitigation on behalf of the client, if requested, by
   communicating the client's request to the mitigator and relaying any
   mitigator feedback to the client. A server MAY also be a mitigator.
 
@@ -329,7 +329,7 @@ OP-003
   end the session, or either endpoint fails to receive beacons from the other
   after a mutually negotiated timeout period has elapsed.
 
-OP-005
+OP-004
 : Mitigation Capability Opacity: DOTS is a threat signaling protocol. The
   server and mitigator MUST NOT make any assumption about the attack detection,
   classfication, or mitigation capabilities of the client. While the server and
@@ -343,7 +343,7 @@ OP-005
   mitigation of DDoS attacks. The form of any attack response undertaken by the
   mitigator is not in scope.
 
-OP-006
+OP-005
 : Mitigation Status: DOTS clients MUST be able to request or withdraw
   a request for mitigation from the server. The server MUST honor a client
   request to withdraw from coordinated attack response.
@@ -355,7 +355,7 @@ OP-006
   mitigation scope and statistics are available to the server, the server
   SHOULD include those details in server beacons sent to the client.
 
-OP-007
+OP-006
 : Mitigation Scope: DOTS clients MUST also indicate the the desired address
   space coverage of any mitigation, for example by using Classless Internet
   Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, the length/prefix

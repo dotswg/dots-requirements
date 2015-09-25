@@ -508,7 +508,7 @@
   <dt>client:</dt>
   <dd style="margin-left: 8">A DOTS-aware network element requesting attack response coordination with another DOTS-aware element, with the expectation that the remote endpoint is capable of helping fend off the attack against the client.</dd>
   <dt>server:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a client.  The server may enable mitigation on behalf of the client, if requested, by communicating the client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A server MAY also be a mitigator.</dd>
+  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a client.  The server MAY enable mitigation on behalf of the client, if requested, by communicating the client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A server MAY also be a mitigator.</dd>
   <dt>signal channel:</dt>
   <dd style="margin-left: 8">A bidirectional, mutually authenticated communication layer between client and server characterized by resilience even in conditions leading to severe packet loss, such as a volumetric DDoS attack causing network congestion.</dd>
   <dt>beacon:</dt>
@@ -562,15 +562,15 @@
   <dd style="margin-left: 8">Peer Mutual Authentication: The client and server MUST authenticate each other before a DOTS session is considered active. The method of authentication is not specified, but should follow current industry best practices with respect to any cryptographic mechanisms to authenticate the remote peer.</dd>
   <dt>OP-003</dt>
   <dd style="margin-left: 8">Session Health Monitoring: The client and server MUST regularly send beacons to each other after mutual authentication in order to keep the DOTS session open. A session MUST be considered active until a client or server explicity end the session, or either endpoint fails to receive beacons from the other after a mutually negotiated timeout period has elapsed.</dd>
-  <dt>OP-005</dt>
+  <dt>OP-004</dt>
   <dd style="margin-left: 8">Mitigation Capability Opacity: DOTS is a threat signaling protocol. The server and mitigator MUST NOT make any assumption about the attack detection, classfication, or mitigation capabilities of the client. While the server and mitigator MAY take hints from any attack telemetry included in client beacons, the server and mitigator cannot depend on the client for authoritative attack classification. Similarly, the mitigator cannot assume the client can or will mitigate attack traffic on its own.</dd>
   <dt></dt>
   <dd style="margin-left: 8">The client likewise MUST NOT make any assumptions about the capabilities of the server or mitigator with respect to detection, classification, and mitigation of DDoS attacks. The form of any attack response undertaken by the mitigator is not in scope.</dd>
-  <dt>OP-006</dt>
+  <dt>OP-005</dt>
   <dd style="margin-left: 8">Mitigation Status: DOTS clients MUST be able to request or withdraw a request for mitigation from the server. The server MUST honor a client request to withdraw from coordinated attack response.</dd>
   <dt></dt>
   <dd style="margin-left: 8">A server MAY refuse to engage in coordinated attack response with a client.  To make the status of a client&#8217;s request clear, the server MUST indicate in server beacons whether client-initiated mitigation is active. When a client-initiated mitigation is active, and threat handling details such as mitigation scope and statistics are available to the server, the server SHOULD include those details in server beacons sent to the client.</dd>
-  <dt>OP-007</dt>
+  <dt>OP-006</dt>
   <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST also indicate the the desired address space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, or by a prefix group alias agreed upon with the server through the data channel. If additional information narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, clients SHOULD include that information in client beacons.</dd>
   <dt></dt>
   <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the address space requiring intervention.</dd>

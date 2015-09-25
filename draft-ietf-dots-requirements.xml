@@ -163,7 +163,7 @@ another DOTS-aware element, with the expectation that the remote endpoint is
 capable of helping fend off the attack against the client.</t>
   <t hangText='server:'>
   A DOTS-aware network element handling and responding to messages from a client.
-The server may enable mitigation on behalf of the client, if requested, by
+The server MAY enable mitigation on behalf of the client, if requested, by
 communicating the client&rsquo;s request to the mitigator and relaying any
 mitigator feedback to the client. A server MAY also be a mitigator.</t>
   <t hangText='signal channel:'>
@@ -324,7 +324,7 @@ to each other after mutual authentication in order to keep the DOTS session
 open. A session MUST be considered active until a client or server explicity
 end the session, or either endpoint fails to receive beacons from the other
 after a mutually negotiated timeout period has elapsed.</t>
-  <t hangText='OP-005'>
+  <t hangText='OP-004'>
   Mitigation Capability Opacity: DOTS is a threat signaling protocol. The
 server and mitigator MUST NOT make any assumption about the attack detection,
 classfication, or mitigation capabilities of the client. While the server and
@@ -336,7 +336,7 @@ the client can or will mitigate attack traffic on its own.</t>
 the server or mitigator with respect to detection, classification, and
 mitigation of DDoS attacks. The form of any attack response undertaken by the
 mitigator is not in scope.</t>
-  <t hangText='OP-006'>
+  <t hangText='OP-005'>
   Mitigation Status: DOTS clients MUST be able to request or withdraw
 a request for mitigation from the server. The server MUST honor a client
 request to withdraw from coordinated attack response.</t>
@@ -346,7 +346,7 @@ server beacons whether client-initiated mitigation is active. When a
 client-initiated mitigation is active, and threat handling details such as
 mitigation scope and statistics are available to the server, the server
 SHOULD include those details in server beacons sent to the client.</t>
-  <t hangText='OP-007'>
+  <t hangText='OP-006'>
   Mitigation Scope: DOTS clients MUST also indicate the the desired address
 space coverage of any mitigation, for example by using Classless Internet
 Domain Routing (CIDR) <xref target="RFC1518"></xref>,<xref target="RFC1519"></xref> prefixes, the length/prefix
