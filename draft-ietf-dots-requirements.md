@@ -134,28 +134,25 @@ attack telemetry:
   attack.
 
 mitigation:
-: A defensive response against a detected and classified DDoS attack, performed
-  by an entity in the network path between attack sources and the attack
-  target, either through inline deployment or some form of traffic diversion.
-  The form mitigation takes is out of scope for this document, but is often
-  deployed in such a way that attack traffic is "scrubbed" from the data stream
-  while allowing other traffic through. The term "attack response coordination"
-  synonymous in this document.
+: A defensive response against a detected DDoS attack, performed by an entity
+  in the network path between attack sources and the attack target, either
+  through inline deployment or some form of traffic diversion.  The form
+  mitigation takes is out of scope for this document.
 
 mitigator:
-: A network element or set of network element capable of performing mitigation
-  of a detected and classified DDoS attack.
+: A network element capable of performing mitigation of a detected DDoS attack.
 
-client:
+DOTS client:
 : A DOTS-aware network element requesting attack response coordination with
   another DOTS-aware element, with the expectation that the remote endpoint is
   capable of helping fend off the attack against the client.
 
-server:
-: A DOTS-aware network element handling and responding to messages from a client.
-  The server MAY enable mitigation on behalf of the client, if requested, by
-  communicating the client's request to the mitigator and relaying any
-  mitigator feedback to the client. A server MAY also be a mitigator.
+DOTS server:
+: A DOTS-aware network element handling and responding to messages from a
+  DOTS client.  The DOTS server MAY enable mitigation on behalf of the DOTS
+  client, if requested, by communicating the DOTS client's request to the
+  mitigator and relaying any mitigator feedback to the client. A DOTS server
+  MAY also be a mitigator.
 
 signal channel:
 : A bidirectional, mutually authenticated communication layer between client
