@@ -4,7 +4,7 @@ docname: draft-ietf-dots-requirements-00
 date: 2015-09-17
 
 area: Security
-wg: DOTS Working Group
+wg: DOTS
 kw: Internet-Draft
 cat: info
 
