@@ -104,12 +104,11 @@ of mitigation, restricted to the client's network space; and to supply
 summarized attack information and additional hints the DOTS server elements can
 use to increase the accuracy and speed of the attack response.
 
-As the DOTS charter makes clear, the protocol must also continue to operate
-even in extreme network conditions. It must be resilient enough to ensure a
-high probability of signal delivery in spite of high packet loss rates. As
-such, elements should be in regular, bidirectional contact to measure peer
-health, provide mitigation-related feedback, and allow for active mitigation
-adjustments.
+The protocol must also continue to operate even in extreme network conditions.
+It must be resilient enough to ensure a high probability of signal delivery in
+spite of high packet loss rates. As such, elements should be in regular,
+bidirectional contact to measure peer health, provide mitigation-related
+feedback, and allow for active mitigation adjustments.
 
 Lastly, the protocol must take care to ensure the confidentiality, integrity
 and authenticity of messages passed between peers to prevent the protocol from
