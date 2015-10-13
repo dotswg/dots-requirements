@@ -155,30 +155,34 @@ DOTS server:
   MAY also be a mitigator.
 
 signal channel:
-: A bidirectional, mutually authenticated communication layer between client
-  and server characterized by resilience even in conditions leading to severe
-  packet loss, such as a volumetric DDoS attack causing network congestion.
+: A bidirectional, mutually authenticated communication layer between DOTS
+  client and DOTS server characterized by resilience even in conditions
+  leading to severe packet loss, such as a volumetric DDoS attack causing
+  network congestion.
 
-beacon:
-: A minimized, authenticated and combined status/control message between two
-  DOTS-aware endpoints transmitted over the signal channel, crafted to
-  contribute to the resilience of the signal channel.
+heartbeat:
+: A concise, authenticated status/control message transmitted between a DOTS
+  client and DOTS server over the signal channel. The format and size are
+  carefully restricted in order to contribute to the resilience of the signal
+  channel.
 
-client beacon:
-: A beacon sent from a client to a server over the signal channel, indicating
-  the client's need for mitigation, and the scope of any requested mitigation,
-  optionally including detected attack telemetry to supplement server-initiated
-  mitigation.
+client heartbeat:
+: A heartbeat sent from a DOTS client to a DOTS server over the signal channel,
+  indicating the DOTS client's need for mitigation, as well as the scope of any
+  requested mitigation, optionally including detected attack telemetry to
+  supplement server-initiated mitigation.
 
-server beacon:
-: A message sent from a server to a client over the signal channel. Note that
-  a server beacon is not a response to client beacon, but a server-initiated
-  status message sent to the client.
+server heartbeat:
+: A message sent from a DOTS server to a DOTS client over the signal channel.
+  Note that a server heartbeat is not a response to client heartbeat, but a
+  DOTS server-initiated status message sent to the DOTS client, containing
+  information about the status of any requested mitigation.
 
-signal relay:
-: A DOTS-aware network element acting as server and client. A signal relay
-  receives client beacons and relays them to another server, and passes server
-  beacons back to the client.
+DOTS relay:
+: A DOTS-aware network element positioned between a DOTS server and a DOTS
+  client. A DOTS relay receives heartbeats from a DOTS client and relays them
+  to a DOTS server, passing heartbeats from the DOTS server back to the DOTS
+  client.
 
 data channel:
 : A secure communication layer between client and server used for infrequent
