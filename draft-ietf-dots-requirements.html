@@ -408,7 +408,7 @@
     <tbody>
     
     	<tr>
-  <td class="left">DOTS Working Group</td>
+  <td class="left">DOTS</td>
   <td class="right">A. Mortensen</td>
 </tr>
 <tr>
@@ -487,10 +487,10 @@
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#problems" id="problems">Introduction</a></h1>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#overview" id="overview">Overview</a></h1>
 <p id="rfc.section.1.1.p.1">Distributed Denial of Service (DDoS) attacks continue to plague networks around the globe, from Tier-1 service providers on down to enterprises and small businesses. Attack scale and frequency similarly have continued to increase, thanks to software vulnerabilities leading to reflection and amplification attacks. Once staggering attack traffic volume is now the norm, and the impact of larger-scale attacks attract the attention of international press agencies.</p>
-<p id="rfc.section.1.1.p.2">The higher profile and greater impact of contemporary DDoS attacks has led to increased focus on coordinated attack response. Many institutions and enterprises lack the resources or expertise to operate on-premise attack prevention solutions themselves. To address that gap, security service providers have begun to offer on-demand traffic scrubbing services. Each service offers its own interface for subscribers to request attack mitigation, tying subcribers to proprietary implementations while also limiting the subset of network elements capable of participating in the attack response. As a result of incompatibility across services, attack response may be fragmentary or otherwise incomplete, leaving key players in the attack path unable to assist in the defense.</p>
+<p id="rfc.section.1.1.p.2">The higher profile and greater impact of contemporary DDoS attacks has led to increased focus on coordinated attack response. Many institutions and enterprises lack the resources or expertise to operate on-premise attack prevention solutions themselves, or simply find themselves constrained by local bandwidth limitations. To address such gaps, security service providers have begun to offer on-demand traffic scrubbing services. Each service offers its own interface for subscribers to request attack mitigation, tying subscribers to proprietary implementations while also limiting the subset of network elements capable of participating in the attack response. As a result of incompatibility across services, attack response may be fragmentary or otherwise incomplete, leaving key players in the attack path unable to assist in the defense.</p>
 <p id="rfc.section.1.1.p.3">There are many ways to respond to an ongoing DDoS attack, some of them better than others, but the lack of a common method to coordinate a real-time response across layers and network domains inhibits the speed and effectiveness of DDoS attack mitigation.</p>
 <p id="rfc.section.1.1.p.4">DOTS was formed to address this lack. The DOTS protocols are therefore not concerned with the form of response, but rather with communicating the need for a response, supplementing the call for help with pertinent details about the detected attack. To achieve this aim, the protocol must permit the DOTS client to request or withdraw a request for coordinated mitigation; to set the scope of mitigation, restricted to the client&#8217;s network space; and to supply summarized attack information and additional hints the DOTS server elements can use to increase the accuracy and speed of the attack response.</p>
-<p id="rfc.section.1.1.p.5">As the DOTS charter makes clear, the protocol must also continue to operate even in extreme network conditions. It must be resilient enough to ensure a high probability of signal delivery in spite of high packet loss rates. As such, elements should be in regular, bidirectional contact to measure peer health, provide mitigation-related feedback, and allow for active mitigation adjustments.</p>
+<p id="rfc.section.1.1.p.5">The protocol must also continue to operate even in extreme network conditions.  It must be resilient enough to ensure a high probability of signal delivery in spite of high packet loss rates. As such, elements should be in regular, bidirectional contact to measure peer health, provide mitigation-related feedback, and allow for active mitigation adjustments.</p>
 <p id="rfc.section.1.1.p.6">Lastly, the protocol must take care to ensure the confidentiality, integrity and authenticity of messages passed between peers to prevent the protocol from being repurposed to contribute to the very attacks it&#8217;s meant to deflect.</p>
 <p id="rfc.section.1.1.p.7">Drawing on the DOTS use cases [I-D.ietf-dots-use-cases] for reference, this document details the requirements for protocols achieving the DOTS goal of standards-based open threat signaling.</p>
 <h1 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2.</a> <a href="#terminology" id="terminology">Terminology</a></h1>
@@ -502,32 +502,32 @@
   <dt>attack telemetry:</dt>
   <dd style="margin-left: 8">collected network traffic characteristics defining the nature of a DDoS attack.</dd>
   <dt>mitigation:</dt>
-  <dd style="margin-left: 8">A defensive response against a detected and classified DDoS attack, performed by an entity in the network path between attack sources and the attack target, either through inline deployment or some form of traffic diversion.  The form mitigation takes is out of scope for this document, but is often deployed in such a way that attack traffic is &#8220;scrubbed&#8221; from the data stream while allowing other traffic through. The term &#8220;attack response coordination&#8221; synonymous in this document.</dd>
+  <dd style="margin-left: 8">A defensive response against a detected DDoS attack, performed by an entity in the network path between attack sources and the attack target, either through inline deployment or some form of traffic diversion.  The form mitigation takes is out of scope for this document.</dd>
   <dt>mitigator:</dt>
-  <dd style="margin-left: 8">A network element or set of network element capable of performing mitigation of a detected and classified DDoS attack.</dd>
-  <dt>client:</dt>
+  <dd style="margin-left: 8">A network element capable of performing mitigation of a detected DDoS attack.</dd>
+  <dt>DOTS client:</dt>
   <dd style="margin-left: 8">A DOTS-aware network element requesting attack response coordination with another DOTS-aware element, with the expectation that the remote endpoint is capable of helping fend off the attack against the client.</dd>
-  <dt>server:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a client.  The server MAY enable mitigation on behalf of the client, if requested, by communicating the client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A server MAY also be a mitigator.</dd>
+  <dt>DOTS server:</dt>
+  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a DOTS client.  The DOTS server MAY enable mitigation on behalf of the DOTS client, if requested, by communicating the DOTS client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A DOTS server MAY also be a mitigator.</dd>
   <dt>signal channel:</dt>
-  <dd style="margin-left: 8">A bidirectional, mutually authenticated communication layer between client and server characterized by resilience even in conditions leading to severe packet loss, such as a volumetric DDoS attack causing network congestion.</dd>
-  <dt>beacon:</dt>
-  <dd style="margin-left: 8">A minimized, authenticated and combined status/control message between two DOTS-aware endpoints transmitted over the signal channel, crafted to contribute to the resilience of the signal channel.</dd>
-  <dt>client beacon:</dt>
-  <dd style="margin-left: 8">A beacon sent from a client to a server over the signal channel, indicating the client&#8217;s need for mitigation, and the scope of any requested mitigation, optionally including detected attack telemetry to supplement server-initiated mitigation.</dd>
-  <dt>server beacon:</dt>
-  <dd style="margin-left: 8">A message sent from a server to a client over the signal channel. Note that a server beacon is not a response to client beacon, but a server-initiated status message sent to the client.</dd>
-  <dt>signal relay:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element acting as server and client. A signal relay receives client beacons and relays them to another server, and passes server beacons back to the client.</dd>
+  <dd style="margin-left: 8">A bidirectional, mutually authenticated communication layer between DOTS client and DOTS server characterized by resilience even in conditions leading to severe packet loss, such as a volumetric DDoS attack causing network congestion.</dd>
+  <dt>heartbeat:</dt>
+  <dd style="margin-left: 8">A concise, authenticated status/control message transmitted between a DOTS client and DOTS server over the signal channel. The format and size are carefully restricted in order to contribute to the resilience of the signal channel.</dd>
+  <dt>client heartbeat:</dt>
+  <dd style="margin-left: 8">A heartbeat sent from a DOTS client to a DOTS server over the signal channel, indicating the DOTS client&#8217;s need for mitigation, as well as the scope of any requested mitigation, optionally including detected attack telemetry to supplement server-initiated mitigation.</dd>
+  <dt>server heartbeat:</dt>
+  <dd style="margin-left: 8">A message sent from a DOTS server to a DOTS client over the signal channel.  Note that a server heartbeat is not a response to client heartbeat, but a DOTS server-initiated status message sent to the DOTS client, containing information about the status of any requested mitigation.</dd>
+  <dt>DOTS relay:</dt>
+  <dd style="margin-left: 8">A DOTS-aware network element positioned between a DOTS server and a DOTS client. A DOTS relay receives heartbeats from a DOTS client and relays them to a DOTS server, passing heartbeats from the DOTS server back to the DOTS client.</dd>
   <dt>data channel:</dt>
   <dd style="margin-left: 8">A secure communication layer between client and server used for infrequent bulk exchange of data not easily or appropriately communicated through the signal channel under attack conditions.</dd>
 </dl>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a></h1>
 <p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols. The requirements are aligned with, although not directly derived from, the use cases described in [I-D.ietf-dots-use-cases].</p>
-<p id="rfc.section.2.p.2">DOTS must at a minimum make it possible for a client to request a server&#8217;s aid in mounting a coordinated defense against a detected attack, and client should similarly be able to withdraw that request arbitrarily.  Regular feedback between client and server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity. Bidirectional communication between endpoints is critical</p>
-<p id="rfc.section.2.p.3">Yet the DOTS protocol must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between endpoints even as attack attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection state (when possible given local network policy) with a given network will tend to contribute to robustness called for in the DOTS charter.</p>
+<p id="rfc.section.2.p.2">DOTS must at a minimum make it possible for a DOTS client to request a DOTS server&#8217;s aid in mounting a coordinated defense against a detected attack, and client should similarly be able to withdraw that request arbitrarily.  Regular feedback between DOTS client and server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity.  Bidirectional communication between DOTS client and server is critical.</p>
+<p id="rfc.section.2.p.3">Yet the DOTS protocol must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between endpoints even as attack attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection overhead (when possible given local network policy) with a given network will tend to contribute to robustness called for in the DOTS charter.</p>
 <p id="rfc.section.2.p.4">On the other hand, DOTS must have adequate message confidentiality, integrity and authenticity to keep the protocol from becoming another vector for the very attacks it&#8217;s meant to help fight off. The client must be authenticated to the server, and vice versa, for DOTS to operate safely, meaning the endpoints must have a way to negotiate and agree upon the terms of protocol security.</p>
-<p id="rfc.section.2.p.5">The server and client must also have some common method of defining the scope of any mitigation performed by the mitigator, as well as making adjustments to other commonly configurable features, such as listen ports.</p>
+<p id="rfc.section.2.p.5">The DOTS server and client must also have some common method of defining the scope of any mitigation performed by the mitigator, as well as making adjustments to other commonly configurable features, such as listen ports, exchanging black- and white-lists, and so on.</p>
 <p id="rfc.section.2.p.6">Finally, DOTS should provide sufficient extensibility to meet local, vendor or future needs in coordinated attack defense, although this consideration is necessarily superseded by the other operational requirements.</p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> <a href="#general-requirements" id="general-requirements">General Requirements</a></h1>
 <p/>

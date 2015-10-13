@@ -2,7 +2,7 @@
 
 
 
-DOTS Working Group                                          A. Mortensen
+DOTS                                                        A. Mortensen
 Internet-Draft                                      Arbor Networks, Inc.
 Intended status: Informational                              R. Moskowitz
 Expires: March 20, 2016                                   HTT Consulting
@@ -95,16 +95,16 @@ Table of Contents
    The higher profile and greater impact of contemporary DDoS attacks
    has led to increased focus on coordinated attack response.  Many
    institutions and enterprises lack the resources or expertise to
-   operate on-premise attack prevention solutions themselves.  To
-   address that gap, security service providers have begun to offer on-
+   operate on-premise attack prevention solutions themselves, or simply
+   find themselves constrained by local bandwidth limitations.  To
+   address such gaps, security service providers have begun to offer on-
    demand traffic scrubbing services.  Each service offers its own
    interface for subscribers to request attack mitigation, tying
-   subcribers to proprietary implementations while also limiting the
+   subscribers to proprietary implementations while also limiting the
    subset of network elements capable of participating in the attack
    response.  As a result of incompatibility across services, attack
    response may be fragmentary or otherwise incomplete, leaving key
    players in the attack path unable to assist in the defense.
-
 
 
 
@@ -130,12 +130,12 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
    elements can use to increase the accuracy and speed of the attack
    response.
 
-   As the DOTS charter makes clear, the protocol must also continue to
-   operate even in extreme network conditions.  It must be resilient
-   enough to ensure a high probability of signal delivery in spite of
-   high packet loss rates.  As such, elements should be in regular,
-   bidirectional contact to measure peer health, provide mitigation-
-   related feedback, and allow for active mitigation adjustments.
+   The protocol must also continue to operate even in extreme network
+   conditions.  It must be resilient enough to ensure a high probability
+   of signal delivery in spite of high packet loss rates.  As such,
+   elements should be in regular, bidirectional contact to measure peer
+   health, provide mitigation-related feedback, and allow for active
+   mitigation adjustments.
 
    Lastly, the protocol must take care to ensure the confidentiality,
    integrity and authenticity of messages passed between peers to
@@ -159,9 +159,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
    attack telemetry:  collected network traffic characteristics defining
       the nature of a DDoS attack.
 
-   mitigation:  A defensive response against a detected and classified
-      DDoS attack, performed by an entity in the network path between
-      attack sources and the attack target, either through inline
+   mitigation:  A defensive response against a detected DDoS attack,
+      performed by an entity in the network path between attack sources
+      and the attack target, either through inline deployment or some
 
 
 
@@ -170,54 +170,54 @@ Mortensen, et al.        Expires March 20, 2016                 [Page 3]
 Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
-      deployment or some form of traffic diversion.  The form mitigation
-      takes is out of scope for this document, but is often deployed in
-      such a way that attack traffic is "scrubbed" from the data stream
-      while allowing other traffic through.  The term "attack response
-      coordination" synonymous in this document.
+      form of traffic diversion.  The form mitigation takes is out of
+      scope for this document.
 
-   mitigator:  A network element or set of network element capable of
-      performing mitigation of a detected and classified DDoS attack.
+   mitigator:  A network element capable of performing mitigation of a
+      detected DDoS attack.
 
-   client:  A DOTS-aware network element requesting attack response
+   DOTS client:  A DOTS-aware network element requesting attack response
       coordination with another DOTS-aware element, with the expectation
       that the remote endpoint is capable of helping fend off the attack
       against the client.
 
-   server:  A DOTS-aware network element handling and responding to
-      messages from a client.  The server MAY enable mitigation on
-      behalf of the client, if requested, by communicating the client's
-      request to the mitigator and relaying any mitigator feedback to
-      the client.  A server MAY also be a mitigator.
+   DOTS server:  A DOTS-aware network element handling and responding to
+      messages from a DOTS client.  The DOTS server MAY enable
+      mitigation on behalf of the DOTS client, if requested, by
+      communicating the DOTS client's request to the mitigator and
+      relaying any mitigator feedback to the client.  A DOTS server MAY
+      also be a mitigator.
 
    signal channel:  A bidirectional, mutually authenticated
-      communication layer between client and server characterized by
-      resilience even in conditions leading to severe packet loss, such
-      as a volumetric DDoS attack causing network congestion.
+      communication layer between DOTS client and DOTS server
+      characterized by resilience even in conditions leading to severe
+      packet loss, such as a volumetric DDoS attack causing network
+      congestion.
 
-   beacon:  A minimized, authenticated and combined status/control
-      message between two DOTS-aware endpoints transmitted over the
-      signal channel, crafted to contribute to the resilience of the
-      signal channel.
+   heartbeat:  A concise, authenticated status/control message
+      transmitted between a DOTS client and DOTS server over the signal
+      channel.  The format and size are carefully restricted in order to
+      contribute to the resilience of the signal channel.
 
-   client beacon:  A beacon sent from a client to a server over the
-      signal channel, indicating the client's need for mitigation, and
-      the scope of any requested mitigation, optionally including
-      detected attack telemetry to supplement server-initiated
-      mitigation.
+   client heartbeat:  A heartbeat sent from a DOTS client to a DOTS
+      server over the signal channel, indicating the DOTS client's need
+      for mitigation, as well as the scope of any requested mitigation,
+      optionally including detected attack telemetry to supplement
+      server-initiated mitigation.
 
-   server beacon:  A message sent from a server to a client over the
-      signal channel.  Note that a server beacon is not a response to
-      client beacon, but a server-initiated status message sent to the
-      client.
+   server heartbeat:  A message sent from a DOTS server to a DOTS client
+      over the signal channel.  Note that a server heartbeat is not a
+      response to client heartbeat, but a DOTS server-initiated status
+      message sent to the DOTS client, containing information about the
+      status of any requested mitigation.
 
-   signal relay:  A DOTS-aware network element acting as server and
-      client.  A signal relay receives client beacons and relays them to
-      another server, and passes server beacons back to the client.
+   DOTS relay:  A DOTS-aware network element positioned between a DOTS
+      server and a DOTS client.  A DOTS relay receives heartbeats from a
+      DOTS client and relays them to a DOTS server, passing heartbeats
+      from the DOTS server back to the DOTS client.
 
    data channel:  A secure communication layer between client and server
       used for infrequent bulk exchange of data not easily or
-
 
 
 
@@ -236,13 +236,13 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
    directly derived from, the use cases described in [I-D.ietf-dots-use-
    cases].
 
-   DOTS must at a minimum make it possible for a client to request a
-   server's aid in mounting a coordinated defense against a detected
-   attack, and client should similarly be able to withdraw that request
-   arbitrarily.  Regular feedback between client and server supplement
-   the defensive alliance by maintaining a common understanding of DOTS
-   peer health and activity.  Bidirectional communication between
-   endpoints is critical
+   DOTS must at a minimum make it possible for a DOTS client to request
+   a DOTS server's aid in mounting a coordinated defense against a
+   detected attack, and client should similarly be able to withdraw that
+   request arbitrarily.  Regular feedback between DOTS client and server
+   supplement the defensive alliance by maintaining a common
+   understanding of DOTS peer health and activity.  Bidirectional
+   communication between DOTS client and server is critical.
 
    Yet the DOTS protocol must also work with a set of competing
    operational goals.  On the one hand, the protocol must be resilient
@@ -250,7 +250,7 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
    contact between endpoints even as attack attack traffic saturates the
    link.  Such resiliency may be developed several ways, but
    characteristics such as small message size, asynchronous, redundant
-   message delivery and minimal connection state (when possible given
+   message delivery and minimal connection overhead (when possible given
    local network policy) with a given network will tend to contribute to
    robustness called for in the DOTS charter.
 
@@ -261,10 +261,10 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
    operate safely, meaning the endpoints must have a way to negotiate
    and agree upon the terms of protocol security.
 
-   The server and client must also have some common method of defining
-   the scope of any mitigation performed by the mitigator, as well as
-   making adjustments to other commonly configurable features, such as
-   listen ports.
+   The DOTS server and client must also have some common method of
+   defining the scope of any mitigation performed by the mitigator, as
+   well as making adjustments to other commonly configurable features,
+   such as listen ports, exchanging black- and white-lists, and so on.
 
    Finally, DOTS should provide sufficient extensibility to meet local,
    vendor or future needs in coordinated attack defense, although this
@@ -524,7 +524,6 @@ Authors' Addresses
 
    Robert Moskowitz
    HTT Consulting
-   n/a
    Oak Park, MI  42837
    United States
 
@@ -539,6 +538,7 @@ Authors' Addresses
    India
 
    Email: tireddy@cisco.com
+
 
 
 
