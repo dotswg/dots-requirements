@@ -24,3 +24,6 @@ xml:	$(XML)
 
 %.txt:  %.xml
 	xml2rfc  $< $@
+
+clean:
+	rm -f ${DRAFTS} ${HTML} ${XML}
