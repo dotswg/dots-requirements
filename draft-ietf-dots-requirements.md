@@ -197,19 +197,19 @@ This section describes the required features and characteristics of the DOTS
 protocols. The requirements are aligned with, although not directly derived
 from, the use cases described in [I-D.ietf-dots-use-cases].
 
-DOTS must at a minimum make it possible for a client to request a server's aid
-in mounting a coordinated defense against a detected attack, and client should
-similarly be able to withdraw that request arbitrarily.  Regular feedback
-between client and server supplement the defensive alliance by maintaining a
-common understanding of DOTS peer health and activity. Bidirectional
-communication between endpoints is critical
+DOTS must at a minimum make it possible for a DOTS client to request a DOTS
+server's aid in mounting a coordinated defense against a detected attack, and
+client should similarly be able to withdraw that request arbitrarily.  Regular
+feedback between DOTS client and server supplement the defensive alliance by
+maintaining a common understanding of DOTS peer health and activity.
+Bidirectional communication between DOTS client and server is critical.
 
 Yet the DOTS protocol must also work with a set of competing operational goals.
 On the one hand, the protocol must be resilient under extremely hostile
 network conditions, providing continued contact between endpoints even as
 attack attack traffic saturates the link. Such resiliency may be developed
 several ways, but characteristics such as small message size, asynchronous,
-redundant message delivery and minimal connection state (when possible given
+redundant message delivery and minimal connection overhead (when possible given
 local network policy) with a given network will tend to contribute to
 robustness called for in the DOTS charter.
 
@@ -219,9 +219,10 @@ very attacks it's meant to help fight off. The client must be authenticated to
 the server, and vice versa, for DOTS to operate safely, meaning the endpoints
 must have a way to negotiate and agree upon the terms of protocol security.
 
-The server and client must also have some common method of defining the scope
-of any mitigation performed by the mitigator, as well as making adjustments to
-other commonly configurable features, such as listen ports.
+The DOTS server and client must also have some common method of defining the
+scope of any mitigation performed by the mitigator, as well as making
+adjustments to other commonly configurable features, such as listen ports,
+exchanging black- and white-lists, and so on.
 
 Finally, DOTS should provide sufficient extensibility to meet local, vendor or
 future needs in coordinated attack defense, although this consideration is
