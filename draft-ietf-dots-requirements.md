@@ -80,14 +80,15 @@ press agencies.
 The higher profile and greater impact of contemporary DDoS attacks has led to
 increased focus on coordinated attack response. Many institutions and
 enterprises lack the resources or expertise to operate on-premise attack
-prevention solutions themselves. To address that gap, security service
-providers have begun to offer on-demand traffic scrubbing services. Each
-service offers its own interface for subscribers to request attack mitigation,
-tying subcribers to proprietary implementations while also limiting the subset
-of network elements capable of participating in the attack response. As a
-result of incompatibility across services, attack response may be fragmentary
-or otherwise incomplete, leaving key players in the attack path unable to
-assist in the defense.
+prevention solutions themselves, or simply find themselves constrained by local
+bandwidth limitations. To address such gaps, security service providers have
+begun to offer on-demand traffic scrubbing services. Each service offers its
+own interface for subscribers to request attack mitigation, tying subscribers
+to proprietary implementations while also limiting the subset of network
+elements capable of participating in the attack response. As a result of
+incompatibility across services, attack response may be fragmentary or
+otherwise incomplete, leaving key players in the attack path unable to assist
+in the defense.
 
 There are many ways to respond to an ongoing DDoS attack, some of them better
 than others, but the lack of a common method to coordinate a real-time response
