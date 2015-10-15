@@ -390,7 +390,7 @@ TODO
 Security Considerations
 =======================
 
-DOTS is at risk to three primary attacks: DOTS agent impersonation, traffic
+DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic
 injection, and signaling blocking. The DOTS protocol MUST be designed for
 minimal data transfer to address the blocking risk. Impersonation and traffic
 injection mitigation can be managed through current secure communications best
