@@ -220,13 +220,13 @@ maintaining a common understanding of DOTS peer health and activity.
 Bidirectional communication between DOTS client and server is critical.
 
 Yet the DOTS protocol must also work with a set of competing operational goals.
-On the one hand, the protocol must be resilient under extremely hostile
-network conditions, providing continued contact between DOTS agents even as
-attack attack traffic saturates the link. Such resiliency may be developed
-several ways, but characteristics such as small message size, asynchronous,
-redundant message delivery and minimal connection overhead (when possible given
-local network policy) with a given network will tend to contribute to
-the robustness demanded by a viable DOTS protocol.
+On the one hand, the protocol must be resilient under extremely hostile network
+conditions, providing continued contact between DOTS agents even as attack
+traffic saturates the link. Such resiliency may be developed several ways, but
+characteristics such as small message size, asynchronous, redundant message
+delivery and minimal connection overhead (when possible given local network
+policy) with a given network will tend to contribute to the robustness demanded
+by a viable DOTS protocol.
 
 On the other hand, DOTS must have adequate message confidentiality, integrity
 and authenticity to keep the protocol from becoming another vector for the
@@ -338,7 +338,7 @@ OP-003
 : Session Health Monitoring: The client and server MUST regularly send
   heartbeats to each other after mutual authentication in order to keep the
   DOTS session open. A session MUST be considered active until a client or
-  server explicity end the session, or either DOTS agent fails to receive
+  server explicity ends the session, or either DOTS agent fails to receive
   heartbeats from the other after a mutually negotiated timeout period has
   elapsed.
 
