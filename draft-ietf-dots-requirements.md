@@ -415,8 +415,7 @@ authenticity.
 
 DATA-001
 : Reliable transport: Transmissions over the data channel may be transactional,
-  requiring reliable, in-order packet delivery. This is most easily achieved
-  using a reliable transport such as TCP.
+  requiring reliable, in-order packet delivery.
 
 DATA-002
 : Data privacy and integrity: Transmissions over the data channel may contain
