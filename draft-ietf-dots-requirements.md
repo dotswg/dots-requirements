@@ -211,13 +211,15 @@ attack attack traffic saturates the link. Such resiliency may be developed
 several ways, but characteristics such as small message size, asynchronous,
 redundant message delivery and minimal connection overhead (when possible given
 local network policy) with a given network will tend to contribute to
-robustness called for in the DOTS charter.
+the robustness demanded by a viable DOTS protocol.
 
 On the other hand, DOTS must have adequate message confidentiality, integrity
 and authenticity to keep the protocol from becoming another vector for the
-very attacks it's meant to help fight off. The client must be authenticated to
-the server, and vice versa, for DOTS to operate safely, meaning the endpoints
-must have a way to negotiate and agree upon the terms of protocol security.
+very attacks it's meant to help fight off. The DOTS client must be
+authenticated to the DOTS server, and vice versa, for DOTS to operate safely,
+meaning the endpoints must have a way to negotiate and agree upon the terms of
+protocol security. Attacks against the transport protocol should not offer a
+means of attack against the message CIA.
 
 The DOTS server and client must also have some common method of defining the
 scope of any mitigation performed by the mitigator, as well as making
@@ -251,25 +253,23 @@ G-003
   probability of signal delivery even under the severely constrained network
   conditions imposed by the attack traffic. The protocol SHOULD be resilient---
   that is, continue operating despite message loss and out-of-order or
-  redundant delivery, and without depending on transport retransmission---as
-  opposed to reliable, as the additional round-trips incurred by reliable
-  transmission will decrease beacon delivery likelihood over congested links.
+  redundant heartbeat delivery.
 
 G-004
 : Bidirectionality: To support peer health detection, to maintain an open
-  signal channel, and to increase the probability of beacon delivery during
+  signal channel, and to increase the probability of heartbeat delivery during
   attack, the signal channel MUST be bidirectional, with client and server
-  transmitting beacons to each other at regular intervals, regardless of any
+  transmitting heartbeats to each other at regular intervals, regardless of any
   client request for mitigation.
 
-G-004
-: Limited Message Size: To avoid message fragmentation and the consequently
+G-005
+: Sub-MTU Message Size: To avoid message fragmentation and the consequently
   decreased probability of message delivery, signaling protocol message size
   MUST be kept under signaling path Maximum Transmission Unit (MTU), including
   the byte overhead of any encapsulation, transport headers, and transport- or
   message-level security.
 
-G-005
+G-006
 : Message Integrity: DOTS protocols MUST take steps to protect the
   confidentiality, integrity and authenticity of messages sent between client
   and server. While specific transport- and message-level security options are
@@ -281,31 +281,25 @@ G-005
   of protocol security, subject to the interoperability and signal message size
   requirements above.
 
-G-006
-: Bulk Data Exchange: While the resilience requirement above demands a small
-  message size, there are scenarios in which infrequent bulk data exchange
-  between a DOTS client and server are valuable, for example
-  \[Move to use cases? -AM]:
+G-007
+: Message Replay Protection: In order to prevent a passive attacker from
+  capturing and replaying old messages, DOTS protocols MUST provide a method
+  for replay detection, such as including a timestamp or sequence number in
+  every heartbeat sent between DOTS server and client.
 
-  * Population of black- or white-listed source addresses on the mitigator by
-    the client, or similar configuration or hinting that will supplement attack
-    response by the mitigator.
+G-008
+: Bulk Data Exchange: Infrequent bulk data exchange between DOTS client and
+  server can also significantly augment attack response coordination,
+  permitting such tasks as population of black- or white-listed source
+  addresses; address group aliasing; exchange of incident reports; and other
+  hinting or configuration supplementing attack response.
 
-  * Client discovery of available server signaling endpoints, allowing the
-    client to establish signal sessions with multiple servers for redundancy.
-
-  * Address group aliasing, allowing the client and server to refer to
-    arbitrarily-sized collections of client-controlled prefixes in beacons
-    transmitted between the two.
-
-  * Pre-shared keys for transport- or message-level security.
-
-  * Exchange of managed incident or similarly organized reports. \[Too much
-    overlap with MILE/RID? -AM]
-
-: As the resilience requirements above mandate small signal message size, a
-  separate, secure data channel SHOULD be used for bulk data exchange. The
-  mechanism for bulk data exchange is not yet specified.
+: As the resilience requirements for DOTS heartbeats mandate small signal
+  message size, a separate, secure data channel utilizing an established
+  reliable protocol SHOULD be used for bulk data exchange. The mechanism for
+  bulk data exchange is not yet specified, but the nature of the data involved
+  suggests use of a reliable, adaptable protocol with established and
+  configurable conventions for authentication and authorization.
 
 Operational requirements
 ------------------------
@@ -326,18 +320,19 @@ OP-002
   remote peer.
 
 OP-003
-: Session Health Monitoring: The client and server MUST regularly send beacons
-  to each other after mutual authentication in order to keep the DOTS session
-  open. A session MUST be considered active until a client or server explicity
-  end the session, or either endpoint fails to receive beacons from the other
-  after a mutually negotiated timeout period has elapsed.
+: Session Health Monitoring: The client and server MUST regularly send
+  heartbeats to each other after mutual authentication in order to keep the
+  DOTS session open. A session MUST be considered active until a client or
+  server explicity end the session, or either endpoint fails to receive
+  heartbeats from the other after a mutually negotiated timeout period has
+  elapsed.
 
 OP-004
 : Mitigation Capability Opacity: DOTS is a threat signaling protocol. The
   server and mitigator MUST NOT make any assumption about the attack detection,
   classfication, or mitigation capabilities of the client. While the server and
   mitigator MAY take hints from any attack telemetry included in client
-  beacons, the server and mitigator cannot depend on the client for
+  heartbeats, the server and mitigator cannot depend on the client for
   authoritative attack classification. Similarly, the mitigator cannot assume
   the client can or will mitigate attack traffic on its own.
 
@@ -347,26 +342,35 @@ OP-004
   mitigator is not in scope.
 
 OP-005
-: Mitigation Status: DOTS clients MUST be able to request or withdraw
-  a request for mitigation from the server. The server MUST honor a client
-  request to withdraw from coordinated attack response.
+: Mitigation Status: DOTS clients MUST be able to request or withdraw a request
+  for mitigation from the DOTS server. The DOTS server MUST acknowledge a DOTS
+  client's request to withdraw from coordinated attack response in subsequent
+  heartbeats, and MUST cease mitigation activity as quickly as possible.
+  However, a DOTS client rapidly toggling active mitigation result in
+  undesirable side-effects, such as route or DNS flapping. A DOTS server
+  therefore MAY continue mitigating for a mutually negotiated period after
+  receiving the DOTS client's request to stop.
 
 : A server MAY refuse to engage in coordinated attack response with a client.
   To make the status of a client's request clear, the server MUST indicate in
-  server beacons whether client-initiated mitigation is active. When a
+  server heartbeats whether client-initiated mitigation is active. When a
   client-initiated mitigation is active, and threat handling details such as
   mitigation scope and statistics are available to the server, the server
-  SHOULD include those details in server beacons sent to the client.
+  SHOULD include those details in server heartbeats sent to the client. DOTS
+  clients SHOULD take mitigation statistics into account when deciding whether
+  to request the DOTS server cease mitigation.
 
 OP-006
-: Mitigation Scope: DOTS clients MUST also indicate the the desired address
+: Mitigation Scope: DOTS clients MUST indicate the the desired address
   space coverage of any mitigation, for example by using Classless Internet
   Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, the length/prefix
   convention established in the Border Gateway Protocol (BGP) [RFC4271], or by
   a prefix group alias agreed upon with the server through the data channel. If
   additional information narrowing the scope of any requested attack response,
   such as targeted port range, protocol, or service, clients SHOULD include
-  that information in client beacons.
+  that information in client heartbeats.
+
+  [RFC2373] for IPv6 prefixes.
 
 : As an active attack evolves, clients MUST be able to adjust as necessary the
   scope of requested mitigation by refining the address space requiring
@@ -386,7 +390,15 @@ TODO
 Security Considerations
 =======================
 
-TODO
+DOTS is at risk to three primary attacks: DOTS agent impersonation, traffic
+injection, and signaling blocking. The DOTS protocol MUST be designed for
+minimal data transfer to address the blocking risk. Impersonation and traffic
+injection mitigation can be managed through current secure communications best
+practices. DOTS is not subject to anything new in this area. One consideration
+could be to minimize the security technologies in use at any one time. The more
+needed, the greater the risk of failures coming from assumptions on one
+technology providing protection that it does not in the presence of another
+technology.
 
 Change Log
 ==========
@@ -394,6 +406,6 @@ Change Log
 Initial revision
 ----------------
 
-2015-09-24
+2015-09-24      Andrew Mortensen
 
 --- back
