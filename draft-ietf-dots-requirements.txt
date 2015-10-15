@@ -5,10 +5,10 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                      Arbor Networks, Inc.
 Intended status: Informational                              R. Moskowitz
-Expires: March 20, 2016                                   HTT Consulting
+Expires: April 17, 2016                                   HTT Consulting
                                                                 T. Reddy
                                                      Cisco Systems, Inc.
-                                                      September 17, 2015
+                                                        October 15, 2015
 
 
                 DDoS Open Threat Signaling Requirements
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 20, 2016.
+   This Internet-Draft will expire on April 17, 2016.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 1]
+Mortensen, et al.        Expires April 17, 2016                 [Page 1]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 2]
+Mortensen, et al.        Expires April 17, 2016                 [Page 2]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    There are many ways to respond to an ongoing DDoS attack, some of
@@ -165,9 +165,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 3]
+Mortensen, et al.        Expires April 17, 2016                 [Page 3]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
       form of traffic diversion.  The form mitigation takes is out of
@@ -221,9 +221,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 4]
+Mortensen, et al.        Expires April 17, 2016                 [Page 4]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
       message sent to the DOTS client, containing information about the
@@ -277,9 +277,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 5]
+Mortensen, et al.        Expires April 17, 2016                 [Page 5]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    The DOTS server and client must also have some common method of
@@ -333,9 +333,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 6]
+Mortensen, et al.        Expires April 17, 2016                 [Page 6]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    G-006  Message Integrity: DOTS protocols MUST take steps to protect
@@ -389,9 +389,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 7]
+Mortensen, et al.        Expires April 17, 2016                 [Page 7]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    OP-003  Session Health Monitoring: The client and server MUST
@@ -445,9 +445,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 8]
+Mortensen, et al.        Expires April 17, 2016                 [Page 8]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
       [RFC4271], or by a prefix group alias agreed upon with the server
@@ -501,9 +501,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                 [Page 9]
+Mortensen, et al.        Expires April 17, 2016                 [Page 9]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
       channel.  DOTS agents MAY take additional steps to authorize data
@@ -557,9 +557,9 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                [Page 10]
+Mortensen, et al.        Expires April 17, 2016                [Page 10]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
 5.1.  Initial revision
@@ -613,9 +613,9 @@ Authors' Addresses
 
 
 
-Mortensen, et al.        Expires March 20, 2016                [Page 11]
+Mortensen, et al.        Expires April 17, 2016                [Page 11]
 
-Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
+Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
    Andrew Mortensen
@@ -669,4 +669,4 @@ Internet-Draft   DDoS Open Threat Signaling Requirements  September 2015
 
 
 
-Mortensen, et al.        Expires March 20, 2016                [Page 12]
+Mortensen, et al.        Expires April 17, 2016                [Page 12]

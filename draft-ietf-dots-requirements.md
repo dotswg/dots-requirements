@@ -1,7 +1,7 @@
 ---
 title: DDoS Open Threat Signaling Requirements
 docname: draft-ietf-dots-requirements-00
-date: 2015-09-17
+date: 2015-10-15
 
 area: Security
 wg: DOTS
