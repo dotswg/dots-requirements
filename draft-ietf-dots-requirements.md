@@ -197,6 +197,13 @@ data channel:
   bulk exchange of data not easily or appropriately communicated through the
   signal channel under attack conditions.
 
+blacklist:
+: a list of source addresses or prefixes from which traffic should be blocked.
+
+whitelist:
+: a list of source addresses or prefixes from which traffic should always be
+  allowed, regardless of contradictory data gleaned in a detected attack.
+
 
 Requirements
 ============
@@ -384,6 +391,62 @@ OP-006
   intervention.
 
 
+Data channel requirements
+-------------------------
+
+The data channel is intended to be used for bulk data exchanges between DOTS
+agents. Unlike the signal channel, which must operate nominally even when
+confronted with despite signal degradation due to packet loss, the data
+channel is not expected to be constructed to deal with attack conditions.
+As the primary function of the data channel is data exchange, a reliable
+transport is required in order for DOTS agents to detect data delivery success
+or failure.
+
+The data channel should be adaptable and extensible. We anticipate the data
+channel will be used for such purposes as configuration or resource discovery.
+For example, a DOTS client may submit to the DOTS server a collection of
+prefixes it wants to refer to by alias when requesting mitigation, to which the
+server would respond with a success status and the new prefix group alias, or
+an error status and message in the event the DOTS client's data channel request
+failed. The transactional nature of such data exchanges suggests a separate set
+of requirements for the data channel, while the potentially sensitive content
+sent between DOTS agents requires extra precautions to ensure data privacy and
+authenticity.
+
+DATA-001
+: Reliable transport: Transmissions over the data channel may be transactional,
+  requiring reliable, in-order packet delivery. This is most easily achieved
+  using a reliable transport such as TCP.
+
+DATA-002
+: Data privacy and integrity: Transmissions over the data channel may contain
+  sensitive information or instructions from the remote DOTS agent. Theft or
+  modification of data channel transmissions could lead to information leaks or
+  malicious transactions on behalf of the sending agent. (See Security
+  Considerations below.) Consequently data sent over the data channel MUST be
+  encrypted and authenticated using current industry best practices.
+
+DATA-003
+: Mutual authentication: DOTS agents MUST mutually authenticate each other
+  before data may be exchanged over the data channel. DOTS agents MAY take
+  additional steps to authorize data exchange, as in the prefix group example
+  above, before accepting data over the data channel. The form of
+  authentication and authorization is unspecified.
+
+DATA-004
+: Black- and whitelist management: DOTS servers SHOULD provide methods for
+  DOTS clients to manage black- and white-lists of source addresses of traffic
+  destined for addresses belonging to a client.
+
+: For example, a DOTS client
+  should be able to create a black- or whitelist entry; retrieve a list of
+  current entries from either list; update the content of either list; and
+  delete entries as necessary.
+
+: How the DOTS server determines client ownership of address space is not in
+  scope.
+
+
 Data model requirements
 -----------------------
 
@@ -398,7 +461,7 @@ conditions. Bulk data transfers are performed over the data channel, which
 should use a reliable transport with built-in congestion control mechanisms,
 such as TCP.
 
-Security Considerations
+Security Considerations         {#security-considerations}
 =======================
 
 DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic
