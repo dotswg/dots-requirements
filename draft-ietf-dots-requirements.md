@@ -150,40 +150,47 @@ DOTS client:
 
 DOTS server:
 : A DOTS-aware network element handling and responding to messages from a
-  DOTS client.  The DOTS server MAY enable mitigation on behalf of the DOTS
+  DOTS client. The DOTS server MAY enable mitigation on behalf of the DOTS
   client, if requested, by communicating the DOTS client's request to the
   mitigator and relaying any mitigator feedback to the client. A DOTS server
-  MAY also be a mitigator.
-
-signal channel:
-: A bidirectional, mutually authenticated communication layer between DOTS
-  client and DOTS server characterized by resilience even in conditions
-  leading to severe packet loss, such as a volumetric DDoS attack causing
-  network congestion.
-
-heartbeat:
-: A concise, authenticated status/control message transmitted between a DOTS
-  client and DOTS server over the signal channel. The format and size are
-  carefully restricted in order to contribute to the resilience of the signal
-  channel.
-
-client heartbeat:
-: A heartbeat sent from a DOTS client to a DOTS server over the signal channel,
-  indicating the DOTS client's need for mitigation, as well as the scope of any
-  requested mitigation, optionally including detected attack telemetry to
-  supplement server-initiated mitigation.
-
-server heartbeat:
-: A message sent from a DOTS server to a DOTS client over the signal channel.
-  Note that a server heartbeat is not a response to client heartbeat, but a
-  DOTS server-initiated status message sent to the DOTS client, containing
-  information about the status of any requested mitigation.
+  may also be a mitigator.
 
 DOTS relay:
 : A DOTS-aware network element positioned between a DOTS server and a DOTS
-  client. A DOTS relay receives heartbeats from a DOTS client and relays them
-  to a DOTS server, passing heartbeats from the DOTS server back to the DOTS
-  client.
+  client. A DOTS relay receives messages from a DOTS client and relays them
+  to a DOTS server, and similarly passes messages from the DOTS server to the
+  DOTS client.
+
+DOTS agents:
+: A collective term for DOTS clients, servers and relays.
+
+signal channel:
+: A bidirectional, mutually authenticated communication layer between DOTS
+  agents characterized by resilience even in conditions leading to severe
+  packet loss, such as a volumetric DDoS attack causing network congestion.
+
+DOTS signal:
+: A concise authenticated status/control message transmitted between DOTS
+  agents, used to indicate client's need for mitigation, as well as to convey
+  the status of any requested mitigation.
+
+heartbeat:
+: A keep-alive message transmitted between DOTS agents over the signal channel,
+  used to measure peer health. Heartbeat functionality is not required to be
+  distinct from signal.
+
+client signal:
+: A message sent from a DOTS client to a DOTS server over the signal channel,
+  possibly traversing a DOTS relay, indicating the DOTS client's need for
+  mitigation, as well as the scope of any requested mitigation, optionally
+  including detected attack telemetry to supplement server-initiated
+  mitigation.
+
+server signal:
+: A message sent from a DOTS server to a DOTS client over the signal channel.
+  Note that a server signal is not a response to client signal, but a DOTS
+  server-initiated status message sent to the DOTS client, containing
+  information about the status of any requested mitigation and its efficacy.
 
 data channel:
 : A secure communication layer between client and server used for infrequent
@@ -252,15 +259,15 @@ G-002
 G-003
 : Resilience: The signaling protocol MUST be designed to maximize the
   probability of signal delivery even under the severely constrained network
-  conditions imposed by the attack traffic. The protocol SHOULD be resilient---
+  conditions imposed by the attack traffic. The protocol SHOULD be resilient,
   that is, continue operating despite message loss and out-of-order or
-  redundant heartbeat delivery.
+  redundant signal delivery.
 
 G-004
 : Bidirectionality: To support peer health detection, to maintain an open
-  signal channel, and to increase the probability of heartbeat delivery during
+  signal channel, and to increase the probability of signal delivery during
   attack, the signal channel MUST be bidirectional, with client and server
-  transmitting heartbeats to each other at regular intervals, regardless of any
+  transmitting signals to each other at regular intervals, regardless of any
   client request for mitigation.
 
 G-005
@@ -286,7 +293,7 @@ G-007
 : Message Replay Protection: In order to prevent a passive attacker from
   capturing and replaying old messages, DOTS protocols MUST provide a method
   for replay detection, such as including a timestamp or sequence number in
-  every heartbeat sent between DOTS server and client.
+  every heartbeat and signal sent between DOTS agents.
 
 G-008
 : Bulk Data Exchange: Infrequent bulk data exchange between DOTS client and
@@ -295,12 +302,12 @@ G-008
   addresses; address group aliasing; exchange of incident reports; and other
   hinting or configuration supplementing attack response.
 
-: As the resilience requirements for DOTS heartbeats mandate small signal
-  message size, a separate, secure data channel utilizing an established
-  reliable protocol SHOULD be used for bulk data exchange. The mechanism for
-  bulk data exchange is not yet specified, but the nature of the data involved
-  suggests use of a reliable, adaptable protocol with established and
-  configurable conventions for authentication and authorization.
+: As the resilience requirements for DOTS mandate small signal message size, a
+  separate, secure data channel utilizing an established reliable protocol
+  SHOULD be used for bulk data exchange. The mechanism for bulk data exchange
+  is not yet specified, but the nature of the data involved suggests use of a
+  reliable, adaptable protocol with established and configurable conventions
+  for authentication and authorization.
 
 Operational requirements
 ------------------------
@@ -333,7 +340,7 @@ OP-004
   server and mitigator MUST NOT make any assumption about the attack detection,
   classfication, or mitigation capabilities of the client. While the server and
   mitigator MAY take hints from any attack telemetry included in client
-  heartbeats, the server and mitigator cannot depend on the client for
+  signals, the server and mitigator cannot depend on the client for
   authoritative attack classification. Similarly, the mitigator cannot assume
   the client can or will mitigate attack traffic on its own.
 
@@ -346,18 +353,18 @@ OP-005
 : Mitigation Status: DOTS clients MUST be able to request or withdraw a request
   for mitigation from the DOTS server. The DOTS server MUST acknowledge a DOTS
   client's request to withdraw from coordinated attack response in subsequent
-  heartbeats, and MUST cease mitigation activity as quickly as possible.
-  However, a DOTS client rapidly toggling active mitigation result in
-  undesirable side-effects, such as route or DNS flapping. A DOTS server
-  therefore MAY continue mitigating for a mutually negotiated period after
-  receiving the DOTS client's request to stop.
+  signals, and MUST cease mitigation activity as quickly as possible.
+  However, a DOTS client rapidly toggling active mitigation may result in
+  undesirable side-effects for the network path, such as route or DNS flapping.
+  A DOTS server therefore MAY continue mitigating for a mutually negotiated
+  period after receiving the DOTS client's request to stop.
 
 : A server MAY refuse to engage in coordinated attack response with a client.
   To make the status of a client's request clear, the server MUST indicate in
-  server heartbeats whether client-initiated mitigation is active. When a
+  server signals whether client-initiated mitigation is active. When a
   client-initiated mitigation is active, and threat handling details such as
   mitigation scope and statistics are available to the server, the server
-  SHOULD include those details in server heartbeats sent to the client. DOTS
+  SHOULD include those details in server signals sent to the client. DOTS
   clients SHOULD take mitigation statistics into account when deciding whether
   to request the DOTS server cease mitigation.
 
