@@ -145,7 +145,7 @@ mitigator:
 
 DOTS client:
 : A DOTS-aware network element requesting attack response coordination with
-  another DOTS-aware element, with the expectation that the remote endpoint is
+  another DOTS-aware element, with the expectation that the remote element is
   capable of helping fend off the attack against the client.
 
 DOTS server:
@@ -214,7 +214,7 @@ Bidirectional communication between DOTS client and server is critical.
 
 Yet the DOTS protocol must also work with a set of competing operational goals.
 On the one hand, the protocol must be resilient under extremely hostile
-network conditions, providing continued contact between endpoints even as
+network conditions, providing continued contact between DOTS agents even as
 attack attack traffic saturates the link. Such resiliency may be developed
 several ways, but characteristics such as small message size, asynchronous,
 redundant message delivery and minimal connection overhead (when possible given
@@ -225,8 +225,8 @@ On the other hand, DOTS must have adequate message confidentiality, integrity
 and authenticity to keep the protocol from becoming another vector for the
 very attacks it's meant to help fight off. The DOTS client must be
 authenticated to the DOTS server, and vice versa, for DOTS to operate safely,
-meaning the endpoints must have a way to negotiate and agree upon the terms of
-protocol security. Attacks against the transport protocol should not offer a
+meaning the DOTS agents must have a way to negotiate and agree upon the terms
+of protocol security. Attacks against the transport protocol should not offer a
 means of attack against the message CIA.
 
 The DOTS server and client must also have some common method of defining the
@@ -285,7 +285,7 @@ G-006
   encryption and message authentication.
 
 : In order for DOTS protocols to remain secure despite advancements in
-  cryptanalysis, DOTS peers MUST be able to negotiate the terms and mechanisms
+  cryptanalysis, DOTS agents MUST be able to negotiate the terms and mechanisms
   of protocol security, subject to the interoperability and signal message size
   requirements above.
 
@@ -314,7 +314,7 @@ Operational requirements
 
 OP-001
 : Use of Common Transports: DOTS MUST operate over common standardized
-  transport protocols. While the protocol resilience requirement [G-NNN]
+  transport protocols. While the protocol resilience requirement [G-003]
   strongly RECOMMENDS the use of connectionless protocols, in particular the
   User Datagram Protocol (UDP) {{RFC0768}}, use of a standardized,
   connection-oriented protocol like the Transmission Control Protocol (TCP)
@@ -331,7 +331,7 @@ OP-003
 : Session Health Monitoring: The client and server MUST regularly send
   heartbeats to each other after mutual authentication in order to keep the
   DOTS session open. A session MUST be considered active until a client or
-  server explicity end the session, or either endpoint fails to receive
+  server explicity end the session, or either DOTS agent fails to receive
   heartbeats from the other after a mutually negotiated timeout period has
   elapsed.
 
