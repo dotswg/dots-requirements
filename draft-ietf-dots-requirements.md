@@ -321,7 +321,7 @@ Operational requirements
 
 OP-001
 : Use of Common Transports: DOTS MUST operate over common standardized
-  transport protocols. While the protocol resilience requirement [G-003]
+  transport protocols. While the protocol resilience requirement
   strongly RECOMMENDS the use of connectionless protocols, in particular the
   User Datagram Protocol (UDP) {{RFC0768}}, use of a standardized,
   connection-oriented protocol like the Transmission Control Protocol (TCP)
