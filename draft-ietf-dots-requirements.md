@@ -54,6 +54,7 @@ normative:
 informative:
   RFC1518:
   RFC1519:
+  RFC2373:
   RFC4271:
 
 --- abstract
@@ -363,14 +364,13 @@ OP-005
 OP-006
 : Mitigation Scope: DOTS clients MUST indicate the the desired address
   space coverage of any mitigation, for example by using Classless Internet
-  Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, the length/prefix
-  convention established in the Border Gateway Protocol (BGP) [RFC4271], or by
-  a prefix group alias agreed upon with the server through the data channel. If
-  additional information narrowing the scope of any requested attack response,
-  such as targeted port range, protocol, or service, clients SHOULD include
-  that information in client heartbeats.
-
-  [RFC2373] for IPv6 prefixes.
+  Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, [RFC2373] for IPv6
+  prefixes, the length/prefix convention established in the Border Gateway
+  Protocol (BGP) [RFC4271], or by a prefix group alias agreed upon with the
+  server through the data channel. If additional information narrowing the
+  scope of any requested attack response, such as targeted port range,
+  protocol, or service, clients SHOULD include that information in client
+  signals.
 
 : As an active attack evolves, clients MUST be able to adjust as necessary the
   scope of requested mitigation by refining the address space requiring
