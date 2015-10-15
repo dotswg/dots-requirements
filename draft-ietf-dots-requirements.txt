@@ -73,12 +73,13 @@ Table of Contents
      2.4.  Data model requirements . . . . . . . . . . . . . . . . .  10
    3.  Congestion Control Considerations . . . . . . . . . . . . . .  10
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   5.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     5.1.  Initial revision  . . . . . . . . . . . . . . . . . . . .  11
+   5.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     5.1.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  11
+     5.2.  Initial revision  . . . . . . . . . . . . . . . . . . . .  11
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .  11
      6.2.  Informative References  . . . . . . . . . . . . . . . . .  11
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -104,8 +105,7 @@ Table of Contents
    subscribers to proprietary implementations while also limiting the
    subset of network elements capable of participating in the attack
    response.  As a result of incompatibility across services, attack
-   response may be fragmentary or otherwise incomplete, leaving key
-   players in the attack path unable to assist in the defense.
+
 
 
 
@@ -113,6 +113,9 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 2]
 
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
+
+   response may be fragmentary or otherwise incomplete, leaving key
+   players in the attack path unable to assist in the defense.
 
    There are many ways to respond to an ongoing DDoS attack, some of
    them better than others, but the lack of a common method to
@@ -159,9 +162,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    attack telemetry:  collected network traffic characteristics defining
       the nature of a DDoS attack.
 
-   mitigation:  A defensive response against a detected DDoS attack,
-      performed by an entity in the network path between attack sources
-      and the attack target, either through inline deployment or some
 
 
 
@@ -170,6 +170,9 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 3]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
+   mitigation:  A defensive response against a detected DDoS attack,
+      performed by an entity in the network path between attack sources
+      and the attack target, either through inline deployment or some
       form of traffic diversion.  The form mitigation takes is out of
       scope for this document.
 
@@ -215,9 +218,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
       scope of any requested mitigation, optionally including detected
       attack telemetry to supplement server-initiated mitigation.
 
-   server signal:  A message sent from a DOTS server to a DOTS client
-      over the signal channel.  Note that a server signal is not a
-      response to client signal, but a DOTS server-initiated status
 
 
 
@@ -226,6 +226,9 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 4]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
+   server signal:  A message sent from a DOTS server to a DOTS client
+      over the signal channel.  Note that a server signal is not a
+      response to client signal, but a DOTS server-initiated status
       message sent to the DOTS client, containing information about the
       status of any requested mitigation and its efficacy.
 
@@ -259,8 +262,8 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    Yet the DOTS protocol must also work with a set of competing
    operational goals.  On the one hand, the protocol must be resilient
    under extremely hostile network conditions, providing continued
-   contact between DOTS agents even as attack attack traffic saturates
-   the link.  Such resiliency may be developed several ways, but
+   contact between DOTS agents even as attack traffic saturates the
+   link.  Such resiliency may be developed several ways, but
    characteristics such as small message size, asynchronous, redundant
    message delivery and minimal connection overhead (when possible given
    local network policy) with a given network will tend to contribute to
@@ -271,9 +274,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    vector for the very attacks it's meant to help fight off.  The DOTS
    client must be authenticated to the DOTS server, and vice versa, for
    DOTS to operate safely, meaning the DOTS agents must have a way to
-   negotiate and agree upon the terms of protocol security.  Attacks
-   against the transport protocol should not offer a means of attack
-   against the message CIA.
 
 
 
@@ -281,6 +281,10 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 5]
 
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
+
+   negotiate and agree upon the terms of protocol security.  Attacks
+   against the transport protocol should not offer a means of attack
+   against the message CIA.
 
    The DOTS server and client must also have some common method of
    defining the scope of any mitigation performed by the mitigator, as
@@ -326,10 +330,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
       consequently decreased probability of message delivery, signaling
       protocol message size MUST be kept under signaling path Maximum
       Transmission Unit (MTU), including the byte overhead of any
-      encapsulation, transport headers, and transport- or message-level
-      security.
-
-
 
 
 
@@ -337,6 +337,9 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 6]
 
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
+
+      encapsulation, transport headers, and transport- or message-level
+      security.
 
    G-006  Message Integrity: DOTS protocols MUST take steps to protect
       the confidentiality, integrity and authenticity of messages sent
@@ -383,9 +386,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
    OP-002  Peer Mutual Authentication: The client and server MUST
       authenticate each other before a DOTS session is considered
-      active.  The method of authentication is not specified, but should
-      follow current industry best practices with respect to any
-      cryptographic mechanisms to authenticate the remote peer.
 
 
 
@@ -394,10 +394,14 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 7]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
+      active.  The method of authentication is not specified, but should
+      follow current industry best practices with respect to any
+      cryptographic mechanisms to authenticate the remote peer.
+
    OP-003  Session Health Monitoring: The client and server MUST
       regularly send heartbeats to each other after mutual
       authentication in order to keep the DOTS session open.  A session
-      MUST be considered active until a client or server explicity end
+      MUST be considered active until a client or server explicity ends
       the session, or either DOTS agent fails to receive heartbeats from
       the other after a mutually negotiated timeout period has elapsed.
 
@@ -437,11 +441,7 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
       SHOULD take mitigation statistics into account when deciding
       whether to request the DOTS server cease mitigation.
 
-   OP-006  Mitigation Scope: DOTS clients MUST indicate the the desired
-      address space coverage of any mitigation, for example by using
-      Classless Internet Domain Routing (CIDR) [RFC1518],[RFC1519]
-      prefixes, [RFC2373] for IPv6 prefixes, the length/prefix
-      convention established in the Border Gateway Protocol (BGP)
+
 
 
 
@@ -450,11 +450,16 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 8]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
+   OP-006  Mitigation Scope: DOTS clients MUST indicate the the desired
+      address space coverage of any mitigation, for example by using
+      Classless Internet Domain Routing (CIDR) [RFC1518],[RFC1519]
+      prefixes, [RFC2373] for IPv6 prefixes, the length/prefix
+      convention established in the Border Gateway Protocol (BGP)
       [RFC4271], or by a prefix group alias agreed upon with the server
-      through the data channel.  If additional information narrowing the
-      scope of any requested attack response, such as targeted port
-      range, protocol, or service, clients SHOULD include that
-      information in client signals.
+      through the data channel.  If there is additional information
+      available narrowing the scope of any requested attack response,
+      such as targeted port range, protocol, or service, clients SHOULD
+      include that information in client signals.
 
       As an active attack evolves, clients MUST be able to adjust as
       necessary the scope of requested mitigation by refining the
@@ -484,8 +489,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
    DATA-001  Reliable transport: Transmissions over the data channel may
       be transactional, requiring reliable, in-order packet delivery.
-      This is most easily achieved using a reliable transport such as
-      TCP.
 
    DATA-002  Data privacy and integrity: Transmissions over the data
       channel may contain sensitive information or instructions from the
@@ -496,9 +499,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
       channel MUST be encrypted and authenticated using current industry
       best practices.
 
-   DATA-003  Mutual authentication: DOTS agents MUST mutually
-      authenticate each other before data may be exchanged over the data
-
 
 
 Mortensen, et al.        Expires April 17, 2016                 [Page 9]
@@ -506,6 +506,8 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 9]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
+   DATA-003  Mutual authentication: DOTS agents MUST mutually
+      authenticate each other before data may be exchanged over the data
       channel.  DOTS agents MAY take additional steps to authorize data
       exchange, as in the prefix group example above, before accepting
       data over the data channel.  The form of authentication and
@@ -549,8 +551,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    technology providing protection that it does not in the presence of
    another technology.
 
-5.  Change Log
-
 
 
 
@@ -562,7 +562,13 @@ Mortensen, et al.        Expires April 17, 2016                [Page 10]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
-5.1.  Initial revision
+5.  Change Log
+
+5.1.  00 revision
+
+   2015-10-15
+
+5.2.  Initial revision
 
    2015-09-24 Andrew Mortensen
 
@@ -603,12 +609,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
               10.17487/RFC4271, January 2006,
               <http://www.rfc-editor.org/info/rfc4271>.
 
-Authors' Addresses
-
-
-
-
-
 
 
 
@@ -617,6 +617,8 @@ Mortensen, et al.        Expires April 17, 2016                [Page 11]
 
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
+
+Authors' Addresses
 
    Andrew Mortensen
    Arbor Networks, Inc.
@@ -643,8 +645,6 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    India
 
    Email: tireddy@cisco.com
-
-
 
 
 

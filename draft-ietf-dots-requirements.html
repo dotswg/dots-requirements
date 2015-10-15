@@ -385,7 +385,8 @@
 <link href="#rfc.section.3" rel="Chapter" title="3 Congestion Control Considerations"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Change Log"/>
-<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Initial revision"/>
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 00 revision"/>
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Initial revision"/>
 <link href="#rfc.references" rel="Chapter" title="6 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
 <link href="#rfc.references.2" rel="Chapter" title="6.2 Informative References"/>
@@ -477,7 +478,8 @@
 </ul><li>3.   <a href="#rfc.section.3">Congestion Control Considerations</a></li>
 <li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
 <li>5.   <a href="#rfc.section.5">Change Log</a></li>
-<ul><li>5.1.   <a href="#rfc.section.5.1">Initial revision</a></li>
+<ul><li>5.1.   <a href="#rfc.section.5.1">00 revision</a></li>
+<li>5.2.   <a href="#rfc.section.5.2">Initial revision</a></li>
 </ul><li>6.   <a href="#rfc.references">References</a></li>
 <ul><li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>6.2.   <a href="#rfc.references.2">Informative References</a></li>
@@ -535,7 +537,7 @@
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a></h1>
 <p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols. The requirements are aligned with, although not directly derived from, the use cases described in [I-D.ietf-dots-use-cases].</p>
 <p id="rfc.section.2.p.2">DOTS must at a minimum make it possible for a DOTS client to request a DOTS server&#8217;s aid in mounting a coordinated defense against a detected attack, and client should similarly be able to withdraw that request arbitrarily.  Regular feedback between DOTS client and server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity.  Bidirectional communication between DOTS client and server is critical.</p>
-<p id="rfc.section.2.p.3">Yet the DOTS protocol must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between DOTS agents even as attack attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection overhead (when possible given local network policy) with a given network will tend to contribute to the robustness demanded by a viable DOTS protocol.</p>
+<p id="rfc.section.2.p.3">Yet the DOTS protocol must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between DOTS agents even as attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection overhead (when possible given local network policy) with a given network will tend to contribute to the robustness demanded by a viable DOTS protocol.</p>
 <p id="rfc.section.2.p.4">On the other hand, DOTS must have adequate message confidentiality, integrity and authenticity to keep the protocol from becoming another vector for the very attacks it&#8217;s meant to help fight off. The DOTS client must be authenticated to the DOTS server, and vice versa, for DOTS to operate safely, meaning the DOTS agents must have a way to negotiate and agree upon the terms of protocol security. Attacks against the transport protocol should not offer a means of attack against the message CIA.</p>
 <p id="rfc.section.2.p.5">The DOTS server and client must also have some common method of defining the scope of any mitigation performed by the mitigator, as well as making adjustments to other commonly configurable features, such as listen ports, exchanging black- and white-lists, and so on.</p>
 <p id="rfc.section.2.p.6">Finally, DOTS should provide sufficient extensibility to meet local, vendor or future needs in coordinated attack defense, although this consideration is necessarily superseded by the other operational requirements.</p>
@@ -573,7 +575,7 @@
   <dt>OP-002</dt>
   <dd style="margin-left: 8">Peer Mutual Authentication: The client and server MUST authenticate each other before a DOTS session is considered active. The method of authentication is not specified, but should follow current industry best practices with respect to any cryptographic mechanisms to authenticate the remote peer.</dd>
   <dt>OP-003</dt>
-  <dd style="margin-left: 8">Session Health Monitoring: The client and server MUST regularly send heartbeats to each other after mutual authentication in order to keep the DOTS session open. A session MUST be considered active until a client or server explicity end the session, or either DOTS agent fails to receive heartbeats from the other after a mutually negotiated timeout period has elapsed.</dd>
+  <dd style="margin-left: 8">Session Health Monitoring: The client and server MUST regularly send heartbeats to each other after mutual authentication in order to keep the DOTS session open. A session MUST be considered active until a client or server explicity ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually negotiated timeout period has elapsed.</dd>
   <dt>OP-004</dt>
   <dd style="margin-left: 8">Mitigation Capability Opacity: DOTS is a threat signaling protocol. The server and mitigator MUST NOT make any assumption about the attack detection, classfication, or mitigation capabilities of the client. While the server and mitigator MAY take hints from any attack telemetry included in client signals, the server and mitigator cannot depend on the client for authoritative attack classification. Similarly, the mitigator cannot assume the client can or will mitigate attack traffic on its own.</dd>
   <dt></dt>
@@ -583,7 +585,7 @@
   <dt></dt>
   <dd style="margin-left: 8">A server MAY refuse to engage in coordinated attack response with a client.  To make the status of a client&#8217;s request clear, the server MUST indicate in server signals whether client-initiated mitigation is active. When a client-initiated mitigation is active, and threat handling details such as mitigation scope and statistics are available to the server, the server SHOULD include those details in server signals sent to the client. DOTS clients SHOULD take mitigation statistics into account when deciding whether to request the DOTS server cease mitigation.</dd>
   <dt>OP-006</dt>
-  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate the the desired address space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, <a href="#RFC2373">[RFC2373]</a> for IPv6 prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, or by a prefix group alias agreed upon with the server through the data channel. If additional information narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, clients SHOULD include that information in client signals.</dd>
+  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate the the desired address space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, <a href="#RFC2373">[RFC2373]</a> for IPv6 prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, or by a prefix group alias agreed upon with the server through the data channel. If there is additional information available narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, clients SHOULD include that information in client signals.</dd>
   <dt></dt>
   <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the address space requiring intervention.</dd>
 </dl>
@@ -594,7 +596,7 @@
 
 <dl>
   <dt>DATA-001</dt>
-  <dd style="margin-left: 8">Reliable transport: Transmissions over the data channel may be transactional, requiring reliable, in-order packet delivery. This is most easily achieved using a reliable transport such as TCP.</dd>
+  <dd style="margin-left: 8">Reliable transport: Transmissions over the data channel may be transactional, requiring reliable, in-order packet delivery.</dd>
   <dt>DATA-002</dt>
   <dd style="margin-left: 8">Data privacy and integrity: Transmissions over the data channel may contain sensitive information or instructions from the remote DOTS agent. Theft or modification of data channel transmissions could lead to information leaks or malicious transactions on behalf of the sending agent. (See Security Considerations below.) Consequently data sent over the data channel MUST be encrypted and authenticated using current industry best practices.</dd>
   <dt>DATA-003</dt>
@@ -613,8 +615,10 @@
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
 <p id="rfc.section.4.p.1">DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic injection, and signaling blocking. The DOTS protocol MUST be designed for minimal data transfer to address the blocking risk. Impersonation and traffic injection mitigation can be managed through current secure communications best practices. DOTS is not subject to anything new in this area. One consideration could be to minimize the security technologies in use at any one time. The more needed, the greater the risk of failures coming from assumptions on one technology providing protection that it does not in the presence of another technology.</p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
-<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
-<p id="rfc.section.5.1.p.1">2015-09-24      Andrew Mortensen</p>
+<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> <a href="#revision" id="revision">00 revision</a></h1>
+<p id="rfc.section.5.1.p.1">2015-10-15</p>
+<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
+<p id="rfc.section.5.2.p.1">2015-09-24      Andrew Mortensen</p>
 <h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
 <table>

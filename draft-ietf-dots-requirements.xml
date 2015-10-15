@@ -221,13 +221,13 @@ maintaining a common understanding of DOTS peer health and activity.
 Bidirectional communication between DOTS client and server is critical.</t>
 
 <t>Yet the DOTS protocol must also work with a set of competing operational goals.
-On the one hand, the protocol must be resilient under extremely hostile
-network conditions, providing continued contact between DOTS agents even as
-attack attack traffic saturates the link. Such resiliency may be developed
-several ways, but characteristics such as small message size, asynchronous,
-redundant message delivery and minimal connection overhead (when possible given
-local network policy) with a given network will tend to contribute to
-the robustness demanded by a viable DOTS protocol.</t>
+On the one hand, the protocol must be resilient under extremely hostile network
+conditions, providing continued contact between DOTS agents even as attack
+traffic saturates the link. Such resiliency may be developed several ways, but
+characteristics such as small message size, asynchronous, redundant message
+delivery and minimal connection overhead (when possible given local network
+policy) with a given network will tend to contribute to the robustness demanded
+by a viable DOTS protocol.</t>
 
 <t>On the other hand, DOTS must have adequate message confidentiality, integrity
 and authenticity to keep the protocol from becoming another vector for the
@@ -329,7 +329,7 @@ remote peer.</t>
   Session Health Monitoring: The client and server MUST regularly send
 heartbeats to each other after mutual authentication in order to keep the
 DOTS session open. A session MUST be considered active until a client or
-server explicity end the session, or either DOTS agent fails to receive
+server explicity ends the session, or either DOTS agent fails to receive
 heartbeats from the other after a mutually negotiated timeout period has
 elapsed.</t>
   <t hangText='OP-004'>
@@ -367,10 +367,10 @@ space coverage of any mitigation, for example by using Classless Internet
 Domain Routing (CIDR) <xref target="RFC1518"></xref>,<xref target="RFC1519"></xref> prefixes, <xref target="RFC2373"></xref> for IPv6
 prefixes, the length/prefix convention established in the Border Gateway
 Protocol (BGP) <xref target="RFC4271"></xref>, or by a prefix group alias agreed upon with the
-server through the data channel. If additional information narrowing the
-scope of any requested attack response, such as targeted port range,
-protocol, or service, clients SHOULD include that information in client
-signals.</t>
+server through the data channel. If there is additional information available
+narrowing the scope of any requested attack response, such as targeted port
+range, protocol, or service, clients SHOULD include that information in
+client signals.</t>
   <t>As an active attack evolves, clients MUST be able to adjust as necessary the
 scope of requested mitigation by refining the address space requiring
 intervention.</t>
@@ -401,8 +401,7 @@ authenticity.</t>
 <t><list style="hanging">
   <t hangText='DATA-001'>
   Reliable transport: Transmissions over the data channel may be transactional,
-requiring reliable, in-order packet delivery. This is most easily achieved
-using a reliable transport such as TCP.</t>
+requiring reliable, in-order packet delivery.</t>
   <t hangText='DATA-002'>
   Data privacy and integrity: Transmissions over the data channel may contain
 sensitive information or instructions from the remote DOTS agent. Theft or
@@ -459,6 +458,11 @@ technology.</t>
 </section>
 <section anchor="change-log" title="Change Log">
 
+<section anchor="revision" title="00 revision">
+
+<t>2015-10-15</t>
+
+</section>
 <section anchor="initial-revision" title="Initial revision">
 
 <t>2015-09-24      Andrew Mortensen</t>
