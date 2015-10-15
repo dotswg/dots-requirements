@@ -392,7 +392,11 @@ TODO
 Congestion Control Considerations
 =================================
 
-TODO
+The DOTS signal channel will not contribute measurably to link congestion, as
+the protocol's transmission rate will be negligible regardless of network
+conditions. Bulk data transfers are performed over the data channel, which
+should use a reliable transport with built-in congestion control mechanisms,
+such as TCP.
 
 Security Considerations
 =======================
