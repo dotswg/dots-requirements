@@ -284,7 +284,7 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
    negotiate and agree upon the terms of protocol security.  Attacks
    against the transport protocol should not offer a means of attack
-   against the message CIA.
+   against the message confidentiality, integrity and authenticity.
 
    The DOTS server and client must also have some common method of
    defining the scope of any mitigation performed by the mitigator, as
@@ -401,13 +401,13 @@ Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
    OP-003  Session Health Monitoring: The client and server MUST
       regularly send heartbeats to each other after mutual
       authentication in order to keep the DOTS session open.  A session
-      MUST be considered active until a client or server explicity ends
+      MUST be considered active until a client or server explicitly ends
       the session, or either DOTS agent fails to receive heartbeats from
       the other after a mutually negotiated timeout period has elapsed.
 
    OP-004  Mitigation Capability Opacity: DOTS is a threat signaling
       protocol.  The server and mitigator MUST NOT make any assumption
-      about the attack detection, classfication, or mitigation
+      about the attack detection, classification, or mitigation
       capabilities of the client.  While the server and mitigator MAY
       take hints from any attack telemetry included in client signals,
       the server and mitigator cannot depend on the client for
@@ -450,7 +450,7 @@ Mortensen, et al.        Expires April 17, 2016                 [Page 8]
 Internet-Draft   DDoS Open Threat Signaling Requirements    October 2015
 
 
-   OP-006  Mitigation Scope: DOTS clients MUST indicate the the desired
+   OP-006  Mitigation Scope: DOTS clients MUST indicate the desired
       address space coverage of any mitigation, for example by using
       Classless Internet Domain Routing (CIDR) [RFC1518],[RFC1519]
       prefixes, [RFC2373] for IPv6 prefixes, the length/prefix
