@@ -234,7 +234,8 @@ very attacks it's meant to help fight off. The DOTS client must be
 authenticated to the DOTS server, and vice versa, for DOTS to operate safely,
 meaning the DOTS agents must have a way to negotiate and agree upon the terms
 of protocol security. Attacks against the transport protocol should not offer a
-means of attack against the message CIA.
+means of attack against the message confidentiality, integrity and
+authenticity.
 
 The DOTS server and client must also have some common method of defining the
 scope of any mitigation performed by the mitigator, as well as making
@@ -338,15 +339,15 @@ OP-003
 : Session Health Monitoring: The client and server MUST regularly send
   heartbeats to each other after mutual authentication in order to keep the
   DOTS session open. A session MUST be considered active until a client or
-  server explicity ends the session, or either DOTS agent fails to receive
+  server explicitly ends the session, or either DOTS agent fails to receive
   heartbeats from the other after a mutually negotiated timeout period has
   elapsed.
 
 OP-004
 : Mitigation Capability Opacity: DOTS is a threat signaling protocol. The
   server and mitigator MUST NOT make any assumption about the attack detection,
-  classfication, or mitigation capabilities of the client. While the server and
-  mitigator MAY take hints from any attack telemetry included in client
+  classification, or mitigation capabilities of the client. While the server
+  and mitigator MAY take hints from any attack telemetry included in client
   signals, the server and mitigator cannot depend on the client for
   authoritative attack classification. Similarly, the mitigator cannot assume
   the client can or will mitigate attack traffic on its own.
@@ -376,7 +377,7 @@ OP-005
   to request the DOTS server cease mitigation.
 
 OP-006
-: Mitigation Scope: DOTS clients MUST indicate the the desired address
+: Mitigation Scope: DOTS clients MUST indicate the desired address
   space coverage of any mitigation, for example by using Classless Internet
   Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, [RFC2373] for IPv6
   prefixes, the length/prefix convention established in the Border Gateway
