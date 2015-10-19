@@ -209,15 +209,16 @@ Requirements
 ============
 
 This section describes the required features and characteristics of the DOTS
-protocols. The requirements are aligned with, although not directly derived
-from, the use cases described in [I-D.ietf-dots-use-cases].
+protocols. The requirements are informed by the use cases described in
+[I-D.ietf-dots-use-cases].
 
 DOTS must at a minimum make it possible for a DOTS client to request a DOTS
-server's aid in mounting a coordinated defense against a detected attack, and
-client should similarly be able to withdraw that request arbitrarily.  Regular
-feedback between DOTS client and server supplement the defensive alliance by
-maintaining a common understanding of DOTS peer health and activity.
-Bidirectional communication between DOTS client and server is critical.
+server's aid in mounting a coordinated defense against a detected attack,
+by signaling inter- or intra-domain using the DOTS protocol. DOTS clients
+should similarly be able to withdraw aid requests arbitrarily. Regular feedback
+between DOTS client and server supplement the defensive alliance by maintaining
+a common understanding of DOTS peer health and activity. Bidirectional
+communication between DOTS client and server is therefore critical.
 
 Yet the DOTS protocol must also work with a set of competing operational goals.
 On the one hand, the protocol must be resilient under extremely hostile network
