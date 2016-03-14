@@ -103,7 +103,7 @@ DOTS is less concerned with the form of defensive action than with communicating
 the need for that action. DOTS supplements calls for help with pertinent details
 about the detected attack, allowing entities participating in DOTS to form ad
 hoc, adaptive alliances against DDoS attacks as described in the DOTS use cases
-[I-D.ietf-dots-use-cases]. The requirements in this document are devied from
+[I-D.ietf-dots-use-cases]. The requirements in this document are derived from
 those use cases.
 
 
@@ -116,30 +116,50 @@ document are to be interpreted as described in {{RFC2119}}.
 
 This document adopts the following terms:
 
+DDoS:
+: A distributed denial-of-service attack, in which high levels of traffic
+  originating from widely distributed sources are directed at a target on a
+  network. DDoS attacks are intended to diminish or block availability of
+  servers, services, applications, and/or other functionality of an attack
+  target.
+
+DDoS attack target:
+: A networked server, network service or application that is the focus of a DDoS
+  attack.
+
 DDoS attack telemetry:
-: collected network traffic characteristics defining the nature of a DDoS
+: Collected network traffic characteristics defining the nature of a DDoS
   attack. This document makes no assumptions regarding telemetry collection
   methodology.
 
-mitigation:
-: A defensive response against a detected DDoS attack, performed by an entity
-  in the network path between attack sources and the attack target, either
-  through inline deployment or some form of traffic diversion.  The form
-  mitigation takes is out of scope for this document.
+Countermeasure:
+: An action or set of actions taken to recognize and filter out DDoS attack
+  traffic while passing legitimate traffic to the attack target.
 
-mitigator:
-: A network element capable of performing mitigation of a detected DDoS attack.
+Mitigation:
+: A set of countermeasures enforced against traffic destined for the target or
+  targets of a detected or reported DDoS attack, where countermeasure
+  enforcement is managed by an entity in the network path between attack sources
+  and the attack target. Mitigation methodology is out of scope for this
+  document.
+
+Mitigator:
+: An entity, typically a network element, capable of performing mitigation of a
+  detected or reported DDoS attack. For the purposes of this document, this
+  entity is a black box capable of mitigation, making no assumptions about
+  availability or design of countermeasures, nor about the programmable
+  interface between this entity and other network elements. The mitigator and
+  DOTS server are assumed to belong to the same administrative entity.
 
 DOTS client:
-: A DOTS-aware network element requesting attack response coordination with
-  another DOTS-aware element, with the expectation that the remote element is
-  capable of helping fend off the attack against the client.
+: A DOTS-aware software module responsible for requesting attack response
+  coordination with other DOTS-aware elements.
 
 DOTS server:
-: A DOTS-aware network element handling and responding to messages from a
-  DOTS client. The DOTS server MAY enable mitigation on behalf of the DOTS
-  client, if requested, by communicating the DOTS client's request to the
-  mitigator and relaying any mitigator feedback to the client. A DOTS server
+: A DOTS-aware software module handling and responding to messages from DOTS
+  clients. The DOTS server MAY enable mitigation on behalf of the DOTS client,
+  if requested, by communicating the DOTS client's request to the mitigator and
+  relaying any mitigator feedback to the requesting DOTS client. A DOTS server
   may also be a mitigator.
 
 DOTS relay:

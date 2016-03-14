@@ -497,23 +497,29 @@
 <p id="rfc.section.1.1.p.1">Distributed Denial of Service (DDoS) attacks continue to plague networks around the globe, from Tier-1 service providers on down to enterprises and small businesses. Attack scale and frequency similarly have continued to increase, in part as a result of software vulnerabilities leading to reflection and amplification attacks. Once staggering attack traffic volume is now the norm, and the impact of larger-scale attacks attract the attention of international press agencies.</p>
 <p id="rfc.section.1.1.p.2">The greater impact of contemporary DDoS attacks has led to increased focus on coordinated attack response. Many institutions and enterprises lack the resources or expertise to operate on-premise attack prevention solutions themselves, or simply find themselves constrained by local bandwidth limitations. To address such gaps, security service providers have begun to offer on-demand traffic scrubbing services. Each service offers its own interface for subscribers to request attack mitigation, tying subscribers to proprietary implementations while also limiting the subset of network elements capable of participating in the attack response. As a result of incompatibility across services, attack responses may be fragmentary or otherwise incomplete, leaving key players in the attack path unable to assist in the defense.</p>
 <p id="rfc.section.1.1.p.3">The lack of a common method to coordinate a real-time response among involved actors and network domains inhibits the speed and effectiveness of DDoS attack mitigation. This document describes the required characteristics of DOTS protocols that would mitigate contemporary DDoS attack impact and lead to more efficient defensive strategies.</p>
-<p id="rfc.section.1.1.p.4">DOTS is less concerned with the form of defensive action than with communicating the need for that action. DOTS supplements calls for help with pertinent details about the detected attack, allowing entities participating in DOTS to form ad hoc, adaptive alliances against DDoS attacks as described in the DOTS use cases <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>. The requirements in this document are devied from those use cases.</p>
+<p id="rfc.section.1.1.p.4">DOTS is less concerned with the form of defensive action than with communicating the need for that action. DOTS supplements calls for help with pertinent details about the detected attack, allowing entities participating in DOTS to form ad hoc, adaptive alliances against DDoS attacks as described in the DOTS use cases <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>. The requirements in this document are derived from those use cases.</p>
 <h1 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2.</a> <a href="#terminology" id="terminology">Terminology</a></h1>
 <p id="rfc.section.1.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.</p>
 <p id="rfc.section.1.2.p.2">This document adopts the following terms:</p>
 <p/>
 
 <dl>
+  <dt>DDoS:</dt>
+  <dd style="margin-left: 8">A distributed denial-of-service attack, in which high levels of traffic originating from widely distributed sources are directed at a target on a network. DDoS attacks are intended to diminish or block availability of servers, services, applications, and/or other functionality of an attack target.</dd>
+  <dt>DDoS attack target:</dt>
+  <dd style="margin-left: 8">A networked server, network service or application that is the focus of a DDoS attack.</dd>
   <dt>DDoS attack telemetry:</dt>
-  <dd style="margin-left: 8">collected network traffic characteristics defining the nature of a DDoS attack. This document makes no assumptions regarding telemetry collection methodology.</dd>
-  <dt>mitigation:</dt>
-  <dd style="margin-left: 8">A defensive response against a detected DDoS attack, performed by an entity in the network path between attack sources and the attack target, either through inline deployment or some form of traffic diversion.  The form mitigation takes is out of scope for this document.</dd>
-  <dt>mitigator:</dt>
-  <dd style="margin-left: 8">A network element capable of performing mitigation of a detected DDoS attack.</dd>
+  <dd style="margin-left: 8">Collected network traffic characteristics defining the nature of a DDoS attack. This document makes no assumptions regarding telemetry collection methodology.</dd>
+  <dt>Countermeasure:</dt>
+  <dd style="margin-left: 8">An action or set of actions taken to recognize and filter out DDoS attack traffic while passing legitimate traffic to the attack target.</dd>
+  <dt>Mitigation:</dt>
+  <dd style="margin-left: 8">A set of countermeasures enforced against traffic destined for the target or targets of a detected or reported DDoS attack, where countermeasure enforcement is managed by an entity in the network path between attack sources and the attack target. Mitigation methodology is out of scope for this document.</dd>
+  <dt>Mitigator:</dt>
+  <dd style="margin-left: 8">An entity, typically a network element, capable of performing mitigation of a detected or reported DDoS attack. For the purposes of this document, this entity is a black box capable of mitigation, making no assumptions about availability or design of countermeasures, nor about the programmable interface between this entity and other network elements. The mitigator and DOTS server are assumed to belong to the same administrative entity.</dd>
   <dt>DOTS client:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element requesting attack response coordination with another DOTS-aware element, with the expectation that the remote element is capable of helping fend off the attack against the client.</dd>
+  <dd style="margin-left: 8">A DOTS-aware software module responsible for requesting attack response coordination with other DOTS-aware elements.</dd>
   <dt>DOTS server:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element handling and responding to messages from a DOTS client. The DOTS server MAY enable mitigation on behalf of the DOTS client, if requested, by communicating the DOTS client&#8217;s request to the mitigator and relaying any mitigator feedback to the client. A DOTS server may also be a mitigator.</dd>
+  <dd style="margin-left: 8">A DOTS-aware software module handling and responding to messages from DOTS clients. The DOTS server MAY enable mitigation on behalf of the DOTS client, if requested, by communicating the DOTS client&#8217;s request to the mitigator and relaying any mitigator feedback to the requesting DOTS client. A DOTS server may also be a mitigator.</dd>
   <dt>DOTS relay:</dt>
   <dd style="margin-left: 8">A DOTS-aware network element positioned between a DOTS server and a DOTS client. A DOTS relay receives messages from a DOTS client and relays them to a DOTS server, and similarly passes messages from the DOTS server to the DOTS client.</dd>
   <dt>DOTS agents:</dt>
