@@ -55,7 +55,7 @@ Copyright Notice
 
 Mortensen, et al.      Expires September 19, 2016               [Page 1]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -111,7 +111,7 @@ Table of Contents
 
 Mortensen, et al.      Expires September 19, 2016               [Page 2]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
    result of incompatibility across services, attack responses may be
@@ -167,7 +167,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 3]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       communicating the DOTS client's request to the mitigator and
@@ -223,7 +223,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 4]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
 2.  Requirements
@@ -279,7 +279,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 5]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
    have a way to negotiate and agree upon the terms of protocol
@@ -335,7 +335,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 6]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       white-listed source addresses; address or prefix group aliasing;
@@ -391,7 +391,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 7]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       A server MAY refuse to engage in coordinated attack response with
@@ -447,7 +447,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 8]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       As an active attack evolves, clients MUST be able to adjust as
@@ -503,7 +503,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016               [Page 9]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       data channel MUST be encrypted and authenticated using current
@@ -559,7 +559,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016              [Page 10]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
       In order for DOTS protocols to remain secure despite advancements
@@ -615,7 +615,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016              [Page 11]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
 6.2.  Initial revision
@@ -671,7 +671,7 @@ Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
 
 Mortensen, et al.      Expires September 19, 2016              [Page 12]
 
-Internet-DraDistributed Denial of Service (DDoS) Open Threat  March 2016
+Internet-Draft              DOTS Requirements                 March 2016
 
 
    [RFC4271]  Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A

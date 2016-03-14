@@ -21,7 +21,7 @@
 <rfc docName="draft-ietf-dots-requirements-01" category="info">
 
   <front>
-    <title>Distributed Denial of Service (DDoS) Open Threat Signaling Requirements</title>
+    <title abbrev="DOTS Requirements">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements</title>
 
     <author initials="A." surname="Mortensen" fullname="Andrew Mortensen">
       <organization>Arbor Networks, Inc.</organization>

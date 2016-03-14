@@ -1,5 +1,6 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
+abbrev: DOTS Requirements
 docname: draft-ietf-dots-requirements-01
 date: 2016-03-18
 
