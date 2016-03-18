@@ -59,6 +59,7 @@ informative:
   RFC2373:
   RFC3261:
   RFC4271:
+  RFC4732:
 
 --- abstract
 
@@ -117,11 +118,11 @@ document are to be interpreted as described in {{RFC2119}}.
 This document adopts the following terms:
 
 DDoS:
-: A distributed denial-of-service attack, in which high levels of traffic
-  originating from widely distributed sources are directed at a target on a
-  network. DDoS attacks are intended to diminish or block availability of
-  servers, services, applications, and/or other functionality of an attack
-  target.
+: A distributed denial-of-service attack, in which of traffic originating from
+  multiple sources are directed at a target on a network. DDoS attacks are
+  intended to cause a negative impact on the availability of servers, services,
+  applications, and/or other functionality of an attack target.
+  Denial-of-service considerations are discussed in detail in [RFC4732].
 
 DDoS attack target:
 : A networked server, network service or application that is the focus of a DDoS

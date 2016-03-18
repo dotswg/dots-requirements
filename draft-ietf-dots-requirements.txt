@@ -141,11 +141,12 @@ Internet-Draft              DOTS Requirements                 March 2016
 
    This document adopts the following terms:
 
-   DDoS:  A distributed denial-of-service attack, in which high levels
-      of traffic originating from widely distributed sources are
-      directed at a target on a network.  DDoS attacks are intended to
-      diminish or block availability of servers, services, applications,
-      and/or other functionality of an attack target.
+   DDoS:  A distributed denial-of-service attack, in which of traffic
+      originating from multiple sources are directed at a target on a
+      network.  DDoS attacks are intended to cause a negative impact on
+      the availability of servers, services, applications, and/or other
+      functionality of an attack target.  Denial-of-service
+      considerations are discussed in detail in [RFC4732].
 
    DDoS attack target:  A networked server, network service or
       application that is the focus of a DDoS attack.
@@ -161,7 +162,6 @@ Internet-Draft              DOTS Requirements                 March 2016
    Mitigation:  A set of countermeasures enforced against traffic
       destined for the target or targets of a detected or reported DDoS
       attack, where countermeasure enforcement is managed by an entity
-
 
 
 
@@ -698,6 +698,11 @@ Internet-Draft              DOTS Requirements                 March 2016
               10.17487/RFC4271, January 2006,
               <http://www.rfc-editor.org/info/rfc4271>.
 
+   [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
+              Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
+              RFC4732, December 2006,
+              <http://www.rfc-editor.org/info/rfc4732>.
+
 Authors' Addresses
 
    Andrew Mortensen
@@ -715,11 +720,6 @@ Authors' Addresses
    United States
 
    Email: rgm@htt-consult.com
-
-
-
-
-
 
 
 
