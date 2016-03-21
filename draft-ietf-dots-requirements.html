@@ -387,8 +387,9 @@
 <link href="#rfc.section.5" rel="Chapter" title="5 Contributors"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgments"/>
 <link href="#rfc.section.7" rel="Chapter" title="7 Change Log"/>
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 00 revision"/>
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Initial revision"/>
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 01 revision"/>
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 00 revision"/>
+<link href="#rfc.section.7.3" rel="Chapter" title="7.3 Initial revision"/>
 <link href="#rfc.references" rel="Chapter" title="8 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References"/>
 <link href="#rfc.references.2" rel="Chapter" title="8.2 Informative References"/>
@@ -482,8 +483,9 @@
 <li>5.   <a href="#rfc.section.5">Contributors</a></li>
 <li>6.   <a href="#rfc.section.6">Acknowledgments</a></li>
 <li>7.   <a href="#rfc.section.7">Change Log</a></li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">00 revision</a></li>
-<li>7.2.   <a href="#rfc.section.7.2">Initial revision</a></li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">01 revision</a></li>
+<li>7.2.   <a href="#rfc.section.7.2">00 revision</a></li>
+<li>7.3.   <a href="#rfc.section.7.3">Initial revision</a></li>
 </ul><li>8.   <a href="#rfc.references">References</a></li>
 <ul><li>8.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>8.2.   <a href="#rfc.references.2">Informative References</a></li>
@@ -587,7 +589,7 @@
   <dt></dt>
   <dd style="margin-left: 8">A DOTS client MAY also request an indefinite mitigation lifetime, enabling architectures in which the mitigator is always in the traffic path to the resources for which the DOTS client is requesting protection. DOTS servers MAY refuse such requests for any reason. The reasons themselves are not in scope.</dd>
   <dt>OP-006</dt>
-  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate the desired address or prefix space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, <a href="#RFC2373">[RFC2373]</a> for IPv6 prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, SIP URIs <a href="#RFC3261">[RFC3261]</a>, E.164 numbers, DNS names, or by a prefix group alias agreed upon with the server through the data channel.</dd>
+  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate the desired address or prefix space coverage of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, <a href="#RFC2373">[RFC2373]</a> for IPv6 <a href="#RFC2460">[RFC2460]</a> prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, SIP URIs <a href="#RFC3261">[RFC3261]</a>, E.164 numbers, DNS names, or by a prefix group alias agreed upon with the server through the data channel.</dd>
   <dt></dt>
   <dd style="margin-left: 8">If there is additional information available narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, DOTS clients SHOULD include that information in client signals. DOTS clients MAY also include additional attack details. Such supplemental information is OPTIONAL, and DOTS servers MAY ignore it when enabling countermeasures on the mitigator.</dd>
   <dt></dt>
@@ -597,7 +599,7 @@
   <dt>OP-008</dt>
   <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a signal administrative entity may send conflicting mitigation requests for pool of protected resources, as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
   <dt>OP-009:</dt>
-  <dd style="margin-left: 8">Name Resolution Caching: As DNS resolution may inhibited or unavailable during an active attack due to link congestion, DOTS agents SHOULD cache resolved names and addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4 or IPv6 address for all communications following initial name resolution.</dd>
+  <dd style="margin-left: 8">Name Resolution Caching: As DNS resolution may inhibited or unavailable during an active attack due to link congestion, DOTS agents SHOULD cache resolved names and addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4 <a href="#RFC0791">[RFC0791]</a> or IPv6 address for all communications following initial name resolution.</dd>
   <dt>OP-010:</dt>
   <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. As UDP is the recommended transport for DOTS, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS. Regardless of transport, DOTS protocols MUST follow established best common practices (BCPs) for NAT traversal.</dd>
 </dl>
@@ -637,16 +639,28 @@
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#congestion-control-considerations" id="congestion-control-considerations">Congestion Control Considerations</a></h1>
 <p id="rfc.section.3.p.1">The DOTS signal channel will not contribute measurably to link congestion, as the protocol&#8217;s transmission rate will be negligible regardless of network conditions. Bulk data transfers are performed over the data channel, which should use a reliable transport with built-in congestion control mechanisms, such as TCP.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
-<p id="rfc.section.4.p.1">DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic injection, and signaling blocking. The DOTS protocol MUST be designed for minimal data transfer to address the blocking risk. Impersonation and traffic injection mitigation can be managed through current secure communications best practices. DOTS is not subject to anything new in this area. One consideration could be to minimize the security technologies in use at any one time. The more needed, the greater the risk of failures coming from assumptions on one technology providing protection that it does not in the presence of another technology.</p>
+<p id="rfc.section.4.p.1">DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic injection, and signaling blocking. The DOTS protocol MUST be designed for minimal data transfer to address the blocking risk. Impersonation and traffic injection mitigation can be managed through current secure communications best practices. See <a href="#security-requirements">Section 2.4</a> above for a detailed discussion.</p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#contributors" id="contributors">Contributors</a></h1>
 <p id="rfc.section.5.p.1">Med Boucadair</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h1>
-<p id="rfc.section.6.p.1">Thanks to Matt Richardson for his careful reading and feedback.</p>
+<p id="rfc.section.6.p.1">Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.</p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
-<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#revision" id="revision">00 revision</a></h1>
-<p id="rfc.section.7.1.p.1">2015-10-15</p>
-<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
-<p id="rfc.section.7.2.p.1">2015-09-24      Andrew Mortensen</p>
+<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#revision" id="revision">01 revision</a></h1>
+<p id="rfc.section.7.1.p.1">2016-03-21</p>
+<p/>
+
+<ul>
+  <li>Reconciled terminology with -00 revision of <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>.</li>
+  <li>Terminology clarification based on working group feedback.</li>
+  <li>Move security-related requirements to separate section.</li>
+  <li>Make resilience/robustness primary general requirement to align with charter.</li>
+  <li>Clarify support for unidirectional communication within the bidirection signal channel.</li>
+  <li>Add proposed operational requirement to support signal redirection.</li>
+</ul>
+<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#revision-1" id="revision-1">00 revision</a></h1>
+<p id="rfc.section.7.2.p.1">2015-10-15</p>
+<h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
+<p id="rfc.section.7.3.p.1">2015-09-24      Andrew Mortensen</p>
 <h1 id="rfc.references"><a href="#rfc.references">8.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">8.1.</a> Normative References</h1>
 <table>
@@ -688,6 +702,12 @@
     </tr>
     <tr>
       <td class="reference">
+        <b id="RFC0791">[RFC0791]</b>
+      </td>
+      <td class="top"><a>Postel, J.</a>, "<a href="http://tools.ietf.org/html/rfc791">Internet Protocol</a>", STD 5, RFC 791, DOI 10.17487/RFC0791, September 1981.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC1034">[RFC1034]</b>
       </td>
       <td class="top"><a>Mockapetris, P.</a>, "<a href="http://tools.ietf.org/html/rfc1034">Domain names - concepts and facilities</a>", STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987.</td>
@@ -709,6 +729,12 @@
         <b id="RFC2373">[RFC2373]</b>
       </td>
       <td class="top"><a>Hinden, R.</a> and <a>S. Deering</a>, "<a href="http://tools.ietf.org/html/rfc2373">IP Version 6 Addressing Architecture</a>", RFC 2373, DOI 10.17487/RFC2373, July 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2460">[RFC2460]</b>
+      </td>
+      <td class="top"><a>Deering, S.</a> and <a>R. Hinden</a>, "<a href="http://tools.ietf.org/html/rfc2460">Internet Protocol, Version 6 (IPv6) Specification</a>", RFC 2460, DOI 10.17487/RFC2460, December 1998.</td>
     </tr>
     <tr>
       <td class="reference">

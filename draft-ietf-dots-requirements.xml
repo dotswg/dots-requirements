@@ -8,10 +8,12 @@
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC5405 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5405.xml">
 <!ENTITY I-D.ietf-dots-use-cases SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-use-cases.xml">
+<!ENTITY RFC0791 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0791.xml">
 <!ENTITY RFC1034 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY RFC1518 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1518.xml">
 <!ENTITY RFC1519 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1519.xml">
 <!ENTITY RFC2373 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2373.xml">
+<!ENTITY RFC2460 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
 <!ENTITY RFC3261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
 <!ENTITY RFC4271 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4271.xml">
 <!ENTITY RFC4732 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4732.xml">
@@ -370,9 +372,10 @@ refuse such requests for any reason. The reasons themselves are not in scope.</t
   Mitigation Scope: DOTS clients MUST indicate the desired address or prefix
 space coverage of any mitigation, for example by using Classless Internet
 Domain Routing (CIDR) <xref target="RFC1518"></xref>,<xref target="RFC1519"></xref> prefixes, <xref target="RFC2373"></xref> for IPv6
-prefixes, the length/prefix convention established in the Border Gateway
-Protocol (BGP) <xref target="RFC4271"></xref>, SIP URIs <xref target="RFC3261"/>, E.164 numbers, DNS names, or
-by a prefix group alias agreed upon with the server through the data channel.</t>
+<xref target="RFC2460"></xref> prefixes, the length/prefix convention established in the Border
+Gateway Protocol (BGP) <xref target="RFC4271"></xref>, SIP URIs <xref target="RFC3261"/>, E.164 numbers, DNS
+names, or by a prefix group alias agreed upon with the server through the data
+channel.</t>
   <t>If there is additional information available narrowing the scope of any
 requested attack response, such as targeted port range, protocol, or service,
 DOTS clients SHOULD include that information in client signals. DOTS clients
@@ -404,7 +407,8 @@ mitigation request.</t>
   Name Resolution Caching: As DNS resolution may inhibited or unavailable during
 an active attack due to link congestion, DOTS agents SHOULD cache resolved
 names and addresses of peer DOTS agents, and SHOULD refer to those agents by
-IPv4 or IPv6 address for all communications following initial name resolution.</t>
+IPv4 <xref target="RFC0791"></xref> or IPv6 address for all communications following initial name
+resolution.</t>
   <t hangText='OP-010:'>
   Network Address Translator Traversal: The DOTS protocol MUST operate over
 networks in which Network Address Translation (NAT) is deployed. As UDP is the
@@ -461,10 +465,9 @@ authentication and authorization is unspecified.</t>
   Black- and whitelist management: DOTS servers SHOULD provide methods for
 DOTS clients to manage black- and white-lists of source addresses of traffic
 destined for addresses belonging to a client.</t>
-  <t>For example, a DOTS client
-should be able to create a black- or whitelist entry; retrieve a list of
-current entries from either list; update the content of either list; and
-delete entries as necessary.</t>
+  <t>For example, a DOTS client should be able to create a black- or whitelist
+entry; retrieve a list of current entries from either list; update the content
+of either list; and delete entries as necessary.</t>
   <t>How the DOTS server determines client ownership of address space is not in
 scope.</t>
 </list></t>
@@ -516,11 +519,7 @@ such as TCP.</t>
 injection, and signaling blocking. The DOTS protocol MUST be designed for
 minimal data transfer to address the blocking risk. Impersonation and traffic
 injection mitigation can be managed through current secure communications best
-practices. DOTS is not subject to anything new in this area. One consideration
-could be to minimize the security technologies in use at any one time. The more
-needed, the greater the risk of failures coming from assumptions on one
-technology providing protection that it does not in the presence of another
-technology.</t>
+practices. See <xref target="security-requirements"/> above for a detailed discussion.</t>
 
 </section>
 <section anchor="contributors" title="Contributors">
@@ -530,12 +529,27 @@ technology.</t>
 </section>
 <section anchor="acknowledgments" title="Acknowledgments">
 
-<t>Thanks to Matt Richardson for his careful reading and feedback.</t>
+<t>Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.</t>
 
 </section>
 <section anchor="change-log" title="Change Log">
 
-<section anchor="revision" title="00 revision">
+<section anchor="revision" title="01 revision">
+
+<t>2016-03-21</t>
+
+<t><list style="symbols">
+  <t>Reconciled terminology with -00 revision of <xref target="I-D.ietf-dots-use-cases"></xref>.</t>
+  <t>Terminology clarification based on working group feedback.</t>
+  <t>Move security-related requirements to separate section.</t>
+  <t>Make resilience/robustness primary general requirement to align with charter.</t>
+  <t>Clarify support for unidirectional communication within the bidirection signal
+channel.</t>
+  <t>Add proposed operational requirement to support signal redirection.</t>
+</list></t>
+
+</section>
+<section anchor="revision-1" title="00 revision">
 
 <t>2015-10-15</t>
 
@@ -565,10 +579,12 @@ technology.</t>
     <references title='Informative References'>
 
 &I-D.ietf-dots-use-cases;
+&RFC0791;
 &RFC1034;
 &RFC1518;
 &RFC1519;
 &RFC2373;
+&RFC2460;
 &RFC3261;
 &RFC4271;
 &RFC4732;

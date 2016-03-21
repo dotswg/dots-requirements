@@ -55,10 +55,12 @@ normative:
 
 informative:
   I-D.ietf-dots-use-cases:
+  RFC0791:
   RFC1034:
   RFC1518:
   RFC1519:
   RFC2373:
+  RFC2460:
   RFC3261:
   RFC4271:
   RFC4732:
@@ -386,9 +388,10 @@ OP-006
 : Mitigation Scope: DOTS clients MUST indicate the desired address or prefix
   space coverage of any mitigation, for example by using Classless Internet
   Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, [RFC2373] for IPv6
-  prefixes, the length/prefix convention established in the Border Gateway
-  Protocol (BGP) [RFC4271], SIP URIs {{RFC3261}}, E.164 numbers, DNS names, or
-  by a prefix group alias agreed upon with the server through the data channel.
+  [RFC2460] prefixes, the length/prefix convention established in the Border
+  Gateway Protocol (BGP) [RFC4271], SIP URIs {{RFC3261}}, E.164 numbers, DNS
+  names, or by a prefix group alias agreed upon with the server through the data
+  channel.
 
 : If there is additional information available narrowing the scope of any
   requested attack response, such as targeted port range, protocol, or service,
@@ -425,7 +428,8 @@ OP-009:
 : Name Resolution Caching: As DNS resolution may inhibited or unavailable during
   an active attack due to link congestion, DOTS agents SHOULD cache resolved
   names and addresses of peer DOTS agents, and SHOULD refer to those agents by
-  IPv4 or IPv6 address for all communications following initial name resolution.
+  IPv4 [RFC0791] or IPv6 address for all communications following initial name
+  resolution.
 
 OP-010:
 : Network Address Translator Traversal: The DOTS protocol MUST operate over
@@ -486,10 +490,9 @@ DATA-004
   DOTS clients to manage black- and white-lists of source addresses of traffic
   destined for addresses belonging to a client.
 
-: For example, a DOTS client
-  should be able to create a black- or whitelist entry; retrieve a list of
-  current entries from either list; update the content of either list; and
-  delete entries as necessary.
+: For example, a DOTS client should be able to create a black- or whitelist
+  entry; retrieve a list of current entries from either list; update the content
+  of either list; and delete entries as necessary.
 
 : How the DOTS server determines client ownership of address space is not in
   scope.
@@ -543,11 +546,7 @@ DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic
 injection, and signaling blocking. The DOTS protocol MUST be designed for
 minimal data transfer to address the blocking risk. Impersonation and traffic
 injection mitigation can be managed through current secure communications best
-practices. DOTS is not subject to anything new in this area. One consideration
-could be to minimize the security technologies in use at any one time. The more
-needed, the greater the risk of failures coming from assumptions on one
-technology providing protection that it does not in the presence of another
-technology.
+practices. See {{security-requirements}} above for a detailed discussion.
 
 
 Contributors
@@ -559,16 +558,35 @@ Med Boucadair
 Acknowledgments
 ===============
 
-Thanks to Matt Richardson for his careful reading and feedback.
+Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.
 
 
 Change Log
 ==========
 
+01 revision
+-----------
+
+2016-03-21
+
+* Reconciled terminology with -00 revision of [I-D.ietf-dots-use-cases].
+
+* Terminology clarification based on working group feedback.
+
+* Move security-related requirements to separate section.
+
+* Make resilience/robustness primary general requirement to align with charter.
+
+* Clarify support for unidirectional communication within the bidirection signal
+  channel.
+
+* Add proposed operational requirement to support signal redirection.
+
 00 revision
 -----------
 
 2015-10-15
+
 
 Initial revision
 ----------------
