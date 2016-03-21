@@ -171,7 +171,10 @@ DOTS relay:
 : A DOTS-aware software module positioned between a DOTS server and a DOTS
   client in the signaling path. A DOTS relay receives messages from a DOTS
   client and relays them to a DOTS server, and similarly passes messages from
-  the DOTS server to the DOTS client.
+  the DOTS server to the DOTS client. A DOTS relay acts as a proxy or bridge
+  between stateful and stateless transport signaling, and may also aggregate
+  signaling from multiple downstream DOTS clients into a single session with an
+  upstream DOTS server or DOTS relay.
 
 DOTS agents:
 : Any DOTS functional element, including DOTS clients, DOTS servers and DOTS
@@ -217,6 +220,10 @@ Whitelist:
 : A list of addresses, prefixes and/or other identifiersfrom indicating sources
   from which traffic should always be allowed, regardless of contradictory data
   gleaned in a detected attack.
+
+Multi-homed DOTS client:
+: A DOTS client exchanging messages with multiple DOTS servers, each in a
+  separate administrative domain.
 
 
 Requirements            {#requirements}
@@ -278,16 +285,16 @@ General Requirements            {#general-requirements}
 --------------------
 
 GEN-001
+: Extensibility: Protocols and data models developed as part of DOTS MUST be
+  extensible in order to keep DOTS adaptable to operational and proprietary
+  DDoS defenses. Future extensions MUST be backward compatible.
+
+GEN-002
 : Resilience and Robustness: The signaling protocol MUST be designed to maximize
   the probability of signal delivery even under the severely constrained network
   conditions imposed by particular attack traffic. The protocol MUST be
   resilient, that is, continue operating despite message loss and out-of-order
   or redundant signal delivery.
-
-GEN-002
-: Extensibility: Protocols and data models developed as part of DOTS MUST be
-  extensible in order to keep DOTS adaptable to operational and proprietary
-  DDoS defenses. Future extensions MUST be backward compatible.
 
 GEN-003
 : Bidirectionality: To support peer health detection, to maintain an open
@@ -341,7 +348,10 @@ OP-003
   DOTS server or relay at any time. Due to the decreased probability of DOTS
   server signal delivery due to link congestion, it is RECOMMENDED DOTS servers
   avoid redirecting while mitigation is enabled during an active attack against
-  a target in the DOTS client's domain.
+  a target in the DOTS client's domain. Either the DOTS servers have to
+  fate-share the security state, the client MUST have separate security state
+  with each potential redirectable server, or be able to negotiate new state as
+  part of redirection.
 
 OP-004
 : Mitigation Status: DOTS MUST provide a means to report the status of an action
@@ -414,7 +424,7 @@ OP-007
 
 OP-008
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
-  signal administrative entity may send conflicting mitigation requests for pool
+  single administrative entity may send conflicting mitigation requests for pool
   of protected resources, as a result of misconfiguration, operator error, or
   compromised DOTS clients. DOTS servers attempting to honor conflicting
   requests may flap network route or DNS information, degrading the networks
@@ -425,10 +435,12 @@ OP-008
   mitigation request.
 
 OP-009:
-: Name Resolution Caching: As DNS resolution may inhibited or unavailable during
-  an active attack due to link congestion, DOTS agents SHOULD cache resolved
-  names and addresses of peer DOTS agents, and SHOULD refer to those agents by
-  IPv4 [RFC0791] or IPv6 address for all communications following initial name
+: Lookup Caching: DOTS agents SHOULD cache resolved names, PKI validation
+  chains, and similarly queried data as necessary. Network-based lookups and
+  validation may be inhibited or unavailable during an active attack due to link
+  congestion.  For example, DOTS agents SHOULD cache resolved names and
+  addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4
+  [RFC0791] or IPv6 address for all communications following initial name
   resolution.
 
 OP-010:
@@ -479,13 +491,6 @@ DATA-002
   document.
 
 DATA-003
-: Mutual authentication: DOTS agents MUST mutually authenticate each other
-  before data may be exchanged over the data channel. DOTS agents MAY take
-  additional steps to authorize data exchange, as in the prefix group example
-  above, before accepting data over the data channel. The form of
-  authentication and authorization is unspecified.
-
-DATA-004
 : Black- and whitelist management: DOTS servers SHOULD provide methods for
   DOTS clients to manage black- and white-lists of source addresses of traffic
   destined for addresses belonging to a client.
@@ -506,11 +511,10 @@ insufficiently protected signal or data channel may be subject to abuse,
 enabling or supplementing the very attacks DOTS purports to mitigate.
 
 SEC-001
-: Peer Mutual Authentication: DOTS clients and DOTS servers MUST authenticate
-  each other before a DOTS session is considered valid. The method of
-  authentication is not specified, but should follow current industry best
-  practices with respect to any cryptographic mechanisms to authenticate the
-  remote peer.
+: Peer Mutual Authentication: DOTS agents MUST authenticate each other before a
+  DOTS session is considered valid. The method of authentication is not
+  specified, but should follow current industry best practices with respect to
+  any cryptographic mechanisms to authenticate the remote peer.
 
 SEC-002
 : Message Confidentiality, Integrity and Authenticity: DOTS protocols MUST take
@@ -542,11 +546,18 @@ such as TCP.
 Security Considerations         {#security-considerations}
 =======================
 
-DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic
-injection, and signaling blocking. The DOTS protocol MUST be designed for
-minimal data transfer to address the blocking risk. Impersonation and traffic
-injection mitigation can be managed through current secure communications best
-practices. See {{security-requirements}} above for a detailed discussion.
+DOTS is at risk from three primary attacks:
+
+* DOTS agent impersonation
+
+* Traffic injection
+
+* Signaling blocking
+
+The DOTS protocol MUST be designed for minimal data transfer to address the
+blocking risk. Impersonation and traffic injection mitigation can be managed
+through current secure communications best practices. See
+{{security-requirements}} above for a detailed discussion.
 
 
 Contributors
@@ -573,14 +584,29 @@ Change Log
 
 * Terminology clarification based on working group feedback.
 
-* Move security-related requirements to separate section.
+* Moved security-related requirements to separate section.
 
-* Make resilience/robustness primary general requirement to align with charter.
+* Made resilience/robustness primary general requirement to align with charter.
 
-* Clarify support for unidirectional communication within the bidirection signal
-  channel.
+* Clarified support for unidirectional communication within the bidirection
+  signal channel.
 
-* Add proposed operational requirement to support signal redirection.
+* Added proposed operational requirement to support session redirection.
+
+* Added proposed operational requirement to support conflict notification.
+
+* Added proposed operational requirement to support mitigation lifetime in
+  mitigation requests.
+
+* Added proposed operational requirement to support mitigation efficacy
+  reporting from DOTS clients.
+
+* Added proposed operational requirement to cache lookups of all kinds.
+
+* Added proposed operational requirement regarding NAT traversal.
+
+* Removed redundant mutual authentication requirement from data channel
+  requirements.
 
 00 revision
 -----------

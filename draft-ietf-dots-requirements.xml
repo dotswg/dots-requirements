@@ -176,7 +176,10 @@ may also be a mitigator.</t>
   A DOTS-aware software module positioned between a DOTS server and a DOTS
 client in the signaling path. A DOTS relay receives messages from a DOTS
 client and relays them to a DOTS server, and similarly passes messages from
-the DOTS server to the DOTS client.</t>
+the DOTS server to the DOTS client. A DOTS relay acts as a proxy or bridge
+between stateful and stateless transport signaling, and may also aggregate
+signaling from multiple downstream DOTS clients into a single session with an
+upstream DOTS server or DOTS relay.</t>
   <t hangText='DOTS agents:'>
   Any DOTS functional element, including DOTS clients, DOTS servers and DOTS
 relays.</t>
@@ -213,6 +216,9 @@ which traffic should be blocked, regardless of traffic content.</t>
   A list of addresses, prefixes and/or other identifiersfrom indicating sources
 from which traffic should always be allowed, regardless of contradictory data
 gleaned in a detected attack.</t>
+  <t hangText='Multi-homed DOTS client:'>
+  A DOTS client exchanging messages with multiple DOTS servers, each in a
+separate administrative domain.</t>
 </list></t>
 
 </section>
@@ -274,15 +280,15 @@ necessarily superseded by the other operational requirements.</t>
 
 <t><list style="hanging">
   <t hangText='GEN-001'>
+  Extensibility: Protocols and data models developed as part of DOTS MUST be
+extensible in order to keep DOTS adaptable to operational and proprietary
+DDoS defenses. Future extensions MUST be backward compatible.</t>
+  <t hangText='GEN-002'>
   Resilience and Robustness: The signaling protocol MUST be designed to maximize
 the probability of signal delivery even under the severely constrained network
 conditions imposed by particular attack traffic. The protocol MUST be
 resilient, that is, continue operating despite message loss and out-of-order
 or redundant signal delivery.</t>
-  <t hangText='GEN-002'>
-  Extensibility: Protocols and data models developed as part of DOTS MUST be
-extensible in order to keep DOTS adaptable to operational and proprietary
-DDoS defenses. Future extensions MUST be backward compatible.</t>
   <t hangText='GEN-003'>
   Bidirectionality: To support peer health detection, to maintain an open
 signal channel, and to increase the probability of signal delivery during
@@ -331,7 +337,10 @@ scalability, DOTS servers SHOULD be able to redirect DOTS clients to another
 DOTS server or relay at any time. Due to the decreased probability of DOTS
 server signal delivery due to link congestion, it is RECOMMENDED DOTS servers
 avoid redirecting while mitigation is enabled during an active attack against
-a target in the DOTS client&rsquo;s domain.</t>
+a target in the DOTS client&rsquo;s domain. Either the DOTS servers have to
+fate-share the security state, the client MUST have separate security state
+with each potential redirectable server, or be able to negotiate new state as
+part of redirection.</t>
   <t hangText='OP-004'>
   Mitigation Status: DOTS MUST provide a means to report the status of an action
 requested by a DOTS client. In particular, DOTS clients MUST be able to
@@ -394,7 +403,7 @@ MAY use the efficacy metric to adjust countermeasures activated on a mitigator
 on behalf of a DOTS client.</t>
   <t hangText='OP-008'>
   Conflict Detection and Notification: Multiple DOTS clients controlled by a
-signal administrative entity may send conflicting mitigation requests for pool
+single administrative entity may send conflicting mitigation requests for pool
 of protected resources, as a result of misconfiguration, operator error, or
 compromised DOTS clients. DOTS servers attempting to honor conflicting
 requests may flap network route or DNS information, degrading the networks
@@ -404,10 +413,12 @@ clients in conflict. The notification SHOULD indicate the nature and scope of
 the conflict, for example, the overlapping prefix range in a conflicting
 mitigation request.</t>
   <t hangText='OP-009:'>
-  Name Resolution Caching: As DNS resolution may inhibited or unavailable during
-an active attack due to link congestion, DOTS agents SHOULD cache resolved
-names and addresses of peer DOTS agents, and SHOULD refer to those agents by
-IPv4 <xref target="RFC0791"></xref> or IPv6 address for all communications following initial name
+  Lookup Caching: DOTS agents SHOULD cache resolved names, PKI validation
+chains, and similarly queried data as necessary. Network-based lookups and
+validation may be inhibited or unavailable during an active attack due to link
+congestion.  For example, DOTS agents SHOULD cache resolved names and
+addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4
+<xref target="RFC0791"></xref> or IPv6 address for all communications following initial name
 resolution.</t>
   <t hangText='OP-010:'>
   Network Address Translator Traversal: The DOTS protocol MUST operate over
@@ -456,12 +467,6 @@ entities participating in DOTS may detail what data may be revealed to
 third-party DOTS agents, such considerations are not in scope for this
 document.</t>
   <t hangText='DATA-003'>
-  Mutual authentication: DOTS agents MUST mutually authenticate each other
-before data may be exchanged over the data channel. DOTS agents MAY take
-additional steps to authorize data exchange, as in the prefix group example
-above, before accepting data over the data channel. The form of
-authentication and authorization is unspecified.</t>
-  <t hangText='DATA-004'>
   Black- and whitelist management: DOTS servers SHOULD provide methods for
 DOTS clients to manage black- and white-lists of source addresses of traffic
 destined for addresses belonging to a client.</t>
@@ -481,11 +486,10 @@ enabling or supplementing the very attacks DOTS purports to mitigate.</t>
 
 <t><list style="hanging">
   <t hangText='SEC-001'>
-  Peer Mutual Authentication: DOTS clients and DOTS servers MUST authenticate
-each other before a DOTS session is considered valid. The method of
-authentication is not specified, but should follow current industry best
-practices with respect to any cryptographic mechanisms to authenticate the
-remote peer.</t>
+  Peer Mutual Authentication: DOTS agents MUST authenticate each other before a
+DOTS session is considered valid. The method of authentication is not
+specified, but should follow current industry best practices with respect to
+any cryptographic mechanisms to authenticate the remote peer.</t>
   <t hangText='SEC-002'>
   Message Confidentiality, Integrity and Authenticity: DOTS protocols MUST take
 steps to protect the confidentiality, integrity and authenticity of messages
@@ -515,11 +519,18 @@ such as TCP.</t>
 </section>
 <section anchor="security-considerations" title="Security Considerations">
 
-<t>DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic
-injection, and signaling blocking. The DOTS protocol MUST be designed for
-minimal data transfer to address the blocking risk. Impersonation and traffic
-injection mitigation can be managed through current secure communications best
-practices. See <xref target="security-requirements"/> above for a detailed discussion.</t>
+<t>DOTS is at risk from three primary attacks:</t>
+
+<t><list style="symbols">
+  <t>DOTS agent impersonation</t>
+  <t>Traffic injection</t>
+  <t>Signaling blocking</t>
+</list></t>
+
+<t>The DOTS protocol MUST be designed for minimal data transfer to address the
+blocking risk. Impersonation and traffic injection mitigation can be managed
+through current secure communications best practices. See
+<xref target="security-requirements"/> above for a detailed discussion.</t>
 
 </section>
 <section anchor="contributors" title="Contributors">
@@ -541,11 +552,20 @@ practices. See <xref target="security-requirements"/> above for a detailed discu
 <t><list style="symbols">
   <t>Reconciled terminology with -00 revision of <xref target="I-D.ietf-dots-use-cases"></xref>.</t>
   <t>Terminology clarification based on working group feedback.</t>
-  <t>Move security-related requirements to separate section.</t>
-  <t>Make resilience/robustness primary general requirement to align with charter.</t>
-  <t>Clarify support for unidirectional communication within the bidirection signal
-channel.</t>
-  <t>Add proposed operational requirement to support signal redirection.</t>
+  <t>Moved security-related requirements to separate section.</t>
+  <t>Made resilience/robustness primary general requirement to align with charter.</t>
+  <t>Clarified support for unidirectional communication within the bidirection
+signal channel.</t>
+  <t>Added proposed operational requirement to support session redirection.</t>
+  <t>Added proposed operational requirement to support conflict notification.</t>
+  <t>Added proposed operational requirement to support mitigation lifetime in
+mitigation requests.</t>
+  <t>Added proposed operational requirement to support mitigation efficacy
+reporting from DOTS clients.</t>
+  <t>Added proposed operational requirement to cache lookups of all kinds.</t>
+  <t>Added proposed operational requirement regarding NAT traversal.</t>
+  <t>Removed redundant mutual authentication requirement from data channel
+requirements.</t>
 </list></t>
 
 </section>
