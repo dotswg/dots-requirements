@@ -55,6 +55,7 @@ normative:
 
 informative:
   I-D.ietf-dots-use-cases:
+  RFC1034:
   RFC1518:
   RFC1519:
   RFC2373:
@@ -309,9 +310,9 @@ GEN-005
   aliasing; exchange of incident reports; and other hinting or configuration
   supplementing attack response.
 
-: As the resilience requirements for DOTS mandate small signal message size, a
-  separate, secure data channel utilizing an established reliable transport
-  protocol MUST be used for bulk data exchange.
+: As the resilience requirements for the DOTS signal channel mandate small
+  signal message size, a separate, secure data channel utilizing an established
+  reliable transport protocol MUST be used for bulk data exchange.
 
 
 Operational Requirements        {#operational-requirements}
@@ -348,9 +349,9 @@ OP-004
   attack response in subsequent signals, and MUST cease mitigation activity as
   quickly as possible.  However, a DOTS client rapidly toggling active
   mitigation may result in undesirable side-effects for the network path, such
-  as route or DNS flapping.  A DOTS server therefore MAY continue mitigating for
-  a mutually negotiated period after receiving the DOTS client's request to
-  stop.
+  as route or DNS [RFC1034] flapping.  A DOTS server therefore MAY continue
+  mitigating for a mutually negotiated period after receiving the DOTS client's
+  request to stop.
 
 : A server MAY refuse to engage in coordinated attack response with a client.
   To make the status of a client's request clear, the server MUST indicate in
@@ -516,23 +517,14 @@ SEC-002
   best practices for encryption and message authentication.
 
 : In order for DOTS protocols to remain secure despite advancements in
-  cryptanalysis, DOTS agents MUST be able to negotiate the terms and mechanisms
-  of protocol security, subject to the interoperability and signal message size
-  requirements above.
+  cryptanalysis and traffic analysis, DOTS agents MUST be able to negotiate the
+  terms and mechanisms of protocol security, subject to the interoperability and
+  signal message size requirements above.
 
 SEC-003
 : Message Replay Protection: In order to prevent a passive attacker from
   capturing and replaying old messages, DOTS protocols MUST provide a method
-  for replay detection, such as including a timestamp or sequence number in
-  every heartbeat and signal sent between DOTS agents.
-
-
-Data model requirements         {#data-model-requirements}
------------------------
-
-DM-000
-: Mitigation Efficacy: The data model for the DOTS protocol MUST permit the DOTS
-  client to transmit a metric of mitigation efficacy to the DOTS server.
+  for replay detection.
 
 
 Congestion Control Considerations       {#congestion-control-considerations}

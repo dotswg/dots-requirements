@@ -8,6 +8,7 @@
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC5405 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5405.xml">
 <!ENTITY I-D.ietf-dots-use-cases SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-use-cases.xml">
+<!ENTITY RFC1034 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY RFC1518 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1518.xml">
 <!ENTITY RFC1519 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1519.xml">
 <!ENTITY RFC2373 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2373.xml">
@@ -300,9 +301,9 @@ significantly augment attack response coordination, permitting such tasks as
 population of black- or white-listed source addresses; address or prefix group
 aliasing; exchange of incident reports; and other hinting or configuration
 supplementing attack response.</t>
-  <t>As the resilience requirements for DOTS mandate small signal message size, a
-separate, secure data channel utilizing an established reliable transport
-protocol MUST be used for bulk data exchange.</t>
+  <t>As the resilience requirements for the DOTS signal channel mandate small
+signal message size, a separate, secure data channel utilizing an established
+reliable transport protocol MUST be used for bulk data exchange.</t>
 </list></t>
 
 </section>
@@ -337,9 +338,9 @@ server MUST acknowledge a DOTS client&rsquo;s request to withdraw from coordinat
 attack response in subsequent signals, and MUST cease mitigation activity as
 quickly as possible.  However, a DOTS client rapidly toggling active
 mitigation may result in undesirable side-effects for the network path, such
-as route or DNS flapping.  A DOTS server therefore MAY continue mitigating for
-a mutually negotiated period after receiving the DOTS client&rsquo;s request to
-stop.</t>
+as route or DNS <xref target="RFC1034"></xref> flapping.  A DOTS server therefore MAY continue
+mitigating for a mutually negotiated period after receiving the DOTS client&rsquo;s
+request to stop.</t>
   <t>A server MAY refuse to engage in coordinated attack response with a client.
 To make the status of a client&rsquo;s request clear, the server MUST indicate in
 server signals whether client-initiated mitigation is active. When a
@@ -489,23 +490,13 @@ sent between client and server. While specific transport- and message-level
 security options are not specified, the protocols MUST follow current industry
 best practices for encryption and message authentication.</t>
   <t>In order for DOTS protocols to remain secure despite advancements in
-cryptanalysis, DOTS agents MUST be able to negotiate the terms and mechanisms
-of protocol security, subject to the interoperability and signal message size
-requirements above.</t>
+cryptanalysis and traffic analysis, DOTS agents MUST be able to negotiate the
+terms and mechanisms of protocol security, subject to the interoperability and
+signal message size requirements above.</t>
   <t hangText='SEC-003'>
   Message Replay Protection: In order to prevent a passive attacker from
 capturing and replaying old messages, DOTS protocols MUST provide a method
-for replay detection, such as including a timestamp or sequence number in
-every heartbeat and signal sent between DOTS agents.</t>
-</list></t>
-
-</section>
-<section anchor="data-model-requirements" title="Data model requirements">
-
-<t><list style="hanging">
-  <t hangText='DM-000'>
-  Mitigation Efficacy: The data model for the DOTS protocol MUST permit the DOTS
-client to transmit a metric of mitigation efficacy to the DOTS server.</t>
+for replay detection.</t>
 </list></t>
 
 </section>
@@ -574,6 +565,7 @@ technology.</t>
     <references title='Informative References'>
 
 &I-D.ietf-dots-use-cases;
+&RFC1034;
 &RFC1518;
 &RFC1519;
 &RFC2373;
