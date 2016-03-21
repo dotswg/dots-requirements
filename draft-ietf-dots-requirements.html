@@ -385,13 +385,14 @@
 <link href="#rfc.section.2.5" rel="Chapter" title="2.5 Data model requirements"/>
 <link href="#rfc.section.3" rel="Chapter" title="3 Congestion Control Considerations"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Acknowledgements"/>
-<link href="#rfc.section.6" rel="Chapter" title="6 Change Log"/>
-<link href="#rfc.section.6.1" rel="Chapter" title="6.1 00 revision"/>
-<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Initial revision"/>
-<link href="#rfc.references" rel="Chapter" title="7 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Contributors"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgments"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Change Log"/>
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 00 revision"/>
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Initial revision"/>
+<link href="#rfc.references" rel="Chapter" title="8 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="8.2 Informative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -480,13 +481,14 @@
 <li>2.5.   <a href="#rfc.section.2.5">Data model requirements</a></li>
 </ul><li>3.   <a href="#rfc.section.3">Congestion Control Considerations</a></li>
 <li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
-<li>5.   <a href="#rfc.section.5">Acknowledgements</a></li>
-<li>6.   <a href="#rfc.section.6">Change Log</a></li>
-<ul><li>6.1.   <a href="#rfc.section.6.1">00 revision</a></li>
-<li>6.2.   <a href="#rfc.section.6.2">Initial revision</a></li>
-</ul><li>7.   <a href="#rfc.references">References</a></li>
-<ul><li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li>5.   <a href="#rfc.section.5">Contributors</a></li>
+<li>6.   <a href="#rfc.section.6">Acknowledgments</a></li>
+<li>7.   <a href="#rfc.section.7">Change Log</a></li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">00 revision</a></li>
+<li>7.2.   <a href="#rfc.section.7.2">Initial revision</a></li>
+</ul><li>8.   <a href="#rfc.references">References</a></li>
+<ul><li>8.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>8.2.   <a href="#rfc.references.2">Informative References</a></li>
 </ul><li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -521,30 +523,30 @@
   <dt>DOTS server:</dt>
   <dd style="margin-left: 8">A DOTS-aware software module handling and responding to messages from DOTS clients. The DOTS server MAY enable mitigation on behalf of the DOTS client, if requested, by communicating the DOTS client&#8217;s request to the mitigator and relaying any mitigator feedback to the requesting DOTS client. A DOTS server may also be a mitigator.</dd>
   <dt>DOTS relay:</dt>
-  <dd style="margin-left: 8">A DOTS-aware network element positioned between a DOTS server and a DOTS client. A DOTS relay receives messages from a DOTS client and relays them to a DOTS server, and similarly passes messages from the DOTS server to the DOTS client.</dd>
+  <dd style="margin-left: 8">A DOTS-aware software module positioned between a DOTS server and a DOTS client in the signaling path. A DOTS relay receives messages from a DOTS client and relays them to a DOTS server, and similarly passes messages from the DOTS server to the DOTS client.</dd>
   <dt>DOTS agents:</dt>
-  <dd style="margin-left: 8">A collective term for DOTS clients, servers and relays.</dd>
-  <dt>signal channel:</dt>
+  <dd style="margin-left: 8">Any DOTS functional element, including DOTS clients, DOTS servers and DOTS relays.</dd>
+  <dt>Signal channel:</dt>
   <dd style="margin-left: 8">A bidirectional, mutually authenticated communication layer between DOTS agents characterized by resilience even in conditions leading to severe packet loss, such as a volumetric DDoS attack causing network congestion.</dd>
   <dt>DOTS signal:</dt>
   <dd style="margin-left: 8">A concise authenticated status/control message transmitted between DOTS agents, used to indicate client&#8217;s need for mitigation, as well as to convey the status of any requested mitigation.</dd>
-  <dt>heartbeat:</dt>
-  <dd style="margin-left: 8">A keep-alive message transmitted between DOTS agents over the signal channel, used to measure peer health. Heartbeat functionality is not required to be distinct from signal.</dd>
-  <dt>client signal:</dt>
-  <dd style="margin-left: 8">A message sent from a DOTS client to a DOTS server over the signal channel, possibly traversing a DOTS relay, indicating the DOTS client&#8217;s need for mitigation, as well as the scope of any requested mitigation, optionally including detected attack telemetry to supplement server-initiated mitigation.</dd>
-  <dt>server signal:</dt>
-  <dd style="margin-left: 8">A message sent from a DOTS server to a DOTS client over the signal channel.  Note that a server signal is not a response to client signal, but a DOTS server-initiated status message sent to the DOTS client, containing information about the status of any requested mitigation and its efficacy.</dd>
-  <dt>data channel:</dt>
-  <dd style="margin-left: 8">A secure communication layer between client and server used for infrequent bulk exchange of data not easily or appropriately communicated through the signal channel under attack conditions.</dd>
-  <dt>blacklist:</dt>
-  <dd style="margin-left: 8">a list of source addresses or prefixes from which traffic should be blocked.</dd>
-  <dt>whitelist:</dt>
-  <dd style="margin-left: 8">a list of source addresses or prefixes from which traffic should always be allowed, regardless of contradictory data gleaned in a detected attack.</dd>
+  <dt>Heartbeat:</dt>
+  <dd style="margin-left: 8">A message transmitted between DOTS agents over the signal channel, used as a keep-alive and to measure peer health.</dd>
+  <dt>Client signal:</dt>
+  <dd style="margin-left: 8">A message sent from a DOTS client to a DOTS server or DOTS relay over the signal channel, indicating the DOTS client&#8217;s need for mitigation, as well as the scope of any requested mitigation, optionally including additional attack details to supplement server-initiated mitigation.</dd>
+  <dt>Server signal:</dt>
+  <dd style="margin-left: 8">A message sent from a DOTS server to a DOTS client or DOTS relay over the signal channel.  Note that a server signal is not a response to client signal, but a DOTS server-initiated status message sent to DOTS clients with which the server has established signaling sessions, containing information about the status of DOTS client-requested mitigation and its efficacy.</dd>
+  <dt>Data channel:</dt>
+  <dd style="margin-left: 8">A secure communication layer between DOTS clients and DOTS servers used for infrequent bulk exchange of data not easily or appropriately communicated through the signal channel under attack conditions.</dd>
+  <dt>Blacklist:</dt>
+  <dd style="margin-left: 8">A list of addresses, prefixes and/or other identifiers indicating sources from which traffic should be blocked, regardless of traffic content.</dd>
+  <dt>Whitelist:</dt>
+  <dd style="margin-left: 8">A list of addresses, prefixes and/or other identifiersfrom indicating sources from which traffic should always be allowed, regardless of contradictory data gleaned in a detected attack.</dd>
 </dl>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a></h1>
 <p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols.</p>
 <p id="rfc.section.2.p.2">DOTS is an advisory protocol. An active DDoS attack against the entity controlling the DOTS client need not be present before establishing DOTS communication between DOTS agents. Indeed, establishing a relationship with peer DOTS agents during nominal network conditions provides the foundation for more rapid attack response against future attacks, as all interactions setting up DOTS, including any business or service level agreements, are already complete.</p>
-<p id="rfc.section.2.p.3">DOTS must at a minimum make it possible for a DOTS client to request a DOTS server&#8217;s aid in mounting a coordinated defense against a detected attack, signaling inter- or intra-domain as requested by local operators. DOTS clients should similarly be able to withdraw aid requests. DOTS requires no justification from DOTS clients for requests for help, nor must must DOTS clients justify withdrawing help requests: the decision is local to the entity owning the DOTS clients. Regular feedback between DOTS clients and DOTS server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity. Bidirectional communication between DOTS clients and DOTS servers is therefore critical.</p>
+<p id="rfc.section.2.p.3">DOTS must at a minimum make it possible for a DOTS client to request a DOTS server&#8217;s aid in mounting a coordinated defense against a detected attack, signaling inter- or intra-domain as requested by local operators. DOTS clients should similarly be able to withdraw aid requests. DOTS requires no justification from DOTS clients for requests for help, nor must DOTS clients justify withdrawing help requests: the decision is local to the entity owning the DOTS clients. Regular feedback between DOTS clients and DOTS server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity. Bidirectional communication between DOTS clients and DOTS servers is therefore critical.</p>
 <p id="rfc.section.2.p.4">Yet DOTS must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between DOTS agents even as attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection overhead (when possible given local network policy) will tend to contribute to the robustness demanded by a viable DOTS protocol. Operators of peer DOTS-enabled domains may enable quality- or class-of-service traffic tagging to increase the probability of successful DOTS signal delivery, but DOTS requires no such policies be in place. The DOTS solution indeed must be viable especially in their absence.</p>
 <p id="rfc.section.2.p.5">On the other hand, DOTS must include protections ensuring message confidentiality, integrity and authenticity to keep the protocol from becoming another vector for the very attacks it&#8217;s meant to help fight off. DOTS clients must be able to authenticate DOTS servers, and vice versa, for DOTS to operate safely, meaning the DOTS agents must have a way to negotiate and agree upon the terms of protocol security. Attacks against the transport protocol should not offer a means of attack against the message confidentiality, integrity and authenticity.</p>
 <p id="rfc.section.2.p.6">The DOTS server and client must also have some common method of defining the scope of any mitigation performed by the mitigator, as well as making adjustments to other commonly configurable features, such as listen ports, exchanging black- and white-lists, and so on.</p>
@@ -593,13 +595,13 @@
   <dt></dt>
   <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the address space requiring intervention.</dd>
   <dt>OP-007</dt>
-  <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request by a DOTS client is active, the DOTS protocol must permit the DOTS client to transmit a metric of mitigation efficacy</dd>
-  <dt>OP-007</dt>
+  <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request by a DOTS client is active, DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the DOTS server, per &#8220;Automatic or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS Mitigation Services&#8221; in <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>. DOTS servers MAY use the efficacy metric to adjust countermeasures activated on a mitigator on behalf of a DOTS client.</dd>
+  <dt>OP-008</dt>
   <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a signal administrative entity may send conflicting mitigation requests for pool of protected resources, as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
-  <dt>OP-008:</dt>
-  <dd style="margin-left: 8">Name Resolution Caching: As DNS resolution may inhibited or unavailable during an active attack due to link congestion, DOTS agents SHOULD cache resolved names and addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4 or IPv6 address for all communications following initial name resolution.</dd>
   <dt>OP-009:</dt>
-  <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. As UDP is the recommended transport for DOTS, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS.</dd>
+  <dd style="margin-left: 8">Name Resolution Caching: As DNS resolution may inhibited or unavailable during an active attack due to link congestion, DOTS agents SHOULD cache resolved names and addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4 or IPv6 address for all communications following initial name resolution.</dd>
+  <dt>OP-010:</dt>
+  <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. As UDP is the recommended transport for DOTS, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS. Regardless of transport, DOTS protocols MUST follow established best common practices (BCPs) for NAT traversal.</dd>
 </dl>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#data-channel-requirements" id="data-channel-requirements">Data Channel Requirements</a></h1>
 <p id="rfc.section.2.3.p.1">The data channel is intended to be used for bulk data exchanges between DOTS agents. Unlike the signal channel, which must operate nominally even when confronted with despite signal degradation due to packet loss, the data channel is not expected to be constructed to deal with attack conditions.  As the primary function of the data channel is data exchange, a reliable transport is required in order for DOTS agents to detect data delivery success or failure.</p>
@@ -610,7 +612,7 @@
   <dt>DATA-001</dt>
   <dd style="margin-left: 8">Reliable transport: Transmissions over the data channel MUST be transactional, requiring reliable, in-order packet delivery.</dd>
   <dt>DATA-002</dt>
-  <dd style="margin-left: 8">Data privacy and integrity: Transmissions over the data channel is likely to contain operationally or privacy-sensitive information or instructions from the remote DOTS agent. Theft or modification of data channel transmissions could lead to information leaks or malicious transactions on behalf of the sending agent.  (See Section 4.) Consequently data sent over the data channel MUST be encrypted and authenticated using current industry best practices.  DOTS servers and relays MUST enable means to prevent leaking operationally or privacy-sensitive data. Although administrative entities participating in DOTS may detail what data may be revealed to third-party DOTS agents, such considerations are not in scope for this document.</dd>
+  <dd style="margin-left: 8">Data privacy and integrity: Transmissions over the data channel is likely to contain operationally or privacy-sensitive information or instructions from the remote DOTS agent. Theft or modification of data channel transmissions could lead to information leaks or malicious transactions on behalf of the sending agent (see <a href="#security-considerations">Section 4</a> below). Consequently data sent over the data channel MUST be encrypted and authenticated using current industry best practices.  DOTS servers and relays MUST enable means to prevent leaking operationally or privacy-sensitive data. Although administrative entities participating in DOTS may detail what data may be revealed to third-party DOTS agents, such considerations are not in scope for this document.</dd>
   <dt>DATA-003</dt>
   <dd style="margin-left: 8">Mutual authentication: DOTS agents MUST mutually authenticate each other before data may be exchanged over the data channel. DOTS agents MAY take additional steps to authorize data exchange, as in the prefix group example above, before accepting data over the data channel. The form of authentication and authorization is unspecified.</dd>
   <dt>DATA-004</dt>
@@ -645,15 +647,17 @@
 <p id="rfc.section.3.p.1">The DOTS signal channel will not contribute measurably to link congestion, as the protocol&#8217;s transmission rate will be negligible regardless of network conditions. Bulk data transfers are performed over the data channel, which should use a reliable transport with built-in congestion control mechanisms, such as TCP.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
 <p id="rfc.section.4.p.1">DOTS is at risk from three primary attacks: DOTS agent impersonation, traffic injection, and signaling blocking. The DOTS protocol MUST be designed for minimal data transfer to address the blocking risk. Impersonation and traffic injection mitigation can be managed through current secure communications best practices. DOTS is not subject to anything new in this area. One consideration could be to minimize the security technologies in use at any one time. The more needed, the greater the risk of failures coming from assumptions on one technology providing protection that it does not in the presence of another technology.</p>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h1>
-<p id="rfc.section.5.p.1">The editors wish to thank Med Boucadair for his careful reading of and suggested revisions to this document.</p>
-<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
-<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> <a href="#revision" id="revision">00 revision</a></h1>
-<p id="rfc.section.6.1.p.1">2015-10-15</p>
-<h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
-<p id="rfc.section.6.2.p.1">2015-09-24      Andrew Mortensen</p>
-<h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#contributors" id="contributors">Contributors</a></h1>
+<p id="rfc.section.5.p.1">Med Boucadair</p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h1>
+<p id="rfc.section.6.p.1">Thanks to Matt Richardson for his careful reading and feedback.</p>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
+<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#revision" id="revision">00 revision</a></h1>
+<p id="rfc.section.7.1.p.1">2015-10-15</p>
+<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
+<p id="rfc.section.7.2.p.1">2015-09-24      Andrew Mortensen</p>
+<h1 id="rfc.references"><a href="#rfc.references">8.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">8.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -682,7 +686,7 @@
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">7.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">8.2.</a> Informative References</h1>
 <table>
   <tbody>
     <tr>

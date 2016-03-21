@@ -165,15 +165,16 @@ DOTS server:
   may also be a mitigator.
 
 DOTS relay:
-: A DOTS-aware network element positioned between a DOTS server and a DOTS
-  client. A DOTS relay receives messages from a DOTS client and relays them
-  to a DOTS server, and similarly passes messages from the DOTS server to the
-  DOTS client.
+: A DOTS-aware software module positioned between a DOTS server and a DOTS
+  client in the signaling path. A DOTS relay receives messages from a DOTS
+  client and relays them to a DOTS server, and similarly passes messages from
+  the DOTS server to the DOTS client.
 
 DOTS agents:
-: A collective term for DOTS clients, servers and relays.
+: Any DOTS functional element, including DOTS clients, DOTS servers and DOTS
+  relays.
 
-signal channel:
+Signal channel:
 : A bidirectional, mutually authenticated communication layer between DOTS
   agents characterized by resilience even in conditions leading to severe
   packet loss, such as a volumetric DDoS attack causing network congestion.
@@ -183,35 +184,36 @@ DOTS signal:
   agents, used to indicate client's need for mitigation, as well as to convey
   the status of any requested mitigation.
 
-heartbeat:
-: A keep-alive message transmitted between DOTS agents over the signal channel,
-  used to measure peer health. Heartbeat functionality is not required to be
-  distinct from signal.
+Heartbeat:
+: A message transmitted between DOTS agents over the signal channel, used as a
+  keep-alive and to measure peer health.
 
-client signal:
-: A message sent from a DOTS client to a DOTS server over the signal channel,
-  possibly traversing a DOTS relay, indicating the DOTS client's need for
-  mitigation, as well as the scope of any requested mitigation, optionally
-  including detected attack telemetry to supplement server-initiated
-  mitigation.
+Client signal:
+: A message sent from a DOTS client to a DOTS server or DOTS relay over the
+  signal channel, indicating the DOTS client's need for mitigation, as well as
+  the scope of any requested mitigation, optionally including additional attack
+  details to supplement server-initiated mitigation.
 
-server signal:
-: A message sent from a DOTS server to a DOTS client over the signal channel.
-  Note that a server signal is not a response to client signal, but a DOTS
-  server-initiated status message sent to the DOTS client, containing
-  information about the status of any requested mitigation and its efficacy.
+Server signal:
+: A message sent from a DOTS server to a DOTS client or DOTS relay over the
+  signal channel.  Note that a server signal is not a response to client signal,
+  but a DOTS server-initiated status message sent to DOTS clients with which the
+  server has established signaling sessions, containing information about the
+  status of DOTS client-requested mitigation and its efficacy.
 
-data channel:
-: A secure communication layer between client and server used for infrequent
-  bulk exchange of data not easily or appropriately communicated through the
-  signal channel under attack conditions.
+Data channel:
+: A secure communication layer between DOTS clients and DOTS servers used for
+  infrequent bulk exchange of data not easily or appropriately communicated
+  through the signal channel under attack conditions.
 
-blacklist:
-: a list of source addresses or prefixes from which traffic should be blocked.
+Blacklist:
+: A list of addresses, prefixes and/or other identifiers indicating sources from
+  which traffic should be blocked, regardless of traffic content.
 
-whitelist:
-: a list of source addresses or prefixes from which traffic should always be
-  allowed, regardless of contradictory data gleaned in a detected attack.
+Whitelist:
+: A list of addresses, prefixes and/or other identifiersfrom indicating sources
+  from which traffic should always be allowed, regardless of contradictory data
+  gleaned in a detected attack.
 
 
 Requirements            {#requirements}
@@ -231,7 +233,7 @@ DOTS must at a minimum make it possible for a DOTS client to request a DOTS
 server's aid in mounting a coordinated defense against a detected attack,
 signaling inter- or intra-domain as requested by local operators. DOTS clients
 should similarly be able to withdraw aid requests. DOTS requires no justification
-from DOTS clients for requests for help, nor must must DOTS clients justify
+from DOTS clients for requests for help, nor must DOTS clients justify
 withdrawing help requests: the decision is local to the entity owning the DOTS
 clients. Regular feedback between DOTS clients and DOTS server supplement the
 defensive alliance by maintaining a common understanding of DOTS peer health and
@@ -399,11 +401,14 @@ OP-006
   intervention.
 
 OP-007
-: Mitigation Efficacy: When a mitigation request by a DOTS client is active, the
-DOTS protocol must permit the DOTS client to transmit a metric of mitigation
-efficacy
+: Mitigation Efficacy: When a mitigation request by a DOTS client is active,
+  DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the
+  DOTS server, per "Automatic or Operator-Assisted CPE or PE Mitigators Request
+  Upstream DDoS Mitigation Services" in [I-D.ietf-dots-use-cases]. DOTS servers
+  MAY use the efficacy metric to adjust countermeasures activated on a mitigator
+  on behalf of a DOTS client.
 
-OP-007
+OP-008
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
   signal administrative entity may send conflicting mitigation requests for pool
   of protected resources, as a result of misconfiguration, operator error, or
@@ -415,17 +420,19 @@ OP-007
   the conflict, for example, the overlapping prefix range in a conflicting
   mitigation request.
 
-OP-008:
+OP-009:
 : Name Resolution Caching: As DNS resolution may inhibited or unavailable during
   an active attack due to link congestion, DOTS agents SHOULD cache resolved
   names and addresses of peer DOTS agents, and SHOULD refer to those agents by
   IPv4 or IPv6 address for all communications following initial name resolution.
 
-OP-009:
+OP-010:
 : Network Address Translator Traversal: The DOTS protocol MUST operate over
   networks in which Network Address Translation (NAT) is deployed. As UDP is the
   recommended transport for DOTS, all considerations in "Middlebox Traversal
-  Guidelines" in [RFC5405] apply to DOTS.
+  Guidelines" in [RFC5405] apply to DOTS. Regardless of transport, DOTS
+  protocols MUST follow established best common practices (BCPs) for NAT
+  traversal.
 
 
 Data Channel Requirements       {#data-channel-requirements}
@@ -458,12 +465,13 @@ DATA-002
   contain operationally or privacy-sensitive information or instructions from
   the remote DOTS agent. Theft or modification of data channel transmissions
   could lead to information leaks or malicious transactions on behalf of the
-  sending agent.  (See Section 4.) Consequently data sent over the data channel
-  MUST be encrypted and authenticated using current industry best practices.
-  DOTS servers and relays MUST enable means to prevent leaking operationally or
-  privacy-sensitive data. Although administrative entities participating in DOTS
-  may detail what data may be revealed to third-party DOTS agents, such
-  considerations are not in scope for this document.
+  sending agent (see {{security-considerations}} below). Consequently data sent
+  over the data channel MUST be encrypted and authenticated using current
+  industry best practices.  DOTS servers and relays MUST enable means to prevent
+  leaking operationally or privacy-sensitive data. Although administrative
+  entities participating in DOTS may detail what data may be revealed to
+  third-party DOTS agents, such considerations are not in scope for this
+  document.
 
 DATA-003
 : Mutual authentication: DOTS agents MUST mutually authenticate each other
@@ -549,11 +557,17 @@ needed, the greater the risk of failures coming from assumptions on one
 technology providing protection that it does not in the presence of another
 technology.
 
-Acknowledgements
-================
 
-The editors wish to thank Med Boucadair for his careful reading of and suggested
-revisions to this document.
+Contributors
+============
+
+Med Boucadair
+
+
+Acknowledgments
+===============
+
+Thanks to Matt Richardson for his careful reading and feedback.
 
 
 Change Log
