@@ -542,7 +542,7 @@
   <dd style="margin-left: 8">a list of source addresses or prefixes from which traffic should always be allowed, regardless of contradictory data gleaned in a detected attack.</dd>
 </dl>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#requirements" id="requirements">Requirements</a></h1>
-<p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols. The requirements assume architectural concepts and components similar to those described in [I-D.draft-mortensen-dots-architecture].</p>
+<p id="rfc.section.2.p.1">This section describes the required features and characteristics of the DOTS protocols.</p>
 <p id="rfc.section.2.p.2">DOTS is an advisory protocol. An active DDoS attack against the entity controlling the DOTS client need not be present before establishing DOTS communication between DOTS agents. Indeed, establishing a relationship with peer DOTS agents during nominal network conditions provides the foundation for more rapid attack response against future attacks, as all interactions setting up DOTS, including any business or service level agreements, are already complete.</p>
 <p id="rfc.section.2.p.3">DOTS must at a minimum make it possible for a DOTS client to request a DOTS server&#8217;s aid in mounting a coordinated defense against a detected attack, signaling inter- or intra-domain as requested by local operators. DOTS clients should similarly be able to withdraw aid requests. DOTS requires no justification from DOTS clients for requests for help, nor must must DOTS clients justify withdrawing help requests: the decision is local to the entity owning the DOTS clients. Regular feedback between DOTS clients and DOTS server supplement the defensive alliance by maintaining a common understanding of DOTS peer health and activity. Bidirectional communication between DOTS clients and DOTS servers is therefore critical.</p>
 <p id="rfc.section.2.p.4">Yet DOTS must also work with a set of competing operational goals.  On the one hand, the protocol must be resilient under extremely hostile network conditions, providing continued contact between DOTS agents even as attack traffic saturates the link. Such resiliency may be developed several ways, but characteristics such as small message size, asynchronous, redundant message delivery and minimal connection overhead (when possible given local network policy) will tend to contribute to the robustness demanded by a viable DOTS protocol. Operators of peer DOTS-enabled domains may enable quality- or class-of-service traffic tagging to increase the probability of successful DOTS signal delivery, but DOTS requires no such policies be in place. The DOTS solution indeed must be viable especially in their absence.</p>
@@ -554,9 +554,9 @@
 
 <dl>
   <dt>GEN-001</dt>
-  <dd style="margin-left: 8">Extensibility: Protocols and data models developed as part of DOTS MUST be extensible in order to keep DOTS adaptable to operational and proprietary DDoS defenses. Future extensions MUST be backward compatible.</dd>
-  <dt>GEN-002</dt>
   <dd style="margin-left: 8">Resilience and Robustness: The signaling protocol MUST be designed to maximize the probability of signal delivery even under the severely constrained network conditions imposed by particular attack traffic. The protocol MUST be resilient, that is, continue operating despite message loss and out-of-order or redundant signal delivery.</dd>
+  <dt>GEN-002</dt>
+  <dd style="margin-left: 8">Extensibility: Protocols and data models developed as part of DOTS MUST be extensible in order to keep DOTS adaptable to operational and proprietary DDoS defenses. Future extensions MUST be backward compatible.</dd>
   <dt>GEN-003</dt>
   <dd style="margin-left: 8">Bidirectionality: To support peer health detection, to maintain an open signal channel, and to increase the probability of signal delivery during attack, the signal channel MUST be bidirectional, with client and server transmitting signals to each other at regular intervals, regardless of any client request for mitigation. Unidirectional messages MUST be supported within the bidirectional signal channel to allow for unsolicited message delivery, enabling asynchronous notifications between agents.</dd>
   <dt>GEN-004</dt>
@@ -571,7 +571,7 @@
 
 <dl>
   <dt>OP-001</dt>
-  <dd style="margin-left: 8">Use of Common Transport Protocols: DOTS MUST operate over common widely deployed and standardized transport protocols. While the use of connectionless protocols, in particular the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a>, is RECOMMENDED for the signal channel, a universally deployed, connection-oriented protocol like the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations.</dd>
+  <dd style="margin-left: 8">Use of Common Transport Protocols: DOTS MUST operate over common widely deployed and standardized transport protocols. While the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a> SHOULD be used for the signal channel, the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations. The data channel MUST use TCP; see <a href="#data-channel-requirements">Section 2.3</a> below.</dd>
   <dt>OP-002</dt>
   <dd style="margin-left: 8">Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to each other after mutual authentication in order to keep the DOTS session open.  A session MUST be considered active until a DOTS agent explicitly ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually negotiated timeout period has elapsed.</dd>
   <dt>OP-003</dt>
@@ -593,7 +593,13 @@
   <dt></dt>
   <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the address space requiring intervention.</dd>
   <dt>OP-007</dt>
+  <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request by a DOTS client is active, the DOTS protocol must permit the DOTS client to transmit a metric of mitigation efficacy</dd>
+  <dt>OP-007</dt>
   <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a signal administrative entity may send conflicting mitigation requests for pool of protected resources, as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
+  <dt>OP-008:</dt>
+  <dd style="margin-left: 8">Name Resolution Caching: As DNS resolution may inhibited or unavailable during an active attack due to link congestion, DOTS agents SHOULD cache resolved names and addresses of peer DOTS agents, and SHOULD refer to those agents by IPv4 or IPv6 address for all communications following initial name resolution.</dd>
+  <dt>OP-009:</dt>
+  <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. As UDP is the recommended transport for DOTS, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS.</dd>
 </dl>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#data-channel-requirements" id="data-channel-requirements">Data Channel Requirements</a></h1>
 <p id="rfc.section.2.3.p.1">The data channel is intended to be used for bulk data exchanges between DOTS agents. Unlike the signal channel, which must operate nominally even when confronted with despite signal degradation due to packet loss, the data channel is not expected to be constructed to deal with attack conditions.  As the primary function of the data channel is data exchange, a reliable transport is required in order for DOTS agents to detect data delivery success or failure.</p>
@@ -629,7 +635,12 @@
   <dd style="margin-left: 8">Message Replay Protection: In order to prevent a passive attacker from capturing and replaying old messages, DOTS protocols MUST provide a method for replay detection, such as including a timestamp or sequence number in every heartbeat and signal sent between DOTS agents.</dd>
 </dl>
 <h1 id="rfc.section.2.5"><a href="#rfc.section.2.5">2.5.</a> <a href="#data-model-requirements" id="data-model-requirements">Data model requirements</a></h1>
-<p id="rfc.section.2.5.p.1">TODO</p>
+<p/>
+
+<dl>
+  <dt>DM-000</dt>
+  <dd style="margin-left: 8">Mitigation Efficacy: The data model for the DOTS protocol MUST permit the DOTS client to transmit a metric of mitigation efficacy to the DOTS server.</dd>
+</dl>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#congestion-control-considerations" id="congestion-control-considerations">Congestion Control Considerations</a></h1>
 <p id="rfc.section.3.p.1">The DOTS signal channel will not contribute measurably to link congestion, as the protocol&#8217;s transmission rate will be negligible regardless of network conditions. Bulk data transfers are performed over the data channel, which should use a reliable transport with built-in congestion control mechanisms, such as TCP.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a></h1>
@@ -662,6 +673,12 @@
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5405">[RFC5405]</b>
+      </td>
+      <td class="top"><a>Eggert, L.</a> and <a>G. Fairhurst</a>, "<a href="http://tools.ietf.org/html/rfc5405">Unicast UDP Usage Guidelines for Application Designers</a>", BCP 145, RFC 5405, DOI 10.17487/RFC5405, November 2008.</td>
     </tr>
   </tbody>
 </table>

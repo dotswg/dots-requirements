@@ -6,6 +6,7 @@
 <!ENTITY RFC0768 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0768.xml">
 <!ENTITY RFC0793 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0793.xml">
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC5405 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5405.xml">
 <!ENTITY I-D.ietf-dots-use-cases SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-use-cases.xml">
 <!ENTITY RFC1518 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1518.xml">
 <!ENTITY RFC1519 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1519.xml">
@@ -214,8 +215,7 @@ allowed, regardless of contradictory data gleaned in a detected attack.</t>
 <section anchor="requirements" title="Requirements">
 
 <t>This section describes the required features and characteristics of the DOTS
-protocols. The requirements assume architectural concepts and components similar
-to those described in [I-D.draft-mortensen-dots-architecture].</t>
+protocols.</t>
 
 <t>DOTS is an advisory protocol. An active DDoS attack against the entity
 controlling the DOTS client need not be present before establishing DOTS
@@ -269,15 +269,15 @@ necessarily superseded by the other operational requirements.</t>
 
 <t><list style="hanging">
   <t hangText='GEN-001'>
-  Extensibility: Protocols and data models developed as part of DOTS MUST be
-extensible in order to keep DOTS adaptable to operational and proprietary
-DDoS defenses. Future extensions MUST be backward compatible.</t>
-  <t hangText='GEN-002'>
   Resilience and Robustness: The signaling protocol MUST be designed to maximize
 the probability of signal delivery even under the severely constrained network
 conditions imposed by particular attack traffic. The protocol MUST be
 resilient, that is, continue operating despite message loss and out-of-order
 or redundant signal delivery.</t>
+  <t hangText='GEN-002'>
+  Extensibility: Protocols and data models developed as part of DOTS MUST be
+extensible in order to keep DOTS adaptable to operational and proprietary
+DDoS defenses. Future extensions MUST be backward compatible.</t>
   <t hangText='GEN-003'>
   Bidirectionality: To support peer health detection, to maintain an open
 signal channel, and to increase the probability of signal delivery during
@@ -309,12 +309,11 @@ protocol MUST be used for bulk data exchange.</t>
 <t><list style="hanging">
   <t hangText='OP-001'>
   Use of Common Transport Protocols: DOTS MUST operate over common widely
-deployed and standardized transport protocols. While the use of connectionless
-protocols, in particular the User Datagram Protocol (UDP) <xref target="RFC0768"/>, is
-RECOMMENDED for the signal channel, a universally deployed,
-connection-oriented protocol like the Transmission Control Protocol (TCP)
-<xref target="RFC0793"></xref> MAY be used if necessary due to network policy or middlebox
-capabilities or configurations.</t>
+deployed and standardized transport protocols. While the User Datagram
+Protocol (UDP) <xref target="RFC0768"/> SHOULD be used for the signal channel, the
+Transmission Control Protocol (TCP) <xref target="RFC0793"></xref> MAY be used if necessary due to
+network policy or middlebox capabilities or configurations. The data channel
+MUST use TCP; see <xref target="data-channel-requirements"/> below.</t>
   <t hangText='OP-002'>
   Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
 each other after mutual authentication in order to keep the DOTS session open.
@@ -381,6 +380,10 @@ mitigator.</t>
 scope of requested mitigation by refining the address space requiring
 intervention.</t>
   <t hangText='OP-007'>
+  Mitigation Efficacy: When a mitigation request by a DOTS client is active, the
+DOTS protocol must permit the DOTS client to transmit a metric of mitigation
+efficacy</t>
+  <t hangText='OP-007'>
   Conflict Detection and Notification: Multiple DOTS clients controlled by a
 signal administrative entity may send conflicting mitigation requests for pool
 of protected resources, as a result of misconfiguration, operator error, or
@@ -391,6 +394,16 @@ servers SHALL detect such conflicting requests, and SHALL notify the DOTS
 clients in conflict. The notification SHOULD indicate the nature and scope of
 the conflict, for example, the overlapping prefix range in a conflicting
 mitigation request.</t>
+  <t hangText='OP-008:'>
+  Name Resolution Caching: As DNS resolution may inhibited or unavailable during
+an active attack due to link congestion, DOTS agents SHOULD cache resolved
+names and addresses of peer DOTS agents, and SHOULD refer to those agents by
+IPv4 or IPv6 address for all communications following initial name resolution.</t>
+  <t hangText='OP-009:'>
+  Network Address Translator Traversal: The DOTS protocol MUST operate over
+networks in which Network Address Translation (NAT) is deployed. As UDP is the
+recommended transport for DOTS, all considerations in &ldquo;Middlebox Traversal
+Guidelines&rdquo; in <xref target="RFC5405"></xref> apply to DOTS.</t>
 </list></t>
 
 </section>
@@ -481,7 +494,11 @@ every heartbeat and signal sent between DOTS agents.</t>
 </section>
 <section anchor="data-model-requirements" title="Data model requirements">
 
-<t>TODO</t>
+<t><list style="hanging">
+  <t hangText='DM-000'>
+  Mitigation Efficacy: The data model for the DOTS protocol MUST permit the DOTS
+client to transmit a metric of mitigation efficacy to the DOTS server.</t>
+</list></t>
 
 </section>
 </section>
@@ -537,6 +554,7 @@ revisions to this document.</t>
 &RFC0768;
 &RFC0793;
 &RFC2119;
+&RFC5405;
 
 
     </references>
