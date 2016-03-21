@@ -51,6 +51,7 @@ normative:
   RFC0768:
   RFC0793:
   RFC2119:
+  RFC5405:
 
 informative:
   I-D.ietf-dots-use-cases:
@@ -213,12 +214,11 @@ whitelist:
   allowed, regardless of contradictory data gleaned in a detected attack.
 
 
-Requirements
+Requirements            {#requirements}
 ============
 
 This section describes the required features and characteristics of the DOTS
-protocols. The requirements assume architectural concepts and components similar
-to those described in [I-D.draft-mortensen-dots-architecture].
+protocols.
 
 DOTS is an advisory protocol. An active DDoS attack against the entity
 controlling the DOTS client need not be present before establishing DOTS
@@ -269,20 +269,20 @@ future needs in coordinated attack defense, although this consideration is
 necessarily superseded by the other operational requirements.
 
 
-General Requirements
+General Requirements            {#general-requirements}
 --------------------
 
 GEN-001
-: Extensibility: Protocols and data models developed as part of DOTS MUST be
-  extensible in order to keep DOTS adaptable to operational and proprietary
-  DDoS defenses. Future extensions MUST be backward compatible.
-
-GEN-002
 : Resilience and Robustness: The signaling protocol MUST be designed to maximize
   the probability of signal delivery even under the severely constrained network
   conditions imposed by particular attack traffic. The protocol MUST be
   resilient, that is, continue operating despite message loss and out-of-order
   or redundant signal delivery.
+
+GEN-002
+: Extensibility: Protocols and data models developed as part of DOTS MUST be
+  extensible in order to keep DOTS adaptable to operational and proprietary
+  DDoS defenses. Future extensions MUST be backward compatible.
 
 GEN-003
 : Bidirectionality: To support peer health detection, to maintain an open
@@ -312,17 +312,16 @@ GEN-005
   protocol MUST be used for bulk data exchange.
 
 
-Operational Requirements
+Operational Requirements        {#operational-requirements}
 ------------------------
 
 OP-001
 : Use of Common Transport Protocols: DOTS MUST operate over common widely
-  deployed and standardized transport protocols. While the use of connectionless
-  protocols, in particular the User Datagram Protocol (UDP) {{RFC0768}}, is
-  RECOMMENDED for the signal channel, a universally deployed,
-  connection-oriented protocol like the Transmission Control Protocol (TCP)
-  [RFC0793] MAY be used if necessary due to network policy or middlebox
-  capabilities or configurations.
+  deployed and standardized transport protocols. While the User Datagram
+  Protocol (UDP) {{RFC0768}} SHOULD be used for the signal channel, the
+  Transmission Control Protocol (TCP) [RFC0793] MAY be used if necessary due to
+  network policy or middlebox capabilities or configurations. The data channel
+  MUST use TCP; see {{data-channel-requirements}} below.
 
 OP-002
 : Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
@@ -400,6 +399,11 @@ OP-006
   intervention.
 
 OP-007
+: Mitigation Efficacy: When a mitigation request by a DOTS client is active, the
+DOTS protocol must permit the DOTS client to transmit a metric of mitigation
+efficacy
+
+OP-007
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
   signal administrative entity may send conflicting mitigation requests for pool
   of protected resources, as a result of misconfiguration, operator error, or
@@ -411,8 +415,20 @@ OP-007
   the conflict, for example, the overlapping prefix range in a conflicting
   mitigation request.
 
+OP-008:
+: Name Resolution Caching: As DNS resolution may inhibited or unavailable during
+  an active attack due to link congestion, DOTS agents SHOULD cache resolved
+  names and addresses of peer DOTS agents, and SHOULD refer to those agents by
+  IPv4 or IPv6 address for all communications following initial name resolution.
 
-Data Channel Requirements
+OP-009:
+: Network Address Translator Traversal: The DOTS protocol MUST operate over
+  networks in which Network Address Translation (NAT) is deployed. As UDP is the
+  recommended transport for DOTS, all considerations in "Middlebox Traversal
+  Guidelines" in [RFC5405] apply to DOTS.
+
+
+Data Channel Requirements       {#data-channel-requirements}
 -------------------------
 
 The data channel is intended to be used for bulk data exchanges between DOTS
@@ -470,7 +486,7 @@ DATA-004
   scope.
 
 
-Security requirements
+Security requirements           {#security-requirements}
 ---------------------
 
 DOTS must operate within a particularly strict security context, as an
@@ -503,13 +519,15 @@ SEC-003
   every heartbeat and signal sent between DOTS agents.
 
 
-Data model requirements
+Data model requirements         {#data-model-requirements}
 -----------------------
 
-TODO
+DM-000
+: Mitigation Efficacy: The data model for the DOTS protocol MUST permit the DOTS
+  client to transmit a metric of mitigation efficacy to the DOTS server.
 
 
-Congestion Control Considerations
+Congestion Control Considerations       {#congestion-control-considerations}
 =================================
 
 The DOTS signal channel will not contribute measurably to link congestion, as
