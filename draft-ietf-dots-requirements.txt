@@ -67,22 +67,26 @@ Table of Contents
      1.1.  Context and Motivation  . . . . . . . . . . . . . . . . .   2
      1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Requirements  . . . . . . . . . . . . . . . . . . . . . . . .   5
-     2.1.  General Requirements  . . . . . . . . . . . . . . . . . .   6
-     2.2.  Operational Requirements  . . . . . . . . . . . . . . . .   7
+     2.1.  General Requirements  . . . . . . . . . . . . . . . . . .   7
+     2.2.  Operational Requirements  . . . . . . . . . . . . . . . .   8
      2.3.  Data Channel Requirements . . . . . . . . . . . . . . . .  10
      2.4.  Security requirements . . . . . . . . . . . . . . . . . .  11
-   3.  Congestion Control Considerations . . . . . . . . . . . . . .  12
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
-   5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  12
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  12
-   7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  13
-     7.1.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  13
-     7.2.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  13
-     7.3.  Initial revision  . . . . . . . . . . . . . . . . . . . .  13
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  14
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
+     2.5.  Data Model Requirements . . . . . . . . . . . . . . . . .  12
+   3.  Congestion Control Considerations . . . . . . . . . . . . . .  13
+     3.1.  Signal Channel  . . . . . . . . . . . . . . . . . . . . .  13
+     3.2.  Data Channel  . . . . . . . . . . . . . . . . . . . . . .  13
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  14
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  14
+   7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  14
+     7.1.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  14
+     7.2.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  14
+     7.3.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  15
+     7.4.  Initial revision  . . . . . . . . . . . . . . . . . . . .  15
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  15
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  16
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -100,12 +104,8 @@ Table of Contents
    The greater impact of contemporary DDoS attacks has led to increased
    focus on coordinated attack response.  Many institutions and
    enterprises lack the resources or expertise to operate on-premise
-   attack prevention solutions themselves, or simply find themselves
+   attack mitigation solutions themselves, or simply find themselves
    constrained by local bandwidth limitations.  To address such gaps,
-   security service providers have begun to offer on-demand traffic
-   scrubbing services.  Each service offers its own interface for
-   subscribers to request attack mitigation, tying subscribers to
-   proprietary implementations while also limiting the subset of network
 
 
 
@@ -114,25 +114,32 @@ Mortensen, et al.      Expires September 19, 2016               [Page 2]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
-   elements capable of participating in the attack response.  As a
-   result of incompatibility across services, attack responses may be
-   fragmentary or otherwise incomplete, leaving key players in the
-   attack path unable to assist in the defense.
+   security service providers have begun to offer on-demand traffic
+   scrubbing services, which aim to separate the DDoS traffic from
+   legitimate traffic and forward only the latter.  Today each such
+   service offers its own interface for subscribers to request attack
+   mitigation, tying subscribers to proprietary implementations while
+   also limiting the subset of network elements capable of participating
+   in the attack response.  As a result of incompatibility across
+   services, attack responses may be fragmentary or otherwise
+   incomplete, leaving key players in the attack path unable to assist
+   in the defense.
 
    The lack of a common method to coordinate a real-time response among
    involved actors and network domains inhibits the speed and
    effectiveness of DDoS attack mitigation.  This document describes the
-   required characteristics of DOTS protocols that would mitigate
-   contemporary DDoS attack impact and lead to more efficient defensive
-   strategies.
+   required characteristics of a DOTS protocol enabling requests for
+   DDoS attack mitigation, reducing attack impact and leading to more
+   efficient defensive strategies.
 
-   DOTS is less concerned with the form of defensive action than with
-   communicating the need for that action.  DOTS supplements calls for
-   help with pertinent details about the detected attack, allowing
-   entities participating in DOTS to form ad hoc, adaptive alliances
-   against DDoS attacks as described in the DOTS use cases
-   [I-D.ietf-dots-use-cases].  The requirements in this document are
-   derived from those use cases.
+   DOTS communicates the need for defensive action in anticipation of or
+   in response to an attack, but does not dictate the form any defensive
+   action takes.  DOTS supplements calls for help with pertinent details
+   about the detected attack, allowing entities participating in DOTS to
+   form ad hoc, adaptive alliances against DDoS attacks as described in
+   the DOTS use cases [I-D.ietf-dots-use-cases].  The requirements in
+   this document are derived from those use cases and
+   [I-D.ietf-dots-architecture].
 
 1.2.  Terminology
 
@@ -142,26 +149,19 @@ Internet-Draft              DOTS Requirements                 March 2016
 
    This document adopts the following terms:
 
-   DDoS:  A distributed denial-of-service attack, in which of traffic
+   DDoS:  A distributed denial-of-service attack, in which traffic
       originating from multiple sources are directed at a target on a
       network.  DDoS attacks are intended to cause a negative impact on
       the availability of servers, services, applications, and/or other
       functionality of an attack target.  Denial-of-service
       considerations are discussed in detail in [RFC4732].
 
-   DDoS attack target:  A networked server, network service or
-      application that is the focus of a DDoS attack.
+   DDoS attack target:  A network connected entity with a finite set of
+      resources, such as network bandwidth, memory or CPU, that is the
+      focus of a DDoS attack.  Potential targets include servers,
+      services and applications.
 
-   DDoS attack telemetry:  Collected network traffic characteristics
-      defining the nature of a DDoS attack.  This document makes no
-      assumptions regarding telemetry collection methodology.
 
-   Countermeasure:  An action or set of actions taken to recognize and
-      filter out DDoS attack traffic while passing legitimate traffic to
-      the attack target.
-
-   Mitigation:  A set of countermeasures enforced against traffic
-      destined for the target or targets of a detected or reported DDoS
 
 
 
@@ -170,6 +170,16 @@ Mortensen, et al.      Expires September 19, 2016               [Page 3]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
+   DDoS attack telemetry:  Collected behavioral characteristics defining
+      the nature of a DDoS attack.  This document makes no assumptions
+      regarding telemetry collection methodology.
+
+   Countermeasure:  An action or set of actions taken to recognize and
+      filter out DDoS attack traffic while passing legitimate traffic to
+      the attack target.
+
+   Mitigation:  A set of countermeasures enforced against traffic
+      destined for the target or targets of a detected or reported DDoS
       attack, where countermeasure enforcement is managed by an entity
       in the network path between attack sources and the attack target.
       Mitigation methodology is out of scope for this document.
@@ -186,37 +196,27 @@ Internet-Draft              DOTS Requirements                 March 2016
       attack response coordination with other DOTS-aware elements.
 
    DOTS server:  A DOTS-aware software module handling and responding to
-      messages from DOTS clients.  The DOTS server MAY enable mitigation
-      on behalf of the DOTS client, if requested, by communicating the
-      DOTS client's request to the mitigator and relaying any mitigator
-      feedback to the requesting DOTS client.  A DOTS server may also be
-      a mitigator.
+      messages from DOTS clients.  The DOTS server SHOULD enable
+      mitigation on behalf of the DOTS client, if requested, by
+      communicating the DOTS client's request to the mitigator and
+      returning selected mitigator feedback to the requesting DOTS
+      client.  A DOTS server MAY also be a mitigator.
 
-   DOTS relay:  A DOTS-aware software module positioned between a DOTS
-      server and a DOTS client in the signaling path.  A DOTS relay
-      receives messages from a DOTS client and relays them to a DOTS
-      server, and similarly passes messages from the DOTS server to the
-      DOTS client.  A DOTS relay acts as a proxy or bridge between
-      stateful and stateless transport signaling, and may also aggregate
-      signaling from multiple downstream DOTS clients into a single
-      session with an upstream DOTS server or DOTS relay.
+   DOTS agent:  Any DOTS-aware software module capable of participating
+      in a DOTS siganling session.
 
-   DOTS agents:  Any DOTS functional element, including DOTS clients,
-      DOTS servers and DOTS relays.
+   DOTS gateway:  A logical DOTS agent resulting from the logical
+      concatenation of a DOTS server and a DOTS client, analogous to a
+      SIP Back-to-Back User Agent (B2BUA) [RFC3261].  DOTS gateways are
+      discussed in detail in [I-D.ietf-dots-architecture].
 
    Signal channel:  A bidirectional, mutually authenticated
-      communication layer between DOTS agents characterized by
+      communication channel between DOTS agents characterized by
       resilience even in conditions leading to severe packet loss, such
       as a volumetric DDoS attack causing network congestion.
 
    DOTS signal:  A concise authenticated status/control message
       transmitted between DOTS agents, used to indicate client's need
-      for mitigation, as well as to convey the status of any requested
-      mitigation.
-
-   Heartbeat:  A message transmitted between DOTS agents over the signal
-      channel, used as a keep-alive and to measure peer health.
-
 
 
 
@@ -226,32 +226,40 @@ Mortensen, et al.      Expires September 19, 2016               [Page 4]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
-   Client signal:  A message sent from a DOTS client to a DOTS server or
-      DOTS relay over the signal channel, indicating the DOTS client's
-      need for mitigation, as well as the scope of any requested
-      mitigation, optionally including additional attack details to
-      supplement server-initiated mitigation.
+      for mitigation, as well as to convey the status of any requested
+      mitigation.
 
-   Server signal:  A message sent from a DOTS server to a DOTS client or
-      DOTS relay over the signal channel.  Note that a server signal is
-      not a response to client signal, but a DOTS server-initiated
-      status message sent to DOTS clients with which the server has
-      established signaling sessions, containing information about the
-      status of DOTS client-requested mitigation and its efficacy.
+   Heartbeat:  A message transmitted between DOTS agents over the signal
+      channel, used as a keep-alive and to measure peer health.
+
+   Client signal:  A message sent from a DOTS client to a DOTS server
+      over the signal channel, indicating the DOTS client's need for
+      mitigation, as well as the scope of any requested mitigation,
+      optionally including additional attack details to supplement
+      server-initiated mitigation.
+
+   Server signal:  A message sent from a DOTS server to a DOTS client
+      over the signal channel.  Note that a server signal is not a
+      response to client signal, but a DOTS server-initiated status
+      message sent to DOTS clients with which the server has established
+      signaling sessions.
 
    Data channel:  A secure communication layer between DOTS clients and
       DOTS servers used for infrequent bulk exchange of data not easily
       or appropriately communicated through the signal channel under
       attack conditions.
 
-   Blacklist:  A list of addresses, prefixes and/or other identifiers
-      indicating sources from which traffic should be blocked,
-      regardless of traffic content.
+   Filter:  A policy matching a network traffic flow or set of flows and
+      rate-limiting or discarding matching traffic.
 
-   Whitelist:  A list of addresses, prefixes and/or other
-      identifiersfrom indicating sources from which traffic should
-      always be allowed, regardless of contradictory data gleaned in a
-      detected attack.
+   Blacklist:  A filter list of addresses, prefixes and/or other
+      identifiers indicating sources from which traffic should be
+      blocked, regardless of traffic content.
+
+   Whitelist:  A list of addresses, prefixes and/or other identifiers
+      from indicating sources from which traffic should always be
+      allowed, regardless of contradictory data gleaned in a detected
+      attack.
 
    Multi-homed DOTS client:  A DOTS client exchanging messages with
       multiple DOTS servers, each in a separate administrative domain.
@@ -259,21 +267,13 @@ Internet-Draft              DOTS Requirements                 March 2016
 2.  Requirements
 
    This section describes the required features and characteristics of
-   the DOTS protocols.
+   the DOTS protocol.
 
    DOTS is an advisory protocol.  An active DDoS attack against the
    entity controlling the DOTS client need not be present before
    establishing DOTS communication between DOTS agents.  Indeed,
-   establishing a relationship with peer DOTS agents during nominal
+   establishing a relationship with peer DOTS agents during normal
    network conditions provides the foundation for more rapid attack
-   response against future attacks, as all interactions setting up DOTS,
-   including any business or service level agreements, are already
-   complete.
-
-   DOTS must at a minimum make it possible for a DOTS client to request
-   a DOTS server's aid in mounting a coordinated defense against a
-   detected attack, signaling inter- or intra-domain as requested by
-   local operators.  DOTS clients should similarly be able to withdraw
 
 
 
@@ -282,14 +282,21 @@ Mortensen, et al.      Expires September 19, 2016               [Page 5]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
+   response against future attacks, as all interactions setting up DOTS,
+   including any business or service level agreements, are already
+   complete.
+
+   DOTS must at a minimum make it possible for a DOTS client to request
+   a DOTS server's aid in mounting a coordinated defense against a
+   suspected attack, signaling within or between domains as requested by
+   local operators.  DOTS clients should similarly be able to withdraw
    aid requests.  DOTS requires no justification from DOTS clients for
-   requests for help, nor must DOTS clients justify withdrawing help
-   requests: the decision is local to the entity owning the DOTS
-   clients.  Regular feedback between DOTS clients and DOTS server
-   supplement the defensive alliance by maintaining a common
-   understanding of DOTS peer health and activity.  Bidirectional
-   communication between DOTS clients and DOTS servers is therefore
-   critical.
+   requests for help, nor do DOTS clients need to justify withdrawing
+   help requests: the decision is local to the DOTS clients' domain.
+   Regular feedback between DOTS clients and DOTS server supplement the
+   defensive alliance by maintaining a common understanding of DOTS peer
+   health and activity.  Bidirectional communication between DOTS
+   clients and DOTS servers is therefore critical.
 
    Yet DOTS must also work with a set of competing operational goals.
    On the one hand, the protocol must be resilient under extremely
@@ -322,13 +329,6 @@ Internet-Draft              DOTS Requirements                 March 2016
 
    Finally, DOTS should provide sufficient extensibility to meet local,
    vendor or future needs in coordinated attack defense, although this
-   consideration is necessarily superseded by the other operational
-   requirements.
-
-2.1.  General Requirements
-
-   GEN-001  Extensibility: Protocols and data models developed as part
-      of DOTS MUST be extensible in order to keep DOTS adaptable to
 
 
 
@@ -338,6 +338,13 @@ Mortensen, et al.      Expires September 19, 2016               [Page 6]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
+   consideration is necessarily superseded by the other operational
+   requirements.
+
+2.1.  General Requirements
+
+   GEN-001  Extensibility: Protocols and data models developed as part
+      of DOTS MUST be extensible in order to keep DOTS adaptable to
       operational and proprietary DDoS defenses.  Future extensions MUST
       be backward compatible.
 
@@ -346,7 +353,7 @@ Internet-Draft              DOTS Requirements                 March 2016
       the severely constrained network conditions imposed by particular
       attack traffic.  The protocol MUST be resilient, that is, continue
       operating despite message loss and out-of-order or redundant
-      signal delivery.
+      message delivery.
 
    GEN-003  Bidirectionality: To support peer health detection, to
       maintain an open signal channel, and to increase the probability
@@ -376,6 +383,17 @@ Internet-Draft              DOTS Requirements                 March 2016
       utilizing an established reliable transport protocol MUST be used
       for bulk data exchange.
 
+
+
+
+
+
+
+Mortensen, et al.      Expires September 19, 2016               [Page 7]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
 2.2.  Operational Requirements
 
    OP-001  Use of Common Transport Protocols: DOTS MUST operate over
@@ -386,31 +404,23 @@ Internet-Draft              DOTS Requirements                 March 2016
       middlebox capabilities or configurations.  The data channel MUST
       use TCP; see Section 2.3 below.
 
-
-
-
-Mortensen, et al.      Expires September 19, 2016               [Page 7]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
    OP-002  Session Health Monitoring: Peer DOTS agents MUST regularly
       send heartbeats to each other after mutual authentication in order
       to keep the DOTS session open.  A session MUST be considered
       active until a DOTS agent explicitly ends the session, or either
       DOTS agent fails to receive heartbeats from the other after a
-      mutually negotiated timeout period has elapsed.
+      mutually agreed upon timeout period has elapsed.
 
    OP-003  Session Redirection: In order to increase DOTS operational
       flexibility and scalability, DOTS servers SHOULD be able to
-      redirect DOTS clients to another DOTS server or relay at any time.
-      Due to the decreased probability of DOTS server signal delivery
-      due to link congestion, it is RECOMMENDED DOTS servers avoid
-      redirecting while mitigation is enabled during an active attack
-      against a target in the DOTS client's domain.  Either the DOTS
-      servers have to fate-share the security state, the client MUST
-      have separate security state with each potential redirectable
-      server, or be able to negotiate new state as part of redirection.
+      redirect DOTS clients to another DOTS server at any time.  Due to
+      the decreased probability of DOTS server signal delivery due to
+      link congestion, it is RECOMMENDED DOTS servers avoid redirecting
+      while mitigation is enabled during an active attack against a
+      target in the DOTS client's domain.  Either the DOTS servers have
+      to fate-share the security state, the client MUST have separate
+      security state with each potential redirectable server, or be able
+      to negotiate new state as part of redirection.
 
    OP-004  Mitigation Status: DOTS MUST provide a means to report the
       status of an action requested by a DOTS client.  In particular,
@@ -431,6 +441,15 @@ Internet-Draft              DOTS Requirements                 March 2016
       active, and threat handling details such as mitigation scope and
       statistics are available to the server, the server SHOULD include
       those details in server signals sent to the client.  DOTS clients
+
+
+
+
+Mortensen, et al.      Expires September 19, 2016               [Page 8]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
       SHOULD take mitigation statistics into account when deciding
       whether to request the DOTS server cease mitigation.
 
@@ -441,15 +460,6 @@ Internet-Draft              DOTS Requirements                 March 2016
       requests for help.  When the mitigation lifetime comes to an end,
       the DOTS server SHOULD delay session termination for a protocol-
       defined grace period to allow for delivery of delayed mitigation
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016               [Page 8]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
       renewals over the signal channel.  After the grace period elapses,
       the DOTS server MAY terminate the session at any time.
 
@@ -466,13 +476,12 @@ Internet-Draft              DOTS Requirements                 March 2016
       any reason.  The reasons themselves are not in scope.
 
    OP-006  Mitigation Scope: DOTS clients MUST indicate the desired
-      address or prefix space coverage of any mitigation, for example by
-      using Classless Internet Domain Routing (CIDR) [RFC1518],[RFC1519]
-      prefixes, [RFC2373] for IPv6 [RFC2460] prefixes, the length/prefix
-      convention established in the Border Gateway Protocol (BGP)
-      [RFC4271], SIP URIs [RFC3261], E.164 numbers, DNS names, or by a
-      prefix group alias agreed upon with the server through the data
-      channel.
+      scope of any mitigation, for example by using Classless Internet
+      Domain Routing (CIDR) [RFC1518],[RFC1519] prefixes, [RFC2373] for
+      IPv6 [RFC2460] prefixes, the length/prefix convention established
+      in the Border Gateway Protocol (BGP) [RFC4271], SIP URIs
+      [RFC3261], E.164 numbers, DNS names, or by a resource group alias
+      agreed upon with the server through the data channel.
 
       If there is additional information available narrowing the scope
       of any requested attack response, such as targeted port range,
@@ -483,21 +492,12 @@ Internet-Draft              DOTS Requirements                 March 2016
       mitigator.
 
       As an active attack evolves, clients MUST be able to adjust as
-      necessary the scope of requested mitigation by refining the
-      address space requiring intervention.
+      necessary the scope of requested mitigation by refining the scope
+      of resources requiring mitigation.
 
    OP-007  Mitigation Efficacy: When a mitigation request by a DOTS
       client is active, DOTS clients SHOULD transmit a metric of
       perceived mitigation efficacy to the DOTS server, per "Automatic
-      or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS
-      Mitigation Services" in [I-D.ietf-dots-use-cases].  DOTS servers
-      MAY use the efficacy metric to adjust countermeasures activated on
-      a mitigator on behalf of a DOTS client.
-
-   OP-008  Conflict Detection and Notification: Multiple DOTS clients
-      controlled by a single administrative entity may send conflicting
-      mitigation requests for pool of protected resources, as a result
-      of misconfiguration, operator error, or compromised DOTS clients.
 
 
 
@@ -506,6 +506,15 @@ Mortensen, et al.      Expires September 19, 2016               [Page 9]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
+      or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS
+      Mitigation Services" in [I-D.ietf-dots-use-cases].  DOTS servers
+      MAY use the efficacy metric to adjust countermeasures activated on
+      a mitigator on behalf of a DOTS client.
+
+   OP-008  Conflict Detection and Notification: Multiple DOTS clients
+      controlled by a single administrative entity may send conflicting
+      mitigation requests for pool of protected resources , as a result
+      of misconfiguration, operator error, or compromised DOTS clients.
       DOTS servers attempting to honor conflicting requests may flap
       network route or DNS information, degrading the networks
       attempting to participate in attack response with the DOTS
@@ -514,16 +523,7 @@ Internet-Draft              DOTS Requirements                 March 2016
       SHOULD indicate the nature and scope of the conflict, for example,
       the overlapping prefix range in a conflicting mitigation request.
 
-   OP-009:  Lookup Caching: DOTS agents SHOULD cache resolved names, PKI
-      validation chains, and similarly queried data as necessary.
-      Network-based lookups and validation may be inhibited or
-      unavailable during an active attack due to link congestion.  For
-      example, DOTS agents SHOULD cache resolved names and addresses of
-      peer DOTS agents, and SHOULD refer to those agents by IPv4
-      [RFC0791] or IPv6 address for all communications following initial
-      name resolution.
-
-   OP-010:  Network Address Translator Traversal: The DOTS protocol MUST
+   OP-009:  Network Address Translator Traversal: The DOTS protocol MUST
       operate over networks in which Network Address Translation (NAT)
       is deployed.  As UDP is the recommended transport for DOTS, all
       considerations in "Middlebox Traversal Guidelines" in [RFC5405]
@@ -552,8 +552,8 @@ Internet-Draft              DOTS Requirements                 March 2016
    sensitive content sent between DOTS agents requires extra precautions
    to ensure data privacy and authenticity.
 
-
-
+   DATA-001  Reliable transport: Messages sent over the data channel
+      MUST be delivered reliably, in send order.
 
 
 
@@ -562,10 +562,6 @@ Mortensen, et al.      Expires September 19, 2016              [Page 10]
 Internet-Draft              DOTS Requirements                 March 2016
 
 
-   DATA-001  Reliable transport: Transmissions over the data channel
-      MUST be transactional, requiring reliable, in-order packet
-      delivery.
-
    DATA-002  Data privacy and integrity: Transmissions over the data
       channel is likely to contain operationally or privacy-sensitive
       information or instructions from the remote DOTS agent.  Theft or
@@ -573,16 +569,32 @@ Internet-Draft              DOTS Requirements                 March 2016
       information leaks or malicious transactions on behalf of the
       sending agent (see Section 4 below).  Consequently data sent over
       the data channel MUST be encrypted and authenticated using current
-      industry best practices.  DOTS servers and relays MUST enable
-      means to prevent leaking operationally or privacy-sensitive data.
-      Although administrative entities participating in DOTS may detail
-      what data may be revealed to third-party DOTS agents, such
-      considerations are not in scope for this document.
+      industry best practices.  DOTS servers MUST enable means to
+      prevent leaking operationally or privacy-sensitive data.  Although
+      administrative entities participating in DOTS may detail what data
+      may be revealed to third-party DOTS agents, such considerations
+      are not in scope for this document.
 
-   DATA-003  Black- and whitelist management: DOTS servers SHOULD
+   DATA-003  Session configuration: To help meet the general and
+      operational requirements in this document, DOTS servers MUST
+      provide methods for DOTS client operators to configure DOTS
+      session behavior using the data channel.  DOTS server
+      implementations MUST have mechanisms to configure the following:
+
+      *  Acceptable signal lossiness, as described in GEN-002.
+
+      *  Heartbeat intervals, as described in OP-002.
+
+      *  Maximum mitigation lifetime, as described in OP-005.
+
+      *  Resource identifiers, as described in OP-006.
+
+      DOTS server implementations MAY expose additional configurability.
+      Additional configurability is implementation-specific.
+
+   DATA-004  Black- and whitelist management: DOTS servers SHOULD
       provide methods for DOTS clients to manage black- and white-lists
-      of source addresses of traffic destined for addresses belonging to
-      a client.
+      of traffic destined for resources belonging to a client.
 
       For example, a DOTS client should be able to create a black- or
       whitelist entry; retrieve a list of current entries from either
@@ -599,6 +611,13 @@ Internet-Draft              DOTS Requirements                 March 2016
    abuse, enabling or supplementing the very attacks DOTS purports to
    mitigate.
 
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 11]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
    SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
       each other before a DOTS session is considered valid.  The method
       of authentication is not specified, but should follow current
@@ -609,15 +628,6 @@ Internet-Draft              DOTS Requirements                 March 2016
       protocols MUST take steps to protect the confidentiality,
       integrity and authenticity of messages sent between client and
       server.  While specific transport- and message-level security
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 11]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
       options are not specified, the protocols MUST follow current
       industry best practices for encryption and message authentication.
 
@@ -631,13 +641,94 @@ Internet-Draft              DOTS Requirements                 March 2016
       attacker from capturing and replaying old messages, DOTS protocols
       MUST provide a method for replay detection.
 
+2.5.  Data Model Requirements
+
+   The value of DOTS is in standardizing a mechanism to permit elements,
+   networks or domains under or under threat of DDoS attack to request
+   aid mitigating the effects of any such attack.  A well-structured
+   DOTS data model is therefore critical to the development of a
+   successful DOTS protocol.
+
+   DM-001:  Structure: The data model structure for the DOTS protocol
+      may be described by a single module, or be divided into related
+      collections of hierarchical modules and sub-modules.  If the data
+      model structure is split across modules, those distinct modules
+      MUST allow references to describe the overall data model's
+      structural dependencies.
+
+   DM-002:  Versioning: To ensure interoperability between DOTS protocol
+      implementations, data models MUST be versioned.  The version
+      number of the initial data model SHALL be 1.  Each published
+      change to the initial published DOTS data model SHALL increment
+      the data model version by 1.
+
+      How the protocol represents data model versions is not defined in
+      this document.
+
+
+
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 12]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
+   DM-003:  Mitigation Status Representation: The data model MUST
+      provide the ability to represent a request for mitigation and the
+      withdrawal of such a request.  The data model MUST also support a
+      representation of currently requested mitigation status, including
+      failures and their causes.
+
+   DM-004:  Mitigation Scope Representation: The data model MUST support
+      representation of a requested mitigation's scope.  As mitigation
+      scope may be represented in several different ways, per OP-006
+      above, the data model MUST be capable of flexible representation
+      of mitigation scope.
+
+   DM-005:  Mitigation Lifetime Representation: The data model MUST
+      support representation of a mitigation request's lifetime,
+      including mitigations with no specified end time.
+
+   DM-006:  Mitigation Efficacy Representation: The data model MUST
+      support representation of a DOTS client's understanding of the
+      efficacy of a mitigation enabled through a mitigation request.
+      TBD: how do we represent the efficacy?
+
+   DM-007:  Relationship to Transport: The DOTS data model MUST NOT
+      depend on the specifics of any transport to represent fields in
+      the model.
+
 3.  Congestion Control Considerations
 
-   The DOTS signal channel will not contribute measurably to link
-   congestion, as the protocol's transmission rate will be negligible
-   regardless of network conditions.  Bulk data transfers are performed
-   over the data channel, which should use a reliable transport with
-   built-in congestion control mechanisms, such as TCP.
+3.1.  Signal Channel
+
+   As part of a protocol expected to operate over links affected by DDoS
+   attack traffic, the DOTS signal channel MUST NOT contribute
+   significantly to link congestion.  To meet the operational
+   requirements above, DOTS signal channel implementations MUST support
+   UDP.  However, UDP when deployed naively can be a source of network
+   congestion, as discussed in [RFC5405].  Signal channel
+   implementations using UDP MUST therefore include a congestion control
+   mechanism.  The form of that congestion control is implementation-
+   specific.
+
+   Signal channel implementations using TCP may rely on built-in TCP
+   congestion control support.
+
+3.2.  Data Channel
+
+   As specified in DATA-001, the data channel requires reliable, in-
+   order message delivery.  Data channel implementations using TCP may
+   rely on the TCP implementation's built-in congestion control
+   mechanisms.
+
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 13]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
 
 4.  Security Considerations
 
@@ -656,27 +747,18 @@ Internet-Draft              DOTS Requirements                 March 2016
 
 5.  Contributors
 
-   Med Boucadair
+   Med Boucadair Flemming Andreasen
 
 6.  Acknowledgments
 
    Thanks to Roman Danyliw and Matt Richardson for careful reading and
    feedback.
 
-
-
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 12]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
 7.  Change Log
 
-7.1.  01 revision
+7.1.  02 revision
+
+7.2.  01 revision
 
    2016-03-21
 
@@ -696,6 +778,14 @@ Internet-Draft              DOTS Requirements                 March 2016
    o  Added proposed operational requirement to support session
       redirection.
 
+
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 14]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
    o  Added proposed operational requirement to support conflict
       notification.
 
@@ -713,22 +803,13 @@ Internet-Draft              DOTS Requirements                 March 2016
    o  Removed redundant mutual authentication requirement from data
       channel requirements.
 
-7.2.  00 revision
+7.3.  00 revision
 
    2015-10-15
 
-7.3.  Initial revision
+7.4.  Initial revision
 
    2015-09-24 Andrew Mortensen
-
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 13]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
 
 8.  References
 
@@ -752,13 +833,29 @@ Internet-Draft              DOTS Requirements                 March 2016
               10.17487/RFC5405, November 2008,
               <http://www.rfc-editor.org/info/rfc5405>.
 
+
+
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 15]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
+
 8.2.  Informative References
+
+   [I-D.ietf-dots-architecture]
+              Mortensen, A., Andreasen, F., Reddy, T.,
+              christopher_gray3@cable.comcast.com, c., Compton, R., and
+              N. Teague, "Distributed-Denial-of-Service Open Threat
+              Signaling (DOTS) Architecture", draft-ietf-dots-
+              architecture-00 (work in progress), July 2016.
 
    [I-D.ietf-dots-use-cases]
               Dobbins, R., Fouant, S., Migault, D., Moskowitz, R.,
               Teague, N., and L. Xia, "Use cases for DDoS Open Threat
-              Signaling", draft-ietf-dots-use-cases-00 (work in
-              progress), October 2015.
+              Signaling", draft-ietf-dots-use-cases-01 (work in
+              progress), March 2016.
 
    [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791, DOI
               10.17487/RFC0791, September 1981,
@@ -777,15 +874,6 @@ Internet-Draft              DOTS Requirements                 March 2016
               Aggregation Strategy", RFC 1519, DOI 10.17487/RFC1519,
               September 1993, <http://www.rfc-editor.org/info/rfc1519>.
 
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 14]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
    [RFC2373]  Hinden, R. and S. Deering, "IP Version 6 Addressing
               Architecture", RFC 2373, DOI 10.17487/RFC2373, July 1998,
               <http://www.rfc-editor.org/info/rfc2373>.
@@ -799,6 +887,16 @@ Internet-Draft              DOTS Requirements                 March 2016
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
+
+
+
+
+
+
+Mortensen, et al.      Expires September 19, 2016              [Page 16]
+
+Internet-Draft              DOTS Requirements                 March 2016
+
 
    [RFC4271]  Rekhter, Y., Ed., Li, T., Ed., and S. Hares, Ed., "A
               Border Gateway Protocol 4 (BGP-4)", RFC 4271, DOI
@@ -829,19 +927,6 @@ Authors' Addresses
    Email: rgm@htt-consult.com
 
 
-
-
-
-
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 15]
-
-Internet-Draft              DOTS Requirements                 March 2016
-
-
    Tirumaleswar Reddy
    Cisco Systems, Inc.
    Cessna Business Park, Varthur Hobli
@@ -864,33 +949,4 @@ Internet-Draft              DOTS Requirements                 March 2016
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Mortensen, et al.      Expires September 19, 2016              [Page 16]
+Mortensen, et al.      Expires September 19, 2016              [Page 17]

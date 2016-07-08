@@ -56,7 +56,6 @@ normative:
 informative:
   I-D.ietf-dots-architecture:
   I-D.ietf-dots-use-cases:
-  RFC0791:
   RFC1034:
   RFC1518:
   RFC1519:
@@ -548,21 +547,75 @@ Data Model Requirements                 {#data-model-requirements}
 
 The value of DOTS is in standardizing a mechanism to permit elements, networks
 or domains under or under threat of DDoS attack to request aid mitigating the
-effects of any such attack. The DOTS data model is therefore critical to the
-success of any DOTS deployment.
+effects of any such attack. A well-structured DOTS data model is therefore
+critical to the development of a successful DOTS protocol.
 
-DM-001
-: 
+DM-001:
+: Structure: The data model structure for the DOTS protocol may be described by
+  a single module, or be divided into related collections of hierarchical
+  modules and sub-modules. If the data model structure is split across modules,
+  those distinct modules MUST allow references to describe the overall data
+  model's structural dependencies.
+
+DM-002:
+: Versioning: To ensure interoperability between DOTS protocol implementations,
+  data models MUST be versioned. The version number of the initial data model
+  SHALL be 1. Each published change to the initial published DOTS data model
+  SHALL increment the data model version by 1.
+
+: How the protocol represents data model versions is not defined in this
+  document.
+
+DM-003:
+: Mitigation Status Representation: The data model MUST provide the ability to
+  represent a request for mitigation and the withdrawal of such a request. The
+  data model MUST also support a representation of currently requested
+  mitigation status, including failures and their causes.
+
+DM-004:
+: Mitigation Scope Representation: The data model MUST support representation of
+  a requested mitigation's scope. As mitigation scope may be represented in
+  several different ways, per OP-006 above, the data model MUST be capable of
+  flexible representation of mitigation scope.
+
+DM-005:
+: Mitigation Lifetime Representation: The data model MUST support representation
+  of a mitigation request's lifetime, including mitigations with no specified
+  end time.
+
+DM-006:
+: Mitigation Efficacy Representation: The data model MUST support representation
+  of a DOTS client's understanding of the efficacy of a mitigation enabled
+  through a mitigation request. TBD: how do we represent the efficacy?
+
+DM-007:
+: Relationship to Transport: The DOTS data model MUST NOT depend on the
+  specifics of any transport to represent fields in the model.
 
 
 Congestion Control Considerations       {#congestion-control-considerations}
 =================================
 
-The DOTS signal channel will not contribute measurably to link congestion, as
-the protocol's transmission rate will be negligible regardless of network
-conditions. Bulk data transfers are performed over the data channel, which
-should use a reliable transport with built-in congestion control mechanisms,
-such as TCP.
+Signal Channel
+--------------
+
+As part of a protocol expected to operate over links affected by DDoS attack
+traffic, the DOTS signal channel MUST NOT contribute significantly to link
+congestion. To meet the operational requirements above, DOTS signal channel
+implementations MUST support UDP. However, UDP when deployed naively can be a
+source of network congestion, as discussed in [RFC5405]. Signal channel
+implementations using UDP MUST therefore include a congestion control mechanism.
+The form of that congestion control is implementation-specific.
+
+Signal channel implementations using TCP may rely on built-in TCP congestion
+control support.
+
+Data Channel
+------------
+As specified in DATA-001, the data channel requires reliable, in-order message
+delivery. Data channel implementations using TCP may rely on the TCP
+implementation's built-in congestion control mechanisms.
+
 
 Security Considerations         {#security-considerations}
 =======================
@@ -585,6 +638,7 @@ Contributors
 ============
 
 Med Boucadair
+Flemming Andreasen
 
 
 Acknowledgments
@@ -595,6 +649,9 @@ Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.
 
 Change Log
 ==========
+
+02 revision
+-----------
 
 01 revision
 -----------
