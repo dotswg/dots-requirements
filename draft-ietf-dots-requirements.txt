@@ -82,8 +82,8 @@ Table of Contents
      7.1.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  14
      7.2.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  15
      7.3.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  15
-     7.4.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  15
-     7.5.  Initial revision  . . . . . . . . . . . . . . . . . . . .  15
+     7.4.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.5.  Initial revision  . . . . . . . . . . . . . . . . . . . .  16
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  16
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  16
@@ -754,9 +754,15 @@ Internet-Draft              DOTS Requirements               October 2016
 
 5.  Contributors
 
-   o  Med Boucadair Orange mohamed.boucadair@orange.com
+   Med Boucadair
+      Orange
 
-   o  Flemming Andreasen Cisco Systems, Inc.  fandreas@cisco.com
+      mohamed.boucadair@orange.com
+
+   Flemming Andreasen:
+      Cisco Systems, Inc.
+
+      fandreas@cisco.com
 
 6.  Acknowledgments
 
@@ -772,12 +778,6 @@ Internet-Draft              DOTS Requirements               October 2016
    o  Extended SEC-003 to require secure interfaces within DOTS
       gateways.
 
-   o  Changed DATA-003 to Resource Configuration, delegating control of
-      acceptable signal loss, heartbeat intervals, and mitigation
-      lifetime to DOTS client.
-
-   o  Added data model requirements reflecting client control over the
-      above.
 
 
 
@@ -785,6 +785,13 @@ Mortensen, et al.          Expires May 3, 2017                 [Page 14]
 
 Internet-Draft              DOTS Requirements               October 2016
 
+
+   o  Changed DATA-003 to Resource Configuration, delegating control of
+      acceptable signal loss, heartbeat intervals, and mitigation
+      lifetime to DOTS client.
+
+   o  Added data model requirements reflecting client control over the
+      above.
 
 7.2.  02 revision
 
@@ -825,13 +832,6 @@ Internet-Draft              DOTS Requirements               October 2016
    o  Removed redundant mutual authentication requirement from data
       channel requirements.
 
-7.4.  00 revision
-
-   2015-10-15
-
-7.5.  Initial revision
-
-   2015-09-24 Andrew Mortensen
 
 
 
@@ -841,6 +841,14 @@ Mortensen, et al.          Expires May 3, 2017                 [Page 15]
 
 Internet-Draft              DOTS Requirements               October 2016
 
+
+7.4.  00 revision
+
+   2015-10-15
+
+7.5.  Initial revision
+
+   2015-09-24 Andrew Mortensen
 
 8.  References
 
@@ -883,20 +891,16 @@ Internet-Draft              DOTS Requirements               October 2016
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
               <http://www.rfc-editor.org/info/rfc1034>.
 
-   [RFC1518]  Rekhter, Y. and T. Li, "An Architecture for IP Address
-              Allocation with CIDR", RFC 1518, DOI 10.17487/RFC1518,
-              September 1993, <http://www.rfc-editor.org/info/rfc1518>.
-
-
-
-
-
 
 
 Mortensen, et al.          Expires May 3, 2017                 [Page 16]
 
 Internet-Draft              DOTS Requirements               October 2016
 
+
+   [RFC1518]  Rekhter, Y. and T. Li, "An Architecture for IP Address
+              Allocation with CIDR", RFC 1518, DOI 10.17487/RFC1518,
+              September 1993, <http://www.rfc-editor.org/info/rfc1518>.
 
    [RFC1519]  Fuller, V., Li, T., Yu, J., and K. Varadhan, "Classless
               Inter-Domain Routing (CIDR): an Address Assignment and
@@ -938,12 +942,8 @@ Authors' Addresses
    Email: amortensen@arbor.net
 
 
-   Robert Moskowitz
-   HTT Consulting
-   Oak Park, MI  42837
-   United States
 
-   Email: rgm@htt-consult.com
+
 
 
 
@@ -954,6 +954,14 @@ Mortensen, et al.          Expires May 3, 2017                 [Page 17]
 Internet-Draft              DOTS Requirements               October 2016
 
 
+   Robert Moskowitz
+   HTT Consulting
+   Oak Park, MI  42837
+   United States
+
+   Email: rgm@htt-consult.com
+
+
    Tirumaleswar Reddy
    Cisco Systems, Inc.
    Cessna Business Park, Varthur Hobli
@@ -962,14 +970,6 @@ Internet-Draft              DOTS Requirements               October 2016
    India
 
    Email: tireddy@cisco.com
-
-
-
-
-
-
-
-
 
 
 

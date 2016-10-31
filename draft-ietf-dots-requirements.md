@@ -645,13 +645,15 @@ through current secure communications best practices. See
 Contributors
 ============
 
-* Med Boucadair
-  Orange
-  mohamed.boucadair@orange.com
+Med Boucadair
+: Orange
+: mohamed.boucadair@orange.com
+{: vspace="0"}
 
-* Flemming Andreasen
-  Cisco Systems, Inc.
-  fandreas@cisco.com
+Flemming Andreasen:
+: Cisco Systems, Inc.
+: fandreas@cisco.com
+{: vspace="0"}
 
 
 Acknowledgments

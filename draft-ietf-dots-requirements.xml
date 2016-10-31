@@ -605,13 +605,16 @@ through current secure communications best practices. See
 </section>
 <section anchor="contributors" title="Contributors">
 
-<t><list style="symbols">
-  <t>Med Boucadair
-Orange
-mohamed.boucadair@orange.com</t>
-  <t>Flemming Andreasen
-Cisco Systems, Inc.
-fandreas@cisco.com</t>
+<t><list style="hanging">
+  <t hangText='Med Boucadair'><vspace blankLines='0'/>
+  Orange</t>
+  <t>mohamed.boucadair@orange.com</t>
+</list></t>
+
+<t><list style="hanging">
+  <t hangText='Flemming Andreasen:'><vspace blankLines='0'/>
+  Cisco Systems, Inc.</t>
+  <t>fandreas@cisco.com</t>
 </list></t>
 
 </section>
