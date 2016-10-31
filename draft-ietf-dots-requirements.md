@@ -1,8 +1,8 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-01
-date: 2016-03-18
+docname: draft-ietf-dots-requirements-03
+date: @DATE@
 
 area: Security
 wg: DOTS
@@ -132,12 +132,12 @@ DDoS:
   Denial-of-service considerations are discussed in detail in [RFC4732].
 
 DDoS attack target:
-: A network connected entity with a finite set of resources, such as network bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential targets include
-  servers, services and applications.
+: A network connected entity with a finite set of resources, such as network
+  bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
+  targets include network elements, servers, and services.
 
 DDoS attack telemetry:
 : Collected behavioral characteristics defining the nature of a DDoS attack.
-  This document makes no assumptions regarding telemetry collection methodology.
 
 Countermeasure:
 : An action or set of actions taken to recognize and filter out DDoS attack
@@ -170,7 +170,7 @@ DOTS server:
   client. A DOTS server MAY also be a mitigator.
 
 DOTS agent:
-: Any DOTS-aware software module capable of participating in a DOTS siganling
+: Any DOTS-aware software module capable of participating in a DOTS signaling
   session.
 
 DOTS gateway:
@@ -322,8 +322,8 @@ GEN-005
   supplementing attack response.
 
 : As the resilience requirements for the DOTS signal channel mandate small
-  signal message size, a separate, secure data channel utilizing an established
-  reliable transport protocol MUST be used for bulk data exchange.
+  signal message size, a separate, secure data channel utilizing a reliable
+  transport protocol MUST be used for bulk data exchange.
 
 
 Operational Requirements        {#operational-requirements}
@@ -335,14 +335,14 @@ OP-001
   Protocol (UDP) {{RFC0768}} SHOULD be used for the signal channel, the
   Transmission Control Protocol (TCP) [RFC0793] MAY be used if necessary due to
   network policy or middlebox capabilities or configurations. The data channel
-  MUST use TCP; see {{data-channel-requirements}} below.
+  MUST use a reliable transport; see {{data-channel-requirements}} below.
 
 OP-002
 : Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
-  each other after mutual authentication in order to keep the DOTS session open.
-  A session MUST be considered active until a DOTS agent explicitly ends the
-  session, or either DOTS agent fails to receive heartbeats from the other after
-  a mutually agreed upon timeout period has elapsed.
+  each other after mutual authentication in order to keep the DOTS session
+  active.  A session MUST be considered active until a DOTS agent explicitly
+  ends the session, or either DOTS agent fails to receive heartbeats from the
+  other after a mutually agreed upon timeout period has elapsed.
 
 OP-003
 : Session Redirection: In order to increase DOTS operational flexibility and
@@ -438,10 +438,10 @@ OP-008
 OP-009:
 : Network Address Translator Traversal: The DOTS protocol MUST operate over
   networks in which Network Address Translation (NAT) is deployed. As UDP is the
-  recommended transport for DOTS, all considerations in "Middlebox Traversal
-  Guidelines" in [RFC5405] apply to DOTS. Regardless of transport, DOTS
-  protocols MUST follow established best common practices (BCPs) for NAT
-  traversal.
+  recommended transport for the DOTS signal channel, all considerations in
+  "Middlebox Traversal Guidelines" in [RFC5405] apply to DOTS. Regardless of
+  transport, DOTS protocols MUST follow established best common practices (BCPs)
+  for NAT traversal.
 
 
 Data Channel Requirements       {#data-channel-requirements}
@@ -449,11 +449,10 @@ Data Channel Requirements       {#data-channel-requirements}
 
 The data channel is intended to be used for bulk data exchanges between DOTS
 agents. Unlike the signal channel, which must operate nominally even when
-confronted with despite signal degradation due to packet loss, the data
-channel is not expected to be constructed to deal with attack conditions.
-As the primary function of the data channel is data exchange, a reliable
-transport is required in order for DOTS agents to detect data delivery success
-or failure.
+confronted with signal degradation due to packet loss, the data channel is not
+expected to be constructed to deal with attack conditions.  As the primary
+function of the data channel is data exchange, a reliable transport is required
+in order for DOTS agents to detect data delivery success or failure.
 
 The data channel must be extensible. We anticipate the data channel will be used
 for such purposes as configuration or resource discovery.  For example, a DOTS
@@ -467,10 +466,10 @@ requires extra precautions to ensure data privacy and authenticity.
 
 DATA-001
 : Reliable transport: Messages sent over the data channel MUST be delivered
-  reliably, in send order.
+  reliably, in order sent.
 
 DATA-002
-: Data privacy and integrity: Transmissions over the data channel is likely to
+: Data privacy and integrity: Transmissions over the data channel are likely to
   contain operationally or privacy-sensitive information or instructions from
   the remote DOTS agent. Theft or modification of data channel transmissions
   could lead to information leaks or malicious transactions on behalf of the
@@ -482,18 +481,9 @@ DATA-002
   agents, such considerations are not in scope for this document.
 
 DATA-003
-: Session configuration: To help meet the general and operational requirements
-  in this document, DOTS servers MUST provide methods for DOTS client operators
-  to configure DOTS session behavior using the data channel. DOTS server
-  implementations MUST have mechanisms to configure the following:
-
-  * Acceptable signal lossiness, as described in GEN-002.
-
-  * Heartbeat intervals, as described in OP-002.
-
-  * Maximum mitigation lifetime, as described in OP-005.
-
-  * Resource identifiers, as described in OP-006.
+: Resource Configuration: To help meet the general and operational requirements
+  in this document, DOTS server implementations MUST provide an interface to
+  configure resource identifiers, as described in OP-007.
 
   DOTS server implementations MAY expose additional configurability. Additional
   configurability is implementation-specific.
@@ -535,6 +525,13 @@ SEC-002
   cryptanalysis and traffic analysis, DOTS agents MUST be able to negotiate the
   terms and mechanisms of protocol security, subject to the interoperability and
   signal message size requirements above.
+
+: While the interfaces between downstream DOTS server and upstream DOTS client
+  within a DOTS gateway are implementation-specific, those interfaces
+  nevertheless MUST provide security equivalent to that of the signaling
+  sessions bridged by gateways in the signaling path. For example, when a DOTS
+  gateway consisting of a DOTS server and DOTS client is running on the same
+  logical device, they must be within the same process security boundary.
 
 SEC-003
 : Message Replay Protection: In order to prevent a passive attacker from
@@ -586,9 +583,19 @@ DM-005:
 DM-006:
 : Mitigation Efficacy Representation: The data model MUST support representation
   of a DOTS client's understanding of the efficacy of a mitigation enabled
-  through a mitigation request. TBD: how do we represent the efficacy?
+  through a mitigation request.
 
 DM-007:
+: Acceptable Signal Loss Representation: The data model MUST be able to
+  represent the DOTS agent's preference for acceptable signal loss when
+  establishing a signaling session, as described in GEN-002.
+
+DM-008:
+: Heartbeat Interval Representation: The data model MUST be able to represent
+  the DOTS agent's preferred heartbeat interval, which the client may include
+  when establishing the signal channel, as described in OP-002.
+
+DM-009:
 : Relationship to Transport: The DOTS data model MUST NOT depend on the
   specifics of any transport to represent fields in the model.
 
@@ -609,6 +616,7 @@ The form of that congestion control is implementation-specific.
 
 Signal channel implementations using TCP may rely on built-in TCP congestion
 control support.
+
 
 Data Channel
 ------------
@@ -637,8 +645,13 @@ through current secure communications best practices. See
 Contributors
 ============
 
-Med Boucadair
-Flemming Andreasen
+* Med Boucadair
+  Orange
+  mohamed.boucadair@orange.com
+
+* Flemming Andreasen
+  Cisco Systems, Inc.
+  fandreas@cisco.com
 
 
 Acknowledgments
@@ -649,6 +662,19 @@ Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.
 
 Change Log
 ==========
+
+03 revision
+-----------
+
+2016-10-30
+
+* Extended SEC-003 to require secure interfaces within DOTS gateways.
+
+* Changed DATA-003 to Resource Configuration, delegating control of acceptable
+  signal loss, heartbeat intervals, and mitigation lifetime to DOTS client.
+
+* Added data model requirements reflecting client control over the above.
+
 
 02 revision
 -----------
@@ -666,7 +692,7 @@ Change Log
 
 * Made resilience/robustness primary general requirement to align with charter.
 
-* Clarified support for unidirectional communication within the bidirection
+* Clarified support for unidirectional communication within the bidirectional
   signal channel.
 
 * Added proposed operational requirement to support session redirection.
