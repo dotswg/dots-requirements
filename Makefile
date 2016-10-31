@@ -15,7 +15,9 @@ txt:	$(DRAFTS)
 xml:	$(XML)
 
 %.xml: $(SOURCES)
-	kramdown-rfc2629 $< >$@.new
+	sed -e 's/@DATE@/$(date +%Y-%m-%d)/' $< > $@.tmp
+	kramdown-rfc2629 $@.tmp >$@.new
+	rm $@.tmp
 	mv $@.new $@
 
 %.html: %.xml
