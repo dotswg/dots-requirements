@@ -5,17 +5,15 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC0768 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0768.xml">
 <!ENTITY RFC0793 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0793.xml">
+<!ENTITY RFC1035 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC2373 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2373.xml">
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC3986 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml">
+<!ENTITY RFC4632 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4632.xml">
 <!ENTITY RFC5405 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5405.xml">
 <!ENTITY I-D.ietf-dots-architecture SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-architecture.xml">
 <!ENTITY I-D.ietf-dots-use-cases SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-use-cases.xml">
-<!ENTITY RFC1034 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
-<!ENTITY RFC1518 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1518.xml">
-<!ENTITY RFC1519 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1519.xml">
-<!ENTITY RFC2373 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2373.xml">
-<!ENTITY RFC2460 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2460.xml">
 <!ENTITY RFC3261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
-<!ENTITY RFC4271 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4271.xml">
 <!ENTITY RFC4732 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4732.xml">
 ]>
 
@@ -65,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2016" month="October" day="30"/>
+    <date year="2017" month="March" day="10"/>
 
     <area>Security</area>
     <workgroup>DOTS</workgroup>
@@ -350,7 +348,7 @@ server MUST acknowledge a DOTS client&rsquo;s request to withdraw from coordinat
 attack response in subsequent signals, and MUST cease mitigation activity as
 quickly as possible.  However, a DOTS client rapidly toggling active
 mitigation may result in undesirable side-effects for the network path, such
-as route or DNS <xref target="RFC1034"></xref> flapping.  A DOTS server therefore MAY continue
+as route or DNS <xref target="RFC1035"></xref> flapping.  A DOTS server therefore MAY continue
 mitigating for a mutually negotiated period after receiving the DOTS client&rsquo;s
 request to stop.</t>
   <t>A server MAY refuse to engage in coordinated attack response with a client.
@@ -379,12 +377,26 @@ architectures in which the mitigator is always in the traffic path to the
 resources for which the DOTS client is requesting protection. DOTS servers MAY
 refuse such requests for any reason. The reasons themselves are not in scope.</t>
   <t hangText='OP-006'>
-  Mitigation Scope: DOTS clients MUST indicate the desired scope of any
-mitigation, for example by using Classless Internet Domain Routing (CIDR)
-<xref target="RFC1518"></xref>,<xref target="RFC1519"></xref> prefixes, <xref target="RFC2373"></xref> for IPv6 <xref target="RFC2460"></xref> prefixes, the
-length/prefix convention established in the Border Gateway Protocol (BGP)
-<xref target="RFC4271"></xref>, SIP URIs <xref target="RFC3261"/>, E.164 numbers, DNS names, or by a resource
-group alias agreed upon with the server through the data channel.</t>
+  Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The
+scope type will vary depending on the resources requiring mitigation. All DOTS
+agent implementations MUST support the following required scope types:
+
+      <list style="symbols">
+        <t>IPv4 addresses in dotted quad format</t>
+        <t>IPv4 address prefixes in CIDR notation <xref target="RFC4632"></xref></t>
+        <t>IPv6 addresses <xref target="RFC2373"></xref></t>
+        <t>IPv6 address prefixes <xref target="RFC2373"></xref></t>
+        <t>Domain names <xref target="RFC1035"></xref></t>
+      </list>
+  </t>
+  <t>The following mitigation scope types are OPTIONAL:
+      <list style="symbols">
+        <t>Uniform Resource Identifiers <xref target="RFC3986"></xref></t>
+      </list>
+  </t>
+  <t>DOTS agents MUST support mitigation scope aliases, allowing DOTS client and
+server to refer to collections of protected resources by an opaque identifier
+created through the data channel, direct configuration, or other means.</t>
   <t>If there is additional information available narrowing the scope of any
 requested attack response, such as targeted port range, protocol, or service,
 DOTS clients SHOULD include that information in client signals. DOTS clients
@@ -685,7 +697,11 @@ requirements.</t>
 
 &RFC0768;
 &RFC0793;
+&RFC1035;
+&RFC2373;
 &RFC2119;
+&RFC3986;
+&RFC4632;
 &RFC5405;
 
 
@@ -695,13 +711,7 @@ requirements.</t>
 
 &I-D.ietf-dots-architecture;
 &I-D.ietf-dots-use-cases;
-&RFC1034;
-&RFC1518;
-&RFC1519;
-&RFC2373;
-&RFC2460;
 &RFC3261;
-&RFC4271;
 &RFC4732;
 
 

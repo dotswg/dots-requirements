@@ -406,7 +406,7 @@
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-03" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-10-30" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-3-10" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
 
@@ -430,7 +430,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 3, 2017</td>
+  <td class="left">Expires: September 11, 2017</td>
   <td class="right">HTT Consulting</td>
 </tr>
 <tr>
@@ -443,7 +443,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">October 30, 2016</td>
+  <td class="right">March 10, 2017</td>
 </tr>
 
     	
@@ -463,11 +463,11 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 3, 2017.</p>
+<p>This Internet-Draft will expire on September 11, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -593,7 +593,7 @@
   <dt>OP-003</dt>
   <dd style="margin-left: 8">Session Redirection: In order to increase DOTS operational flexibility and scalability, DOTS servers SHOULD be able to redirect DOTS clients to another DOTS server at any time. Due to the decreased probability of DOTS server signal delivery due to link congestion, it is RECOMMENDED DOTS servers avoid redirecting while mitigation is enabled during an active attack against a target in the DOTS client&#8217;s domain. Either the DOTS servers have to fate-share the security state, the client MUST have separate security state with each potential redirectable server, or be able to negotiate new state as part of redirection.</dd>
   <dt>OP-004</dt>
-  <dd style="margin-left: 8">Mitigation Status: DOTS MUST provide a means to report the status of an action requested by a DOTS client. In particular, DOTS clients MUST be able to request or withdraw a request for mitigation from the DOTS server. The DOTS server MUST acknowledge a DOTS client&#8217;s request to withdraw from coordinated attack response in subsequent signals, and MUST cease mitigation activity as quickly as possible.  However, a DOTS client rapidly toggling active mitigation may result in undesirable side-effects for the network path, such as route or DNS <a href="#RFC1034">[RFC1034]</a> flapping.  A DOTS server therefore MAY continue mitigating for a mutually negotiated period after receiving the DOTS client&#8217;s request to stop.</dd>
+  <dd style="margin-left: 8">Mitigation Status: DOTS MUST provide a means to report the status of an action requested by a DOTS client. In particular, DOTS clients MUST be able to request or withdraw a request for mitigation from the DOTS server. The DOTS server MUST acknowledge a DOTS client&#8217;s request to withdraw from coordinated attack response in subsequent signals, and MUST cease mitigation activity as quickly as possible.  However, a DOTS client rapidly toggling active mitigation may result in undesirable side-effects for the network path, such as route or DNS <a href="#RFC1035">[RFC1035]</a> flapping.  A DOTS server therefore MAY continue mitigating for a mutually negotiated period after receiving the DOTS client&#8217;s request to stop.</dd>
   <dt></dt>
   <dd style="margin-left: 8">A server MAY refuse to engage in coordinated attack response with a client.  To make the status of a client&#8217;s request clear, the server MUST indicate in server signals whether client-initiated mitigation is active. When a client-initiated mitigation is active, and threat handling details such as mitigation scope and statistics are available to the server, the server SHOULD include those details in server signals sent to the client. DOTS clients SHOULD take mitigation statistics into account when deciding whether to request the DOTS server cease mitigation.</dd>
   <dt>OP-005</dt>
@@ -603,7 +603,11 @@
   <dt></dt>
   <dd style="margin-left: 8">A DOTS client MAY also request an indefinite mitigation lifetime, enabling architectures in which the mitigator is always in the traffic path to the resources for which the DOTS client is requesting protection. DOTS servers MAY refuse such requests for any reason. The reasons themselves are not in scope.</dd>
   <dt>OP-006</dt>
-  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate the desired scope of any mitigation, for example by using Classless Internet Domain Routing (CIDR) <a href="#RFC1518">[RFC1518]</a>,<a href="#RFC1519">[RFC1519]</a> prefixes, <a href="#RFC2373">[RFC2373]</a> for IPv6 <a href="#RFC2460">[RFC2460]</a> prefixes, the length/prefix convention established in the Border Gateway Protocol (BGP) <a href="#RFC4271">[RFC4271]</a>, SIP URIs <a href="#RFC3261">[RFC3261]</a>, E.164 numbers, DNS names, or by a resource group alias agreed upon with the server through the data channel.</dd>
+  <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The scope type will vary depending on the resources requiring mitigation. All DOTS agent implementations MUST support the following required scope types: <ul><li>IPv4 addresses in dotted quad format</li><li>IPv4 address prefixes in CIDR notation <a href="#RFC4632">[RFC4632]</a></li><li>IPv6 addresses <a href="#RFC2373">[RFC2373]</a></li><li>IPv6 address prefixes <a href="#RFC2373">[RFC2373]</a></li><li>Domain names <a href="#RFC1035">[RFC1035]</a></li></ul><p> </p></dd>
+  <dt></dt>
+  <dd style="margin-left: 8">The following mitigation scope types are OPTIONAL: <ul><li>Uniform Resource Identifiers <a href="#RFC3986">[RFC3986]</a></li></ul><p> </p></dd>
+  <dt></dt>
+  <dd style="margin-left: 8">DOTS agents MUST support mitigation scope aliases, allowing DOTS client and server to refer to collections of protected resources by an opaque identifier created through the data channel, direct configuration, or other means.</dd>
   <dt></dt>
   <dd style="margin-left: 8">If there is additional information available narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, DOTS clients SHOULD include that information in client signals. DOTS clients MAY also include additional attack details. Such supplemental information is OPTIONAL, and DOTS servers MAY ignore it when enabling countermeasures on the mitigator.</dd>
   <dt></dt>
@@ -762,9 +766,33 @@
     </tr>
     <tr>
       <td class="reference">
+        <b id="RFC1035">[RFC1035]</b>
+      </td>
+      <td class="top"><a>Mockapetris, P.</a>, "<a href="http://tools.ietf.org/html/rfc1035">Domain names - implementation and specification</a>", STD 13, RFC 1035, DOI 10.17487/RFC1035, November 1987.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2373">[RFC2373]</b>
+      </td>
+      <td class="top"><a>Hinden, R.</a> and <a>S. Deering</a>, "<a href="http://tools.ietf.org/html/rfc2373">IP Version 6 Addressing Architecture</a>", RFC 2373, DOI 10.17487/RFC2373, July 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3986">[RFC3986]</b>
+      </td>
+      <td class="top"><a>Berners-Lee, T.</a>, <a>Fielding, R.</a> and <a>L. Masinter</a>, "<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>", STD 66, RFC 3986, DOI 10.17487/RFC3986, January 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4632">[RFC4632]</b>
+      </td>
+      <td class="top"><a>Fuller, V.</a> and <a>T. Li</a>, "<a href="http://tools.ietf.org/html/rfc4632">Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan</a>", BCP 122, RFC 4632, DOI 10.17487/RFC4632, August 2006.</td>
     </tr>
     <tr>
       <td class="reference">
@@ -781,55 +809,19 @@
       <td class="reference">
         <b id="I-D.ietf-dots-architecture">[I-D.ietf-dots-architecture]</b>
       </td>
-      <td class="top"><a>Mortensen, A.</a>, <a>Andreasen, F.</a>, <a>Reddy, T.</a>, <a>christopher_gray3@cable.comcast.com, c.</a>, <a>Compton, R.</a> and <a>N. Teague</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-architecture-00">Distributed-Denial-of-Service Open Threat Signaling (DOTS) Architecture</a>", Internet-Draft draft-ietf-dots-architecture-00, July 2016.</td>
+      <td class="top"><a>Mortensen, A.</a>, <a>Andreasen, F.</a>, <a>Reddy, T.</a>, <a>christopher_gray3@cable.comcast.com, c.</a>, <a>Compton, R.</a> and <a>N. Teague</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-architecture-01">Distributed-Denial-of-Service Open Threat Signaling (DOTS) Architecture</a>", Internet-Draft draft-ietf-dots-architecture-01, October 2016.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</b>
       </td>
-      <td class="top"><a>Dobbins, R.</a>, <a>Fouant, S.</a>, <a>Migault, D.</a>, <a>Moskowitz, R.</a>, <a>Teague, N.</a> and <a>L. Xia</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-use-cases-01">Use cases for DDoS Open Threat Signaling</a>", Internet-Draft draft-ietf-dots-use-cases-01, March 2016.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC1034">[RFC1034]</b>
-      </td>
-      <td class="top"><a>Mockapetris, P.</a>, "<a href="http://tools.ietf.org/html/rfc1034">Domain names - concepts and facilities</a>", STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC1518">[RFC1518]</b>
-      </td>
-      <td class="top"><a>Rekhter, Y.</a> and <a>T. Li</a>, "<a href="http://tools.ietf.org/html/rfc1518">An Architecture for IP Address Allocation with CIDR</a>", RFC 1518, DOI 10.17487/RFC1518, September 1993.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC1519">[RFC1519]</b>
-      </td>
-      <td class="top"><a>Fuller, V.</a>, <a>Li, T.</a>, <a>Yu, J.</a> and <a>K. Varadhan</a>, "<a href="http://tools.ietf.org/html/rfc1519">Classless Inter-Domain Routing (CIDR): an Address Assignment and Aggregation Strategy</a>", RFC 1519, DOI 10.17487/RFC1519, September 1993.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC2373">[RFC2373]</b>
-      </td>
-      <td class="top"><a>Hinden, R.</a> and <a>S. Deering</a>, "<a href="http://tools.ietf.org/html/rfc2373">IP Version 6 Addressing Architecture</a>", RFC 2373, DOI 10.17487/RFC2373, July 1998.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC2460">[RFC2460]</b>
-      </td>
-      <td class="top"><a>Deering, S.</a> and <a>R. Hinden</a>, "<a href="http://tools.ietf.org/html/rfc2460">Internet Protocol, Version 6 (IPv6) Specification</a>", RFC 2460, DOI 10.17487/RFC2460, December 1998.</td>
+      <td class="top"><a>Dobbins, R.</a>, <a>Fouant, S.</a>, <a>Migault, D.</a>, <a>Moskowitz, R.</a>, <a>Teague, N.</a>, <a>Xia, L.</a> and <a>K. Nishizuka</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-use-cases-03">Use cases for DDoS Open Threat Signaling</a>", Internet-Draft draft-ietf-dots-use-cases-03, November 2016.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="RFC3261">[RFC3261]</b>
       </td>
       <td class="top"><a>Rosenberg, J.</a>, <a>Schulzrinne, H.</a>, <a>Camarillo, G.</a>, <a>Johnston, A.</a>, <a>Peterson, J.</a>, <a>Sparks, R.</a>, <a>Handley, M.</a> and <a>E. Schooler</a>, "<a href="http://tools.ietf.org/html/rfc3261">SIP: Session Initiation Protocol</a>", RFC 3261, DOI 10.17487/RFC3261, June 2002.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC4271">[RFC4271]</b>
-      </td>
-      <td class="top"><a>Rekhter, Y.</a>, <a>Li, T.</a> and <a>S. Hares</a>, "<a href="http://tools.ietf.org/html/rfc4271">A Border Gateway Protocol 4 (BGP-4)</a>", RFC 4271, DOI 10.17487/RFC4271, January 2006.</td>
     </tr>
     <tr>
       <td class="reference">
