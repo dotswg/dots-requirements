@@ -411,24 +411,28 @@ OP-004
   point.
 
 OP-005
-: Mitigation Lifetime: A DOTS client SHOULD indicate the desired lifetime of any
-  mitigation requested from the DOTS server. As DDoS attack duration is
-  unpredictable, the DOTS client SHOULD be able to extend mitigation lifetime
-  with periodic renewed requests for help. When the mitigation lifetime comes to
-  an end, the DOTS server SHOULD delay session termination for a
-  protocol-defined grace period to allow for delivery of delayed mitigation
-  renewals over the signal channel. After the grace period elapses, the DOTS
-  server MAY terminate the session at any time.
+: Mitigation Lifetime: DOTS servers MUST support mitigation lifetimes, and
+  MUST terminate a mitigation when the lifetime elapses. DOTS servers also MUST
+  support renewal of mitigation lifetimes in mitigation requests from DOTS
+  clients, allowing clients to extend mitigation as necessary for the duration
+  of an attack.
 
-: If a DOTS client does not include a mitigation lifetime in requests for help
+: DOTS servers MUST treat a mitigation terminated due to lifetime expiration
+  exactly as if the DOTS client originating the mitigation had asked to end the
+  mitigation, including the five-minute termination period, as described above
+  in OP-004.
+
+: DOTS clients SHOULD include a mitigation lifetime in all mitigation requests.
+  If a DOTS client does not include a mitigation lifetime in requests for help
   sent to the DOTS server, the DOTS server will use a reasonable default as
-  defined by the protocol. As above, the DOTS client MAY extend a current
-  mitigation request's lifetime trivially with renewed requests for help.
+  defined by the protocol.
 
-: A DOTS client MAY also request an indefinite mitigation lifetime, enabling
+: DOTS servers SHOULD support indefinite mitigation lifetimes, enabling
   architectures in which the mitigator is always in the traffic path to the
   resources for which the DOTS client is requesting protection. DOTS servers MAY
-  refuse such requests for any reason. The reasons themselves are not in scope.
+  refuse mitigations with indefinite lifetimes, for policy reasons. The reasons
+  themselves are out of scope for this document, but MUST be included in the
+  mitigation rejection message from the server, per OP-004.
 
 OP-006
 : Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The
