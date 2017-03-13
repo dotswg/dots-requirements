@@ -148,7 +148,7 @@ Denial-of-service considerations are discussed in detail in <xref target="RFC473
   <t hangText='DDoS attack target:'>
   A network connected entity with a finite set of resources, such as network
 bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
-targets include network elements, servers, and services.</t>
+targets include network elements, network links, servers, and services.</t>
   <t hangText='DDoS attack telemetry:'>
   Collected behavioral characteristics defining the nature of a DDoS attack.</t>
   <t hangText='Countermeasure:'>
