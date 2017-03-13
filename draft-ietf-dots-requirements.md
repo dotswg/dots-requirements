@@ -359,13 +359,16 @@ OP-002
 OP-003
 : Session Redirection: In order to increase DOTS operational flexibility and
   scalability, DOTS servers SHOULD be able to redirect DOTS clients to another
-  DOTS server at any time. Due to the decreased probability of DOTS server
-  signal delivery due to link congestion, it is RECOMMENDED DOTS servers avoid
-  redirecting while mitigation is enabled during an active attack against a
-  target in the DOTS client's domain. Either the DOTS servers have to fate-share
-  the security state, the client MUST have separate security state with each
-  potential redirectable server, or be able to negotiate new state as part of
-  redirection.
+  DOTS server at any time. DOTS clients MUST NOT assume the redirection target
+  DOTS server shares security state with the redirecting DOTS server. DOTS
+  clients MAY attempt abbreviated security negotiation methods supported by the
+  protocol, such as DTLS session resumption, but MUST be prepared to negotiate
+  new security state with the redirection target DOTS server.
+
+: Due to the increased likelihood of packet loss caused by link congestion
+  during an attack, it is RECOMMENDED DOTS servers avoid redirecting while
+  mitigation is enabled during an active attack against a target in the DOTS
+  client's domain.
 
 OP-004
 : Mitigation Requests and Status:
