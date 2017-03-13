@@ -49,8 +49,12 @@ author:
 
 normative:
   RFC0768:
+  RFC0791:
   RFC0793:
+  RFC1122:
+  RFC1191:
   RFC2119:
+  RFC4821:
   RFC5405:
 
 informative:
@@ -312,9 +316,16 @@ GEN-003
 GEN-004
 : Sub-MTU Message Size: To avoid message fragmentation and the consequently
   decreased probability of message delivery, signaling protocol message size
-  MUST be kept under signaling path Maximum Transmission Unit (MTU), including
+  MUST be kept under signaling Path Maximum Transmission Unit (PMTU), including
   the byte overhead of any encapsulation, transport headers, and transport- or
   message-level security.
+
+: DOTS agents SHOULD attempt to learn the PMTU through mechanisms such as Path
+  MTU Discovery [RFC1191] or Packetization Layer Path MTU Discovery [RFC4821].
+  If the PMTU cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280
+  bytes. If IPv4 support on legacy or otherwise unusual networks is a
+  consideration and PMTU is unknown, DOTS implementations MAY rely on a PMTU
+  of 576 bytes, as discussed in [RFC0791] and [RFC1122].
 
 GEN-005
 : Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also
