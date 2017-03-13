@@ -97,7 +97,7 @@ against DDoS attacks.</t>
 around the globe, from Tier-1 service providers on down to enterprises and
 small businesses. Attack scale and frequency similarly have continued to
 increase, in part as a result of software vulnerabilities leading to reflection
-and amplification attacks. Once staggering attack traffic volume is now the
+and amplification attacks. Once-staggering attack traffic volume is now the
 norm, and the impact of larger-scale attacks attract the attention of
 international press agencies.</t>
 
@@ -150,7 +150,8 @@ Denial-of-service considerations are discussed in detail in <xref target="RFC473
 bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
 targets include network elements, network links, servers, and services.</t>
   <t hangText='DDoS attack telemetry:'>
-  Collected behavioral characteristics defining the nature of a DDoS attack.</t>
+  Collected measurements and behavioral characteristics defining the nature of a
+DDoS attack.</t>
   <t hangText='Countermeasure:'>
   An action or set of actions taken to recognize and filter out DDoS attack
 traffic while passing legitimate traffic to the attack target.</t>
@@ -618,8 +619,7 @@ traffic, the DOTS signal channel MUST NOT contribute significantly to link
 congestion. To meet the operational requirements above, DOTS signal channel
 implementations MUST support UDP. However, UDP when deployed naively can be a
 source of network congestion, as discussed in <xref target="RFC5405"></xref>. Signal channel
-implementations using UDP MUST therefore include a congestion control mechanism.
-The form of that congestion control is implementation-specific.</t>
+implementations using UDP MUST therefore include a congestion control mechanism.</t>
 
 <t>Signal channel implementations using TCP may rely on built-in TCP congestion
 control support.</t>
