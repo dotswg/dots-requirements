@@ -51,22 +51,20 @@ normative:
   RFC0768:
   RFC0791:
   RFC0793:
+  RFC1035:
   RFC1122:
   RFC1191:
   RFC2119:
+  RFC2373:
+  RFC3986:
+  RFC4632:
   RFC4821:
   RFC5405:
 
 informative:
   I-D.ietf-dots-architecture:
   I-D.ietf-dots-use-cases:
-  RFC1034:
-  RFC1518:
-  RFC1519:
-  RFC2373:
-  RFC2460:
   RFC3261:
-  RFC4271:
   RFC4732:
 
 --- abstract
@@ -376,7 +374,7 @@ OP-004
   attack response in subsequent signals, and MUST cease mitigation activity as
   quickly as possible.  However, a DOTS client rapidly toggling active
   mitigation may result in undesirable side-effects for the network path, such
-  as route or DNS [RFC1034] flapping.  A DOTS server therefore MAY continue
+  as route or DNS [RFC1035] flapping.  A DOTS server therefore MAY continue
   mitigating for a mutually negotiated period after receiving the DOTS client's
   request to stop.
 
@@ -410,12 +408,27 @@ OP-005
   refuse such requests for any reason. The reasons themselves are not in scope.
 
 OP-006
-: Mitigation Scope: DOTS clients MUST indicate the desired scope of any
-  mitigation, for example by using Classless Internet Domain Routing (CIDR)
-  [RFC1518],[RFC1519] prefixes, [RFC2373] for IPv6 [RFC2460] prefixes, the
-  length/prefix convention established in the Border Gateway Protocol (BGP)
-  [RFC4271], SIP URIs {{RFC3261}}, E.164 numbers, DNS names, or by a resource
-  group alias agreed upon with the server through the data channel.
+: Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The
+  scope type will vary depending on the resources requiring mitigation. All DOTS
+  agent implementations MUST support the following required scope types:
+
+  * IPv4 addresses in dotted quad format
+
+  * IPv4 address prefixes in CIDR notation [RFC4632]
+
+  * IPv6 addresses [RFC2373]
+
+  * IPv6 address prefixes [RFC2373]
+
+  * Domain names [RFC1035]
+
+: The following mitigation scope types are OPTIONAL:
+
+  * Uniform Resource Identifiers [RFC3986]
+
+: DOTS agents MUST support mitigation scope aliases, allowing DOTS client and
+  server to refer to collections of protected resources by an opaque identifier
+  created through the data channel, direct configuration, or other means.
 
 : If there is additional information available narrowing the scope of any
   requested attack response, such as targeted port range, protocol, or service,
