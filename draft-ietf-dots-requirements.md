@@ -136,7 +136,7 @@ DDoS:
 DDoS attack target:
 : A network connected entity with a finite set of resources, such as network
   bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
-  targets include network elements, servers, and services.
+  targets include network elements, network links, servers, and services.
 
 DDoS attack telemetry:
 : Collected behavioral characteristics defining the nature of a DDoS attack.
