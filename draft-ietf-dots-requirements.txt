@@ -77,16 +77,17 @@ Table of Contents
      3.2.  Data Channel  . . . . . . . . . . . . . . . . . . . . . .  15
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  15
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  15
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  16
    7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.1.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.2.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.3.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.4.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  17
-     7.5.  Initial revision  . . . . . . . . . . . . . . . . . . . .  17
+     7.1.  04 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.2.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.3.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.4.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.5.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  17
+     7.6.  Initial revision  . . . . . . . . . . . . . . . . . . . .  17
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  18
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  19
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
@@ -105,7 +106,6 @@ Table of Contents
    The greater impact of contemporary DDoS attacks has led to increased
    focus on coordinated attack response.  Many institutions and
    enterprises lack the resources or expertise to operate on-premise
-   attack mitigation solutions themselves, or simply find themselves
 
 
 
@@ -114,6 +114,7 @@ Mortensen, et al.      Expires September 14, 2017               [Page 2]
 Internet-Draft              DOTS Requirements                 March 2017
 
 
+   attack mitigation solutions themselves, or simply find themselves
    constrained by local bandwidth limitations.  To address such gaps,
    security service providers have begun to offer on-demand traffic
    scrubbing services, which aim to separate the DDoS traffic from
@@ -161,7 +162,6 @@ Internet-Draft              DOTS Requirements                 March 2017
       resources, such as network bandwidth, memory or CPU, that is the
       focus of a DDoS attack.  Potential targets include network
       elements, network links, servers, and services.
-
 
 
 
@@ -819,20 +819,20 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 5.  Contributors
 
-   Med Boucadair
+   Mohamed Boucadair
       Orange
 
       mohamed.boucadair@orange.com
 
-   Flemming Andreasen:
+   Flemming Andreasen
       Cisco Systems, Inc.
 
       fandreas@cisco.com
 
-6.  Acknowledgments
+   Dave Dolson
+      Sandvine
 
-   Thanks to Roman Danyliw and Matt Richardson for careful reading and
-   feedback.
+      ddolson@sandvine.com
 
 
 
@@ -842,9 +842,34 @@ Mortensen, et al.      Expires September 14, 2017              [Page 15]
 Internet-Draft              DOTS Requirements                 March 2017
 
 
+6.  Acknowledgments
+
+   Thanks to Roman Danyliw and Matt Richardson for careful reading and
+   feedback.
+
 7.  Change Log
 
-7.1.  03 revision
+7.1.  04 revision
+
+   2017-03-13
+
+   o  Establish required and optional mitigation scope types
+
+   o  Specify message size for DOTS signal channel
+
+   o  Recast mitigation lifetime as a DOTS server requirement
+
+   o  Clarify DOTS server's responsibilities after client request to end
+      mitigation
+
+   o  Specify security state handling on redirection
+
+   o  Signal channel should use transport not susceptible to HOL
+      blocking
+
+   o  Expanded list of DDoS types to include network links
+
+7.2.  03 revision
 
    2016-10-30
 
@@ -858,11 +883,20 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Added data model requirements reflecting client control over the
       above.
 
-7.2.  02 revision
+7.3.  02 revision
 
-7.3.  01 revision
+7.4.  01 revision
 
    2016-03-21
+
+
+
+
+
+Mortensen, et al.      Expires September 14, 2017              [Page 16]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
    o  Reconciled terminology with -00 revision of
       [I-D.ietf-dots-use-cases].
@@ -889,15 +923,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Added proposed operational requirement to support mitigation
       efficacy reporting from DOTS clients.
 
-
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 16]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
-
    o  Added proposed operational requirement to cache lookups of all
       kinds.
 
@@ -906,11 +931,11 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Removed redundant mutual authentication requirement from data
       channel requirements.
 
-7.4.  00 revision
+7.5.  00 revision
 
    2015-10-15
 
-7.5.  Initial revision
+7.6.  Initial revision
 
    2015-09-24 Andrew Mortensen
 
@@ -921,6 +946,13 @@ Internet-Draft              DOTS Requirements                 March 2017
    [RFC0768]  Postel, J., "User Datagram Protocol", STD 6, RFC 768, DOI
               10.17487/RFC0768, August 1980,
               <http://www.rfc-editor.org/info/rfc768>.
+
+
+
+Mortensen, et al.      Expires September 14, 2017              [Page 17]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
    [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791, DOI
               10.17487/RFC0791, September 1981,
@@ -942,17 +974,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
               DOI 10.17487/RFC1191, November 1990,
               <http://www.rfc-editor.org/info/rfc1191>.
-
-
-
-
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 17]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
@@ -982,6 +1003,13 @@ Internet-Draft              DOTS Requirements                 March 2017
               10.17487/RFC5405, November 2008,
               <http://www.rfc-editor.org/info/rfc5405>.
 
+
+
+Mortensen, et al.      Expires September 14, 2017              [Page 18]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
+
 8.2.  Informative References
 
    [I-D.ietf-dots-architecture]
@@ -1002,13 +1030,6 @@ Internet-Draft              DOTS Requirements                 March 2017
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 18]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
 
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
@@ -1032,6 +1053,17 @@ Authors' Addresses
    United States
 
    Email: rgm@htt-consult.com
+
+
+
+
+
+
+
+
+Mortensen, et al.      Expires September 14, 2017              [Page 19]
+
+Internet-Draft              DOTS Requirements                 March 2017
 
 
    Tirumaleswar Reddy
@@ -1061,4 +1093,28 @@ Authors' Addresses
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 19]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mortensen, et al.      Expires September 14, 2017              [Page 20]

@@ -653,15 +653,21 @@ through current secure communications best practices. See
 <section anchor="contributors" title="Contributors">
 
 <t><list style="hanging">
-  <t hangText='Med Boucadair'><vspace blankLines='0'/>
+  <t hangText='Mohamed Boucadair'><vspace blankLines='0'/>
   Orange</t>
   <t>mohamed.boucadair@orange.com</t>
 </list></t>
 
 <t><list style="hanging">
-  <t hangText='Flemming Andreasen:'><vspace blankLines='0'/>
+  <t hangText='Flemming Andreasen'><vspace blankLines='0'/>
   Cisco Systems, Inc.</t>
   <t>fandreas@cisco.com</t>
+</list></t>
+
+<t><list style="hanging">
+  <t hangText='Dave Dolson'><vspace blankLines='0'/>
+  Sandvine</t>
+  <t>ddolson@sandvine.com</t>
 </list></t>
 
 </section>
@@ -672,7 +678,22 @@ through current secure communications best practices. See
 </section>
 <section anchor="change-log" title="Change Log">
 
-<section anchor="revision" title="03 revision">
+<section anchor="revision" title="04 revision">
+
+<t>2017-03-13</t>
+
+<t><list style="symbols">
+  <t>Establish required and optional mitigation scope types</t>
+  <t>Specify message size for DOTS signal channel</t>
+  <t>Recast mitigation lifetime as a DOTS server requirement</t>
+  <t>Clarify DOTS server&rsquo;s responsibilities after client request to end mitigation</t>
+  <t>Specify security state handling on redirection</t>
+  <t>Signal channel should use transport not susceptible to HOL blocking</t>
+  <t>Expanded list of DDoS types to include network links</t>
+</list></t>
+
+</section>
+<section anchor="revision-1" title="03 revision">
 
 <t>2016-10-30</t>
 
@@ -684,10 +705,10 @@ signal loss, heartbeat intervals, and mitigation lifetime to DOTS client.</t>
 </list></t>
 
 </section>
-<section anchor="revision-1" title="02 revision">
+<section anchor="revision-2" title="02 revision">
 
 </section>
-<section anchor="revision-2" title="01 revision">
+<section anchor="revision-3" title="01 revision">
 
 <t>2016-03-21</t>
 
@@ -711,7 +732,7 @@ requirements.</t>
 </list></t>
 
 </section>
-<section anchor="revision-3" title="00 revision">
+<section anchor="revision-4" title="00 revision">
 
 <t>2015-10-15</t>
 
