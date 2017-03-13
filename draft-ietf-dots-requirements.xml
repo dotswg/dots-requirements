@@ -65,7 +65,7 @@
       </address>
     </author>
 
-    <date year="2016" month="October" day="30"/>
+    <date year="2017" month="March" day="10"/>
 
     <area>Security</area>
     <workgroup>DOTS</workgroup>
@@ -289,7 +289,9 @@ DDoS defenses. Future extensions MUST be backward compatible.</t>
 the probability of signal delivery even under the severely constrained network
 conditions imposed by particular attack traffic. The protocol MUST be
 resilient, that is, continue operating despite message loss and out-of-order
-or redundant message delivery.</t>
+or redundant message delivery. In support signaling protocol robustness,
+DOTS signals SHOULD be conveyed over a transport not susceptible to
+Head of Line Blocking.</t>
   <t hangText='GEN-003'>
   Bidirectionality: To support peer health detection, to maintain an open
 signal channel, and to increase the probability of signal delivery during

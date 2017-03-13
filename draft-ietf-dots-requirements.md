@@ -296,7 +296,9 @@ GEN-002
   the probability of signal delivery even under the severely constrained network
   conditions imposed by particular attack traffic. The protocol MUST be
   resilient, that is, continue operating despite message loss and out-of-order
-  or redundant message delivery.
+  or redundant message delivery. In support signaling protocol robustness,
+  DOTS signals SHOULD be conveyed over a transport not susceptible to
+  Head of Line Blocking.
 
 GEN-003
 : Bidirectionality: To support peer health detection, to maintain an open
