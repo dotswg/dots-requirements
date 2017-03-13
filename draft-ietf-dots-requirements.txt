@@ -479,25 +479,25 @@ Internet-Draft              DOTS Requirements                 March 2017
       server domains, the DOTS client ceases incurring cost at this
       point.
 
-   OP-005  Mitigation Lifetime: A DOTS client SHOULD indicate the
-      desired lifetime of any mitigation requested from the DOTS server.
-      As DDoS attack duration is unpredictable, the DOTS client SHOULD
-      be able to extend mitigation lifetime with periodic renewed
-      requests for help.  When the mitigation lifetime comes to an end,
-      the DOTS server SHOULD delay session termination for a protocol-
-      defined grace period to allow for delivery of delayed mitigation
-      renewals over the signal channel.  After the grace period elapses,
-      the DOTS server MAY terminate the session at any time.
+   OP-005  Mitigation Lifetime: DOTS servers MUST support mitigation
+      lifetimes, and MUST terminate a mitigation when the lifetime
+      elapses.  DOTS servers also MUST support renewal of mitigation
+      lifetimes in mitigation requests from DOTS clients, allowing
+      clients to extend mitigation as necessary for the duration of an
+      attack.
 
-      If a DOTS client does not include a mitigation lifetime in
-      requests for help sent to the DOTS server, the DOTS server will
-      use a reasonable default as defined by the protocol.  As above,
-      the DOTS client MAY extend a current mitigation request's lifetime
-      trivially with renewed requests for help.
+      DOTS servers MUST treat a mitigation terminated due to lifetime
+      expiration exactly as if the DOTS client originating the
+      mitigation had asked to end the mitigation, including the five-
+      minute termination period, as described above in OP-004.
 
-      A DOTS client MAY also request an indefinite mitigation lifetime,
-      enabling architectures in which the mitigator is always in the
-      traffic path to the resources for which the DOTS client is
+      DOTS clients SHOULD include a mitigation lifetime in all
+      mitigation requests.  If a DOTS client does not include a
+      mitigation lifetime in requests for help sent to the DOTS server,
+      the DOTS server will use a reasonable default as defined by the
+      protocol.
+
+
 
 
 
@@ -506,8 +506,13 @@ Mortensen, et al.      Expires September 14, 2017               [Page 9]
 Internet-Draft              DOTS Requirements                 March 2017
 
 
-      requesting protection.  DOTS servers MAY refuse such requests for
-      any reason.  The reasons themselves are not in scope.
+      DOTS servers SHOULD support indefinite mitigation lifetimes,
+      enabling architectures in which the mitigator is always in the
+      traffic path to the resources for which the DOTS client is
+      requesting protection.  DOTS servers MAY refuse mitigations with
+      indefinite lifetimes, for policy reasons.  The reasons themselves
+      are out of scope for this document, but MUST be included in the
+      mitigation rejection message from the server, per OP-004.
 
    OP-006  Mitigation Scope: DOTS clients MUST indicate desired
       mitigation scope.  The scope type will vary depending on the
@@ -549,11 +554,6 @@ Internet-Draft              DOTS Requirements                 March 2017
       client is active, DOTS clients SHOULD transmit a metric of
       perceived mitigation efficacy to the DOTS server, per "Automatic
       or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS
-      Mitigation Services" in [I-D.ietf-dots-use-cases].  DOTS servers
-      MAY use the efficacy metric to adjust countermeasures activated on
-      a mitigator on behalf of a DOTS client.
-
-
 
 
 
@@ -561,6 +561,10 @@ Mortensen, et al.      Expires September 14, 2017              [Page 10]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
+
+      Mitigation Services" in [I-D.ietf-dots-use-cases].  DOTS servers
+      MAY use the efficacy metric to adjust countermeasures activated on
+      a mitigator on behalf of a DOTS client.
 
    OP-008  Conflict Detection and Notification: Multiple DOTS clients
       controlled by a single administrative entity may send conflicting
@@ -607,10 +611,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    DATA-001  Reliable transport: Messages sent over the data channel
       MUST be delivered reliably, in order sent.
 
-   DATA-002  Data privacy and integrity: Transmissions over the data
-      channel are likely to contain operationally or privacy-sensitive
-      information or instructions from the remote DOTS agent.  Theft or
-
 
 
 Mortensen, et al.      Expires September 14, 2017              [Page 11]
@@ -618,6 +618,9 @@ Mortensen, et al.      Expires September 14, 2017              [Page 11]
 Internet-Draft              DOTS Requirements                 March 2017
 
 
+   DATA-002  Data privacy and integrity: Transmissions over the data
+      channel are likely to contain operationally or privacy-sensitive
+      information or instructions from the remote DOTS agent.  Theft or
       modification of data channel transmissions could lead to
       information leaks or malicious transactions on behalf of the
       sending agent (see Section 4 below).  Consequently data sent over
@@ -663,9 +666,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    SEC-002  Message Confidentiality, Integrity and Authenticity: DOTS
       protocols MUST take steps to protect the confidentiality,
       integrity and authenticity of messages sent between client and
-      server.  While specific transport- and message-level security
-      options are not specified, the protocols MUST follow current
-      industry best practices for encryption and message authentication.
 
 
 
@@ -673,6 +673,10 @@ Mortensen, et al.      Expires September 14, 2017              [Page 12]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
+
+      server.  While specific transport- and message-level security
+      options are not specified, the protocols MUST follow current
+      industry best practices for encryption and message authentication.
 
       In order for DOTS protocols to remain secure despite advancements
       in cryptanalysis and traffic analysis, DOTS agents MUST be able to
@@ -718,10 +722,6 @@ Internet-Draft              DOTS Requirements                 March 2017
 
    DM-003:  Mitigation Status Representation: The data model MUST
       provide the ability to represent a request for mitigation and the
-      withdrawal of such a request.  The data model MUST also support a
-      representation of currently requested mitigation status, including
-      failures and their causes.
-
 
 
 
@@ -729,6 +729,10 @@ Mortensen, et al.      Expires September 14, 2017              [Page 13]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
+
+      withdrawal of such a request.  The data model MUST also support a
+      representation of currently requested mitigation status, including
+      failures and their causes.
 
    DM-004:  Mitigation Scope Representation: The data model MUST support
       representation of a requested mitigation's scope.  As mitigation
@@ -774,10 +778,6 @@ Internet-Draft              DOTS Requirements                 March 2017
 
    Signal channel implementations using TCP may rely on built-in TCP
    congestion control support.
-
-
-
-
 
 
 
