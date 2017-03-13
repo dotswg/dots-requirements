@@ -367,25 +367,48 @@ OP-003
   redirection.
 
 OP-004
-: Mitigation Status: DOTS MUST provide a means to report the status of an action
-  requested by a DOTS client. In particular, DOTS clients MUST be able to
-  request or withdraw a request for mitigation from the DOTS server. The DOTS
-  server MUST acknowledge a DOTS client's request to withdraw from coordinated
-  attack response in subsequent signals, and MUST cease mitigation activity as
-  quickly as possible.  However, a DOTS client rapidly toggling active
-  mitigation may result in undesirable side-effects for the network path, such
-  as route or DNS [RFC1035] flapping.  A DOTS server therefore MAY continue
-  mitigating for a mutually negotiated period after receiving the DOTS client's
-  request to stop.
+: Mitigation Requests and Status:
+  Authorized DOTS clients MUST be able to request scoped mitigation from DOTS
+  servers. DOTS servers MUST send mitigation request status in response to
+  DOTS clients requests for mitigation, and SHOULD accept scoped mitigation
+  requests from authorized DOTS clients. DOTS servers MAY reject authorized
+  requests for mitigation, but MUST include a reason for the rejection in the
+  status message sent to the client.
 
-: A server MAY refuse to engage in coordinated attack response with a client.
-  To make the status of a client's request clear, the server MUST indicate in
-  server signals whether client-initiated mitigation is active. When a
-  client-initiated mitigation is active, and threat handling details such as
-  mitigation scope and statistics are available to the server, the server
-  SHOULD include those details in server signals sent to the client. DOTS
-  clients SHOULD take mitigation statistics into account when deciding whether
-  to request the DOTS server cease mitigation.
+: Due to the higher likelihood of packet loss during a DDoS attack, DOTS
+  servers SHOULD regularly send mitigation status to authorized DOTS clients
+  which have requested and been granted mitigation, regardless of client
+  requests for mitigation status.
+
+: When DOTS client-requested mitigation is active, DOTS server status messages
+  SHOULD include the following mitigation metrics:
+
+  * Total number of packets blocked by the mitigation
+
+  * Current number of packets per second blocked
+
+  * Total number of bytes blocked
+
+  * Current number of bytes per second blocked
+
+: DOTS clients SHOULD take these metrics into account when determining whether
+  to ask the DOTS server to cease mitigation.
+
+: Once a DOTS client requests mitigation, the client MAY withdraw that request
+  at any time, regardless of whether mitigation is currently active. The DOTS
+  server MUST immediately acknowledge a DOTS client's request to stop
+  mitigation.
+
+: To protect against route or DNS flapping caused by a client rapidly toggling
+  mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY
+  continue mitigation for a period of up to five minutes after acknowledging a
+  DOTS client's withdrawal of a mitigation request. During this period, DOTS
+  server status messages SHOULD indicate that mitigation is active but
+  terminating. After the five-minute period elapses, the DOTS server MUST treat
+  the mitigation as terminated, as the DOTS client is no longer responsible for
+  the mitigation. For example, if there is a financial relationship between the
+  DOTS client and server domains, the DOTS client ceases incurring cost at this
+  point.
 
 OP-005
 : Mitigation Lifetime: A DOTS client SHOULD indicate the desired lifetime of any
