@@ -5,14 +5,14 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                      Arbor Networks, Inc.
 Intended status: Informational                              R. Moskowitz
-Expires: September 14, 2017                               HTT Consulting
+Expires: September 29, 2017                               HTT Consulting
                                                                 T. Reddy
                                                      Cisco Systems, Inc.
-                                                          March 13, 2017
+                                                          March 28, 2017
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
-                    draft-ietf-dots-requirements-03
+                    draft-ietf-dots-requirements-04
 
 Abstract
 
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 14, 2017.
+   This Internet-Draft will expire on September 29, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 1]
+Mortensen, et al.      Expires September 29, 2017               [Page 1]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -77,16 +77,17 @@ Table of Contents
      3.2.  Data Channel  . . . . . . . . . . . . . . . . . . . . . .  15
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  15
-   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  15
+   6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  16
    7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.1.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.2.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.3.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.4.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  17
-     7.5.  Initial revision  . . . . . . . . . . . . . . . . . . . .  17
+     7.1.  04 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.2.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.3.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.4.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.5.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  17
+     7.6.  Initial revision  . . . . . . . . . . . . . . . . . . . .  17
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  18
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  19
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
@@ -105,15 +106,15 @@ Table of Contents
    The greater impact of contemporary DDoS attacks has led to increased
    focus on coordinated attack response.  Many institutions and
    enterprises lack the resources or expertise to operate on-premise
-   attack mitigation solutions themselves, or simply find themselves
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 2]
+Mortensen, et al.      Expires September 29, 2017               [Page 2]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
 
+   attack mitigation solutions themselves, or simply find themselves
    constrained by local bandwidth limitations.  To address such gaps,
    security service providers have begun to offer on-demand traffic
    scrubbing services, which aim to separate the DDoS traffic from
@@ -164,8 +165,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-
-Mortensen, et al.      Expires September 14, 2017               [Page 3]
+Mortensen, et al.      Expires September 29, 2017               [Page 3]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -202,7 +202,7 @@ Internet-Draft              DOTS Requirements                 March 2017
       client.  A DOTS server MAY also be a mitigator.
 
    DOTS agent:  Any DOTS-aware software module capable of participating
-      in a DOTS signaling session.
+      in a DOTS signal or data channel.
 
    DOTS gateway:  A logical DOTS agent resulting from the logical
       concatenation of a DOTS server and a DOTS client, analogous to a
@@ -221,7 +221,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 4]
+Mortensen, et al.      Expires September 29, 2017               [Page 4]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -239,7 +239,7 @@ Internet-Draft              DOTS Requirements                 March 2017
       over the signal channel.  Note that a server signal is not a
       response to client signal, but a DOTS server-initiated status
       message sent to DOTS clients with which the server has established
-      signaling sessions.
+      signal channels.
 
    Data channel:  A secure communication layer between DOTS clients and
       DOTS servers used for infrequent bulk exchange of data not easily
@@ -277,7 +277,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 5]
+Mortensen, et al.      Expires September 29, 2017               [Page 5]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -333,7 +333,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 6]
+Mortensen, et al.      Expires September 29, 2017               [Page 6]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -389,7 +389,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 7]
+Mortensen, et al.      Expires September 29, 2017               [Page 7]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -401,22 +401,23 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 2.2.  Operational Requirements
 
-   OP-001  Use of Common Transport Protocols: DOTS MUST operate over
-      common widely deployed and standardized transport protocols.
-      While the User Datagram Protocol (UDP) [RFC0768] SHOULD be used
-      for the signal channel, the Transmission Control Protocol (TCP)
-      [RFC0793] MAY be used if necessary due to network policy or
-      middlebox capabilities or configurations.  The data channel MUST
-      use a reliable transport; see Section 2.3 below.
+   OP-001  Use of Common Transport Protocols: The DOTS signal channel
+      MUST operate over common widely deployed and standardized
+      transport protocols.  While the User Datagram Protocol (UDP)
+      [RFC0768] SHOULD be used for the signal channel, the Transmission
+      Control Protocol (TCP) [RFC0793] MAY be used if necessary due to
+      network policy or middlebox capabilities or configurations.  The
+      data channel MUST use a reliable transport; see Section 2.3 below.
 
-   OP-002  Session Health Monitoring: Peer DOTS agents MUST regularly
-      send heartbeats to each other after mutual authentication in order
-      to keep the DOTS session active.  A session MUST be considered
-      active until a DOTS agent explicitly ends the session, or either
-      DOTS agent fails to receive heartbeats from the other after a
-      mutually agreed upon timeout period has elapsed.
+   OP-002  Channel Health Monitoring: Peer DOTS agents MUST regularly
+      send heartbeats to each other over the signal channel, after
+      mutual authentication, in order to keep the channel active.  The
+      signal channel MUST be considered active until a DOTS agent
+      explicitly terminates the channel, or either DOTS agent fails to
+      receive heartbeats from the other after a mutually agreed upon
+      timeout period has elapsed.
 
-   OP-003  Session Redirection: In order to increase DOTS operational
+   OP-003  Channel Redirection: In order to increase DOTS operational
       flexibility and scalability, DOTS servers SHOULD be able to
       redirect DOTS clients to another DOTS server at any time.  DOTS
       clients MUST NOT assume the redirection target DOTS server shares
@@ -444,8 +445,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-
-Mortensen, et al.      Expires September 14, 2017               [Page 8]
+Mortensen, et al.      Expires September 29, 2017               [Page 8]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -501,7 +501,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017               [Page 9]
+Mortensen, et al.      Expires September 29, 2017               [Page 9]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -557,7 +557,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 10]
+Mortensen, et al.      Expires September 29, 2017              [Page 10]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -613,7 +613,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 11]
+Mortensen, et al.      Expires September 29, 2017              [Page 11]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -669,13 +669,13 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 12]
+Mortensen, et al.      Expires September 29, 2017              [Page 12]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
 
    SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
-      each other before a DOTS session is considered valid.  The method
+      each other before a DOTS channel is considered valid.  The method
       of authentication is not specified, but should follow current
       industry best practices with respect to any cryptographic
       mechanisms to authenticate the remote peer.
@@ -696,10 +696,10 @@ Internet-Draft              DOTS Requirements                 March 2017
       While the interfaces between downstream DOTS server and upstream
       DOTS client within a DOTS gateway are implementation-specific,
       those interfaces nevertheless MUST provide security equivalent to
-      that of the signaling sessions bridged by gateways in the
-      signaling path.  For example, when a DOTS gateway consisting of a
-      DOTS server and DOTS client is running on the same logical device,
-      they must be within the same process security boundary.
+      that of the signal channels bridged by gateways in the signaling
+      path.  For example, when a DOTS gateway consisting of a DOTS
+      server and DOTS client is running on the same logical device, they
+      must be within the same process security boundary.
 
    SEC-003  Message Replay Protection: In order to prevent a passive
       attacker from capturing and replaying old messages, DOTS protocols
@@ -725,7 +725,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 13]
+Mortensen, et al.      Expires September 29, 2017              [Page 13]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -759,7 +759,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
    DM-007:  Acceptable Signal Loss Representation: The data model MUST
       be able to represent the DOTS agent's preference for acceptable
-      signal loss when establishing a signaling session, as described in
+      signal loss when establishing a signal channel, as described in
       GEN-002.
 
    DM-008:  Heartbeat Interval Representation: The data model MUST be
@@ -781,7 +781,7 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 14]
+Mortensen, et al.      Expires September 29, 2017              [Page 14]
 
 Internet-Draft              DOTS Requirements                 March 2017
 
@@ -819,32 +819,57 @@ Internet-Draft              DOTS Requirements                 March 2017
 
 5.  Contributors
 
-   Med Boucadair
+   Mohamed Boucadair
       Orange
 
       mohamed.boucadair@orange.com
 
-   Flemming Andreasen:
+   Flemming Andreasen
       Cisco Systems, Inc.
 
       fandreas@cisco.com
+
+   Dave Dolson
+      Sandvine
+
+      ddolson@sandvine.com
+
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 15]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
 6.  Acknowledgments
 
    Thanks to Roman Danyliw and Matt Richardson for careful reading and
    feedback.
 
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 15]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
-
 7.  Change Log
 
-7.1.  03 revision
+7.1.  04 revision
+
+   2017-03-13
+
+   o  Establish required and optional mitigation scope types
+
+   o  Specify message size for DOTS signal channel
+
+   o  Recast mitigation lifetime as a DOTS server requirement
+
+   o  Clarify DOTS server's responsibilities after client request to end
+      mitigation
+
+   o  Specify security state handling on redirection
+
+   o  Signal channel should use transport not susceptible to HOL
+      blocking
+
+   o  Expanded list of DDoS types to include network links
+
+7.2.  03 revision
 
    2016-10-30
 
@@ -858,11 +883,20 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Added data model requirements reflecting client control over the
       above.
 
-7.2.  02 revision
+7.3.  02 revision
 
-7.3.  01 revision
+7.4.  01 revision
 
    2016-03-21
+
+
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 16]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
    o  Reconciled terminology with -00 revision of
       [I-D.ietf-dots-use-cases].
@@ -877,7 +911,7 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Clarified support for unidirectional communication within the
       bidirectional signal channel.
 
-   o  Added proposed operational requirement to support session
+   o  Added proposed operational requirement to support channel
       redirection.
 
    o  Added proposed operational requirement to support conflict
@@ -889,15 +923,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Added proposed operational requirement to support mitigation
       efficacy reporting from DOTS clients.
 
-
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 16]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
-
    o  Added proposed operational requirement to cache lookups of all
       kinds.
 
@@ -906,11 +931,11 @@ Internet-Draft              DOTS Requirements                 March 2017
    o  Removed redundant mutual authentication requirement from data
       channel requirements.
 
-7.4.  00 revision
+7.5.  00 revision
 
    2015-10-15
 
-7.5.  Initial revision
+7.6.  Initial revision
 
    2015-09-24 Andrew Mortensen
 
@@ -921,6 +946,13 @@ Internet-Draft              DOTS Requirements                 March 2017
    [RFC0768]  Postel, J., "User Datagram Protocol", STD 6, RFC 768, DOI
               10.17487/RFC0768, August 1980,
               <http://www.rfc-editor.org/info/rfc768>.
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 17]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
    [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791, DOI
               10.17487/RFC0791, September 1981,
@@ -942,17 +974,6 @@ Internet-Draft              DOTS Requirements                 March 2017
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
               DOI 10.17487/RFC1191, November 1990,
               <http://www.rfc-editor.org/info/rfc1191>.
-
-
-
-
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 17]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
@@ -978,9 +999,16 @@ Internet-Draft              DOTS Requirements                 March 2017
               <http://www.rfc-editor.org/info/rfc4821>.
 
    [RFC5405]  Eggert, L. and G. Fairhurst, "Unicast UDP Usage Guidelines
-              for Application Designers", BCP 145, RFC 5405, DOI
-              10.17487/RFC5405, November 2008,
+              for Application Designers", RFC 5405, DOI 10.17487/
+              RFC5405, November 2008,
               <http://www.rfc-editor.org/info/rfc5405>.
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 18]
+
+Internet-Draft              DOTS Requirements                 March 2017
+
 
 8.2.  Informative References
 
@@ -1002,13 +1030,6 @@ Internet-Draft              DOTS Requirements                 March 2017
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
-
-
-
-Mortensen, et al.      Expires September 14, 2017              [Page 18]
-
-Internet-Draft              DOTS Requirements                 March 2017
-
 
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
@@ -1032,6 +1053,17 @@ Authors' Addresses
    United States
 
    Email: rgm@htt-consult.com
+
+
+
+
+
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 19]
+
+Internet-Draft              DOTS Requirements                 March 2017
 
 
    Tirumaleswar Reddy
@@ -1061,4 +1093,28 @@ Authors' Addresses
 
 
 
-Mortensen, et al.      Expires September 14, 2017              [Page 19]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mortensen, et al.      Expires September 29, 2017              [Page 20]

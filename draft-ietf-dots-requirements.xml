@@ -25,7 +25,7 @@
 <?rfc sortrefs="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc docName="draft-ietf-dots-requirements-03" category="info">
+<rfc docName="draft-ietf-dots-requirements-04" category="info">
 
   <front>
     <title abbrev="DOTS Requirements">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements</title>
@@ -67,7 +67,7 @@
       </address>
     </author>
 
-    <date year="2017" month="March" day="13"/>
+    <date year="2017" month="March" day="28"/>
 
     <area>Security</area>
     <workgroup>DOTS</workgroup>
@@ -178,8 +178,8 @@ client, if requested, by communicating the DOTS client&rsquo;s request to the
 mitigator and returning selected mitigator feedback to the requesting DOTS
 client. A DOTS server MAY also be a mitigator.</t>
   <t hangText='DOTS agent:'>
-  Any DOTS-aware software module capable of participating in a DOTS signaling
-session.</t>
+  Any DOTS-aware software module capable of participating in a DOTS signal
+or data channel.</t>
   <t hangText='DOTS gateway:'>
   A logical DOTS agent resulting from the logical concatenation of a DOTS server
 and a DOTS client, analogous to a SIP Back-to-Back User Agent (B2BUA)
@@ -205,7 +205,7 @@ supplement server-initiated mitigation.</t>
   A message sent from a DOTS server to a DOTS client over the signal channel.
 Note that a server signal is not a response to client signal, but a DOTS
 server-initiated status message sent to DOTS clients with which the server has
-established signaling sessions.</t>
+established signal channels.</t>
   <t hangText='Data channel:'>
   A secure communication layer between DOTS clients and DOTS servers used for
 infrequent bulk exchange of data not easily or appropriately communicated
@@ -331,20 +331,21 @@ transport protocol MUST be used for bulk data exchange.</t>
 
 <t><list style="hanging">
   <t hangText='OP-001'>
-  Use of Common Transport Protocols: DOTS MUST operate over common widely
-deployed and standardized transport protocols. While the User Datagram
-Protocol (UDP) <xref target="RFC0768"/> SHOULD be used for the signal channel, the
+  Use of Common Transport Protocols: The DOTS signal channel MUST operate over
+common widely deployed and standardized transport protocols. While the User
+Datagram Protocol (UDP) <xref target="RFC0768"/> SHOULD be used for the signal channel, the
 Transmission Control Protocol (TCP) <xref target="RFC0793"></xref> MAY be used if necessary due to
 network policy or middlebox capabilities or configurations. The data channel
 MUST use a reliable transport; see <xref target="data-channel-requirements"/> below.</t>
   <t hangText='OP-002'>
-  Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
-each other after mutual authentication in order to keep the DOTS session
-active.  A session MUST be considered active until a DOTS agent explicitly
-ends the session, or either DOTS agent fails to receive heartbeats from the
-other after a mutually agreed upon timeout period has elapsed.</t>
+  Channel Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
+each other over the signal channel, after mutual authentication, in order to
+keep the channel active.  The signal channel MUST be considered active until a
+DOTS agent explicitly terminates the channel, or either DOTS agent fails to
+receive heartbeats from the other after a mutually agreed upon timeout period
+has elapsed.</t>
   <t hangText='OP-003'>
-  Session Redirection: In order to increase DOTS operational flexibility and
+  Channel Redirection: In order to increase DOTS operational flexibility and
 scalability, DOTS servers SHOULD be able to redirect DOTS clients to another
 DOTS server at any time. DOTS clients MUST NOT assume the redirection target
 DOTS server shares security state with the redirecting DOTS server. DOTS
@@ -532,7 +533,7 @@ enabling or supplementing the very attacks DOTS purports to mitigate.</t>
 <t><list style="hanging">
   <t hangText='SEC-001'>
   Peer Mutual Authentication: DOTS agents MUST authenticate each other before a
-DOTS session is considered valid. The method of authentication is not
+DOTS channel is considered valid. The method of authentication is not
 specified, but should follow current industry best practices with respect to
 any cryptographic mechanisms to authenticate the remote peer.</t>
   <t hangText='SEC-002'>
@@ -547,10 +548,10 @@ terms and mechanisms of protocol security, subject to the interoperability and
 signal message size requirements above.</t>
   <t>While the interfaces between downstream DOTS server and upstream DOTS client
 within a DOTS gateway are implementation-specific, those interfaces
-nevertheless MUST provide security equivalent to that of the signaling
-sessions bridged by gateways in the signaling path. For example, when a DOTS
-gateway consisting of a DOTS server and DOTS client is running on the same
-logical device, they must be within the same process security boundary.</t>
+nevertheless MUST provide security equivalent to that of the signal channels
+bridged by gateways in the signaling path. For example, when a DOTS gateway
+consisting of a DOTS server and DOTS client is running on the same logical
+device, they must be within the same process security boundary.</t>
   <t hangText='SEC-003'>
   Message Replay Protection: In order to prevent a passive attacker from
 capturing and replaying old messages, DOTS protocols MUST provide a method
@@ -600,7 +601,7 @@ through a mitigation request.</t>
   <t hangText='DM-007:'>
   Acceptable Signal Loss Representation: The data model MUST be able to
 represent the DOTS agent&rsquo;s preference for acceptable signal loss when
-establishing a signaling session, as described in GEN-002.</t>
+establishing a signal channel, as described in GEN-002.</t>
   <t hangText='DM-008:'>
   Heartbeat Interval Representation: The data model MUST be able to represent
 the DOTS agent&rsquo;s preferred heartbeat interval, which the client may include
@@ -653,15 +654,21 @@ through current secure communications best practices. See
 <section anchor="contributors" title="Contributors">
 
 <t><list style="hanging">
-  <t hangText='Med Boucadair'><vspace blankLines='0'/>
+  <t hangText='Mohamed Boucadair'><vspace blankLines='0'/>
   Orange</t>
   <t>mohamed.boucadair@orange.com</t>
 </list></t>
 
 <t><list style="hanging">
-  <t hangText='Flemming Andreasen:'><vspace blankLines='0'/>
+  <t hangText='Flemming Andreasen'><vspace blankLines='0'/>
   Cisco Systems, Inc.</t>
   <t>fandreas@cisco.com</t>
+</list></t>
+
+<t><list style="hanging">
+  <t hangText='Dave Dolson'><vspace blankLines='0'/>
+  Sandvine</t>
+  <t>ddolson@sandvine.com</t>
 </list></t>
 
 </section>
@@ -672,7 +679,22 @@ through current secure communications best practices. See
 </section>
 <section anchor="change-log" title="Change Log">
 
-<section anchor="revision" title="03 revision">
+<section anchor="revision" title="04 revision">
+
+<t>2017-03-13</t>
+
+<t><list style="symbols">
+  <t>Establish required and optional mitigation scope types</t>
+  <t>Specify message size for DOTS signal channel</t>
+  <t>Recast mitigation lifetime as a DOTS server requirement</t>
+  <t>Clarify DOTS server&rsquo;s responsibilities after client request to end mitigation</t>
+  <t>Specify security state handling on redirection</t>
+  <t>Signal channel should use transport not susceptible to HOL blocking</t>
+  <t>Expanded list of DDoS types to include network links</t>
+</list></t>
+
+</section>
+<section anchor="revision-1" title="03 revision">
 
 <t>2016-10-30</t>
 
@@ -684,10 +706,10 @@ signal loss, heartbeat intervals, and mitigation lifetime to DOTS client.</t>
 </list></t>
 
 </section>
-<section anchor="revision-1" title="02 revision">
+<section anchor="revision-2" title="02 revision">
 
 </section>
-<section anchor="revision-2" title="01 revision">
+<section anchor="revision-3" title="01 revision">
 
 <t>2016-03-21</t>
 
@@ -698,7 +720,7 @@ signal loss, heartbeat intervals, and mitigation lifetime to DOTS client.</t>
   <t>Made resilience/robustness primary general requirement to align with charter.</t>
   <t>Clarified support for unidirectional communication within the bidirectional
 signal channel.</t>
-  <t>Added proposed operational requirement to support session redirection.</t>
+  <t>Added proposed operational requirement to support channel redirection.</t>
   <t>Added proposed operational requirement to support conflict notification.</t>
   <t>Added proposed operational requirement to support mitigation lifetime in
 mitigation requests.</t>
@@ -711,7 +733,7 @@ requirements.</t>
 </list></t>
 
 </section>
-<section anchor="revision-3" title="00 revision">
+<section anchor="revision-4" title="00 revision">
 
 <t>2015-10-15</t>
 
