@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-03
+docname: draft-ietf-dots-requirements-04
 date: @DATE@
 
 area: Security
@@ -701,14 +701,19 @@ through current secure communications best practices. See
 Contributors
 ============
 
-Med Boucadair
+Mohamed Boucadair
 : Orange
 : mohamed.boucadair@orange.com
 {: vspace="0"}
 
-Flemming Andreasen:
+Flemming Andreasen
 : Cisco Systems, Inc.
 : fandreas@cisco.com
+{: vspace="0"}
+
+Dave Dolson
+: Sandvine
+: ddolson@sandvine.com
 {: vspace="0"}
 
 
@@ -720,6 +725,25 @@ Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.
 
 Change Log
 ==========
+
+04 revision
+-----------
+
+2017-03-13
+
+* Establish required and optional mitigation scope types
+
+* Specify message size for DOTS signal channel
+
+* Recast mitigation lifetime as a DOTS server requirement
+
+* Clarify DOTS server's responsibilities after client request to end mitigation
+
+* Specify security state handling on redirection
+
+* Signal channel should use transport not susceptible to HOL blocking
+
+* Expanded list of DDoS types to include network links
 
 03 revision
 -----------
