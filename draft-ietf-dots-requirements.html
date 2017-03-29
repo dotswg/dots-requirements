@@ -407,7 +407,7 @@
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-04" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-3-13" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-3-28" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
 
@@ -431,7 +431,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: September 14, 2017</td>
+  <td class="left">Expires: September 29, 2017</td>
   <td class="right">HTT Consulting</td>
 </tr>
 <tr>
@@ -444,7 +444,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">March 13, 2017</td>
+  <td class="right">March 28, 2017</td>
 </tr>
 
     	
@@ -464,7 +464,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 14, 2017.</p>
+<p>This Internet-Draft will expire on September 29, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -535,7 +535,7 @@
   <dt>DOTS server:</dt>
   <dd style="margin-left: 8">A DOTS-aware software module handling and responding to messages from DOTS clients. The DOTS server SHOULD enable mitigation on behalf of the DOTS client, if requested, by communicating the DOTS client&#8217;s request to the mitigator and returning selected mitigator feedback to the requesting DOTS client. A DOTS server MAY also be a mitigator.</dd>
   <dt>DOTS agent:</dt>
-  <dd style="margin-left: 8">Any DOTS-aware software module capable of participating in a DOTS signaling session.</dd>
+  <dd style="margin-left: 8">Any DOTS-aware software module capable of participating in a DOTS signal or data channel.</dd>
   <dt>DOTS gateway:</dt>
   <dd style="margin-left: 8">A logical DOTS agent resulting from the logical concatenation of a DOTS server and a DOTS client, analogous to a SIP Back-to-Back User Agent (B2BUA) <a href="#RFC3261">[RFC3261]</a>. DOTS gateways are discussed in detail in <a href="#I-D.ietf-dots-architecture">[I-D.ietf-dots-architecture]</a>.</dd>
   <dt>Signal channel:</dt>
@@ -547,7 +547,7 @@
   <dt>Client signal:</dt>
   <dd style="margin-left: 8">A message sent from a DOTS client to a DOTS server over the signal channel, indicating the DOTS client&#8217;s need for mitigation, as well as the scope of any requested mitigation, optionally including additional attack details to supplement server-initiated mitigation.</dd>
   <dt>Server signal:</dt>
-  <dd style="margin-left: 8">A message sent from a DOTS server to a DOTS client over the signal channel.  Note that a server signal is not a response to client signal, but a DOTS server-initiated status message sent to DOTS clients with which the server has established signaling sessions.</dd>
+  <dd style="margin-left: 8">A message sent from a DOTS server to a DOTS client over the signal channel.  Note that a server signal is not a response to client signal, but a DOTS server-initiated status message sent to DOTS clients with which the server has established signal channels.</dd>
   <dt>Data channel:</dt>
   <dd style="margin-left: 8">A secure communication layer between DOTS clients and DOTS servers used for infrequent bulk exchange of data not easily or appropriately communicated through the signal channel under attack conditions.</dd>
   <dt>Filter:</dt>
@@ -591,11 +591,11 @@
 
 <dl>
   <dt>OP-001</dt>
-  <dd style="margin-left: 8">Use of Common Transport Protocols: DOTS MUST operate over common widely deployed and standardized transport protocols. While the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a> SHOULD be used for the signal channel, the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations. The data channel MUST use a reliable transport; see <a href="#data-channel-requirements">Section 2.3</a> below.</dd>
+  <dd style="margin-left: 8">Use of Common Transport Protocols: The DOTS signal channel MUST operate over common widely deployed and standardized transport protocols. While the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a> SHOULD be used for the signal channel, the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations. The data channel MUST use a reliable transport; see <a href="#data-channel-requirements">Section 2.3</a> below.</dd>
   <dt>OP-002</dt>
-  <dd style="margin-left: 8">Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to each other after mutual authentication in order to keep the DOTS session active.  A session MUST be considered active until a DOTS agent explicitly ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually agreed upon timeout period has elapsed.</dd>
+  <dd style="margin-left: 8">Channel Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to each other over the signal channel, after mutual authentication, in order to keep the channel active.  The signal channel MUST be considered active until a DOTS agent explicitly terminates the channel, or either DOTS agent fails to receive heartbeats from the other after a mutually agreed upon timeout period has elapsed.</dd>
   <dt>OP-003</dt>
-  <dd style="margin-left: 8">Session Redirection: In order to increase DOTS operational flexibility and scalability, DOTS servers SHOULD be able to redirect DOTS clients to another DOTS server at any time. DOTS clients MUST NOT assume the redirection target DOTS server shares security state with the redirecting DOTS server. DOTS clients MAY attempt abbreviated security negotiation methods supported by the protocol, such as DTLS session resumption, but MUST be prepared to negotiate new security state with the redirection target DOTS server.</dd>
+  <dd style="margin-left: 8">Channel Redirection: In order to increase DOTS operational flexibility and scalability, DOTS servers SHOULD be able to redirect DOTS clients to another DOTS server at any time. DOTS clients MUST NOT assume the redirection target DOTS server shares security state with the redirecting DOTS server. DOTS clients MAY attempt abbreviated security negotiation methods supported by the protocol, such as DTLS session resumption, but MUST be prepared to negotiate new security state with the redirection target DOTS server.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Due to the increased likelihood of packet loss caused by link congestion during an attack, it is RECOMMENDED DOTS servers avoid redirecting while mitigation is enabled during an active attack against a target in the DOTS client&#8217;s domain.</dd>
   <dt>OP-004</dt>
@@ -660,13 +660,13 @@
 
 <dl>
   <dt>SEC-001</dt>
-  <dd style="margin-left: 8">Peer Mutual Authentication: DOTS agents MUST authenticate each other before a DOTS session is considered valid. The method of authentication is not specified, but should follow current industry best practices with respect to any cryptographic mechanisms to authenticate the remote peer.</dd>
+  <dd style="margin-left: 8">Peer Mutual Authentication: DOTS agents MUST authenticate each other before a DOTS channel is considered valid. The method of authentication is not specified, but should follow current industry best practices with respect to any cryptographic mechanisms to authenticate the remote peer.</dd>
   <dt>SEC-002</dt>
   <dd style="margin-left: 8">Message Confidentiality, Integrity and Authenticity: DOTS protocols MUST take steps to protect the confidentiality, integrity and authenticity of messages sent between client and server. While specific transport- and message-level security options are not specified, the protocols MUST follow current industry best practices for encryption and message authentication.</dd>
   <dt></dt>
   <dd style="margin-left: 8">In order for DOTS protocols to remain secure despite advancements in cryptanalysis and traffic analysis, DOTS agents MUST be able to negotiate the terms and mechanisms of protocol security, subject to the interoperability and signal message size requirements above.</dd>
   <dt></dt>
-  <dd style="margin-left: 8">While the interfaces between downstream DOTS server and upstream DOTS client within a DOTS gateway are implementation-specific, those interfaces nevertheless MUST provide security equivalent to that of the signaling sessions bridged by gateways in the signaling path. For example, when a DOTS gateway consisting of a DOTS server and DOTS client is running on the same logical device, they must be within the same process security boundary.</dd>
+  <dd style="margin-left: 8">While the interfaces between downstream DOTS server and upstream DOTS client within a DOTS gateway are implementation-specific, those interfaces nevertheless MUST provide security equivalent to that of the signal channels bridged by gateways in the signaling path. For example, when a DOTS gateway consisting of a DOTS server and DOTS client is running on the same logical device, they must be within the same process security boundary.</dd>
   <dt>SEC-003</dt>
   <dd style="margin-left: 8">Message Replay Protection: In order to prevent a passive attacker from capturing and replaying old messages, DOTS protocols MUST provide a method for replay detection.</dd>
 </dl>
@@ -690,7 +690,7 @@
   <dt>DM-006:</dt>
   <dd style="margin-left: 8">Mitigation Efficacy Representation: The data model MUST support representation of a DOTS client&#8217;s understanding of the efficacy of a mitigation enabled through a mitigation request.</dd>
   <dt>DM-007:</dt>
-  <dd style="margin-left: 8">Acceptable Signal Loss Representation: The data model MUST be able to represent the DOTS agent&#8217;s preference for acceptable signal loss when establishing a signaling session, as described in GEN-002.</dd>
+  <dd style="margin-left: 8">Acceptable Signal Loss Representation: The data model MUST be able to represent the DOTS agent&#8217;s preference for acceptable signal loss when establishing a signal channel, as described in GEN-002.</dd>
   <dt>DM-008:</dt>
   <dd style="margin-left: 8">Heartbeat Interval Representation: The data model MUST be able to represent the DOTS agent&#8217;s preferred heartbeat interval, which the client may include when establishing the signal channel, as described in OP-002.</dd>
   <dt>DM-009:</dt>
@@ -773,7 +773,7 @@
   <li>Moved security-related requirements to separate section.</li>
   <li>Made resilience/robustness primary general requirement to align with charter.</li>
   <li>Clarified support for unidirectional communication within the bidirectional signal channel.</li>
-  <li>Added proposed operational requirement to support session redirection.</li>
+  <li>Added proposed operational requirement to support channel redirection.</li>
   <li>Added proposed operational requirement to support conflict notification.</li>
   <li>Added proposed operational requirement to support mitigation lifetime in mitigation requests.</li>
   <li>Added proposed operational requirement to support mitigation efficacy reporting from DOTS clients.</li>
@@ -859,7 +859,7 @@
       <td class="reference">
         <b id="RFC5405">[RFC5405]</b>
       </td>
-      <td class="top"><a>Eggert, L.</a> and <a>G. Fairhurst</a>, "<a href="http://tools.ietf.org/html/rfc5405">Unicast UDP Usage Guidelines for Application Designers</a>", BCP 145, RFC 5405, DOI 10.17487/RFC5405, November 2008.</td>
+      <td class="top"><a>Eggert, L.</a> and <a>G. Fairhurst</a>, "<a href="http://tools.ietf.org/html/rfc5405">Unicast UDP Usage Guidelines for Application Designers</a>", RFC 5405, DOI 10.17487/RFC5405, November 2008.</td>
     </tr>
   </tbody>
 </table>
