@@ -38,14 +38,13 @@ author:
       -
         ins: T. Reddy
         name: Tirumaleswar Reddy
-        org: Cisco Systems, Inc.
+        org: McAfee, Inc.
         street:
-        - Cessna Business Park, Varthur Hobli
-        - Sarjapur Marathalli Outer Ring Road
+        - Embassy Golf Link Business Park
         city: Bangalore, Karnataka
-        code: 560103
+        code: 560071
         country: India
-        email: tireddy@cisco.com
+        email: TirumaleswarReddy_Konda@McAfee.com
 
 normative:
   RFC0768:
@@ -80,9 +79,9 @@ Introduction            {#problems}
 
 Context and Motivation
 ----------------------
-Distributed Denial of Service (DDoS) attacks continue to plague networks
-around the globe, from Tier-1 service providers on down to enterprises and
-small businesses. Attack scale and frequency similarly have continued to
+Distributed Denial of Service (DDoS) attacks continue to plague network
+operators around the globe, from Tier-1 service providers on down to enterprises
+and small businesses. Attack scale and frequency similarly have continued to
 increase, in part as a result of software vulnerabilities leading to reflection
 and amplification attacks. Once-staggering attack traffic volume is now the
 norm, and the impact of larger-scale attacks attract the attention of
@@ -90,23 +89,23 @@ international press agencies.
 
 The greater impact of contemporary DDoS attacks has led to increased focus on
 coordinated attack response. Many institutions and enterprises lack the
-resources or expertise to operate on-premise attack mitigation solutions
+resources or expertise to operate on-premises attack mitigation solutions
 themselves, or simply find themselves constrained by local bandwidth
 limitations. To address such gaps, security service providers have begun to
 offer on-demand traffic scrubbing services, which aim to separate the DDoS
 traffic from legitimate traffic and forward only the latter. Today each such
 service offers its own interface for subscribers to request attack mitigation,
-tying subscribers to proprietary implementations while also limiting the subset
-of network elements capable of participating in the attack response. As a result
-of incompatibility across services, attack responses may be fragmentary or
-otherwise incomplete, leaving key players in the attack path unable to assist in
-the defense.
+tying subscribers to proprietary signaling implementations while also limiting
+the subset of network elements capable of participating in the attack response.
+As a result of signaling interface incompatibility, attack responses may be
+fragmentary or otherwise incomplete, leaving key players in the attack path
+unable to assist in the defense.
 
 The lack of a common method to coordinate a real-time response among involved
 actors and network domains inhibits the speed and effectiveness of DDoS attack
-mitigation. This document describes the required characteristics of a DOTS
-protocol enabling requests for DDoS attack mitigation, reducing attack impact
-and leading to more efficient defensive strategies.
+mitigation. This document describes the required characteristics of a protocol
+enabling requests for DDoS attack mitigation, reducing attack impact and leading
+to more efficient defensive strategies.
 
 DOTS communicates the need for defensive action in anticipation of or in
 response to an attack, but does not dictate the form any defensive action
@@ -238,52 +237,58 @@ This section describes the required features and characteristics of the DOTS
 protocol.
 
 DOTS is an advisory protocol. An active DDoS attack against the entity
-controlling the DOTS client need not be present before establishing DOTS
-communication between DOTS agents. Indeed, establishing a relationship with peer
-DOTS agents during normal network conditions provides the foundation for more
-rapid attack response against future attacks, as all interactions setting up
-DOTS, including any business or service level agreements, are already complete.
+controlling the DOTS client need not be present before establishing a
+communication channel between DOTS agents. Indeed, establishing a relationship
+with peer DOTS agents during normal network conditions provides the foundation
+for more rapid attack response against future attacks, as all interactions
+setting up DOTS, including any business or service level agreements, are already
+complete.
 
-DOTS must at a minimum make it possible for a DOTS client to request a DOTS
-server's aid in mounting a coordinated defense against a suspected attack,
-signaling within or between domains as requested by local operators. DOTS
-clients should similarly be able to withdraw aid requests. DOTS requires no
-justification from DOTS clients for requests for help, nor do DOTS clients need
-to justify withdrawing help requests: the decision is local to the DOTS clients'
-domain. Regular feedback between DOTS clients and DOTS server supplement the
-defensive alliance by maintaining a common understanding of DOTS peer health and
+The DOTS protocol must at a minimum make it possible for a DOTS client to
+request a mitigator's aid mounting a defense, coordinated by a DOTS server,
+against a suspected attack, signaling within or between domains as requested by
+local operators. DOTS clients should similarly be able to withdraw aid requests.
+DOTS requires no justification from DOTS clients for requests for help, nor do
+DOTS clients need to justify withdrawing help requests: the decision is local to
+the DOTS clients' domain.
+
+Regular feedback between DOTS clients and DOTS server supplement the defensive
+alliance by maintaining a common understanding of DOTS agent health and
 activity. Bidirectional communication between DOTS clients and DOTS servers is
 therefore critical.
 
-Yet DOTS must also work with a set of competing operational goals.
-On the one hand, the protocol must be resilient under extremely hostile network
-conditions, providing continued contact between DOTS agents even as attack
-traffic saturates the link. Such resiliency may be developed several ways, but
-characteristics such as small message size, asynchronous, redundant message
-delivery and minimal connection overhead (when possible given local network
-policy) will tend to contribute to the robustness demanded by a viable DOTS
-protocol. Operators of peer DOTS-enabled domains may enable quality- or
-class-of-service traffic tagging to increase the probability of successful DOTS
-signal delivery, but DOTS requires no such policies be in place. The DOTS
-solution indeed must be viable especially in their absence.
+DOTS protocol implementations face competing operational goals when maintaining
+this bidirectional communication stream.  On the one hand, the protocol must be
+resilient under extremely hostile network conditions, providing continued
+contact between DOTS agents even as attack traffic saturates the link. Such
+resiliency may be developed several ways, but characteristics such as small
+message size, asynchronous, redundant message delivery and minimal connection
+overhead (when possible given local network policy) will tend to contribute to
+the robustness demanded by a viable DOTS protocol. Operators of peer
+DOTS-enabled domains may enable quality- or class-of-service traffic tagging to
+increase the probability of successful DOTS signal delivery, but DOTS requires
+no such policies be in place. The DOTS solution indeed must be viable especially
+in their absence.
 
 On the other hand, DOTS must include protections ensuring message
 confidentiality, integrity and authenticity to keep the protocol from becoming
 another vector for the very attacks it's meant to help fight off. DOTS clients
-must be able to authenticate DOTS servers, and vice versa, for DOTS to operate
-safely, meaning the DOTS agents must have a way to negotiate and agree upon the
-terms of protocol security. Attacks against the transport protocol should not
-offer a means of attack against the message confidentiality, integrity and
-authenticity.
+must be able to authenticate DOTS servers, and vice versa, to avoid exposing new
+attack surfaces when deploying DOTS; specifically, to prevent DDoS mitigation in
+response to DOTS signaling from becoming a new form of attack. In order to
+provide this level of proteection, DOTS agents must have a way to negotiate and
+agree upon the terms of protocol security. Attacks against the transport
+protocol should not offer a means of attack against the message confidentiality,
+integrity and authenticity.
 
 The DOTS server and client must also have some common method of defining the
 scope of any mitigation performed by the mitigator, as well as making
 adjustments to other commonly configurable features, such as listen ports,
 exchanging black- and white-lists, and so on.
 
-Finally, DOTS should provide sufficient extensibility to meet local, vendor or
-future needs in coordinated attack defense, although this consideration is
-necessarily superseded by the other operational requirements.
+Finally, DOTS should be sufficiently extensible to meet future needs in
+coordinated attack defense, although this consideration is necessarily
+superseded by the other operational requirements.
 
 
 General Requirements            {#general-requirements}
@@ -366,9 +371,8 @@ OP-003
   new security state with the redirection target DOTS server.
 
 : Due to the increased likelihood of packet loss caused by link congestion
-  during an attack, it is RECOMMENDED DOTS servers avoid redirecting while
-  mitigation is enabled during an active attack against a target in the DOTS
-  client's domain.
+  during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled
+  during an active attack against a target in the DOTS client's domain.
 
 OP-004
 : Mitigation Requests and Status:
