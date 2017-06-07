@@ -540,7 +540,10 @@ Internet-Draft              DOTS Requirements                  June 2017
       DOTS agents MUST support mitigation scope aliases, allowing DOTS
       client and server to refer to collections of protected resources
       by an opaque identifier created through the data channel, direct
-      configuration, or other means.
+      configuration, or other means.  Domain name and URI mitigation
+      scopes may be thought of as a form of scope alias, in which the
+      addresses to which the domain name or URI resolve represent the
+      full scope of the mitigation.
 
       If there is additional information available narrowing the scope
       of any requested attack response, such as targeted port range,
@@ -550,9 +553,6 @@ Internet-Draft              DOTS Requirements                  June 2017
       DOTS servers MAY ignore it when enabling countermeasures on the
       mitigator.
 
-      As an active attack evolves, clients MUST be able to adjust as
-      necessary the scope of requested mitigation by refining the scope
-      of resources requiring mitigation.
 
 
 
@@ -561,6 +561,10 @@ Mortensen, et al.       Expires December 8, 2017               [Page 10]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
+
+      As an active attack evolves, clients MUST be able to adjust as
+      necessary the scope of requested mitigation by refining the scope
+      of resources requiring mitigation.
 
    SIG-007  Mitigation Efficacy: When a mitigation request by a DOTS
       client is active, DOTS clients SHOULD transmit a metric of
@@ -606,10 +610,6 @@ Internet-Draft              DOTS Requirements                  June 2017
    a collection of prefixes it wants to refer to by alias when
    requesting mitigation, to which the server would respond with a
    success status and the new prefix group alias, or an error status and
-   message in the event the DOTS client's data channel request failed.
-   The transactional nature of such data exchanges suggests a separate
-   set of requirements for the data channel, while the potentially
-
 
 
 
@@ -618,6 +618,9 @@ Mortensen, et al.       Expires December 8, 2017               [Page 11]
 Internet-Draft              DOTS Requirements                  June 2017
 
 
+   message in the event the DOTS client's data channel request failed.
+   The transactional nature of such data exchanges suggests a separate
+   set of requirements for the data channel, while the potentially
    sensitive content sent between DOTS agents requires extra precautions
    to ensure data privacy and authenticity.
 
@@ -663,9 +666,6 @@ Internet-Draft              DOTS Requirements                  June 2017
    abuse, enabling or supplementing the very attacks DOTS purports to
    mitigate.
 
-   SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
-      each other before a DOTS signal or data channel is considered
-      valid.  The method of authentication is not specified, but should
 
 
 
@@ -674,6 +674,9 @@ Mortensen, et al.       Expires December 8, 2017               [Page 12]
 Internet-Draft              DOTS Requirements                  June 2017
 
 
+   SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
+      each other before a DOTS signal or data channel is considered
+      valid.  The method of authentication is not specified, but should
       follow current industry best practices with respect to any
       cryptographic mechanisms to authenticate the remote peer.
 
@@ -719,9 +722,6 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    DM-002:  Versioning: To ensure interoperability between DOTS protocol
       implementations, data models MUST be versioned.  The version
-      number of the initial data model SHALL be 1.  Each published
-      change to the initial published DOTS data model SHALL increment
-      the data model version by 1.
 
 
 
@@ -729,6 +729,10 @@ Mortensen, et al.       Expires December 8, 2017               [Page 13]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
+
+      number of the initial data model SHALL be 1.  Each published
+      change to the initial published DOTS data model SHALL increment
+      the data model version by 1.
 
       How the protocol represents data model versions is not defined in
       this document.
@@ -774,10 +778,6 @@ Internet-Draft              DOTS Requirements                  June 2017
    As part of a protocol expected to operate over links affected by DDoS
    attack traffic, the DOTS signal channel MUST NOT contribute
    significantly to link congestion.  To meet the signal channel
-   requirements above, DOTS signal channel implementations SHOULD
-   support connectionless transports.  However, some connectionless
-   transports when deployed naively can be a source of network
-   congestion, as discussed in [RFC5405].  Signal channel
 
 
 
@@ -786,6 +786,10 @@ Mortensen, et al.       Expires December 8, 2017               [Page 14]
 Internet-Draft              DOTS Requirements                  June 2017
 
 
+   requirements above, DOTS signal channel implementations SHOULD
+   support connectionless transports.  However, some connectionless
+   transports when deployed naively can be a source of network
+   congestion, as discussed in [RFC5405].  Signal channel
    implementations using such connectionless transports, such as UDP,
    therefore MUST include a congestion control mechanism.
 
@@ -830,10 +834,6 @@ Internet-Draft              DOTS Requirements                  June 2017
       Sandvine
 
       ddolson@sandvine.com
-
-
-
-
 
 
 

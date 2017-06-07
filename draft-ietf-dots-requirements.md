@@ -465,7 +465,10 @@ SIG-006
 
 : DOTS agents MUST support mitigation scope aliases, allowing DOTS client and
   server to refer to collections of protected resources by an opaque identifier
-  created through the data channel, direct configuration, or other means.
+  created through the data channel, direct configuration, or other means. Domain
+  name and URI mitigation scopes may be thought of as a form of scope alias, in
+  which the addresses to which the domain name or URI resolve represent the full
+  scope of the mitigation.
 
 : If there is additional information available narrowing the scope of any
   requested attack response, such as targeted port range, protocol, or service,
