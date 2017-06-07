@@ -379,7 +379,7 @@
 <link href="#rfc.section.1.2" rel="Chapter" title="1.2 Terminology"/>
 <link href="#rfc.section.2" rel="Chapter" title="2 Requirements"/>
 <link href="#rfc.section.2.1" rel="Chapter" title="2.1 General Requirements"/>
-<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Operational Requirements"/>
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Signal Channel Requirements"/>
 <link href="#rfc.section.2.3" rel="Chapter" title="2.3 Data Channel Requirements"/>
 <link href="#rfc.section.2.4" rel="Chapter" title="2.4 Security requirements"/>
 <link href="#rfc.section.2.5" rel="Chapter" title="2.5 Data Model Requirements"/>
@@ -407,7 +407,7 @@
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-04" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-6-01" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-6-06" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
 
@@ -431,7 +431,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: December 3, 2017</td>
+  <td class="left">Expires: December 8, 2017</td>
   <td class="right">HTT Consulting</td>
 </tr>
 <tr>
@@ -444,7 +444,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">June 01, 2017</td>
+  <td class="right">June 06, 2017</td>
 </tr>
 
     	
@@ -464,7 +464,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on December 3, 2017.</p>
+<p>This Internet-Draft will expire on December 8, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -481,7 +481,7 @@
 <li>1.2.   <a href="#rfc.section.1.2">Terminology</a></li>
 </ul><li>2.   <a href="#rfc.section.2">Requirements</a></li>
 <ul><li>2.1.   <a href="#rfc.section.2.1">General Requirements</a></li>
-<li>2.2.   <a href="#rfc.section.2.2">Operational Requirements</a></li>
+<li>2.2.   <a href="#rfc.section.2.2">Signal Channel Requirements</a></li>
 <li>2.3.   <a href="#rfc.section.2.3">Data Channel Requirements</a></li>
 <li>2.4.   <a href="#rfc.section.2.4">Security requirements</a></li>
 <li>2.5.   <a href="#rfc.section.2.5">Data Model Requirements</a></li>
@@ -573,33 +573,31 @@
 
 <dl>
   <dt>GEN-001</dt>
-  <dd style="margin-left: 8">Extensibility: Protocols and data models developed as part of DOTS MUST be extensible in order to keep DOTS adaptable to operational and proprietary DDoS defenses. Future extensions MUST be backward compatible.</dd>
+  <dd style="margin-left: 8">Extensibility: Protocols and data models developed as part of DOTS MUST be extensible in order to keep DOTS adaptable to operational and proprietary DDoS defenses. Future extensions MUST be backward compatible. DOTS protocols MUST use a version number system to distinguish protocol revisions.  Implementations of older protocol versions SHOULD ignore information added to DOTS messages as part of newer protocol versions.</dd>
   <dt>GEN-002</dt>
   <dd style="margin-left: 8">Resilience and Robustness: The signaling protocol MUST be designed to maximize the probability of signal delivery even under the severely constrained network conditions imposed by particular attack traffic. The protocol MUST be resilient, that is, continue operating despite message loss and out-of-order or redundant message delivery. In support signaling protocol robustness, DOTS signals SHOULD be conveyed over a transport not susceptible to Head of Line Blocking.</dd>
   <dt>GEN-003</dt>
   <dd style="margin-left: 8">Bidirectionality: To support peer health detection, to maintain an open signal channel, and to increase the probability of signal delivery during attack, the signal channel MUST be bidirectional, with client and server transmitting signals to each other at regular intervals, regardless of any client request for mitigation. Unidirectional messages MUST be supported within the bidirectional signal channel to allow for unsolicited message delivery, enabling asynchronous notifications between agents.</dd>
   <dt>GEN-004</dt>
-  <dd style="margin-left: 8">Sub-MTU Message Size: To avoid message fragmentation and the consequently decreased probability of message delivery, signaling protocol message size MUST be kept under signaling Path Maximum Transmission Unit (PMTU), including the byte overhead of any encapsulation, transport headers, and transport- or message-level security.</dd>
-  <dt></dt>
-  <dd style="margin-left: 8">DOTS agents SHOULD attempt to learn the PMTU through mechanisms such as Path MTU Discovery <a href="#RFC1191">[RFC1191]</a> or Packetization Layer Path MTU Discovery <a href="#RFC4821">[RFC4821]</a>.  If the PMTU cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280 bytes. If IPv4 support on legacy or otherwise unusual networks is a consideration and PMTU is unknown, DOTS implementations MAY rely on a PMTU of 576 bytes, as discussed in <a href="#RFC0791">[RFC0791]</a> and <a href="#RFC1122">[RFC1122]</a>.</dd>
+  <dd style="margin-left: 8">Path MTU Discovery: DOTS agents SHOULD attempt to learn the PMTU through mechanisms such as Path MTU Discovery <a href="#RFC1191">[RFC1191]</a> or Packetization Layer Path MTU Discovery <a href="#RFC4821">[RFC4821]</a>.  If the PMTU cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280 bytes. If IPv4 support on legacy or otherwise unusual networks is a consideration and PMTU is unknown, DOTS implementations MAY rely on a PMTU of 576 bytes, as discussed in <a href="#RFC0791">[RFC0791]</a> and <a href="#RFC1122">[RFC1122]</a>.</dd>
   <dt>GEN-005</dt>
   <dd style="margin-left: 8">Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also significantly augment attack response coordination, permitting such tasks as population of black- or white-listed source addresses; address or prefix group aliasing; exchange of incident reports; and other hinting or configuration supplementing attack response.</dd>
   <dt></dt>
   <dd style="margin-left: 8">As the resilience requirements for the DOTS signal channel mandate small signal message size, a separate, secure data channel utilizing a reliable transport protocol MUST be used for bulk data exchange.</dd>
 </dl>
-<h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#operational-requirements" id="operational-requirements">Operational Requirements</a></h1>
+<h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#signal-channel-requirements" id="signal-channel-requirements">Signal Channel Requirements</a></h1>
 <p/>
 
 <dl>
-  <dt>OP-001</dt>
-  <dd style="margin-left: 8">Use of Common Transport Protocols: DOTS MUST operate over common widely deployed and standardized transport protocols. While the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a> SHOULD be used for the signal channel, the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations. The data channel MUST use a reliable transport; see <a href="#data-channel-requirements">Section 2.3</a> below.</dd>
-  <dt>OP-002</dt>
+  <dt>SIG-001</dt>
+  <dd style="margin-left: 8">Use of Common Transport Protocols: DOTS MUST operate over common widely deployed and standardized transport protocols. While connectionless transport such as the User Datagram Protocol (UDP) <a href="#RFC0768">[RFC0768]</a> SHOULD be used for the signal channel, the Transmission Control Protocol (TCP) <a href="#RFC0793">[RFC0793]</a> MAY be used if necessary due to network policy or middlebox capabilities or configurations.  The data channel MUST use a reliable transport; see <a href="#data-channel-requirements">Section 2.3</a> below.</dd>
+  <dt>SIG-002</dt>
   <dd style="margin-left: 8">Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to each other after mutual authentication in order to keep the DOTS session active.  A session MUST be considered active until a DOTS agent explicitly ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually agreed upon timeout period has elapsed.</dd>
-  <dt>OP-003</dt>
+  <dt>SIG-003</dt>
   <dd style="margin-left: 8">Session Redirection: In order to increase DOTS operational flexibility and scalability, DOTS servers SHOULD be able to redirect DOTS clients to another DOTS server at any time. DOTS clients MUST NOT assume the redirection target DOTS server shares security state with the redirecting DOTS server. DOTS clients MAY attempt abbreviated security negotiation methods supported by the protocol, such as DTLS session resumption, but MUST be prepared to negotiate new security state with the redirection target DOTS server.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Due to the increased likelihood of packet loss caused by link congestion during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled during an active attack against a target in the DOTS client&#8217;s domain.</dd>
-  <dt>OP-004</dt>
+  <dt>SIG-004</dt>
   <dd style="margin-left: 8">Mitigation Requests and Status: Authorized DOTS clients MUST be able to request scoped mitigation from DOTS servers. DOTS servers MUST send mitigation request status in response to DOTS clients requests for mitigation, and SHOULD accept scoped mitigation requests from authorized DOTS clients. DOTS servers MAY reject authorized requests for mitigation, but MUST include a reason for the rejection in the status message sent to the client.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Due to the higher likelihood of packet loss during a DDoS attack, DOTS servers SHOULD regularly send mitigation status to authorized DOTS clients which have requested and been granted mitigation, regardless of client requests for mitigation status.</dd>
@@ -610,16 +608,18 @@
   <dt></dt>
   <dd style="margin-left: 8">Once a DOTS client requests mitigation, the client MAY withdraw that request at any time, regardless of whether mitigation is currently active. The DOTS server MUST immediately acknowledge a DOTS client&#8217;s request to stop mitigation.</dd>
   <dt></dt>
-  <dd style="margin-left: 8">To protect against route or DNS flapping caused by a client rapidly toggling mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY continue mitigation for a period of up to five minutes after acknowledging a DOTS client&#8217;s withdrawal of a mitigation request. During this period, DOTS server status messages SHOULD indicate that mitigation is active but terminating. After the five-minute period elapses, the DOTS server MUST treat the mitigation as terminated, as the DOTS client is no longer responsible for the mitigation. For example, if there is a financial relationship between the DOTS client and server domains, the DOTS client ceases incurring cost at this point.</dd>
-  <dt>OP-005</dt>
+  <dd style="margin-left: 8">To protect against route or DNS flapping caused by a client rapidly toggling mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY allow mitigation to continue for a limited period after acknowledging a DOTS client&#8217;s withdrawal of a mitigation request. During this period, DOTS server status messages SHOULD indicate that mitigation is active but terminating.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">The active-but-terminating period is initially 30 seconds. If the client requests mitigation again before that 30 second window elapses, the DOTS server MAY exponentially increase the active-but-terminating period up to a maximum of 240 seconds (4 minutes). After the active-but-terminating period elapses, the DOTS server MUST treat the mitigation as terminated, as the DOTS client is no longer responsible for the mitigation. For example, if there is a financial relationship between the DOTS client and server domains, the DOTS client ceases incurring cost at this point.</dd>
+  <dt>SIG-005</dt>
   <dd style="margin-left: 8">Mitigation Lifetime: DOTS servers MUST support mitigation lifetimes, and MUST terminate a mitigation when the lifetime elapses. DOTS servers also MUST support renewal of mitigation lifetimes in mitigation requests from DOTS clients, allowing clients to extend mitigation as necessary for the duration of an attack.</dd>
   <dt></dt>
-  <dd style="margin-left: 8">DOTS servers MUST treat a mitigation terminated due to lifetime expiration exactly as if the DOTS client originating the mitigation had asked to end the mitigation, including the five-minute termination period, as described above in OP-004.</dd>
+  <dd style="margin-left: 8">DOTS servers MUST treat a mitigation terminated due to lifetime expiration exactly as if the DOTS client originating the mitigation had asked to end the mitigation, including the five-minute termination period, as described above in SIG-004.</dd>
   <dt></dt>
   <dd style="margin-left: 8">DOTS clients SHOULD include a mitigation lifetime in all mitigation requests.  If a DOTS client does not include a mitigation lifetime in requests for help sent to the DOTS server, the DOTS server will use a reasonable default as defined by the protocol.</dd>
   <dt></dt>
-  <dd style="margin-left: 8">DOTS servers SHOULD support indefinite mitigation lifetimes, enabling architectures in which the mitigator is always in the traffic path to the resources for which the DOTS client is requesting protection. DOTS servers MAY refuse mitigations with indefinite lifetimes, for policy reasons. The reasons themselves are out of scope for this document, but MUST be included in the mitigation rejection message from the server, per OP-004.</dd>
-  <dt>OP-006</dt>
+  <dd style="margin-left: 8">DOTS servers SHOULD support indefinite mitigation lifetimes, enabling architectures in which the mitigator is always in the traffic path to the resources for which the DOTS client is requesting protection. DOTS servers MAY refuse mitigations with indefinite lifetimes, for policy reasons. The reasons themselves are out of scope for this document, but MUST be included in the mitigation rejection message from the server, per SIG-004.</dd>
+  <dt>SIG-006</dt>
   <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The scope type will vary depending on the resources requiring mitigation. All DOTS agent implementations MUST support the following required scope types: <ul><li>IPv4 addresses in dotted quad format</li><li>IPv4 address prefixes in CIDR notation <a href="#RFC4632">[RFC4632]</a></li><li>IPv6 addresses <a href="#RFC2373">[RFC2373]</a></li><li>IPv6 address prefixes <a href="#RFC2373">[RFC2373]</a></li><li>Domain names <a href="#RFC1035">[RFC1035]</a></li></ul><p> </p></dd>
   <dt></dt>
   <dd style="margin-left: 8">The following mitigation scope types are OPTIONAL: <ul><li>Uniform Resource Identifiers <a href="#RFC3986">[RFC3986]</a></li></ul><p> </p></dd>
@@ -629,12 +629,12 @@
   <dd style="margin-left: 8">If there is additional information available narrowing the scope of any requested attack response, such as targeted port range, protocol, or service, DOTS clients SHOULD include that information in client signals. DOTS clients MAY also include additional attack details. Such supplemental information is OPTIONAL, and DOTS servers MAY ignore it when enabling countermeasures on the mitigator.</dd>
   <dt></dt>
   <dd style="margin-left: 8">As an active attack evolves, clients MUST be able to adjust as necessary the scope of requested mitigation by refining the scope of resources requiring mitigation.</dd>
-  <dt>OP-007</dt>
+  <dt>SIG-007</dt>
   <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request by a DOTS client is active, DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the DOTS server, per &#8220;Automatic or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS Mitigation Services&#8221; in <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>. DOTS servers MAY use the efficacy metric to adjust countermeasures activated on a mitigator on behalf of a DOTS client.</dd>
-  <dt>OP-008</dt>
+  <dt>SIG-008</dt>
   <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a single administrative entity may send conflicting mitigation requests for pool of protected resources , as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
-  <dt>OP-009:</dt>
-  <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. As UDP is the recommended transport for the DOTS signal channel, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS. Regardless of transport, DOTS protocols MUST follow established best common practices (BCPs) for NAT traversal.</dd>
+  <dt>SIG-009:</dt>
+  <dd style="margin-left: 8">Network Address Translator Traversal: The DOTS protocol MUST operate over networks in which Network Address Translation (NAT) is deployed. If UDP is used as the transport for the DOTS signal channel, all considerations in &#8220;Middlebox Traversal Guidelines&#8221; in <a href="#RFC5405">[RFC5405]</a> apply to DOTS.  Regardless of transport, DOTS protocols MUST follow established best common practices (BCPs) for NAT traversal.</dd>
 </dl>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#data-channel-requirements" id="data-channel-requirements">Data Channel Requirements</a></h1>
 <p id="rfc.section.2.3.p.1">The data channel is intended to be used for bulk data exchanges between DOTS agents. Unlike the signal channel, which must operate nominally even when confronted with signal degradation due to packet loss, the data channel is not expected to be constructed to deal with attack conditions.  As the primary function of the data channel is data exchange, a reliable transport is required in order for DOTS agents to detect data delivery success or failure.</p>
@@ -647,7 +647,7 @@
   <dt>DATA-002</dt>
   <dd style="margin-left: 8">Data privacy and integrity: Transmissions over the data channel are likely to contain operationally or privacy-sensitive information or instructions from the remote DOTS agent. Theft or modification of data channel transmissions could lead to information leaks or malicious transactions on behalf of the sending agent (see <a href="#security-considerations">Section 4</a> below). Consequently data sent over the data channel MUST be encrypted and authenticated using current industry best practices.  DOTS servers MUST enable means to prevent leaking operationally or privacy-sensitive data. Although administrative entities participating in DOTS may detail what data may be revealed to third-party DOTS agents, such considerations are not in scope for this document.</dd>
   <dt>DATA-003</dt>
-  <dd style="margin-left: 8">Resource Configuration: To help meet the general and operational requirements in this document, DOTS server implementations MUST provide an interface to configure resource identifiers, as described in OP-007.  DOTS server implementations MAY expose additional configurability. Additional configurability is implementation-specific.</dd>
+  <dd style="margin-left: 8">Resource Configuration: To help meet the general and signal channel requirements in this document, DOTS server implementations MUST provide an interface to configure resource identifiers, as described in SIG-007.  DOTS server implementations MAY expose additional configurability. Additional configurability is implementation-specific.</dd>
   <dt>DATA-004</dt>
   <dd style="margin-left: 8">Black- and whitelist management: DOTS servers SHOULD provide methods for DOTS clients to manage black- and white-lists of traffic destined for resources belonging to a client.</dd>
   <dt></dt>
@@ -685,7 +685,7 @@
   <dt>DM-003:</dt>
   <dd style="margin-left: 8">Mitigation Status Representation: The data model MUST provide the ability to represent a request for mitigation and the withdrawal of such a request. The data model MUST also support a representation of currently requested mitigation status, including failures and their causes.</dd>
   <dt>DM-004:</dt>
-  <dd style="margin-left: 8">Mitigation Scope Representation: The data model MUST support representation of a requested mitigation&#8217;s scope. As mitigation scope may be represented in several different ways, per OP-006 above, the data model MUST be capable of flexible representation of mitigation scope.</dd>
+  <dd style="margin-left: 8">Mitigation Scope Representation: The data model MUST support representation of a requested mitigation&#8217;s scope. As mitigation scope may be represented in several different ways, per SIG-006 above, the data model MUST be capable of flexible representation of mitigation scope.</dd>
   <dt>DM-005:</dt>
   <dd style="margin-left: 8">Mitigation Lifetime Representation: The data model MUST support representation of a mitigation request&#8217;s lifetime, including mitigations with no specified end time.</dd>
   <dt>DM-006:</dt>
@@ -693,13 +693,13 @@
   <dt>DM-007:</dt>
   <dd style="margin-left: 8">Acceptable Signal Loss Representation: The data model MUST be able to represent the DOTS agent&#8217;s preference for acceptable signal loss when establishing a signaling session, as described in GEN-002.</dd>
   <dt>DM-008:</dt>
-  <dd style="margin-left: 8">Heartbeat Interval Representation: The data model MUST be able to represent the DOTS agent&#8217;s preferred heartbeat interval, which the client may include when establishing the signal channel, as described in OP-002.</dd>
+  <dd style="margin-left: 8">Heartbeat Interval Representation: The data model MUST be able to represent the DOTS agent&#8217;s preferred heartbeat interval, which the client may include when establishing the signal channel, as described in SIG-002.</dd>
   <dt>DM-009:</dt>
   <dd style="margin-left: 8">Relationship to Transport: The DOTS data model MUST NOT depend on the specifics of any transport to represent fields in the model.</dd>
 </dl>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#congestion-control-considerations" id="congestion-control-considerations">Congestion Control Considerations</a></h1>
 <h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> <a href="#signal-channel" id="signal-channel">Signal Channel</a></h1>
-<p id="rfc.section.3.1.p.1">As part of a protocol expected to operate over links affected by DDoS attack traffic, the DOTS signal channel MUST NOT contribute significantly to link congestion. To meet the operational requirements above, DOTS signal channel implementations MUST support UDP. However, UDP when deployed naively can be a source of network congestion, as discussed in <a href="#RFC5405">[RFC5405]</a>. Signal channel implementations using UDP MUST therefore include a congestion control mechanism.</p>
+<p id="rfc.section.3.1.p.1">As part of a protocol expected to operate over links affected by DDoS attack traffic, the DOTS signal channel MUST NOT contribute significantly to link congestion. To meet the signal channel requirements above, DOTS signal channel implementations SHOULD support connectionless transports. However, some connectionless transports when deployed naively can be a source of network congestion, as discussed in <a href="#RFC5405">[RFC5405]</a>. Signal channel implementations using such connectionless transports, such as UDP, therefore MUST include a congestion control mechanism.</p>
 <p id="rfc.section.3.1.p.2">Signal channel implementations using TCP may rely on built-in TCP congestion control support.</p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> <a href="#data-channel" id="data-channel">Data Channel</a></h1>
 <p id="rfc.section.3.2.p.1">As specified in DATA-001, the data channel requires reliable, in-order message delivery. Data channel implementations using TCP may rely on the TCP implementation&#8217;s built-in congestion control mechanisms.</p>

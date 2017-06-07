@@ -5,10 +5,10 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                      Arbor Networks, Inc.
 Intended status: Informational                              R. Moskowitz
-Expires: December 3, 2017                                 HTT Consulting
+Expires: December 8, 2017                                 HTT Consulting
                                                                 T. Reddy
                                                             McAfee, Inc.
-                                                           June 01, 2017
+                                                           June 06, 2017
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 3, 2017.
+   This Internet-Draft will expire on December 8, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 1]
+Mortensen, et al.       Expires December 8, 2017                [Page 1]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -68,7 +68,7 @@ Table of Contents
      1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Requirements  . . . . . . . . . . . . . . . . . . . . . . . .   5
      2.1.  General Requirements  . . . . . . . . . . . . . . . . . .   7
-     2.2.  Operational Requirements  . . . . . . . . . . . . . . . .   8
+     2.2.  Signal Channel Requirements . . . . . . . . . . . . . . .   8
      2.3.  Data Channel Requirements . . . . . . . . . . . . . . . .  11
      2.4.  Security requirements . . . . . . . . . . . . . . . . . .  12
      2.5.  Data Model Requirements . . . . . . . . . . . . . . . . .  13
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 2]
+Mortensen, et al.       Expires December 8, 2017                [Page 2]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -165,7 +165,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 3]
+Mortensen, et al.       Expires December 8, 2017                [Page 3]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -221,7 +221,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 4]
+Mortensen, et al.       Expires December 8, 2017                [Page 4]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -277,7 +277,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 5]
+Mortensen, et al.       Expires December 8, 2017                [Page 5]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -333,7 +333,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017                [Page 6]
+Mortensen, et al.       Expires December 8, 2017                [Page 6]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -343,7 +343,10 @@ Internet-Draft              DOTS Requirements                  June 2017
    GEN-001  Extensibility: Protocols and data models developed as part
       of DOTS MUST be extensible in order to keep DOTS adaptable to
       operational and proprietary DDoS defenses.  Future extensions MUST
-      be backward compatible.
+      be backward compatible.  DOTS protocols MUST use a version number
+      system to distinguish protocol revisions.  Implementations of
+      older protocol versions SHOULD ignore information added to DOTS
+      messages as part of newer protocol versions.
 
    GEN-002  Resilience and Robustness: The signaling protocol MUST be
       designed to maximize the probability of signal delivery even under
@@ -363,20 +366,13 @@ Internet-Draft              DOTS Requirements                  June 2017
       bidirectional signal channel to allow for unsolicited message
       delivery, enabling asynchronous notifications between agents.
 
-   GEN-004  Sub-MTU Message Size: To avoid message fragmentation and the
-      consequently decreased probability of message delivery, signaling
-      protocol message size MUST be kept under signaling Path Maximum
-      Transmission Unit (PMTU), including the byte overhead of any
-      encapsulation, transport headers, and transport- or message-level
-      security.
-
-      DOTS agents SHOULD attempt to learn the PMTU through mechanisms
-      such as Path MTU Discovery [RFC1191] or Packetization Layer Path
-      MTU Discovery [RFC4821].  If the PMTU cannot be discovered, DOTS
-      agents SHOULD assume a PMTU of 1280 bytes.  If IPv4 support on
-      legacy or otherwise unusual networks is a consideration and PMTU
-      is unknown, DOTS implementations MAY rely on a PMTU of 576 bytes,
-      as discussed in [RFC0791] and [RFC1122].
+   GEN-004  Path MTU Discovery: DOTS agents SHOULD attempt to learn the
+      PMTU through mechanisms such as Path MTU Discovery [RFC1191] or
+      Packetization Layer Path MTU Discovery [RFC4821].  If the PMTU
+      cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280
+      bytes.  If IPv4 support on legacy or otherwise unusual networks is
+      a consideration and PMTU is unknown, DOTS implementations MAY rely
+      on a PMTU of 576 bytes, as discussed in [RFC0791] and [RFC1122].
 
    GEN-005  Bulk Data Exchange: Infrequent bulk data exchange between
       DOTS agents can also significantly augment attack response
@@ -385,38 +381,38 @@ Internet-Draft              DOTS Requirements                  June 2017
       exchange of incident reports; and other hinting or configuration
       supplementing attack response.
 
-
-
-
-
-Mortensen, et al.       Expires December 3, 2017                [Page 7]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
-
       As the resilience requirements for the DOTS signal channel mandate
       small signal message size, a separate, secure data channel
       utilizing a reliable transport protocol MUST be used for bulk data
       exchange.
 
-2.2.  Operational Requirements
 
-   OP-001  Use of Common Transport Protocols: DOTS MUST operate over
+
+
+Mortensen, et al.       Expires December 8, 2017                [Page 7]
+
+Internet-Draft              DOTS Requirements                  June 2017
+
+
+2.2.  Signal Channel Requirements
+
+   SIG-001  Use of Common Transport Protocols: DOTS MUST operate over
       common widely deployed and standardized transport protocols.
-      While the User Datagram Protocol (UDP) [RFC0768] SHOULD be used
-      for the signal channel, the Transmission Control Protocol (TCP)
-      [RFC0793] MAY be used if necessary due to network policy or
-      middlebox capabilities or configurations.  The data channel MUST
-      use a reliable transport; see Section 2.3 below.
+      While connectionless transport such as the User Datagram Protocol
+      (UDP) [RFC0768] SHOULD be used for the signal channel, the
+      Transmission Control Protocol (TCP) [RFC0793] MAY be used if
+      necessary due to network policy or middlebox capabilities or
+      configurations.  The data channel MUST use a reliable transport;
+      see Section 2.3 below.
 
-   OP-002  Session Health Monitoring: Peer DOTS agents MUST regularly
+   SIG-002  Session Health Monitoring: Peer DOTS agents MUST regularly
       send heartbeats to each other after mutual authentication in order
       to keep the DOTS session active.  A session MUST be considered
       active until a DOTS agent explicitly ends the session, or either
       DOTS agent fails to receive heartbeats from the other after a
       mutually agreed upon timeout period has elapsed.
 
-   OP-003  Session Redirection: In order to increase DOTS operational
+   SIG-003  Session Redirection: In order to increase DOTS operational
       flexibility and scalability, DOTS servers SHOULD be able to
       redirect DOTS clients to another DOTS server at any time.  DOTS
       clients MUST NOT assume the redirection target DOTS server shares
@@ -431,7 +427,7 @@ Internet-Draft              DOTS Requirements                  June 2017
       while mitigation is enabled during an active attack against a
       target in the DOTS client's domain.
 
-   OP-004  Mitigation Requests and Status: Authorized DOTS clients MUST
+   SIG-004  Mitigation Requests and Status: Authorized DOTS clients MUST
       be able to request scoped mitigation from DOTS servers.  DOTS
       servers MUST send mitigation request status in response to DOTS
       clients requests for mitigation, and SHOULD accept scoped
@@ -441,20 +437,18 @@ Internet-Draft              DOTS Requirements                  June 2017
 
       Due to the higher likelihood of packet loss during a DDoS attack,
       DOTS servers SHOULD regularly send mitigation status to authorized
-
-
-
-
-Mortensen, et al.       Expires December 3, 2017                [Page 8]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
-
       DOTS clients which have requested and been granted mitigation,
       regardless of client requests for mitigation status.
 
       When DOTS client-requested mitigation is active, DOTS server
       status messages SHOULD include the following mitigation metrics:
+
+
+
+Mortensen, et al.       Expires December 8, 2017                [Page 8]
+
+Internet-Draft              DOTS Requirements                  June 2017
+
 
       *  Total number of packets blocked by the mitigation
 
@@ -474,18 +468,23 @@ Internet-Draft              DOTS Requirements                  June 2017
 
       To protect against route or DNS flapping caused by a client
       rapidly toggling mitigation, and to dampen the effect of
-      oscillating attacks, DOTS servers MAY continue mitigation for a
-      period of up to five minutes after acknowledging a DOTS client's
+      oscillating attacks, DOTS servers MAY allow mitigation to continue
+      for a limited period after acknowledging a DOTS client's
       withdrawal of a mitigation request.  During this period, DOTS
       server status messages SHOULD indicate that mitigation is active
-      but terminating.  After the five-minute period elapses, the DOTS
-      server MUST treat the mitigation as terminated, as the DOTS client
-      is no longer responsible for the mitigation.  For example, if
-      there is a financial relationship between the DOTS client and
-      server domains, the DOTS client ceases incurring cost at this
-      point.
+      but terminating.
 
-   OP-005  Mitigation Lifetime: DOTS servers MUST support mitigation
+      The active-but-terminating period is initially 30 seconds.  If the
+      client requests mitigation again before that 30 second window
+      elapses, the DOTS server MAY exponentially increase the active-
+      but-terminating period up to a maximum of 240 seconds (4 minutes).
+      After the active-but-terminating period elapses, the DOTS server
+      MUST treat the mitigation as terminated, as the DOTS client is no
+      longer responsible for the mitigation.  For example, if there is a
+      financial relationship between the DOTS client and server domains,
+      the DOTS client ceases incurring cost at this point.
+
+   SIG-005  Mitigation Lifetime: DOTS servers MUST support mitigation
       lifetimes, and MUST terminate a mitigation when the lifetime
       elapses.  DOTS servers also MUST support renewal of mitigation
       lifetimes in mitigation requests from DOTS clients, allowing
@@ -495,19 +494,18 @@ Internet-Draft              DOTS Requirements                  June 2017
       DOTS servers MUST treat a mitigation terminated due to lifetime
       expiration exactly as if the DOTS client originating the
       mitigation had asked to end the mitigation, including the five-
-      minute termination period, as described above in OP-004.
+      minute termination period, as described above in SIG-004.
+
+      DOTS clients SHOULD include a mitigation lifetime in all
+      mitigation requests.  If a DOTS client does not include a
 
 
 
-
-
-Mortensen, et al.       Expires December 3, 2017                [Page 9]
+Mortensen, et al.       Expires December 8, 2017                [Page 9]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
 
-      DOTS clients SHOULD include a mitigation lifetime in all
-      mitigation requests.  If a DOTS client does not include a
       mitigation lifetime in requests for help sent to the DOTS server,
       the DOTS server will use a reasonable default as defined by the
       protocol.
@@ -518,9 +516,9 @@ Internet-Draft              DOTS Requirements                  June 2017
       requesting protection.  DOTS servers MAY refuse mitigations with
       indefinite lifetimes, for policy reasons.  The reasons themselves
       are out of scope for this document, but MUST be included in the
-      mitigation rejection message from the server, per OP-004.
+      mitigation rejection message from the server, per SIG-004.
 
-   OP-006  Mitigation Scope: DOTS clients MUST indicate desired
+   SIG-006  Mitigation Scope: DOTS clients MUST indicate desired
       mitigation scope.  The scope type will vary depending on the
       resources requiring mitigation.  All DOTS agent implementations
       MUST support the following required scope types:
@@ -552,21 +550,19 @@ Internet-Draft              DOTS Requirements                  June 2017
       DOTS servers MAY ignore it when enabling countermeasures on the
       mitigator.
 
-
-
-
-
-
-Mortensen, et al.       Expires December 3, 2017               [Page 10]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
-
       As an active attack evolves, clients MUST be able to adjust as
       necessary the scope of requested mitigation by refining the scope
       of resources requiring mitigation.
 
-   OP-007  Mitigation Efficacy: When a mitigation request by a DOTS
+
+
+
+Mortensen, et al.       Expires December 8, 2017               [Page 10]
+
+Internet-Draft              DOTS Requirements                  June 2017
+
+
+   SIG-007  Mitigation Efficacy: When a mitigation request by a DOTS
       client is active, DOTS clients SHOULD transmit a metric of
       perceived mitigation efficacy to the DOTS server, per "Automatic
       or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS
@@ -574,7 +570,7 @@ Internet-Draft              DOTS Requirements                  June 2017
       MAY use the efficacy metric to adjust countermeasures activated on
       a mitigator on behalf of a DOTS client.
 
-   OP-008  Conflict Detection and Notification: Multiple DOTS clients
+   SIG-008  Conflict Detection and Notification: Multiple DOTS clients
       controlled by a single administrative entity may send conflicting
       mitigation requests for pool of protected resources , as a result
       of misconfiguration, operator error, or compromised DOTS clients.
@@ -586,9 +582,9 @@ Internet-Draft              DOTS Requirements                  June 2017
       SHOULD indicate the nature and scope of the conflict, for example,
       the overlapping prefix range in a conflicting mitigation request.
 
-   OP-009:  Network Address Translator Traversal: The DOTS protocol MUST
-      operate over networks in which Network Address Translation (NAT)
-      is deployed.  As UDP is the recommended transport for the DOTS
+   SIG-009:  Network Address Translator Traversal: The DOTS protocol
+      MUST operate over networks in which Network Address Translation
+      (NAT) is deployed.  If UDP is used as the transport for the DOTS
       signal channel, all considerations in "Middlebox Traversal
       Guidelines" in [RFC5405] apply to DOTS.  Regardless of transport,
       DOTS protocols MUST follow established best common practices
@@ -610,17 +606,18 @@ Internet-Draft              DOTS Requirements                  June 2017
    a collection of prefixes it wants to refer to by alias when
    requesting mitigation, to which the server would respond with a
    success status and the new prefix group alias, or an error status and
+   message in the event the DOTS client's data channel request failed.
+   The transactional nature of such data exchanges suggests a separate
+   set of requirements for the data channel, while the potentially
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 11]
+
+Mortensen, et al.       Expires December 8, 2017               [Page 11]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
 
-   message in the event the DOTS client's data channel request failed.
-   The transactional nature of such data exchanges suggests a separate
-   set of requirements for the data channel, while the potentially
    sensitive content sent between DOTS agents requires extra precautions
    to ensure data privacy and authenticity.
 
@@ -640,12 +637,12 @@ Internet-Draft              DOTS Requirements                  June 2017
       may be revealed to third-party DOTS agents, such considerations
       are not in scope for this document.
 
-   DATA-003  Resource Configuration: To help meet the general and
-      operational requirements in this document, DOTS server
-      implementations MUST provide an interface to configure resource
-      identifiers, as described in OP-007.  DOTS server implementations
-      MAY expose additional configurability.  Additional configurability
-      is implementation-specific.
+   DATA-003  Resource Configuration: To help meet the general and signal
+      channel requirements in this document, DOTS server implementations
+      MUST provide an interface to configure resource identifiers, as
+      described in SIG-007.  DOTS server implementations MAY expose
+      additional configurability.  Additional configurability is
+      implementation-specific.
 
    DATA-004  Black- and whitelist management: DOTS servers SHOULD
       provide methods for DOTS clients to manage black- and white-lists
@@ -666,17 +663,17 @@ Internet-Draft              DOTS Requirements                  June 2017
    abuse, enabling or supplementing the very attacks DOTS purports to
    mitigate.
 
+   SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
+      each other before a DOTS session is considered valid.  The method
+      of authentication is not specified, but should follow current
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 12]
+Mortensen, et al.       Expires December 8, 2017               [Page 12]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
 
-   SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
-      each other before a DOTS session is considered valid.  The method
-      of authentication is not specified, but should follow current
       industry best practices with respect to any cryptographic
       mechanisms to authenticate the remote peer.
 
@@ -722,17 +719,16 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    DM-002:  Versioning: To ensure interoperability between DOTS protocol
       implementations, data models MUST be versioned.  The version
-
-
-
-Mortensen, et al.       Expires December 3, 2017               [Page 13]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
-
       number of the initial data model SHALL be 1.  Each published
       change to the initial published DOTS data model SHALL increment
       the data model version by 1.
+
+
+
+Mortensen, et al.       Expires December 8, 2017               [Page 13]
+
+Internet-Draft              DOTS Requirements                  June 2017
+
 
       How the protocol represents data model versions is not defined in
       this document.
@@ -745,7 +741,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    DM-004:  Mitigation Scope Representation: The data model MUST support
       representation of a requested mitigation's scope.  As mitigation
-      scope may be represented in several different ways, per OP-006
+      scope may be represented in several different ways, per SIG-006
       above, the data model MUST be capable of flexible representation
       of mitigation scope.
 
@@ -765,7 +761,7 @@ Internet-Draft              DOTS Requirements                  June 2017
    DM-008:  Heartbeat Interval Representation: The data model MUST be
       able to represent the DOTS agent's preferred heartbeat interval,
       which the client may include when establishing the signal channel,
-      as described in OP-002.
+      as described in SIG-002.
 
    DM-009:  Relationship to Transport: The DOTS data model MUST NOT
       depend on the specifics of any transport to represent fields in
@@ -777,20 +773,21 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    As part of a protocol expected to operate over links affected by DDoS
    attack traffic, the DOTS signal channel MUST NOT contribute
-   significantly to link congestion.  To meet the operational
+   significantly to link congestion.  To meet the signal channel
+   requirements above, DOTS signal channel implementations SHOULD
+   support connectionless transports.  However, some connectionless
+   transports when deployed naively can be a source of network
+   congestion, as discussed in [RFC5405].  Signal channel
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 14]
+Mortensen, et al.       Expires December 8, 2017               [Page 14]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
 
-   requirements above, DOTS signal channel implementations MUST support
-   UDP.  However, UDP when deployed naively can be a source of network
-   congestion, as discussed in [RFC5405].  Signal channel
-   implementations using UDP MUST therefore include a congestion control
-   mechanism.
+   implementations using such connectionless transports, such as UDP,
+   therefore MUST include a congestion control mechanism.
 
    Signal channel implementations using TCP may rely on built-in TCP
    congestion control support.
@@ -837,7 +834,10 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 15]
+
+
+
+Mortensen, et al.       Expires December 8, 2017               [Page 15]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -893,7 +893,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 16]
+Mortensen, et al.       Expires December 8, 2017               [Page 16]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -949,7 +949,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 17]
+Mortensen, et al.       Expires December 8, 2017               [Page 17]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -1005,7 +1005,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 18]
+Mortensen, et al.       Expires December 8, 2017               [Page 18]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -1061,7 +1061,7 @@ Authors' Addresses
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 19]
+Mortensen, et al.       Expires December 8, 2017               [Page 19]
 
 Internet-Draft              DOTS Requirements                  June 2017
 
@@ -1117,4 +1117,4 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 3, 2017               [Page 20]
+Mortensen, et al.       Expires December 8, 2017               [Page 20]
