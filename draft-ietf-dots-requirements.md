@@ -172,8 +172,8 @@ DOTS server:
   client. A DOTS server MAY also be a mitigator.
 
 DOTS agent:
-: Any DOTS-aware software module capable of participating in a DOTS signaling
-  session.
+: Any DOTS-aware software module capable of participating in a DOTS signal
+  or data channel.
 
 DOTS gateway:
 : A logical DOTS agent resulting from the logical concatenation of a DOTS server
@@ -205,7 +205,7 @@ Server signal:
 : A message sent from a DOTS server to a DOTS client over the signal channel.
   Note that a server signal is not a response to client signal, but a DOTS
   server-initiated status message sent to DOTS clients with which the server has
-  established signaling sessions.
+  established signal channels.
 
 Data channel:
 : A secure communication layer between DOTS clients and DOTS servers used for
@@ -353,14 +353,14 @@ SIG-001
   {{data-channel-requirements}} below.
 
 SIG-002
-: Session Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
-  each other after mutual authentication in order to keep the DOTS session
-  active.  A session MUST be considered active until a DOTS agent explicitly
-  ends the session, or either DOTS agent fails to receive heartbeats from the
-  other after a mutually agreed upon timeout period has elapsed.
+: Channel Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
+  each other after mutual authentication in order to keep the DOTS signal
+  channel active. A signal channel MUST be considered active until a DOTS agent
+  explicitly ends the session, or either DOTS agent fails to receive heartbeats
+  from the other after a mutually agreed upon timeout period has elapsed.
 
 SIG-003
-: Session Redirection: In order to increase DOTS operational flexibility and
+: Channel Redirection: In order to increase DOTS operational flexibility and
   scalability, DOTS servers SHOULD be able to redirect DOTS clients to another
   DOTS server at any time. DOTS clients MUST NOT assume the redirection target
   DOTS server shares security state with the redirecting DOTS server. DOTS
@@ -573,9 +573,9 @@ enabling or supplementing the very attacks DOTS purports to mitigate.
 
 SEC-001
 : Peer Mutual Authentication: DOTS agents MUST authenticate each other before a
-  DOTS session is considered valid. The method of authentication is not
-  specified, but should follow current industry best practices with respect to
-  any cryptographic mechanisms to authenticate the remote peer.
+  DOTS signal or data channel is considered valid. The method of authentication
+  is not specified, but should follow current industry best practices with
+  respect to any cryptographic mechanisms to authenticate the remote peer.
 
 SEC-002
 : Message Confidentiality, Integrity and Authenticity: DOTS protocols MUST take
@@ -591,10 +591,10 @@ SEC-002
 
 : While the interfaces between downstream DOTS server and upstream DOTS client
   within a DOTS gateway are implementation-specific, those interfaces
-  nevertheless MUST provide security equivalent to that of the signaling
-  sessions bridged by gateways in the signaling path. For example, when a DOTS
-  gateway consisting of a DOTS server and DOTS client is running on the same
-  logical device, they must be within the same process security boundary.
+  nevertheless MUST provide security equivalent to that of the signal channels
+  bridged by gateways in the signaling path. For example, when a DOTS gateway
+  consisting of a DOTS server and DOTS client is running on the same logical
+  device, they must be within the same process security boundary.
 
 SEC-003
 : Message Replay Protection: In order to prevent a passive attacker from
@@ -651,7 +651,7 @@ DM-006:
 DM-007:
 : Acceptable Signal Loss Representation: The data model MUST be able to
   represent the DOTS agent's preference for acceptable signal loss when
-  establishing a signaling session, as described in GEN-002.
+  establishing a signal channel, as described in GEN-002.
 
 DM-008:
 : Heartbeat Interval Representation: The data model MUST be able to represent
