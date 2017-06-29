@@ -573,9 +573,7 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    SIG-008  Mitigation Efficacy: When a mitigation request by a DOTS
       client is active, DOTS clients SHOULD transmit a metric of
-      perceived mitigation efficacy to the DOTS server, per "Automatic
-      or Operator-Assisted CPE or PE Mitigators Request Upstream DDoS
-      Mitigation Services" in [I-D.ietf-dots-use-cases].  DOTS servers
+      perceived mitigation efficacy to the DOTS server.  DOTS servers
       MAY use the efficacy metric to adjust countermeasures activated on
       a mitigator on behalf of a DOTS client.
 
@@ -609,7 +607,9 @@ Internet-Draft              DOTS Requirements                  June 2017
    data exchange, a reliable transport is required in order for DOTS
    agents to detect data delivery success or failure.
 
-
+   The data channel must be extensible.  We anticipate the data channel
+   will be used for such purposes as configuration or resource
+   discovery.  For example, a DOTS client may submit to the DOTS server
 
 
 
@@ -618,9 +618,6 @@ Mortensen, et al.       Expires December 31, 2017              [Page 11]
 Internet-Draft              DOTS Requirements                  June 2017
 
 
-   The data channel must be extensible.  We anticipate the data channel
-   will be used for such purposes as configuration or resource
-   discovery.  For example, a DOTS client may submit to the DOTS server
    a collection of prefixes it wants to refer to by alias when
    requesting mitigation, to which the server would respond with a
    success status and the new prefix group alias, or an error status and
@@ -664,6 +661,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
       How the DOTS server determines client ownership of address space
       is not in scope.
+
+
+
 
 
 
