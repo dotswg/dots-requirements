@@ -437,7 +437,7 @@ SIG-006
   mitigation, including the active-but-terminating period, as described above
   in SIG-005.
 
-: DOTS clients SHOULD include a mitigation lifetime in all mitigation requests.
+: DOTS clients MUST include a mitigation lifetime in all mitigation requests.
   If a DOTS client does not include a mitigation lifetime in requests for help
   sent to the DOTS server, the DOTS server will use a reasonable default as
   defined by the protocol.
