@@ -403,7 +403,7 @@ SIG-005
 
   * Current number of bytes per second blocked
 
-: DOTS clients SHOULD take these metrics into account when determining whether
+: DOTS clients MAY take these metrics into account when determining whether
   to ask the DOTS server to cease mitigation.
 
 : Once a DOTS client requests mitigation, the client MAY withdraw that request
