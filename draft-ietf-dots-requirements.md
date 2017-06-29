@@ -54,11 +54,12 @@ normative:
   RFC1122:
   RFC1191:
   RFC2119:
-  RFC2373:
   RFC3986:
+  RFC4291:
   RFC4632:
   RFC4821:
   RFC5405:
+  RFC5952:
 
 informative:
   I-D.ietf-dots-architecture:
@@ -458,9 +459,9 @@ SIG-007
 
   * IPv4 address prefixes in CIDR notation [RFC4632]
 
-  * IPv6 addresses [RFC2373]
+  * IPv6 addresses [RFC4291]{{RFC5952}}
 
-  * IPv6 address prefixes [RFC2373]
+  * IPv6 address prefixes [RFC4291]{{RFC5952}}
 
   * Domain names [RFC1035]
 
