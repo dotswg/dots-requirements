@@ -490,10 +490,8 @@ SIG-007
 SIG-008
 : Mitigation Efficacy: When a mitigation request by a DOTS client is active,
   DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the
-  DOTS server, per "Automatic or Operator-Assisted CPE or PE Mitigators Request
-  Upstream DDoS Mitigation Services" in [I-D.ietf-dots-use-cases]. DOTS servers
-  MAY use the efficacy metric to adjust countermeasures activated on a mitigator
-  on behalf of a DOTS client.
+  DOTS server. DOTS servers MAY use the efficacy metric to adjust
+  countermeasures activated on a mitigator on behalf of a DOTS client.
 
 SIG-009
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
