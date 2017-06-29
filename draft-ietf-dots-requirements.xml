@@ -431,9 +431,9 @@ agent implementations MUST support the following required scope types:
 
       <list style="symbols">
         <t>IPv4 addresses in dotted quad format</t>
-        <t>IPv4 address prefixes in CIDR notation <xref target="RFC4632"></xref></t>
+        <t>IPv4 prefixes in CIDR notation <xref target="RFC4632"></xref></t>
         <t>IPv6 addresses <xref target="RFC4291"></xref><xref target="RFC5952"/></t>
-        <t>IPv6 address prefixes <xref target="RFC4291"></xref><xref target="RFC5952"/></t>
+        <t>IPv6 prefixes <xref target="RFC4291"></xref><xref target="RFC5952"/></t>
         <t>Domain names <xref target="RFC1035"></xref></t>
       </list>
   </t>

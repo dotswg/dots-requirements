@@ -457,11 +457,11 @@ SIG-007
 
   * IPv4 addresses in dotted quad format
 
-  * IPv4 address prefixes in CIDR notation [RFC4632]
+  * IPv4 prefixes in CIDR notation [RFC4632]
 
   * IPv6 addresses [RFC4291]{{RFC5952}}
 
-  * IPv6 address prefixes [RFC4291]{{RFC5952}}
+  * IPv6 prefixes [RFC4291]{{RFC5952}}
 
   * Domain names [RFC1035]
 
