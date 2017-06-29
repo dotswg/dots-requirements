@@ -650,9 +650,9 @@ Internet-Draft              DOTS Requirements                  June 2017
       additional configurability.  Additional configurability is
       implementation-specific.
 
-   DATA-004  Black- and whitelist management: DOTS servers SHOULD
-      provide methods for DOTS clients to manage black- and white-lists
-      of traffic destined for resources belonging to a client.
+   DATA-004  Black- and whitelist management: DOTS servers MUST provide
+      methods for DOTS clients to manage black- and white-lists of
+      traffic destined for resources belonging to a client.
 
       For example, a DOTS client should be able to create a black- or
       whitelist entry; retrieve a list of current entries from either

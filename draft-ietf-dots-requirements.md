@@ -559,7 +559,7 @@ DATA-003
   configurability is implementation-specific.
 
 DATA-004
-: Black- and whitelist management: DOTS servers SHOULD provide methods for
+: Black- and whitelist management: DOTS servers MUST provide methods for
   DOTS clients to manage black- and white-lists of traffic destined for
   resources belonging to a client.
 

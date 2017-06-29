@@ -525,7 +525,7 @@ interface to configure resource identifiers, as described in SIG-007.
 DOTS server implementations MAY expose additional configurability. Additional
 configurability is implementation-specific.</t>
   <t hangText='DATA-004'>
-  Black- and whitelist management: DOTS servers SHOULD provide methods for
+  Black- and whitelist management: DOTS servers MUST provide methods for
 DOTS clients to manage black- and white-lists of traffic destined for
 resources belonging to a client.</t>
   <t>For example, a DOTS client should be able to create a black- or whitelist
