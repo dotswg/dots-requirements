@@ -385,7 +385,7 @@ SHOULD include the following mitigation metrics:
         <t>Current number of bytes per second blocked</t>
       </list>
   </t>
-  <t>DOTS clients SHOULD take these metrics into account when determining whether
+  <t>DOTS clients MAY take these metrics into account when determining whether
 to ask the DOTS server to cease mitigation.</t>
   <t>Once a DOTS client requests mitigation, the client MAY withdraw that request
 at any time, regardless of whether mitigation is currently active. The DOTS

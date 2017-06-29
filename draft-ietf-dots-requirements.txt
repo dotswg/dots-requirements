@@ -466,8 +466,8 @@ Internet-Draft              DOTS Requirements                  June 2017
 
       *  Current number of bytes per second blocked
 
-      DOTS clients SHOULD take these metrics into account when
-      determining whether to ask the DOTS server to cease mitigation.
+      DOTS clients MAY take these metrics into account when determining
+      whether to ask the DOTS server to cease mitigation.
 
       Once a DOTS client requests mitigation, the client MAY withdraw
       that request at any time, regardless of whether mitigation is
