@@ -604,9 +604,17 @@ SEC-002
   device, they must be within the same process security boundary.
 
 SEC-003
-: Message Replay Protection: In order to prevent a passive attacker from
-  capturing and replaying old messages, DOTS protocols MUST provide a method
-  for replay detection.
+: Message Replay Protection: To prevent a passive attacker from capturing and
+  replaying old messages, and thereby potentially disrupting or influencing the
+  network policy of the receiving DOTS agent's domain, DOTS protocols MUST
+  provide a method for replay detection and prevention.
+
+: Within the signal channel, messages MUST be uniquely identified such that
+  replayed or duplicated messages may be detected and discarded. Unique
+  mitigation requests MUST be processed at most once. While specific signal
+  channel message types MAY be idempotent, mitigation requests are not, as
+  replaying a mitigation request may alter the lifetime or scope of a current
+  mitigation.
 
 
 Data Model Requirements                 {#data-model-requirements}
