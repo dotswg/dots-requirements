@@ -506,12 +506,14 @@ SIG-009
   mitigation request.
 
 SIG-010:
-: Network Address Translator Traversal: The DOTS protocol MUST operate over
-  networks in which Network Address Translation (NAT) is deployed. If UDP is
-  used as the transport for the DOTS signal channel, all considerations in
-  "Middlebox Traversal Guidelines" in [RFC5405] apply to DOTS.  Regardless of
-  transport, DOTS protocols MUST follow established best common practices (BCPs)
-  for NAT traversal.
+: Network Address Translator Traversal: DOTS clients may be deployed behind a
+  Network Address Translator (NAT), and need to communicate with DOTS servers
+  through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.
+
+: If UDP is used as the transport for the DOTS signal channel, all
+  considerations in "Middlebox Traversal Guidelines" in [RFC5405] apply to DOTS.
+  Regardless of transport, DOTS protocols MUST follow established best common
+  practices (BCPs) for NAT traversal.
 
 
 Data Channel Requirements       {#data-channel-requirements}

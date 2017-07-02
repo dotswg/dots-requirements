@@ -474,12 +474,13 @@ clients in conflict. The notification SHOULD indicate the nature and scope of
 the conflict, for example, the overlapping prefix range in a conflicting
 mitigation request.</t>
   <t hangText='SIG-010:'>
-  Network Address Translator Traversal: The DOTS protocol MUST operate over
-networks in which Network Address Translation (NAT) is deployed. If UDP is
-used as the transport for the DOTS signal channel, all considerations in
-&ldquo;Middlebox Traversal Guidelines&rdquo; in <xref target="RFC5405"></xref> apply to DOTS.  Regardless of
-transport, DOTS protocols MUST follow established best common practices (BCPs)
-for NAT traversal.</t>
+  Network Address Translator Traversal: DOTS clients may be deployed behind a
+Network Address Translator (NAT), and need to communicate with DOTS servers
+through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.</t>
+  <t>If UDP is used as the transport for the DOTS signal channel, all
+considerations in &ldquo;Middlebox Traversal Guidelines&rdquo; in <xref target="RFC5405"></xref> apply to DOTS.
+Regardless of transport, DOTS protocols MUST follow established best common
+practices (BCPs) for NAT traversal.</t>
 </list></t>
 
 </section>
