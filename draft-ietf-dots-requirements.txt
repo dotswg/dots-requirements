@@ -5,10 +5,10 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                            Arbor Networks
 Intended status: Informational                              R. Moskowitz
-Expires: December 31, 2017                                HTT Consulting
+Expires: January 3, 2018                                  HTT Consulting
                                                                 T. Reddy
                                                             McAfee, Inc.
-                                                           June 29, 2017
+                                                           July 02, 2017
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 31, 2017.
+   This Internet-Draft will expire on January 3, 2018.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 1]
+Mortensen, et al.        Expires January 3, 2018                [Page 1]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -71,24 +71,24 @@ Table of Contents
      2.2.  Signal Channel Requirements . . . . . . . . . . . . . . .   7
      2.3.  Data Channel Requirements . . . . . . . . . . . . . . . .  11
      2.4.  Security requirements . . . . . . . . . . . . . . . . . .  13
-     2.5.  Data Model Requirements . . . . . . . . . . . . . . . . .  13
+     2.5.  Data Model Requirements . . . . . . . . . . . . . . . . .  14
    3.  Congestion Control Considerations . . . . . . . . . . . . . .  15
      3.1.  Signal Channel  . . . . . . . . . . . . . . . . . . . . .  15
      3.2.  Data Channel  . . . . . . . . . . . . . . . . . . . . . .  15
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
-   5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  15
+   5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  16
    6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  16
    7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  16
      7.1.  04 revision . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.2.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.2.  03 revision . . . . . . . . . . . . . . . . . . . . . . .  17
      7.3.  02 revision . . . . . . . . . . . . . . . . . . . . . . .  17
      7.4.  01 revision . . . . . . . . . . . . . . . . . . . . . . .  17
-     7.5.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  17
-     7.6.  Initial revision  . . . . . . . . . . . . . . . . . . . .  17
+     7.5.  00 revision . . . . . . . . . . . . . . . . . . . . . . .  18
+     7.6.  Initial revision  . . . . . . . . . . . . . . . . . . . .  18
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  19
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 2]
+Mortensen, et al.        Expires January 3, 2018                [Page 2]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    attack mitigation solutions themselves, or simply find themselves
@@ -165,9 +165,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 3]
+Mortensen, et al.        Expires January 3, 2018                [Page 3]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    DDoS attack telemetry:  Collected measurements and behavioral
@@ -221,9 +221,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 4]
+Mortensen, et al.        Expires January 3, 2018                [Page 4]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    Heartbeat:  A message transmitted between DOTS agents over the signal
@@ -277,9 +277,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 5]
+Mortensen, et al.        Expires January 3, 2018                [Page 5]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    The DOTS protocol must at a minimum make it possible for a DOTS
@@ -333,9 +333,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 6]
+Mortensen, et al.        Expires January 3, 2018                [Page 6]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
 2.1.  General Requirements
@@ -389,9 +389,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 7]
+Mortensen, et al.        Expires January 3, 2018                [Page 7]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
       necessary due to network policy or middlebox capabilities or
@@ -445,9 +445,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 8]
+Mortensen, et al.        Expires January 3, 2018                [Page 8]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
       Due to the higher likelihood of packet loss during a DDoS attack,
@@ -501,9 +501,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017               [Page 9]
+Mortensen, et al.        Expires January 3, 2018                [Page 9]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
       DOTS servers MUST treat a mitigation terminated due to lifetime
@@ -557,9 +557,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017              [Page 10]
+Mortensen, et al.        Expires January 3, 2018               [Page 10]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
       in client signals.  DOTS clients MAY also include additional
@@ -613,9 +613,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017              [Page 11]
+Mortensen, et al.        Expires January 3, 2018               [Page 11]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
    a collection of prefixes it wants to refer to by alias when
@@ -669,9 +669,9 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-Mortensen, et al.       Expires December 31, 2017              [Page 12]
+Mortensen, et al.        Expires January 3, 2018               [Page 12]
 
-Internet-Draft              DOTS Requirements                  June 2017
+Internet-Draft              DOTS Requirements                  July 2017
 
 
 2.4.  Security requirements
@@ -708,9 +708,27 @@ Internet-Draft              DOTS Requirements                  June 2017
       server and DOTS client is running on the same logical device, they
       must be within the same process security boundary.
 
-   SEC-003  Message Replay Protection: In order to prevent a passive
-      attacker from capturing and replaying old messages, DOTS protocols
-      MUST provide a method for replay detection.
+   SEC-003  Message Replay Protection: To prevent a passive attacker
+      from capturing and replaying old messages, and thereby potentially
+      disrupting or influencing the network policy of the receiving DOTS
+      agent's domain, DOTS protocols MUST provide a method for replay
+      detection and prevention.
+
+      Within the signal channel, messages MUST be uniquely identified
+      such that replayed or duplicated messages may be detected and
+      discarded.  Unique mitigation requests MUST be processed at most
+      once.  While specific signal channel message types MAY be
+      idempotent, mitigation requests are not, as replaying a mitigation
+      request may alter the lifetime or scope of a current mitigation.
+
+
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 13]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
 
 2.5.  Data Model Requirements
 
@@ -722,14 +740,6 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    DM-001:  Structure: The data model structure for the DOTS protocol
       may be described by a single module, or be divided into related
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 13]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
-
       collections of hierarchical modules and sub-modules.  If the data
       model structure is split across modules, those distinct modules
       MUST allow references to describe the overall data model's
@@ -769,6 +779,13 @@ Internet-Draft              DOTS Requirements                  June 2017
       signal loss when establishing a signal channel, as described in
       GEN-002.
 
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 14]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    DM-008:  Heartbeat Interval Representation: The data model MUST be
       able to represent the DOTS agent's preferred heartbeat interval,
       which the client may include when establishing the signal channel,
@@ -777,14 +794,6 @@ Internet-Draft              DOTS Requirements                  June 2017
    DM-009:  Relationship to Transport: The DOTS data model MUST NOT
       depend on the specifics of any transport to represent fields in
       the model.
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 14]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
 3.  Congestion Control Considerations
 
@@ -825,6 +834,14 @@ Internet-Draft              DOTS Requirements                  June 2017
    mitigation can be managed through current secure communications best
    practices.  See Section 2.4 above for a detailed discussion.
 
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 15]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
 5.  Contributors
 
    Mohamed Boucadair
@@ -834,13 +851,6 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    Flemming Andreasen
       Cisco Systems, Inc.
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 15]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
       fandreas@cisco.com
 
@@ -876,6 +886,18 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    o  Expanded list of DDoS types to include network links
 
+
+
+
+
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 16]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
 7.2.  03 revision
 
    2016-10-30
@@ -889,14 +911,6 @@ Internet-Draft              DOTS Requirements                  June 2017
 
    o  Added data model requirements reflecting client control over the
       above.
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 16]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
 7.3.  02 revision
 
@@ -932,6 +946,14 @@ Internet-Draft              DOTS Requirements                  June 2017
    o  Added proposed operational requirement to cache lookups of all
       kinds.
 
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 17]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    o  Added proposed operational requirement regarding NAT traversal.
 
    o  Removed redundant mutual authentication requirement from data
@@ -944,15 +966,6 @@ Internet-Draft              DOTS Requirements                  June 2017
 7.6.  Initial revision
 
    2015-09-24 Andrew Mortensen
-
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 17]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
 8.  References
 
@@ -988,6 +1001,15 @@ Internet-Draft              DOTS Requirements                  June 2017
               RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 18]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66, RFC
               3986, DOI 10.17487/RFC3986, January 2005,
@@ -1001,14 +1023,6 @@ Internet-Draft              DOTS Requirements                  June 2017
               (CIDR): The Internet Address Assignment and Aggregation
               Plan", BCP 122, RFC 4632, DOI 10.17487/RFC4632, August
               2006, <http://www.rfc-editor.org/info/rfc4632>.
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 18]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
    [RFC4821]  Mathis, M. and J. Heffner, "Packetization Layer Path MTU
               Discovery", RFC 4821, DOI 10.17487/RFC4821, March 2007,
@@ -1045,26 +1059,19 @@ Internet-Draft              DOTS Requirements                  June 2017
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
 
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 19]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
               RFC4732, December 2006,
               <http://www.rfc-editor.org/info/rfc4732>.
 
 Authors' Addresses
-
-
-
-
-
-
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 19]
-
-Internet-Draft              DOTS Requirements                  June 2017
-
 
    Andrew Mortensen
    Arbor Networks
@@ -1110,11 +1117,4 @@ Internet-Draft              DOTS Requirements                  June 2017
 
 
 
-
-
-
-
-
-
-
-Mortensen, et al.       Expires December 31, 2017              [Page 20]
+Mortensen, et al.        Expires January 3, 2018               [Page 20]

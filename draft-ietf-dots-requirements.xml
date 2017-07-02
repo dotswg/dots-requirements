@@ -68,7 +68,7 @@
       </address>
     </author>
 
-    <date year="2017" month="June" day="29"/>
+    <date year="2017" month="July" day="02"/>
 
     <area>Security</area>
     <workgroup>DOTS</workgroup>
@@ -565,9 +565,16 @@ bridged by gateways in the signaling path. For example, when a DOTS gateway
 consisting of a DOTS server and DOTS client is running on the same logical
 device, they must be within the same process security boundary.</t>
   <t hangText='SEC-003'>
-  Message Replay Protection: In order to prevent a passive attacker from
-capturing and replaying old messages, DOTS protocols MUST provide a method
-for replay detection.</t>
+  Message Replay Protection: To prevent a passive attacker from capturing and
+replaying old messages, and thereby potentially disrupting or influencing the
+network policy of the receiving DOTS agent&rsquo;s domain, DOTS protocols MUST
+provide a method for replay detection and prevention.</t>
+  <t>Within the signal channel, messages MUST be uniquely identified such that
+replayed or duplicated messages may be detected and discarded. Unique
+mitigation requests MUST be processed at most once. While specific signal
+channel message types MAY be idempotent, mitigation requests are not, as
+replaying a mitigation request may alter the lifetime or scope of a current
+mitigation.</t>
 </list></t>
 
 </section>
