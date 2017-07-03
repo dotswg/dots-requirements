@@ -438,7 +438,7 @@ SIG-006
   mitigation, including the active-but-terminating period, as described above
   in SIG-005.
 
-: DOTS clients MUST include a mitigation lifetime in all mitigation requests.
+: DOTS clients SHOULD include a mitigation lifetime in all mitigation requests.
   If a DOTS client does not include a mitigation lifetime in requests for help
   sent to the DOTS server, the DOTS server will use a reasonable default as
   defined by the protocol.
@@ -613,10 +613,7 @@ SEC-003
 
 : Within the signal channel, messages MUST be uniquely identified such that
   replayed or duplicated messages may be detected and discarded. Unique
-  mitigation requests MUST be processed at most once. While specific signal
-  channel message types MAY be idempotent, mitigation requests are not, as
-  replaying a mitigation request may alter the lifetime or scope of a current
-  mitigation.
+  mitigation requests MUST be processed at most once.
 
 SEC-004
 : Authorization: DOTS servers MUST authorize all messages from DOTS clients
