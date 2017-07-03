@@ -75,7 +75,7 @@ Table of Contents
    3.  Congestion Control Considerations . . . . . . . . . . . . . .  15
      3.1.  Signal Channel  . . . . . . . . . . . . . . . . . . . . .  15
      3.2.  Data Channel  . . . . . . . . . . . . . . . . . . . . . .  15
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
    5.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  16
    6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  16
    7.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  16
@@ -730,6 +730,19 @@ Mortensen, et al.        Expires January 3, 2018               [Page 13]
 Internet-Draft              DOTS Requirements                  July 2017
 
 
+   SEC-004  Authorization: DOTS servers MUST authorize all messages from
+      DOTS clients which pertain to mitigation, configuration,
+      filtering, or status.
+
+      DOTS servers MUST reject mitigation requests with scopes which the
+      DOTS client is not authorized to manage.
+
+      Likewise, DOTS servers MUST refuse to allow creation, modification
+      or deletion of scope aliases and black-/white-lists when the DOTS
+      client is unauthorized.
+
+      The modes of authorization are implementation-specific.
+
 2.5.  Data Model Requirements
 
    The value of DOTS is in standardizing a mechanism to permit elements,
@@ -766,6 +779,13 @@ Internet-Draft              DOTS Requirements                  July 2017
       above, the data model MUST be capable of flexible representation
       of mitigation scope.
 
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 14]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    DM-005:  Mitigation Lifetime Representation: The data model MUST
       support representation of a mitigation request's lifetime,
       including mitigations with no specified end time.
@@ -778,13 +798,6 @@ Internet-Draft              DOTS Requirements                  July 2017
       be able to represent the DOTS agent's preference for acceptable
       signal loss when establishing a signal channel, as described in
       GEN-002.
-
-
-
-Mortensen, et al.        Expires January 3, 2018               [Page 14]
-
-Internet-Draft              DOTS Requirements                  July 2017
-
 
    DM-008:  Heartbeat Interval Representation: The data model MUST be
       able to represent the DOTS agent's preferred heartbeat interval,
@@ -819,6 +832,16 @@ Internet-Draft              DOTS Requirements                  July 2017
    rely on the TCP implementation's built-in congestion control
    mechanisms.
 
+
+
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 15]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
 4.  Security Considerations
 
    DOTS is at risk from three primary attacks:
@@ -833,14 +856,6 @@ Internet-Draft              DOTS Requirements                  July 2017
    address the blocking risk.  Impersonation and traffic injection
    mitigation can be managed through current secure communications best
    practices.  See Section 2.4 above for a detailed discussion.
-
-
-
-
-Mortensen, et al.        Expires January 3, 2018               [Page 15]
-
-Internet-Draft              DOTS Requirements                  July 2017
-
 
 5.  Contributors
 
@@ -876,6 +891,13 @@ Internet-Draft              DOTS Requirements                  July 2017
 
    o  Recast mitigation lifetime as a DOTS server requirement
 
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 16]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    o  Clarify DOTS server's responsibilities after client request to end
       mitigation
 
@@ -885,18 +907,6 @@ Internet-Draft              DOTS Requirements                  July 2017
       blocking
 
    o  Expanded list of DDoS types to include network links
-
-
-
-
-
-
-
-
-Mortensen, et al.        Expires January 3, 2018               [Page 16]
-
-Internet-Draft              DOTS Requirements                  July 2017
-
 
 7.2.  03 revision
 
@@ -937,6 +947,13 @@ Internet-Draft              DOTS Requirements                  July 2017
    o  Added proposed operational requirement to support conflict
       notification.
 
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 17]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    o  Added proposed operational requirement to support mitigation
       lifetime in mitigation requests.
 
@@ -945,14 +962,6 @@ Internet-Draft              DOTS Requirements                  July 2017
 
    o  Added proposed operational requirement to cache lookups of all
       kinds.
-
-
-
-
-Mortensen, et al.        Expires January 3, 2018               [Page 17]
-
-Internet-Draft              DOTS Requirements                  July 2017
-
 
    o  Added proposed operational requirement regarding NAT traversal.
 
@@ -992,15 +1001,6 @@ Internet-Draft              DOTS Requirements                  July 2017
               RFC1122, October 1989,
               <http://www.rfc-editor.org/info/rfc1122>.
 
-   [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
-              DOI 10.17487/RFC1191, November 1990,
-              <http://www.rfc-editor.org/info/rfc1191>.
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997,
-              <http://www.rfc-editor.org/info/rfc2119>.
-
 
 
 
@@ -1009,6 +1009,15 @@ Mortensen, et al.        Expires January 3, 2018               [Page 18]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
+
+   [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
+              DOI 10.17487/RFC1191, November 1990,
+              <http://www.rfc-editor.org/info/rfc1191>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997,
+              <http://www.rfc-editor.org/info/rfc2119>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66, RFC
@@ -1047,6 +1056,16 @@ Internet-Draft              DOTS Requirements                  July 2017
               Signaling (DOTS) Architecture", draft-ietf-dots-
               architecture-03 (work in progress), June 2017.
 
+
+
+
+
+
+Mortensen, et al.        Expires January 3, 2018               [Page 19]
+
+Internet-Draft              DOTS Requirements                  July 2017
+
+
    [I-D.ietf-dots-use-cases]
               Dobbins, R., Fouant, S., Migault, D., Moskowitz, R.,
               Teague, N., Xia, L., and K. Nishizuka, "Use cases for DDoS
@@ -1058,13 +1077,6 @@ Internet-Draft              DOTS Requirements                  July 2017
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
-
-
-
-Mortensen, et al.        Expires January 3, 2018               [Page 19]
-
-Internet-Draft              DOTS Requirements                  July 2017
-
 
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
               Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
@@ -1097,18 +1109,6 @@ Authors' Addresses
    India
 
    Email: TirumaleswarReddy_Konda@McAfee.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
