@@ -576,6 +576,14 @@ mitigation requests MUST be processed at most once. While specific signal
 channel message types MAY be idempotent, mitigation requests are not, as
 replaying a mitigation request may alter the lifetime or scope of a current
 mitigation.</t>
+  <t hangText='SEC-004'>
+  Authorization: DOTS servers MUST authorize all messages from DOTS clients
+which pertain to mitigation, configuration, filtering, or status.</t>
+  <t>DOTS servers MUST reject mitigation requests with scopes which the DOTS client
+is not authorized to manage.</t>
+  <t>Likewise, DOTS servers MUST refuse to allow creation, modification or deletion
+of scope aliases and black-/white-lists when the DOTS client is unauthorized.</t>
+  <t>The modes of authorization are implementation-specific.</t>
 </list></t>
 
 </section>

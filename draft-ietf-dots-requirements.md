@@ -618,6 +618,18 @@ SEC-003
   replaying a mitigation request may alter the lifetime or scope of a current
   mitigation.
 
+SEC-004
+: Authorization: DOTS servers MUST authorize all messages from DOTS clients
+  which pertain to mitigation, configuration, filtering, or status.
+
+: DOTS servers MUST reject mitigation requests with scopes which the DOTS client
+  is not authorized to manage.
+
+: Likewise, DOTS servers MUST refuse to allow creation, modification or deletion
+  of scope aliases and black-/white-lists when the DOTS client is unauthorized.
+
+: The modes of authorization are implementation-specific.
+
 
 Data Model Requirements                 {#data-model-requirements}
 -----------------------
