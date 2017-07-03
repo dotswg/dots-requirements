@@ -662,8 +662,8 @@ Internet-Draft              DOTS Requirements                  July 2017
       list; update the content of either list; and delete entries as
       necessary.
 
-      How the DOTS server determines client ownership of address space
-      is not in scope.
+      How the DOTS server authorizes DOTS client management of black-
+      and white-list entries is implementation-specific.
 
 
 

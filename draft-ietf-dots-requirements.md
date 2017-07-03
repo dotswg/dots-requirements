@@ -569,8 +569,8 @@ DATA-004
   entry; retrieve a list of current entries from either list; update the content
   of either list; and delete entries as necessary.
 
-: How the DOTS server determines client ownership of address space is not in
-  scope.
+: How the DOTS server authorizes DOTS client management of black- and white-list
+  entries is implementation-specific.
 
 
 Security requirements           {#security-requirements}
