@@ -5,10 +5,10 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                            Arbor Networks
 Intended status: Informational                              R. Moskowitz
-Expires: January 4, 2018                                  HTT Consulting
+Expires: January 25, 2018                                         Huawei
                                                                 T. Reddy
                                                             McAfee, Inc.
-                                                           July 03, 2017
+                                                           July 24, 2017
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 4, 2018.
+   This Internet-Draft will expire on January 25, 2018.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 1]
+Mortensen, et al.       Expires January 25, 2018                [Page 1]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 2]
+Mortensen, et al.       Expires January 25, 2018                [Page 2]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -165,7 +165,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 3]
+Mortensen, et al.       Expires January 25, 2018                [Page 3]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -221,7 +221,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 4]
+Mortensen, et al.       Expires January 25, 2018                [Page 4]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -277,7 +277,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 5]
+Mortensen, et al.       Expires January 25, 2018                [Page 5]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -333,7 +333,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 6]
+Mortensen, et al.       Expires January 25, 2018                [Page 6]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -389,7 +389,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 7]
+Mortensen, et al.       Expires January 25, 2018                [Page 7]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -445,7 +445,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 8]
+Mortensen, et al.       Expires January 25, 2018                [Page 8]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -501,7 +501,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018                [Page 9]
+Mortensen, et al.       Expires January 25, 2018                [Page 9]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -557,7 +557,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 10]
+Mortensen, et al.       Expires January 25, 2018               [Page 10]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -613,7 +613,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 11]
+Mortensen, et al.       Expires January 25, 2018               [Page 11]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -669,7 +669,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 12]
+Mortensen, et al.       Expires January 25, 2018               [Page 12]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -725,7 +725,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 13]
+Mortensen, et al.       Expires January 25, 2018               [Page 13]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -781,7 +781,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 14]
+Mortensen, et al.       Expires January 25, 2018               [Page 14]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -837,7 +837,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 15]
+Mortensen, et al.       Expires January 25, 2018               [Page 15]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -893,7 +893,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 16]
+Mortensen, et al.       Expires January 25, 2018               [Page 16]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -949,7 +949,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 17]
+Mortensen, et al.       Expires January 25, 2018               [Page 17]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -1005,7 +1005,7 @@ Internet-Draft              DOTS Requirements                  July 2017
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 18]
+Mortensen, et al.       Expires January 25, 2018               [Page 18]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -1050,18 +1050,18 @@ Internet-Draft              DOTS Requirements                  July 2017
               christopher_gray3@cable.comcast.com, c., Compton, R., and
               N. Teague, "Distributed-Denial-of-Service Open Threat
               Signaling (DOTS) Architecture", draft-ietf-dots-
-              architecture-03 (work in progress), June 2017.
+              architecture-04 (work in progress), July 2017.
 
    [I-D.ietf-dots-use-cases]
-              Dobbins, R., Fouant, S., Migault, D., Moskowitz, R.,
+              Dobbins, R., Migault, D., Fouant, S., Moskowitz, R.,
               Teague, N., Xia, L., and K. Nishizuka, "Use cases for DDoS
-              Open Threat Signaling (DDoS) Open Threat Signaling",
-              draft-ietf-dots-use-cases-05 (work in progress), May 2017.
+              Open Threat Signaling", draft-ietf-dots-use-cases-07 (work
+              in progress), July 2017.
 
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 19]
+Mortensen, et al.       Expires January 25, 2018               [Page 19]
 
 Internet-Draft              DOTS Requirements                  July 2017
 
@@ -1089,7 +1089,7 @@ Authors' Addresses
 
 
    Robert Moskowitz
-   HTT Consulting
+   Huawei
    Oak Park, MI  42837
    United States
 
@@ -1117,4 +1117,4 @@ Authors' Addresses
 
 
 
-Mortensen, et al.        Expires January 4, 2018               [Page 20]
+Mortensen, et al.       Expires January 25, 2018               [Page 20]

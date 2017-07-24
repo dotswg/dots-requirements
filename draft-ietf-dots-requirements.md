@@ -28,7 +28,7 @@ author:
       -
         ins: R. Moskowitz
         name: Robert Moskowitz
-        org: HTT Consulting
+        org: Huawei
         street:
         -
         city: Oak Park, MI
