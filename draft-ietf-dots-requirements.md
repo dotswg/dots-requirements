@@ -58,7 +58,7 @@ normative:
   RFC4291:
   RFC4632:
   RFC4821:
-  RFC5405:
+  RFC8085:
   RFC5952:
 
 informative:
@@ -511,7 +511,7 @@ SIG-010:
   through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.
 
 : If UDP is used as the transport for the DOTS signal channel, all
-  considerations in "Middlebox Traversal Guidelines" in [RFC5405] apply to DOTS.
+  considerations in "Middlebox Traversal Guidelines" in [RFC8085] apply to DOTS.
   Regardless of transport, DOTS protocols MUST follow established best common
   practices (BCPs) for NAT traversal.
 
