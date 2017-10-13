@@ -179,7 +179,7 @@ DOTS agent:
 DOTS gateway:
 : A logical DOTS agent resulting from the logical concatenation of a DOTS server
   and a DOTS client, analogous to a SIP Back-to-Back User Agent (B2BUA)
-  [RFC3261]. Client-side DOTS gateways are DOTS gateways that are in the DOTS client's domain, while server-side DOTS gateways denote DOTS gateways that are in DOTS server's domain. DOTS gateways are discussed in detail in
+  [RFC3261]. Client-side DOTS gateways are DOTS gateways that are in the DOTS client's domain, while server-side DOTS gateways denote DOTS gateways that are in the DOTS server's domain. DOTS gateways are discussed in detail in
   [I-D.ietf-dots-architecture].
 
 Signal channel:
