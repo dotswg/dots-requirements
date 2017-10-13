@@ -245,13 +245,15 @@ for more rapid attack response against future attacks, as all interactions
 setting up DOTS, including any business or service level agreements, are already
 complete.
 
+Multi-homed DOTS clients must maintain multiple DOTS associations with multiple upstream DOTS servers.   
+
 The DOTS protocol must at a minimum make it possible for a DOTS client to
 request a mitigator's aid mounting a defense, coordinated by a DOTS server,
 against a suspected attack, signaling within or between domains as requested by
 local operators. DOTS clients should similarly be able to withdraw aid requests.
 DOTS requires no justification from DOTS clients for requests for help, nor do
 DOTS clients need to justify withdrawing help requests: the decision is local to
-the DOTS clients' domain.
+the DOTS clients' domain. Multi-homed DOTS clients must be able to select the appropriate DOTS server(s) to which a mitigation request is to be sent. Further multi-homing considerations are discussed in [I-D.boucadair-dots-multihoming].  
 
 Regular feedback between DOTS clients and DOTS server supplement the defensive
 alliance by maintaining a common understanding of DOTS agent health and
