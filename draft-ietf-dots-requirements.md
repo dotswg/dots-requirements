@@ -445,10 +445,13 @@ SIG-006
 
 : DOTS servers SHOULD support indefinite mitigation lifetimes, enabling
   architectures in which the mitigator is always in the traffic path to the
-  resources for which the DOTS client is requesting protection. DOTS servers MAY
-  refuse mitigations with indefinite lifetimes, for policy reasons. The reasons
-  themselves are out of scope for this document, but MUST be included in the
-  mitigation rejection message from the server, per SIG-005.
+  resources for which the DOTS client is requesting protection. 
+  DOTS clients MUST be prepared to not be granted mitigations with indefinite lifetimes. 
+  DOTS servers MAY refuse mitigations with indefinite lifetimes, for policy reasons. The reasons
+  themselves are out of scope. If the DOTS server does not grant a 
+  mitigation request with an indefinite mitigation lifetime, it MUST set the lifetime
+  to a value that is configured locally. That value MUST be returned in a reply to
+  the requesting DOTS client.  
 
 SIG-007
 : Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The
