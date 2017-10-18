@@ -243,7 +243,7 @@ communication channel between DOTS agents. Indeed, establishing a relationship
 with peer DOTS agents during normal network conditions provides the foundation
 for more rapid attack response against future attacks, as all interactions
 setting up DOTS, including any business or service level agreements, are already
-complete.
+complete. Peer DOTS agents are provisioned to a DOTS client using a variety of means (e.g., manual or dynamic). 
 
 The DOTS protocol must at a minimum make it possible for a DOTS client to
 request a mitigator's aid mounting a defense, coordinated by a DOTS server,
@@ -267,8 +267,8 @@ message size, asynchronous, redundant message delivery and minimal connection
 overhead (when possible given local network policy) will tend to contribute to
 the robustness demanded by a viable DOTS protocol. Operators of peer
 DOTS-enabled domains may enable quality- or class-of-service traffic tagging to
-increase the probability of successful DOTS signal delivery, but DOTS requires
-no such policies be in place. The DOTS solution indeed must be viable especially
+increase the probability of successful DOTS signal delivery, but DOTS does not require
+such policies be in place. The DOTS solution indeed must be viable especially
 in their absence.
 
 On the other hand, DOTS must include protections ensuring message
@@ -277,14 +277,14 @@ another vector for the very attacks it's meant to help fight off. DOTS clients
 must be able to authenticate DOTS servers, and vice versa, to avoid exposing new
 attack surfaces when deploying DOTS; specifically, to prevent DDoS mitigation in
 response to DOTS signaling from becoming a new form of attack. In order to
-provide this level of proteection, DOTS agents must have a way to negotiate and
+provide this level of protection, DOTS agents must have a way to negotiate and
 agree upon the terms of protocol security. Attacks against the transport
 protocol should not offer a means of attack against the message confidentiality,
 integrity and authenticity.
 
 The DOTS server and client must also have some common method of defining the
 scope of any mitigation performed by the mitigator, as well as making
-adjustments to other commonly configurable features, such as listen ports,
+adjustments to other commonly configurable features, such as listen port numbers,
 exchanging black- and white-lists, and so on.
 
 Finally, DOTS should be sufficiently extensible to meet future needs in
