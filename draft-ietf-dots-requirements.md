@@ -253,7 +253,7 @@ against a suspected attack, signaling within or between domains as requested by
 local operators. DOTS clients should similarly be able to withdraw aid requests.
 DOTS requires no justification from DOTS clients for requests for help, nor do
 DOTS clients need to justify withdrawing help requests: the decision is local to
-the DOTS clients' domain. Multi-homed DOTS clients must be able to select the appropriate DOTS server(s) to which a mitigation request is to be sent. Further multi-homing considerations are discussed in [I-D.boucadair-dots-multihoming].  
+the DOTS clients' domain. Multi-homed DOTS clients must be able to select the appropriate DOTS server(s) to which a mitigation request is to be sent. Further multi-homing considerations are out of scope.  
 
 Regular feedback between DOTS clients and DOTS server supplement the defensive
 alliance by maintaining a common understanding of DOTS agent health and
