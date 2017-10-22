@@ -183,7 +183,7 @@ DOTS gateway:
   [I-D.ietf-dots-architecture].
 
 Signal channel:
-: A bidirectional, mutually authenticated communication channel between DOTS
+: A bidirectional, mutually authenticated communication channel between two DOTS
   agents characterized by resilience even in conditions leading to severe
   packet loss, such as a volumetric DDoS attack causing network congestion.
 
@@ -209,20 +209,19 @@ Server signal:
   established signal channels.
 
 Data channel:
-: A secure communication layer between DOTS clients and DOTS servers used for
+: A secure communication layer between two DOTS agents used for
   infrequent bulk exchange of data not easily or appropriately communicated
   through the signal channel under attack conditions.
 
 Filter:
-: A policy matching a network traffic flow or set of flows and rate-limiting or
-  discarding matching traffic.
+: A specification of a matching network traffic flow or set of flows. The filter will typically have a policy associated with it, e.g., rate-limiting or discarding matching traffic.
 
 Blacklist:
 : A filter list of addresses, prefixes and/or other identifiers indicating
   sources from which traffic should be blocked, regardless of traffic content.
 
 Whitelist:
-: A list of addresses, prefixes and/or other identifiers from indicating sources
+: A list of addresses, prefixes and/or other identifiers indicating sources
   from which traffic should always be allowed, regardless of contradictory data
   gleaned in a detected attack.
 
@@ -253,8 +252,8 @@ DOTS requires no justification from DOTS clients for requests for help, nor do
 DOTS clients need to justify withdrawing help requests: the decision is local to
 the DOTS clients' domain.
 
-Regular feedback between DOTS clients and DOTS server supplement the defensive
-alliance by maintaining a common understanding of DOTS agent health and
+Regular feedback between DOTS clients and DOTS servers supplement the defensive
+alliance by maintaining a common understanding of the DOTS agents' health and
 activity. Bidirectional communication between DOTS clients and DOTS servers is
 therefore critical.
 
@@ -277,7 +276,7 @@ another vector for the very attacks it's meant to help fight off. DOTS clients
 must be able to authenticate DOTS servers, and vice versa, to avoid exposing new
 attack surfaces when deploying DOTS; specifically, to prevent DDoS mitigation in
 response to DOTS signaling from becoming a new form of attack. In order to
-provide this level of proteection, DOTS agents must have a way to negotiate and
+provide this level of protection, DOTS agents must have a way to negotiate and
 agree upon the terms of protocol security. Attacks against the transport
 protocol should not offer a means of attack against the message confidentiality,
 integrity and authenticity.
@@ -308,7 +307,7 @@ GEN-002
   the probability of signal delivery even under the severely constrained network
   conditions imposed by particular attack traffic. The protocol MUST be
   resilient, that is, continue operating despite message loss and out-of-order
-  or redundant message delivery. In support signaling protocol robustness,
+  or redundant message delivery. In support of signaling protocol robustness,
   DOTS signals SHOULD be conveyed over a transport not susceptible to
   Head of Line Blocking.
 
@@ -472,8 +471,8 @@ SIG-007
 
   * Uniform Resource Identifiers [RFC3986]
 
-: DOTS agents MUST support mitigation scope aliases, allowing DOTS client and
-  server to refer to collections of protected resources by an opaque identifier
+: DOTS agents MUST support mitigation scope aliases, allowing DOTS clients and
+  servers to refer to collections of protected resources by an opaque identifier
   created through the data channel, direct configuration, or other means. Domain
   name and URI mitigation scopes may be thought of as a form of scope alias, in
   which the addresses to which the domain name or URI resolve represent the full
@@ -498,8 +497,8 @@ SIG-008
 
 SIG-009
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
-  single administrative entity may send conflicting mitigation requests for pool
-  of protected resources , as a result of misconfiguration, operator error, or
+  single administrative entity may send conflicting mitigation requests for pools
+  of protected resources as a result of misconfiguration, operator error, or
   compromised DOTS clients. DOTS servers attempting to honor conflicting
   requests may flap network route or DNS information, degrading the networks
   attempting to participate in attack response with the DOTS clients. DOTS
@@ -635,7 +634,7 @@ Data Model Requirements                 {#data-model-requirements}
 -----------------------
 
 The value of DOTS is in standardizing a mechanism to permit elements, networks
-or domains under or under threat of DDoS attack to request aid mitigating the
+or domains under threat of DDoS attack to request aid mitigating the
 effects of any such attack. A well-structured DOTS data model is therefore
 critical to the development of a successful DOTS protocol.
 
