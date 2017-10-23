@@ -243,7 +243,7 @@ communication channel between DOTS agents. Indeed, establishing a relationship
 with peer DOTS agents during normal network conditions provides the foundation
 for more rapid attack response against future attacks, as all interactions
 setting up DOTS, including any business or service level agreements, are already
-complete. Peer DOTS agents are provisioned to a DOTS client using a variety of means (e.g., manual or dynamic). 
+complete. Peer DOTS agents are provisioned to a DOTS client using a variety of manual or dynamic methods.
 
 The DOTS protocol must at a minimum make it possible for a DOTS client to
 request a mitigator's aid mounting a defense, coordinated by a DOTS server,
