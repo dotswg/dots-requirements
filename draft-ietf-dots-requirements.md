@@ -488,6 +488,11 @@ SIG-007
 : As an active attack evolves, clients MUST be able to adjust as necessary the
   scope of requested mitigation by refining the scope of resources requiring
   mitigation.
+  
+: The DOTS client may acquire the required information to feed the mitigation
+  scope to supply in a request either by provisioning or by discovery means.
+  It is out of scope to specify such means. Neverthless, the DOTS client MUST  
+  support at least one method to acquire such information. 
 
 SIG-008
 : Mitigation Efficacy: When a mitigation request by a DOTS client is active,
