@@ -70,7 +70,7 @@ Table of Contents
      2.1.  General Requirements  . . . . . . . . . . . . . . . . . .   7
      2.2.  Signal Channel Requirements . . . . . . . . . . . . . . .   8
      2.3.  Data Channel Requirements . . . . . . . . . . . . . . . .  12
-     2.4.  Security requirements . . . . . . . . . . . . . . . . . .  13
+     2.4.  Security requirements . . . . . . . . . . . . . . . . . .  14
      2.5.  Data Model Requirements . . . . . . . . . . . . . . . . .  15
    3.  Congestion Control Considerations . . . . . . . . . . . . . .  16
      3.1.  Signal Channel  . . . . . . . . . . . . . . . . . . . . .  16
@@ -622,6 +622,11 @@ Internet-Draft              DOTS Requirements               October 2017
       necessary the scope of requested mitigation by refining the scope
       of resources requiring mitigation.
 
+      The DOTS client may obtain the mitigation scope through direct
+      provisioning or through implementation-specific methods of
+      discovery.  DOTS clients MUST support at least one mechanism to
+      obtain mitigiation scope.
+
    SIG-008  Mitigation Efficacy: When a mitigation request by a DOTS
       client is active, DOTS clients SHOULD transmit a metric of
       perceived mitigation efficacy to the DOTS server.  DOTS servers
@@ -661,11 +666,6 @@ Internet-Draft              DOTS Requirements               October 2017
    data exchange, a reliable transport is required in order for DOTS
    agents to detect data delivery success or failure.
 
-   The data channel must be extensible.  We anticipate the data channel
-   will be used for such purposes as configuration or resource
-   discovery.  For example, a DOTS client may submit to the DOTS server
-   a collection of prefixes it wants to refer to by alias when
-   requesting mitigation, to which the server would respond with a
 
 
 
@@ -674,6 +674,11 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 12]
 Internet-Draft              DOTS Requirements               October 2017
 
 
+   The data channel must be extensible.  We anticipate the data channel
+   will be used for such purposes as configuration or resource
+   discovery.  For example, a DOTS client may submit to the DOTS server
+   a collection of prefixes it wants to refer to by alias when
+   requesting mitigation, to which the server would respond with a
    success status and the new prefix group alias, or an error status and
    message in the event the DOTS client's data channel request failed.
    The transactional nature of such data exchanges suggests a separate
@@ -716,12 +721,7 @@ Internet-Draft              DOTS Requirements               October 2017
       How the DOTS server authorizes DOTS client management of black-
       and white-list entries is implementation-specific.
 
-2.4.  Security requirements
 
-   DOTS must operate within a particularly strict security context, as
-   an insufficiently protected signal or data channel may be subject to
-   abuse, enabling or supplementing the very attacks DOTS purports to
-   mitigate.
 
 
 
@@ -729,6 +729,13 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 13]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+2.4.  Security requirements
+
+   DOTS must operate within a particularly strict security context, as
+   an insufficiently protected signal or data channel may be subject to
+   abuse, enabling or supplementing the very attacks DOTS purports to
+   mitigate.
 
    SEC-001  Peer Mutual Authentication: DOTS agents MUST authenticate
       each other before a DOTS signal or data channel is considered
@@ -772,19 +779,19 @@ Internet-Draft              DOTS Requirements               October 2017
       DOTS clients which pertain to mitigation, configuration,
       filtering, or status.
 
-      DOTS servers MUST reject mitigation requests with scopes which the
-      DOTS client is not authorized to manage.
-
-      Likewise, DOTS servers MUST refuse to allow creation, modification
-      or deletion of scope aliases and black-/white-lists when the DOTS
-      client is unauthorized.
-
 
 
 Mortensen, et al.          Expires May 3, 2018                 [Page 14]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+      DOTS servers MUST reject mitigation requests with scopes which the
+      DOTS client is not authorized to manage.
+
+      Likewise, DOTS servers MUST refuse to allow creation, modification
+      or deletion of scope aliases and black-/white-lists when the DOTS
+      client is unauthorized.
 
       The modes of authorization are implementation-specific.
 
@@ -828,13 +835,6 @@ Internet-Draft              DOTS Requirements               October 2017
       support representation of a mitigation request's lifetime,
       including mitigations with no specified end time.
 
-   DM-006:  Mitigation Efficacy Representation: The data model MUST
-      support representation of a DOTS client's understanding of the
-      efficacy of a mitigation enabled through a mitigation request.
-
-   DM-007:  Acceptable Signal Loss Representation: The data model MUST
-      be able to represent the DOTS agent's preference for acceptable
-
 
 
 Mortensen, et al.          Expires May 3, 2018                 [Page 15]
@@ -842,6 +842,12 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 15]
 Internet-Draft              DOTS Requirements               October 2017
 
 
+   DM-006:  Mitigation Efficacy Representation: The data model MUST
+      support representation of a DOTS client's understanding of the
+      efficacy of a mitigation enabled through a mitigation request.
+
+   DM-007:  Acceptable Signal Loss Representation: The data model MUST
+      be able to represent the DOTS agent's preference for acceptable
       signal loss when establishing a signal channel, as described in
       GEN-002.
 
@@ -884,12 +890,6 @@ Internet-Draft              DOTS Requirements               October 2017
 
    o  DOTS agent impersonation
 
-   o  Traffic injection
-
-   o  Signaling blocking
-
-   The DOTS protocol MUST be designed for minimal data transfer to
-   address the blocking risk.  Impersonation and traffic injection
 
 
 
@@ -898,6 +898,12 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 16]
 Internet-Draft              DOTS Requirements               October 2017
 
 
+   o  Traffic injection
+
+   o  Signaling blocking
+
+   The DOTS protocol MUST be designed for minimal data transfer to
+   address the blocking risk.  Impersonation and traffic injection
    mitigation can be managed through current secure communications best
    practices.  See Section 2.4 above for a detailed discussion.
 
@@ -940,12 +946,6 @@ Internet-Draft              DOTS Requirements               October 2017
 
    o  Specify security state handling on redirection
 
-   o  Signal channel should use transport not susceptible to HOL
-      blocking
-
-   o  Expanded list of DDoS types to include network links
-
-
 
 
 
@@ -953,6 +953,11 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 17]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+   o  Signal channel should use transport not susceptible to HOL
+      blocking
+
+   o  Expanded list of DDoS types to include network links
 
 7.2.  03 revision
 
@@ -996,11 +1001,6 @@ Internet-Draft              DOTS Requirements               October 2017
    o  Added proposed operational requirement to support mitigation
       lifetime in mitigation requests.
 
-   o  Added proposed operational requirement to support mitigation
-      efficacy reporting from DOTS clients.
-
-   o  Added proposed operational requirement to cache lookups of all
-      kinds.
 
 
 
@@ -1009,6 +1009,12 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 18]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+   o  Added proposed operational requirement to support mitigation
+      efficacy reporting from DOTS clients.
+
+   o  Added proposed operational requirement to cache lookups of all
+      kinds.
 
    o  Added proposed operational requirement regarding NAT traversal.
 
@@ -1052,12 +1058,6 @@ Internet-Draft              DOTS Requirements               October 2017
               DOI 10.17487/RFC1191, November 1990, <https://www.rfc-
               editor.org/info/rfc1191>.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997, <https://www.rfc-editor.org/info/
-              rfc2119>.
-
-
 
 
 
@@ -1065,6 +1065,11 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 19]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997, <https://www.rfc-editor.org/info/
+              rfc2119>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66, RFC
@@ -1107,11 +1112,6 @@ Internet-Draft              DOTS Requirements               October 2017
               Signaling (DOTS) Architecture", draft-ietf-dots-
               architecture-05 (work in progress), October 2017.
 
-   [I-D.ietf-dots-use-cases]
-              Dobbins, R., Migault, D., Fouant, S., Moskowitz, R.,
-              Teague, N., Xia, L., and K. Nishizuka, "Use cases for DDoS
-              Open Threat Signaling", draft-ietf-dots-use-cases-08 (work
-              in progress), October 2017.
 
 
 
@@ -1121,6 +1121,12 @@ Mortensen, et al.          Expires May 3, 2018                 [Page 20]
 
 Internet-Draft              DOTS Requirements               October 2017
 
+
+   [I-D.ietf-dots-use-cases]
+              Dobbins, R., Migault, D., Fouant, S., Moskowitz, R.,
+              Teague, N., Xia, L., and K. Nishizuka, "Use cases for DDoS
+              Open Threat Signaling", draft-ietf-dots-use-cases-08 (work
+              in progress), October 2017.
 
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -1159,12 +1165,6 @@ Authors' Addresses
    India
 
    Email: TirumaleswarReddy_Konda@McAfee.com
-
-
-
-
-
-
 
 
 
