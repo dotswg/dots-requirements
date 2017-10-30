@@ -12,7 +12,7 @@ Expires: May 3, 2018                                              Huawei
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
-                    draft-ietf-dots-requirements-06
+                    draft-ietf-dots-requirements-07
 
 Abstract
 
