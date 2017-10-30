@@ -628,10 +628,11 @@ Internet-Draft              DOTS Requirements               October 2017
       controlled by a single administrative entity may send conflicting
       mitigation requests for pools of protected resources as a result
       of misconfiguration, operator error, or compromised DOTS clients.
-      DOTS servers attempting to honor conflicting requests may flap
-      network route or DNS information, degrading the networks
-      attempting to participate in attack response with the DOTS
-      clients.  DOTS servers SHALL detect such conflicting requests, and
+      DOTS servers in the same administrative domain attempting to honor
+      conflicting requests may flap network route or DNS information,
+      degrading the networks attempting to participate in attack
+      response with the DOTS clients.  DOTS servers in a single
+      administrative domain SHALL detect such conflicting requests, and
       SHALL notify the DOTS clients in conflict.  The notification
       SHOULD indicate the nature and scope of the conflict, for example,
       the overlapping prefix range in a conflicting mitigation request.
@@ -665,7 +666,6 @@ Internet-Draft              DOTS Requirements               October 2017
    message in the event the DOTS client's data channel request failed.
    The transactional nature of such data exchanges suggests a separate
    set of requirements for the data channel, while the potentially
-
 
 
 

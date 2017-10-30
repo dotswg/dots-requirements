@@ -521,12 +521,13 @@ SIG-009
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
   single administrative entity may send conflicting mitigation requests for pools
   of protected resources as a result of misconfiguration, operator error, or
-  compromised DOTS clients. DOTS servers attempting to honor conflicting
-  requests may flap network route or DNS information, degrading the networks
-  attempting to participate in attack response with the DOTS clients. DOTS
-  servers SHALL detect such conflicting requests, and SHALL notify the DOTS
-  clients in conflict. The notification SHOULD indicate the nature and scope of
-  the conflict, for example, the overlapping prefix range in a conflicting
+  compromised DOTS clients. DOTS servers in the same administrative domain
+  attempting to honor conflicting requests may flap network route or DNS
+  information, degrading the networks attempting to participate in attack
+  response with the DOTS clients. DOTS servers in a single administrative domain
+  SHALL detect such conflicting requests, and SHALL notify the DOTS clients in
+  conflict. The notification SHOULD indicate the nature and scope of the
+  conflict, for example, the overlapping prefix range in a conflicting
   mitigation request.
 
 SIG-010:
