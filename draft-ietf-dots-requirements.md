@@ -65,6 +65,7 @@ normative:
 informative:
   I-D.ietf-dots-architecture:
   I-D.ietf-dots-use-cases:
+  RFC3261:
   RFC7092:
   RFC4732:
 
@@ -175,13 +176,16 @@ DOTS server:
 
 DOTS agent:
 : Any DOTS-aware software module capable of participating in a DOTS signal
-  or data channel. It can be a DOTS client, DOTS server, or DOTS gateway.
+  or data channel. It can be a DOTS client, DOTS server, or, as a logical agent,
+  a DOTS gateway.
 
 DOTS gateway:
-: A DOTS-aware software module resulting from the logical concatenation of a DOTS server
-  and a DOTS client, analogous to a SIP Back-to-Back User Agent (B2BUA)
-  [RFC7092]. Client-side DOTS gateways are DOTS gateways that are in the DOTS client's domain, while server-side DOTS gateways denote DOTS gateways that are in the DOTS server's domain. DOTS gateways are discussed in detail in
-  [I-D.ietf-dots-architecture].
+: A DOTS-aware software module resulting from the logical concatenation of a
+  DOTS server and a DOTS client, analogous to a Session Initiation Protocol
+  (SIP) [RFC3261] Back-to-Back User Agent (B2BUA) [RFC7092]. Client-side DOTS
+  gateways are DOTS gateways that are in the DOTS client's domain, while
+  server-side DOTS gateways denote DOTS gateways that are in the DOTS server's
+  domain. DOTS gateways are discussed in detail in [I-D.ietf-dots-architecture].
 
 Signal channel:
 : A bidirectional, mutually authenticated communication channel between two DOTS
