@@ -411,14 +411,16 @@ mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY
 allow mitigation to continue for a limited period after acknowledging a DOTS
 client&rsquo;s withdrawal of a mitigation request. During this period, DOTS server
 status messages SHOULD indicate that mitigation is active but terminating.</t>
-  <t>The active-but-terminating period is initially 30 seconds. If the client
-requests mitigation again before that 30 second window elapses, the DOTS
-server MAY exponentially increase the active-but-terminating period up to a
-maximum of 240 seconds (4 minutes). After the active-but-terminating period
-elapses, the DOTS server MUST treat the mitigation as terminated, as the DOTS
-client is no longer responsible for the mitigation. For example, if there is
-a financial relationship between the DOTS client and server domains, the DOTS
-client ceases incurring cost at this point.</t>
+  <t>The initial active-but-terminating period is implementation-specific, but SHOULD be
+sufficiently long to absorb latency incurred by route propagation. If the client
+requests mitigation again before the initial active-but-terminating period
+elapses, the DOTS server MAY exponentially increase the active-but-terminating
+period up to a maximum of 300 seconds (5 minutes). After the
+active-but-terminating period elapses, the DOTS server MUST treat the
+mitigation as terminated, as the DOTS client is no longer responsible for the
+mitigation.  For example, if there is a financial relationship between the
+DOTS client and server domains, the DOTS client ceases incurring cost at this
+point.</t>
   <t hangText='SIG-006'>
   Mitigation Lifetime: DOTS servers MUST support mitigation lifetimes, and
 MUST terminate a mitigation when the lifetime elapses. DOTS servers also MUST
