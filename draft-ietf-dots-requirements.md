@@ -514,6 +514,10 @@ SIG-007
   scope of requested mitigation by refining the scope of resources requiring
   mitigation.
 
+: The DOTS client may obtain the mitigation scope through direct provisioning
+  or through implementation-specific methods of discovery. DOTS clients MUST
+  support at least one mechanism to obtain mitigiation scope.
+
 SIG-008
 : Mitigation Efficacy: When a mitigation request by a DOTS client is active,
   DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the
