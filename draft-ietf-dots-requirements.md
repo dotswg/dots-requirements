@@ -58,6 +58,7 @@ normative:
   RFC4291:
   RFC4632:
   RFC4821:
+  RFC5405:
   RFC8085:
   RFC5952:
 
@@ -358,11 +359,32 @@ SIG-002
   576 bytes, as discussed in [RFC0791] and [RFC1122].
 
 SIG-003
-: Channel Health Monitoring: Peer DOTS agents MUST regularly send heartbeats to
-  each other after mutual authentication in order to keep the DOTS signal
-  channel active. A signal channel MUST be considered active until a DOTS agent
-  explicitly ends the session, or either DOTS agent fails to receive heartbeats
-  from the other after a mutually agreed upon timeout period has elapsed.
+: Channel Health Monitoring: DOTS agents MUST support exchange of heartbeat
+  messages over the signal channel to monitor channel health. Peer DOTS agents
+  SHOULD regularly send heartbeats to each other while a mitigation request is
+  active. The heartbeat interval during active mitigation is not specified, but
+  SHOULD be frequent enough to maintain any on-path NAT bindings during
+  mitigation.
+
+: To support scenarios in which loss of heartbeat is used to trigger
+  mitigation, and to keep the channel active, DOTS clients MAY solicit heartbeat
+  exchanges after successful mutual authentication. When DOTS agents are
+  exchanging heartbeats and no mitigation request is active, either agent MAY
+  request changes to the heartbeat rate. For example, a DOTS server might want
+  to delay or cease heartbeat exchanges when an active DOTS client has not
+  requested mitigation, in order to control load.
+
+: Following mutual authentication, a signal channel MUST be considered active
+  until a DOTS agent explicitly ends the session, or either DOTS agent fails to
+  receive heartbeats from the other after a mutually agreed upon timeout period
+  has elapsed. Because heartbeat loss is much more likely during volumetric
+  attack, DOTS agents SHOULD avoid signal channel termination when mitigation
+  is active and heartbeats are not received by either DOTS agent for an extended
+  period. In such circumstances, DOTS clients MAY attempt to reestablish the
+  signal channel. DOTS servers SHOULD monitor the attack, using feedback from
+  the mitigator and other available sources, and MAY use the absence of attack
+  traffic and lack of client heartbeats as an indication the signal channel is
+  defunct.
 
 SIG-004
 : Channel Redirection: In order to increase DOTS operational flexibility and
