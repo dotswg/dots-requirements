@@ -65,7 +65,7 @@ normative:
 informative:
   I-D.ietf-dots-architecture:
   I-D.ietf-dots-use-cases:
-  RFC3261:
+  RFC7092:
   RFC4732:
 
 --- abstract
@@ -96,20 +96,20 @@ themselves, or simply find themselves constrained by local bandwidth
 limitations. To address such gaps, security service providers have begun to
 offer on-demand traffic scrubbing services, which aim to separate the DDoS
 traffic from legitimate traffic and forward only the latter. Today each such
-service offers its own interface for subscribers to request attack mitigation,
+service offers a proprietary invocation interface for subscribers to request attack mitigation,
 tying subscribers to proprietary signaling implementations while also limiting
-the subset of network elements capable of participating in the attack response.
+the subset of network elements capable of participating in the attack mitigation.
 As a result of signaling interface incompatibility, attack responses may be
 fragmentary or otherwise incomplete, leaving key players in the attack path
 unable to assist in the defense.
 
 The lack of a common method to coordinate a real-time response among involved
 actors and network domains inhibits the speed and effectiveness of DDoS attack
-mitigation. This document describes the required characteristics of a protocol
+mitigation. This document describes the required characteristics of protocols
 enabling requests for DDoS attack mitigation, reducing attack impact and leading
 to more efficient defensive strategies.
 
-DOTS communicates the need for defensive action in anticipation of or in
+DDoS Open Threat Signaling (DOTS) communicates the need for defensive action in anticipation of or in
 response to an attack, but does not dictate the form any defensive action
 takes. DOTS supplements calls for help with pertinent details about the detected
 attack, allowing entities participating in DOTS to form ad hoc, adaptive
@@ -137,7 +137,7 @@ DDoS:
 DDoS attack target:
 : A network connected entity with a finite set of resources, such as network
   bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
-  targets include network elements, network links, servers, and services.
+  targets include (but not limited to) network elements, network links, servers, and services.
 
 DDoS attack telemetry:
 : Collected measurements and behavioral characteristics defining the nature of a
@@ -159,8 +159,8 @@ Mitigator:
   detected or reported DDoS attack. For the purposes of this document, this
   entity is a black box capable of mitigation, making no assumptions about
   availability or design of countermeasures, nor about the programmable
-  interface between this entity and other network elements. The mitigator and
-  DOTS server are assumed to belong to the same administrative entity.
+  interface(s) between this entity and other network elements. The mitigator and
+  invoked DOTS server are assumed to belong to the same administrative entity.
 
 DOTS client:
 : A DOTS-aware software module responsible for requesting attack response
@@ -168,19 +168,19 @@ DOTS client:
 
 DOTS server:
 : A DOTS-aware software module handling and responding to messages from DOTS
-  clients. The DOTS server SHOULD enable mitigation on behalf of the DOTS
+  clients. The DOTS server enables mitigation on behalf of the DOTS
   client, if requested, by communicating the DOTS client's request to the
   mitigator and returning selected mitigator feedback to the requesting DOTS
-  client. A DOTS server MAY also be a mitigator.
+  client. A DOTS server may also be colocated with a mitigator.
 
 DOTS agent:
 : Any DOTS-aware software module capable of participating in a DOTS signal
-  or data channel.
+  or data channel. It can be a DOTS client, DOTS server, or DOTS gateway.
 
 DOTS gateway:
-: A logical DOTS agent resulting from the logical concatenation of a DOTS server
+: A DOTS-aware software module resulting from the logical concatenation of a DOTS server
   and a DOTS client, analogous to a SIP Back-to-Back User Agent (B2BUA)
-  [RFC3261]. Client-side DOTS gateways are DOTS gateways that are in the DOTS client's domain, while server-side DOTS gateways denote DOTS gateways that are in the DOTS server's domain. DOTS gateways are discussed in detail in
+  [RFC7092]. Client-side DOTS gateways are DOTS gateways that are in the DOTS client's domain, while server-side DOTS gateways denote DOTS gateways that are in the DOTS server's domain. DOTS gateways are discussed in detail in
   [I-D.ietf-dots-architecture].
 
 Signal channel:
@@ -197,18 +197,6 @@ Heartbeat:
 : A message transmitted between DOTS agents over the signal channel, used as a
   keep-alive and to measure peer health.
 
-Client signal:
-: A message sent from a DOTS client to a DOTS server over the signal channel,
-  indicating the DOTS client's need for mitigation, as well as the scope of any
-  requested mitigation, optionally including additional attack details to
-  supplement server-initiated mitigation.
-
-Server signal:
-: A message sent from a DOTS server to a DOTS client over the signal channel.
-  Note that a server signal is not a response to client signal, but a DOTS
-  server-initiated status message sent to DOTS clients with which the server has
-  established signal channels.
-
 Data channel:
 : A secure communication layer between two DOTS agents used for
   infrequent bulk exchange of data not easily or appropriately communicated
@@ -218,11 +206,11 @@ Filter:
 : A specification of a matching network traffic flow or set of flows. The filter will typically have a policy associated with it, e.g., rate-limiting or discarding matching traffic.
 
 Blacklist:
-: A filter list of addresses, prefixes and/or other identifiers indicating
+: A filter list of addresses, prefixes, and/or other identifiers indicating
   sources from which traffic should be blocked, regardless of traffic content.
 
 Whitelist:
-: A list of addresses, prefixes and/or other identifiers indicating sources
+: A list of addresses, prefixes, and/or other identifiers indicating sources
   from which traffic should always be allowed, regardless of contradictory data
   gleaned in a detected attack.
 
