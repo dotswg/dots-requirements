@@ -389,16 +389,9 @@
 <link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Contributors"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgments"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 Change Log"/>
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 04 revision"/>
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 03 revision"/>
-<link href="#rfc.section.7.3" rel="Chapter" title="7.3 02 revision"/>
-<link href="#rfc.section.7.4" rel="Chapter" title="7.4 01 revision"/>
-<link href="#rfc.section.7.5" rel="Chapter" title="7.5 00 revision"/>
-<link href="#rfc.section.7.6" rel="Chapter" title="7.6 Initial revision"/>
-<link href="#rfc.references" rel="Chapter" title="8 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="8.2 Informative References"/>
+<link href="#rfc.references" rel="Chapter" title="7 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -491,16 +484,9 @@
 </ul><li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
 <li>5.   <a href="#rfc.section.5">Contributors</a></li>
 <li>6.   <a href="#rfc.section.6">Acknowledgments</a></li>
-<li>7.   <a href="#rfc.section.7">Change Log</a></li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">04 revision</a></li>
-<li>7.2.   <a href="#rfc.section.7.2">03 revision</a></li>
-<li>7.3.   <a href="#rfc.section.7.3">02 revision</a></li>
-<li>7.4.   <a href="#rfc.section.7.4">01 revision</a></li>
-<li>7.5.   <a href="#rfc.section.7.5">00 revision</a></li>
-<li>7.6.   <a href="#rfc.section.7.6">Initial revision</a></li>
-</ul><li>8.   <a href="#rfc.references">References</a></li>
-<ul><li>8.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>8.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li>7.   <a href="#rfc.references">References</a></li>
+<ul><li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
 </ul><li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -756,54 +742,8 @@
 </dl>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h1>
 <p id="rfc.section.6.p.1">Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.</p>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#change-log" id="change-log">Change Log</a></h1>
-<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#revision" id="revision">04 revision</a></h1>
-<p id="rfc.section.7.1.p.1">2017-03-13</p>
-<p/>
-
-<ul>
-  <li>Establish required and optional mitigation scope types</li>
-  <li>Specify message size for DOTS signal channel</li>
-  <li>Recast mitigation lifetime as a DOTS server requirement</li>
-  <li>Clarify DOTS server&#8217;s responsibilities after client request to end mitigation</li>
-  <li>Specify security state handling on redirection</li>
-  <li>Signal channel should use transport not susceptible to HOL blocking</li>
-  <li>Expanded list of DDoS types to include network links</li>
-</ul>
-<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#revision-1" id="revision-1">03 revision</a></h1>
-<p id="rfc.section.7.2.p.1">2016-10-30</p>
-<p/>
-
-<ul>
-  <li>Extended SEC-003 to require secure interfaces within DOTS gateways.</li>
-  <li>Changed DATA-003 to Resource Configuration, delegating control of acceptable signal loss, heartbeat intervals, and mitigation lifetime to DOTS client.</li>
-  <li>Added data model requirements reflecting client control over the above.</li>
-</ul>
-<h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> <a href="#revision-2" id="revision-2">02 revision</a></h1>
-<h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> <a href="#revision-3" id="revision-3">01 revision</a></h1>
-<p id="rfc.section.7.4.p.1">2016-03-21</p>
-<p/>
-
-<ul>
-  <li>Reconciled terminology with -00 revision of <a href="#I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</a>.</li>
-  <li>Terminology clarification based on working group feedback.</li>
-  <li>Moved security-related requirements to separate section.</li>
-  <li>Made resilience/robustness primary general requirement to align with charter.</li>
-  <li>Clarified support for unidirectional communication within the bidirectional signal channel.</li>
-  <li>Added proposed operational requirement to support session redirection.</li>
-  <li>Added proposed operational requirement to support conflict notification.</li>
-  <li>Added proposed operational requirement to support mitigation lifetime in mitigation requests.</li>
-  <li>Added proposed operational requirement to support mitigation efficacy reporting from DOTS clients.</li>
-  <li>Added proposed operational requirement to cache lookups of all kinds.</li>
-  <li>Added proposed operational requirement regarding NAT traversal.</li>
-  <li>Removed redundant mutual authentication requirement from data channel requirements.</li>
-</ul>
-<h1 id="rfc.section.7.5"><a href="#rfc.section.7.5">7.5.</a> <a href="#revision-4" id="revision-4">00 revision</a></h1>
-<p id="rfc.section.7.5.p.1">2015-10-15</p>
-<h1 id="rfc.section.7.6"><a href="#rfc.section.7.6">7.6.</a> <a href="#initial-revision" id="initial-revision">Initial revision</a></h1>
-<p id="rfc.section.7.6.p.1">2015-09-24      Andrew Mortensen</p>
-<h1 id="rfc.references"><a href="#rfc.references">8.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">8.1.</a> Normative References</h1>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -892,7 +832,7 @@
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">8.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">7.2.</a> Informative References</h1>
 <table>
   <tbody>
     <tr>
