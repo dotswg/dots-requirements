@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-07
+docname: draft-ietf-dots-requirements-08
 date: @DATE@
 
 area: Security
@@ -366,8 +366,8 @@ SIG-003
   exchanges after successful mutual authentication. When DOTS agents are
   exchanging heartbeats and no mitigation request is active, either agent MAY
   request changes to the heartbeat rate. For example, a DOTS server might want
-  to delay or cease heartbeat exchanges when an active DOTS client has not
-  requested mitigation, in order to control load.
+  to reduce heartbeat frequency or cease heartbeat exchanges when an active DOTS
+  client has not requested mitigation, in order to control load.
 
 : Following mutual authentication, a signal channel MUST be considered active
   until a DOTS agent explicitly ends the session, or either DOTS agent fails to

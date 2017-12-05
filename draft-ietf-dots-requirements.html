@@ -406,8 +406,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-07" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-10-30" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-08" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-12-05" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols coordinating attack response against DDoS attacks." />
 
@@ -431,7 +431,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 3, 2018</td>
+  <td class="left">Expires: June 8, 2018</td>
   <td class="right">Huawei</td>
 </tr>
 <tr>
@@ -444,7 +444,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">October 30, 2017</td>
+  <td class="right">December 05, 2017</td>
 </tr>
 
     	
@@ -452,7 +452,7 @@
   </table>
 
   <p class="title">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements<br />
-  <span class="filename">draft-ietf-dots-requirements-07</span></p>
+  <span class="filename">draft-ietf-dots-requirements-08</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
@@ -464,7 +464,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 3, 2018.</p>
+<p>This Internet-Draft will expire on June 8, 2018.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -592,7 +592,7 @@
   <dt>SIG-003</dt>
   <dd style="margin-left: 8">Channel Health Monitoring: DOTS agents MUST support exchange of heartbeat messages over the signal channel to monitor channel health. Peer DOTS agents SHOULD regularly send heartbeats to each other while a mitigation request is active. The heartbeat interval during active mitigation is not specified, but SHOULD be frequent enough to maintain any on-path NAT bindings during mitigation.</dd>
   <dt></dt>
-  <dd style="margin-left: 8">To support scenarios in which loss of heartbeat is used to trigger mitigation, and to keep the channel active, DOTS clients MAY solicit heartbeat exchanges after successful mutual authentication. When DOTS agents are exchanging heartbeats and no mitigation request is active, either agent MAY request changes to the heartbeat rate. For example, a DOTS server might want to delay or cease heartbeat exchanges when an active DOTS client has not requested mitigation, in order to control load.</dd>
+  <dd style="margin-left: 8">To support scenarios in which loss of heartbeat is used to trigger mitigation, and to keep the channel active, DOTS clients MAY solicit heartbeat exchanges after successful mutual authentication. When DOTS agents are exchanging heartbeats and no mitigation request is active, either agent MAY request changes to the heartbeat rate. For example, a DOTS server might want to reduce heartbeat frequency or cease heartbeat exchanges when an active DOTS client has not requested mitigation, in order to control load.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Following mutual authentication, a signal channel MUST be considered active until a DOTS agent explicitly ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually agreed upon timeout period has elapsed. Because heartbeat loss is much more likely during volumetric attack, DOTS agents SHOULD avoid signal channel termination when mitigation is active and heartbeats are not received by either DOTS agent for an extended period. In such circumstances, DOTS clients MAY attempt to reestablish the signal channel. DOTS servers SHOULD monitor the attack, using feedback from the mitigator and other available sources, and MAY use the absence of attack traffic and lack of client heartbeats as an indication the signal channel is defunct.</dd>
   <dt>SIG-004</dt>
@@ -905,7 +905,7 @@
       <td class="reference">
         <b id="I-D.ietf-dots-use-cases">[I-D.ietf-dots-use-cases]</b>
       </td>
-      <td class="top"><a>Dobbins, R.</a>, <a>Migault, D.</a>, <a>Fouant, S.</a>, <a>Moskowitz, R.</a>, <a>Teague, N.</a>, <a>Xia, L.</a> and <a>K. Nishizuka</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-use-cases-08">Use cases for DDoS Open Threat Signaling</a>", Internet-Draft draft-ietf-dots-use-cases-08, October 2017.</td>
+      <td class="top"><a>Dobbins, R.</a>, <a>Migault, D.</a>, <a>Fouant, S.</a>, <a>Moskowitz, R.</a>, <a>Teague, N.</a>, <a>Xia, L.</a> and <a>K. Nishizuka</a>, "<a href="http://tools.ietf.org/html/draft-ietf-dots-use-cases-09">Use cases for DDoS Open Threat Signaling</a>", Internet-Draft draft-ietf-dots-use-cases-09, November 2017.</td>
     </tr>
     <tr>
       <td class="reference">
