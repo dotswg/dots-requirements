@@ -87,8 +87,8 @@ Distributed Denial of Service (DDoS) attacks continue to plague network
 operators around the globe, from Tier-1 service providers on down to enterprises
 and small businesses. Attack scale and frequency similarly have continued to
 increase, in part as a result of software vulnerabilities leading to reflection
-and amplification attacks. Once-staggering attack traffic volume is now the
-norm, and the impact of larger-scale attacks attract the attention of
+and amplification attacks. High-volume attacks saturating inbound links are now
+common, and the impact of larger-scale attacks attract the attention of
 international press agencies.
 
 The greater impact of contemporary DDoS attacks has led to increased focus on
@@ -183,10 +183,13 @@ DOTS agent:
 DOTS gateway:
 : A DOTS-aware software module resulting from the logical concatenation of a
   DOTS server and a DOTS client, analogous to a Session Initiation Protocol
-  (SIP) [RFC3261] Back-to-Back User Agent (B2BUA) [RFC7092]. Client-side DOTS
-  gateways are DOTS gateways that are in the DOTS client's domain, while
-  server-side DOTS gateways denote DOTS gateways that are in the DOTS server's
-  domain. DOTS gateways are described further in [I-D.ietf-dots-architecture].
+  (SIP) [RFC3261] Back-to-Back User Agent (B2BUA) [RFC7092]. A DOTS gateway has
+  a client-facing side, which behaves as a DOTS server for downstream clients,
+  and a server-facing side, which performs the role of DOTS client to upstream
+  DOTS servers. Client-domain DOTS gateways are DOTS gateways that are in the
+  DOTS client's domain, while server-domain DOTS gateways denote DOTS gateways
+  that are in the DOTS server's domain. DOTS gateways are described further in
+  [I-D.ietf-dots-architecture].
 
 Signal channel:
 : A bidirectional, mutually authenticated communication channel between two DOTS
