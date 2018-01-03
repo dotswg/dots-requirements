@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-09
+docname: draft-ietf-dots-requirements-10
 date: @DATE@
 
 area: Security
@@ -628,7 +628,8 @@ SEC-002
   nevertheless MUST provide security equivalent to that of the signal channels
   bridged by gateways in the signaling path. For example, when a DOTS gateway
   consisting of a DOTS server and DOTS client is running on the same logical
-  device, they must be within the same process security boundary.
+  device, the two DOTS agents could be implemented within the same process
+  security boundary.
 
 SEC-003
 : Message Replay Protection: To prevent a passive attacker from capturing and

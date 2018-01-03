@@ -12,7 +12,7 @@ Expires: July 6, 2018                                             Huawei
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
-                    draft-ietf-dots-requirements-09
+                    draft-ietf-dots-requirements-10
 
 Abstract
 
@@ -28,7 +28,7 @@ Status of This Memo
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at https://datatracker.ietf.org/drafts/current/.
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
@@ -44,7 +44,7 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
+   (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
@@ -80,7 +80,7 @@ Table of Contents
    6.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  17
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  18
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  19
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
@@ -754,8 +754,9 @@ Internet-Draft              DOTS Requirements               January 2018
       those interfaces nevertheless MUST provide security equivalent to
       that of the signal channels bridged by gateways in the signaling
       path.  For example, when a DOTS gateway consisting of a DOTS
-      server and DOTS client is running on the same logical device, they
-      must be within the same process security boundary.
+      server and DOTS client is running on the same logical device, the
+      two DOTS agents could be implemented within the same process
+      security boundary.
 
    SEC-003  Message Replay Protection: To prevent a passive attacker
       from capturing and replaying old messages, and thereby potentially
@@ -775,9 +776,8 @@ Internet-Draft              DOTS Requirements               January 2018
       DOTS servers MUST reject mitigation requests with scopes which the
       DOTS client is not authorized to manage.
 
-      Likewise, DOTS servers MUST refuse to allow creation, modification
-      or deletion of scope aliases and black-/white-lists when the DOTS
-      client is unauthorized.
+
+
 
 
 
@@ -785,6 +785,10 @@ Mortensen, et al.         Expires July 6, 2018                 [Page 14]
 
 Internet-Draft              DOTS Requirements               January 2018
 
+
+      Likewise, DOTS servers MUST refuse to allow creation, modification
+      or deletion of scope aliases and black-/white-lists when the DOTS
+      client is unauthorized.
 
       The modes of authorization are implementation-specific.
 
@@ -829,11 +833,7 @@ Internet-Draft              DOTS Requirements               January 2018
 
    DM-007:  Acceptable Signal Loss Representation: The data model MUST
       be able to represent the DOTS agent's preference for acceptable
-      signal loss when establishing a signal channel, as described in
-      GEN-002.
 
-   DM-008:  Heartbeat Interval Representation: The data model MUST be
-      able to represent the DOTS agent's preferred heartbeat interval,
 
 
 
@@ -842,6 +842,11 @@ Mortensen, et al.         Expires July 6, 2018                 [Page 15]
 Internet-Draft              DOTS Requirements               January 2018
 
 
+      signal loss when establishing a signal channel, as described in
+      GEN-002.
+
+   DM-008:  Heartbeat Interval Representation: The data model MUST be
+      able to represent the DOTS agent's preferred heartbeat interval,
       which the client may include when establishing the signal channel,
       as described in SIG-003.
 
@@ -885,11 +890,6 @@ Internet-Draft              DOTS Requirements               January 2018
 
    The DOTS protocol MUST be designed for minimal data transfer to
    address the blocking risk.  Impersonation and traffic injection
-   mitigation can be managed through current secure communications best
-   practices.  See Section 2.4 above for a detailed discussion.
-
-
-
 
 
 
@@ -897,6 +897,9 @@ Mortensen, et al.         Expires July 6, 2018                 [Page 16]
 
 Internet-Draft              DOTS Requirements               January 2018
 
+
+   mitigation can be managed through current secure communications best
+   practices.  See Section 2.4 above for a detailed discussion.
 
 5.  Contributors
 
@@ -924,26 +927,23 @@ Internet-Draft              DOTS Requirements               January 2018
 
 7.1.  Normative References
 
-   [RFC0768]  Postel, J., "User Datagram Protocol", STD 6, RFC 768,
-              DOI 10.17487/RFC0768, August 1980,
-              <https://www.rfc-editor.org/info/rfc768>.
+   [RFC0768]  Postel, J., "User Datagram Protocol", STD 6, RFC 768, DOI
+              10.17487/RFC0768, August 1980, <https://www.rfc-
+              editor.org/info/rfc768>.
 
-   [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791,
-              DOI 10.17487/RFC0791, September 1981,
-              <https://www.rfc-editor.org/info/rfc791>.
+   [RFC0791]  Postel, J., "Internet Protocol", STD 5, RFC 791, DOI
+              10.17487/RFC0791, September 1981, <https://www.rfc-
+              editor.org/info/rfc791>.
 
-   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7,
-              RFC 793, DOI 10.17487/RFC0793, September 1981,
+   [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7, RFC
+              793, DOI 10.17487/RFC0793, September 1981,
               <https://www.rfc-editor.org/info/rfc793>.
 
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
               November 1987, <https://www.rfc-editor.org/info/rfc1035>.
 
-   [RFC1122]  Braden, R., Ed., "Requirements for Internet Hosts -
-              Communication Layers", STD 3, RFC 1122,
-              DOI 10.17487/RFC1122, October 1989,
-              <https://www.rfc-editor.org/info/rfc1122>.
+
 
 
 
@@ -954,18 +954,23 @@ Mortensen, et al.         Expires July 6, 2018                 [Page 17]
 Internet-Draft              DOTS Requirements               January 2018
 
 
+   [RFC1122]  Braden, R., Ed., "Requirements for Internet Hosts -
+              Communication Layers", STD 3, RFC 1122, DOI 10.17487/
+              RFC1122, October 1989, <https://www.rfc-editor.org/info/
+              rfc1122>.
+
    [RFC1191]  Mogul, J. and S. Deering, "Path MTU discovery", RFC 1191,
-              DOI 10.17487/RFC1191, November 1990,
-              <https://www.rfc-editor.org/info/rfc1191>.
+              DOI 10.17487/RFC1191, November 1990, <https://www.rfc-
+              editor.org/info/rfc1191>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997, <https://www.rfc-editor.org/info/
+              rfc2119>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
-              Resource Identifier (URI): Generic Syntax", STD 66,
-              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              Resource Identifier (URI): Generic Syntax", STD 66, RFC
+              3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/info/rfc3986>.
 
    [RFC4291]  Hinden, R. and S. Deering, "IP Version 6 Addressing
@@ -982,23 +987,18 @@ Internet-Draft              DOTS Requirements               January 2018
               <https://www.rfc-editor.org/info/rfc4821>.
 
    [RFC5405]  Eggert, L. and G. Fairhurst, "Unicast UDP Usage Guidelines
-              for Application Designers", RFC 5405,
-              DOI 10.17487/RFC5405, November 2008,
-              <https://www.rfc-editor.org/info/rfc5405>.
+              for Application Designers", RFC 5405, DOI 10.17487/
+              RFC5405, November 2008, <https://www.rfc-editor.org/info/
+              rfc5405>.
 
    [RFC8085]  Eggert, L., Fairhurst, G., and G. Shepherd, "UDP Usage
               Guidelines", BCP 145, RFC 8085, DOI 10.17487/RFC8085,
               March 2017, <https://www.rfc-editor.org/info/rfc8085>.
 
    [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
-              Address Text Representation", RFC 5952,
-              DOI 10.17487/RFC5952, August 2010,
-              <https://www.rfc-editor.org/info/rfc5952>.
-
-7.2.  Informative References
-
-
-
+              Address Text Representation", RFC 5952, DOI 10.17487/
+              RFC5952, August 2010, <https://www.rfc-editor.org/info/
+              rfc5952>.
 
 
 
@@ -1009,6 +1009,8 @@ Mortensen, et al.         Expires July 6, 2018                 [Page 18]
 
 Internet-Draft              DOTS Requirements               January 2018
 
+
+7.2.  Informative References
 
    [I-D.ietf-dots-architecture]
               Mortensen, A., Andreasen, F., Reddy, T.,
@@ -1026,21 +1028,21 @@ Internet-Draft              DOTS Requirements               January 2018
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
               Schooler, "SIP: Session Initiation Protocol", RFC 3261,
-              DOI 10.17487/RFC3261, June 2002,
-              <https://www.rfc-editor.org/info/rfc3261>.
+              DOI 10.17487/RFC3261, June 2002, <https://www.rfc-
+              editor.org/info/rfc3261>.
 
    [RFC7092]  Kaplan, H. and V. Pascual, "A Taxonomy of Session
-              Initiation Protocol (SIP) Back-to-Back User Agents",
-              RFC 7092, DOI 10.17487/RFC7092, December 2013,
+              Initiation Protocol (SIP) Back-to-Back User Agents", RFC
+              7092, DOI 10.17487/RFC7092, December 2013,
               <https://www.rfc-editor.org/info/rfc7092>.
 
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
-              Denial-of-Service Considerations", RFC 4732,
-              DOI 10.17487/RFC4732, December 2006,
-              <https://www.rfc-editor.org/info/rfc4732>.
+              Denial-of-Service Considerations", RFC 4732, DOI 10.17487/
+              RFC4732, December 2006, <https://www.rfc-editor.org/info/
+              rfc4732>.
 
-   [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
-              FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
+   [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2", FYI
+              36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <https://www.rfc-editor.org/info/rfc4949>.
 
 Authors' Addresses
@@ -1052,8 +1054,6 @@ Authors' Addresses
    United States
 
    Email: amortensen@arbor.net
-
-
 
 
 
