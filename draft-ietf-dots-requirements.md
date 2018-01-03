@@ -138,8 +138,8 @@ DDoS:
 
 DDoS attack target:
 : A network connected entity with a finite set of resources, such as network
-  bandwidth,  memory or CPU, that is the focus of a DDoS attack. Potential
-  targets include (but not limited to) network elements, network links, servers, and services.
+  bandwidth, memory or CPU, that is the target of a DDoS attack. Potential
+  targets include (but are not limited to) network elements, network links, servers, and services.
 
 DDoS attack telemetry:
 : Collected measurements and behavioral characteristics defining the nature of a
@@ -186,7 +186,7 @@ DOTS gateway:
   (SIP) [RFC3261] Back-to-Back User Agent (B2BUA) [RFC7092]. Client-side DOTS
   gateways are DOTS gateways that are in the DOTS client's domain, while
   server-side DOTS gateways denote DOTS gateways that are in the DOTS server's
-  domain. DOTS gateways are discussed in detail in [I-D.ietf-dots-architecture].
+  domain. DOTS gateways are described further in [I-D.ietf-dots-architecture].
 
 Signal channel:
 : A bidirectional, mutually authenticated communication channel between two DOTS
@@ -195,7 +195,7 @@ Signal channel:
 
 DOTS signal:
 : A concise authenticated status/control message transmitted between DOTS
-  agents, used to indicate client's need for mitigation, as well as to convey
+  agents, used to indicate the client's need for mitigation, as well as to convey
   the status of any requested mitigation.
 
 Heartbeat:
@@ -281,7 +281,7 @@ integrity and authenticity.
 
 The DOTS server and client must also have some common method of defining the
 scope of any mitigation performed by a mitigator, as well as making
-adjustments to other commonly configurable features, such as listen port
+adjustments to other commonly configurable features, such as targeted port
 numbers, exchanging black- and white-lists, and so on.
 
 Finally, DOTS should be sufficiently extensible to meet future needs in
@@ -312,7 +312,7 @@ GEN-002
 GEN-003
 : Bidirectionality: To support peer health detection, to maintain an open
   signal channel, and to increase the probability of signal delivery during
-  attack, the signal channel MUST be bidirectional, with client and server
+  an attack, the signal channel MUST be bidirectional, with client and server
   transmitting signals to each other at regular intervals, regardless of any
   client request for mitigation. Unidirectional messages MUST be supported
   within the bidirectional signal channel to allow for unsolicited message
@@ -360,7 +360,7 @@ SIG-003
   messages over the signal channel to monitor channel health. Peer DOTS agents
   SHOULD regularly send heartbeats to each other while a mitigation request is
   active. The heartbeat interval during active mitigation is not specified, but
-  SHOULD be frequent enough to maintain any on-path NAT bindings during
+  SHOULD be frequent enough to maintain any on-path NAT or Firewall bindings during
   mitigation.
 
 : To support scenarios in which loss of heartbeat is used to trigger
@@ -379,7 +379,7 @@ SIG-003
   when mitigation is active and heartbeats are not received by either DOTS agent
   for an extended period. In such circumstances, DOTS clients MAY attempt to
   reestablish the signal channel, but SHOULD continue to send heartbeats so that
-  the DOTS server knows the session is still partially alive. DOTS servers
+  the DOTS server knows the session is still alive. DOTS servers
   SHOULD monitor the attack, using feedback from the mitigator and other
   available sources, and MAY use the absence of attack traffic and lack of
   client heartbeats as an indication the signal channel is defunct.
@@ -484,7 +484,7 @@ SIG-007
 
   * Uniform Resource Identifiers [RFC3986]
 
-: DOTS servers MUST be able to resolve domain names and URIs. How name
+: DOTS servers MUST be able to resolve domain names and (when supported) URIs. How name
   resolution is managed on the DOTS server is implementation-specific.
 
 : DOTS agents MUST support mitigation scope aliases, allowing DOTS clients and
@@ -544,7 +544,7 @@ Data Channel Requirements       {#data-channel-requirements}
 
 The data channel is intended to be used for bulk data exchanges between DOTS
 agents. Unlike the signal channel, which must operate nominally even when
-confronted with signal degradation due to packet loss, the data channel is not
+confronted with signal degradation due to significant packet loss, the data channel is not
 expected to be constructed to deal with attack conditions.  As the primary
 function of the data channel is data exchange, a reliable transport is required
 in order for DOTS agents to detect data delivery success or failure.
@@ -637,7 +637,7 @@ SEC-003
   provide a method for replay detection and prevention.
 
 : Within the signal channel, messages MUST be uniquely identified such that
-  replayed or duplicated messages may be detected and discarded. Unique
+  replayed or duplicated messages can be detected and discarded. Unique
   mitigation requests MUST be processed at most once.
 
 SEC-004
