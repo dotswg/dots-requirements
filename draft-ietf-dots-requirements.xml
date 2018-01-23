@@ -32,7 +32,7 @@
 <?rfc sortrefs="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc docName="draft-ietf-dots-requirements-10" category="info">
+<rfc docName="draft-ietf-dots-requirements-11" category="info">
 
   <front>
     <title abbrev="DOTS Requirements">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements</title>
@@ -784,11 +784,11 @@ current secure network communications best practices.</t>
   </back>
 
 <!-- ##markdown-source:
-H4sIAG2zZ1oAA619W2/cSJLuO38F0fMw9kFVje92a7FAy5a7W1i77bXkHSwM
+H4sIAO61Z1oAA619W2/cSJLuO38F0fMw9kFVje92a7FAy5a7W1i77bXkHSwM
 4yCrmFXFFous5UVyteH/fuKLiLyxKNmDs/MwLUtkXiIjI764cj6fZ33ZV/Yk
 Pyu7vi2XQ2+L/MzWpanyZp1f2Pa6XNn83tlZc3E/f7e3dX65ba3p84tyU5uq
 rDf5B/s/Q9nana37LjPLZWuvabx3lxfpX4pmVZsdTVW0Zt3PS9uv50XTd/M2
-emr+8EFWmJ6eyjJD85zQElZDW/aH7GYjo2ZXNyf5ed3btrb9/AyDZSvTn+Rl
+emr+8GFWmJ6eyjJD85zQElZDW/aH7GYjo2ZXNyf5ed3btrb9/AyDZSvTn+Rl
 vW6ybNUUtKiTfOjmpluVZbYvT7I875vVSX6wHf3YNW3f2nV3ktcN/nnYyb/w
 18wM/bZp8Qb+N9f/5jQ4PXG6yN/Sy7bubO3/Ips6rYvW3kz8uWlpMaftsmnz
 P2x/07RXnf8bkdxaWvmj54+e5xeL/KKnrdP/+wdWtHGMXcsIs/ztefhbU9C8
@@ -1053,7 +1053,7 @@ eqluiMyFljXYG77kEX+YYJzYJtal2FU08ejLYW+brUGjsJfNsDKFKVuyid9x
 Rjz9sJM/Lpbuj780/KcFzZh9PcmvO1Jo9t9/evDTtyz7lYjBnzw5rQvuXFCj
 NgR1F/kF98LvkC2wWtBv10Ye+WWFP0+OdgY4dUbgtMEwF/TCdVljTUXBv/yl
 019Nvp2d+i4ZzJ5jhAxkbGpBmx9IzZLYIZu9Km+k9p/on38o8RmSwnUGInVo
-0XGx1Q9c8tfGtVMaSEwGCX8yIPt/CK1pBTeOAAA=
+0XGx1Q9c8tfGtVMaSEwGCX8yIPt/QrQUYzeOAAA=
 
 -->
 
