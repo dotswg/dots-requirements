@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-11
+docname: draft-ietf-dots-requirements-12
 date: @DATE@
 
 area: Security
@@ -59,7 +59,6 @@ normative:
   RFC4632:
   RFC4787:
   RFC4821:
-  RFC5405:
   RFC6888:
   RFC7857:
   RFC8085:
@@ -263,7 +262,7 @@ out of scope.
 DOTS protocol implementations face competing operational goals when maintaining
 this bidirectional communication stream.  On the one hand, DOTS must include
 protections ensuring message confidentiality, integrity and authenticity to keep
-the protocols from becoming additional vectors for the very attadcks it is meant
+the protocols from becoming additional vectors for the very attacks it is meant
 to help fight off. On the other hand, the protocol must be resilient under
 extremely hostile network conditions, providing continued contact between DOTS
 agents even as attack traffic saturates the link. Such resiliency may be
@@ -276,8 +275,8 @@ of successful DOTS signal delivery, but DOTS does not require such policies be
 in place, and should be viable in their absence.
 
 The DOTS server and client must also have some standardized method of defining
-the scope of any mitigation, and negotiating related mitigation communication
-and actions and communications.
+the scope of any mitigation, as well as managing other mitigation-related
+configuration.
 
 Finally, DOTS should be sufficiently extensible to meet future needs in
 coordinated attack defense, although this consideration is necessarily
@@ -440,10 +439,10 @@ SIG-005
 
 SIG-006
 : Mitigation Lifetime: DOTS servers MUST support mitigations for a negotiated
-  time interval or lifetime, and MUST terminate a mitigation when the lifetime
-  elapses.  DOTS servers also MUST support renewal of mitigation lifetimes in
-  mitigation requests from DOTS clients, allowing clients to extend mitigation
-  as necessary for the duration of an attack.
+  time interval, and MUST terminate a mitigation when the lifetime elapses.
+  DOTS servers also MUST support renewal of mitigation lifetimes in mitigation
+  requests from DOTS clients, allowing clients to extend mitigation as necessary
+  for the duration of an attack.
 
 : DOTS servers MUST treat a mitigation terminated due to lifetime expiration
   exactly as if the DOTS client originating the mitigation had asked to end the
@@ -520,7 +519,7 @@ SIG-009
   SHOULD indicate the nature and scope of the conflict, for example, the
   overlapping prefix range in a conflicting mitigation request.
 
-SIG-010:
+SIG-010
 : Network Address Translator Traversal: DOTS clients may be deployed behind a
   Network Address Translator (NAT), and need to communicate with DOTS servers
   through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.
@@ -647,51 +646,51 @@ Data Model Requirements                 {#data-model-requirements}
 A well-structured DOTS data model is critical to the development of successful
 DOTS protocols.
 
-DM-001:
+DM-001
 : Structure: The data model structure for the DOTS protocol MAY be described by
   a single module, or be divided into related collections of hierarchical
   modules and sub-modules. If the data model structure is split across modules,
   those distinct modules MUST allow references to describe the overall data
   model's structural dependencies.
 
-DM-002:
+DM-002
 : Versioning: To ensure interoperability between DOTS protocol implementations,
   data models MUST be versioned. How the protocols represent data model versions
   is not defined in this document.
 
-DM-003:
+DM-003
 : Mitigation Status Representation: The data model MUST provide the ability to
   represent a request for mitigation and the withdrawal of such a request. The
   data model MUST also support a representation of currently requested
   mitigation status, including failures and their causes.
 
-DM-004:
+DM-004
 : Mitigation Scope Representation: The data model MUST support representation of
   a requested mitigation's scope. As mitigation scope may be represented in
   several different ways, per SIG-007 above, the data model MUST be capable of
   flexible representation of mitigation scope.
 
-DM-005:
+DM-005
 : Mitigation Lifetime Representation: The data model MUST support representation
   of a mitigation request's lifetime, including mitigations with no specified
   end time.
 
-DM-006:
+DM-006
 : Mitigation Efficacy Representation: The data model MUST support representation
   of a DOTS client's understanding of the efficacy of a mitigation enabled
   through a mitigation request.
 
-DM-007:
+DM-007
 : Acceptable Signal Loss Representation: The data model MUST be able to
   represent the DOTS agent's preference for acceptable signal loss when
   establishing a signal channel, as described in GEN-002.
 
-DM-008:
+DM-008
 : Heartbeat Interval Representation: The data model MUST be able to represent
   the DOTS agent's preferred heartbeat interval, which the client may include
   when establishing the signal channel, as described in SIG-003.
 
-DM-009:
+DM-009
 : Relationship to Transport: The DOTS data model MUST NOT depend on the
   specifics of any transport to represent fields in the model.
 
@@ -707,7 +706,7 @@ traffic, the DOTS signal channel MUST NOT contribute significantly to link
 congestion. To meet the signal channel requirements above, DOTS signal channel
 implementations SHOULD support connectionless transports. However, some
 connectionless transports when deployed naively can be a source of network
-congestion, as discussed in [RFC5405]. Signal channel implementations using such
+congestion, as discussed in [RFC8085]. Signal channel implementations using such
 connectionless transports, such as UDP, therefore MUST include a congestion
 control mechanism.
 
@@ -726,43 +725,46 @@ Security Considerations         {#security-considerations}
 =======================
 
 This document informs future protocols under development, and so does not have
-its security considerations of its own. However, naive DOTS deployment
-potentially exposes networks to new attack vectors. The three primary attack
-vectors are DOTS agent impersonation, traffic injection, and signal blocking.
+security considerations of its own. However, operators should be aware of
+potential risks involved in deploying DOTS. DOTS agent impersonation and signal
+blocking are discussed here. Additional DOTS security considerations may be
+found in [I-D.ietf-dots-architecture] and DOTS protocol documents.
+
 
 Impersonation of either DOTS server or DOTS client could have catastrophic
-impact on operations in either domain. Should an attacker develop the ability to
+impact on operations in either domain. If an attacker has the ability to
 impersonate a DOTS client, that attacker can affect policy on the network path
 to the DOTS client's domain, up to and including instantiation of blacklists
 blocking all inbound traffic to networks for which the DOTS client is authorized
-to request mitigation. Similarly, an impersonated DOTS server may be able to act
-as a sort of malicious DOTS gateway, intercepting requests from the downstream
-DOTS client, modifying them to inflict the desired impact on traffic to or from
-the DOTS client's domain. Among other things, this malicious DOTS gateway might
-receive mitigation requests from the DOTS client, and simply discard them,
-ensuring no mitigation is ever applied.
+to request mitigation.
 
-Traffic injection into a naive DOTS deployment could allow an attacker to
-affect DOTS operations selectively. Rather than impersonating a DOTS agent
-directly, the attacker crafts DOTS signal or data channel messages in such a way
-that the targeted DOTS agent treats them as if they originated with a legitimate
-DOTS agent, for example, by spoofing the sender's IP address. As with agent
-impersonation, the attacker capable of injecting traffic can affect the network
-path to addresses for which the DOTS client is authorized to request mitigation.
-
-Blocking communication between DOTS agents--signal blocking--has the
-potential to disrupt the core function of DOTS, which is to request mitigation
-of active or expected DDoS attacks. The DOTS signal channel is expected to
-operate over congested inbound links, and, as described in
-{{signal-channel-requirements}}, the signal channel protocol must be designed
-for minimal data transfer to reduce the incidence of signal blocking.
+Similarly, an impersonated DOTS server may be able to act as a sort of malicious
+DOTS gateway, intercepting requests from the downstream DOTS client, and
+modifying them before transmission to the DOTS server to inflict the desired
+impact on traffic to or from the DOTS client's domain. Among other things, this
+malicious DOTS gateway might receive and discard mitigation requests from the
+DOTS client, ensuring no requested mitigation is ever applied.
 
 As detailed in {{security-requirements}}, DOTS implementations require mutual
-authentication of DOTS agents in order to make agent impersonation and traffic
-injection more difficult. However, impersonation or traffic injection may still
-be possible as a result of credential theft, implementation flaws, or compromise
-of DOTS agents. Operators should take steps to reduce attack surfaces through
-current secure network communications best practices.
+authentication of DOTS agents in order to make agent impersonation more
+difficult. However, impersonation may still be possible as a result of
+credential theft, implementation flaws, or compromise of DOTS agents. To detect
+misuse, DOTS operators should carefully monitor and audit DOTS agents, while
+employing current secure network communications best practices to reduce attack
+surface.
+
+Blocking communication between DOTS agents has the potential to disrupt the core
+function of DOTS, which is to request mitigation of active or expected DDoS
+attacks. The DOTS signal channel is expected to operate over congested inbound
+links, and, as described in {{signal-channel-requirements}}, the signal channel
+protocol must be designed for minimal data transfer to reduce the incidence of
+signal blocking.
+
+
+IANA Considerations
+===================
+
+This document does not require any IANA action.
 
 
 Contributors
