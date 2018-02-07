@@ -400,8 +400,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-12" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-1-25" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-13" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-2-07" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols enabling coordinated response to DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols enabling coordinated response to DDoS attacks." />
 
@@ -425,7 +425,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: July 29, 2018</td>
+  <td class="left">Expires: August 11, 2018</td>
   <td class="right">Huawei</td>
 </tr>
 <tr>
@@ -434,11 +434,11 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">McAfee, Inc.</td>
+  <td class="right">McAfee</td>
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">January 25, 2018</td>
+  <td class="right">February 07, 2018</td>
 </tr>
 
     	
@@ -446,7 +446,7 @@
   </table>
 
   <p class="title">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements<br />
-  <span class="filename">draft-ietf-dots-requirements-12</span></p>
+  <span class="filename">draft-ietf-dots-requirements-13</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
@@ -458,7 +458,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on July 29, 2018.</p>
+<p>This Internet-Draft will expire on August 11, 2018.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -560,11 +560,13 @@
   <dt>GEN-002</dt>
   <dd style="margin-left: 8">Resilience and Robustness: The signaling protocol MUST be designed to maximize the probability of signal delivery even under the severely constrained network conditions caused by particular attack traffic. The protocol MUST be resilient, that is, continue operating despite message loss and out-of-order or redundant message delivery. In support of signaling protocol robustness, DOTS signals SHOULD be conveyed over a transport not susceptible to Head of Line Blocking.</dd>
   <dt>GEN-003</dt>
-  <dd style="margin-left: 8">Bidirectionality: To support peer health detection, to maintain an active signal channel, and increase the probability of signal delivery during an attack, the signal channel MUST be bidirectional, with client and server transmitting signals to each other at regular intervals, regardless of any client request for mitigation. Unidirectional messages MUST be supported within the bidirectional signal channel to allow for unsolicited message delivery, enabling asynchronous notifications between DOTS agents.</dd>
-  <dt>GEN-004</dt>
   <dd style="margin-left: 8">Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also significantly augment attack response coordination, permitting such tasks as population of black- or white-listed source addresses; address or prefix group aliasing; exchange of incident reports; and other hinting or configuration supplementing attack response.</dd>
   <dt></dt>
   <dd style="margin-left: 8">As the resilience requirements for the DOTS signal channel mandate small signal message size, a separate, secure data channel utilizing a reliable transport protocol MUST be used for bulk data exchange.</dd>
+  <dt>GEN-004</dt>
+  <dd style="margin-left: 8">Mitigation Hinting: DOTS clients may have access to attack details which can be used to inform mitigation techniques. Example attack details might include locally collected fingerprints for an on-going attack, or anticipated or active attack focal points based on other threat intelligence. DOTS clients MAY send mitigation hints derived from attack details to DOTS servers, in the full understanding that the DOTS server MAY ignore mitigation hints.  Mitigation hints MAY be transmitted across either signal or data channel. DOTS server treatment of mitigation hints, and how such hints shape mitigation, are implementation-specific.</dd>
+  <dt>GEN-005</dt>
+  <dd style="margin-left: 8">Loop Handling: In specific scenarios, it may be possible for communication between DOTS agents to loop, for example as a result of misconfiguration or aggressive caching. Signal and data channel implementations should be prepared to detect and terminate such loops to prevent service disruption.</dd>
 </dl>
 <h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#signal-channel-requirements" id="signal-channel-requirements">Signal Channel Requirements</a></h1>
 <p/>
@@ -577,16 +579,18 @@
   <dt></dt>
   <dd style="margin-left: 8">DOTS agents SHOULD attempt to learn the PMTU through mechanisms such as Path MTU Discovery <a href="#RFC1191">[RFC1191]</a> or Packetization Layer Path MTU Discovery <a href="#RFC4821">[RFC4821]</a>.  If the PMTU cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280 bytes.  If IPv4 support on legacy or otherwise unusual networks is a consideration and PMTU is unknown, DOTS implementations MAY rely on a PMTU of 576 bytes, as discussed in <a href="#RFC0791">[RFC0791]</a> and <a href="#RFC1122">[RFC1122]</a>.</dd>
   <dt>SIG-003</dt>
+  <dd style="margin-left: 8">Bidirectionality: To support peer health detection, to maintain an active signal channel, and increase the probability of signal delivery during an attack, the signal channel MUST be bidirectional, with client and server transmitting signals to each other at regular intervals, regardless of any client request for mitigation. Unidirectional messages MUST be supported within the bidirectional signal channel to allow for unsolicited message delivery, enabling asynchronous notifications between DOTS agents.</dd>
+  <dt>SIG-004</dt>
   <dd style="margin-left: 8">Channel Health Monitoring: DOTS agents MUST support exchange of heartbeat messages over the signal channel to monitor channel health. Peer DOTS agents SHOULD regularly send heartbeats to each other while a mitigation request is active. The heartbeat interval during active mitigation could be negotiable, but SHOULD be frequent enough to maintain any on-path NAT or Firewall bindings during mitigation.</dd>
   <dt></dt>
   <dd style="margin-left: 8">To support scenarios in which loss of heartbeat is used to trigger mitigation, and to keep the channel active, DOTS clients MAY solicit heartbeat exchanges after successful mutual authentication. When DOTS agents are exchanging heartbeats and no mitigation request is active, either agent MAY request changes to the heartbeat rate. For example, a DOTS server might want to reduce heartbeat frequency or cease heartbeat exchanges when an active DOTS client has not requested mitigation, in order to control load.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Following mutual authentication, a signal channel MUST be considered active until a DOTS agent explicitly ends the session, or either DOTS agent fails to receive heartbeats from the other after a mutually agreed upon retransmission procedure has been exhausted. Because heartbeat loss is much more likely during volumetric attack, DOTS agents SHOULD avoid signal channel termination when mitigation is active and heartbeats are not received by either DOTS agent for an extended period. In such circumstances, DOTS clients MAY attempt to reestablish the signal channel, but SHOULD continue to send heartbeats so that the DOTS server knows the session is still alive. DOTS servers are assumed to have the ability to monitor the attack, using feedback from the mitigator and other available sources, and MAY use the absence of attack traffic and lack of client heartbeats as an indication the signal channel is defunct.</dd>
-  <dt>SIG-004</dt>
+  <dt>SIG-005</dt>
   <dd style="margin-left: 8">Channel Redirection: In order to increase DOTS operational flexibility and scalability, DOTS servers SHOULD be able to redirect DOTS clients to another DOTS server at any time. DOTS clients MUST NOT assume the redirection target DOTS server shares security state with the redirecting DOTS server. DOTS clients are free to attempt abbreviated security negotiation methods supported by the protocol, such as DTLS session resumption, but MUST be prepared to negotiate new security state with the redirection target DOTS server.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Due to the increased likelihood of packet loss caused by link congestion during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled during an active attack against a target in the DOTS client's domain.</dd>
-  <dt>SIG-005</dt>
+  <dt>SIG-006</dt>
   <dd style="margin-left: 8">Mitigation Requests and Status: Authorized DOTS clients MUST be able to request scoped mitigation from DOTS servers. DOTS servers MUST send status to the DOTS clients about mitigation requests. If a DOTS server rejects an authorized request for mitigation, the DOTS server MUST include a reason for the rejection in the status message sent to the client.</dd>
   <dt></dt>
   <dd style="margin-left: 8">Due to the higher likelihood of packet loss during a DDoS attack, DOTS servers SHOULD regularly send mitigation status to authorized DOTS clients which have requested and been granted mitigation, regardless of client requests for mitigation status.</dd>
@@ -600,7 +604,7 @@
   <dd style="margin-left: 8">To protect against route or DNS flapping caused by a client rapidly toggling mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY allow mitigation to continue for a limited period after acknowledging a DOTS client's withdrawal of a mitigation request. During this period, DOTS server status messages SHOULD indicate that mitigation is active but terminating.</dd>
   <dt></dt>
   <dd style="margin-left: 8">The initial active-but-terminating period is implementation- and deployment- specific, but SHOULD be sufficiently long to absorb latency incurred by route propagation. If the client requests mitigation again before the initial active-but-terminating period elapses, the DOTS server MAY exponentially increase the active-but-terminating period up to a maximum of 300 seconds (5 minutes). After the active-but-terminating period elapses, the DOTS server MUST treat the mitigation as terminated, as the DOTS client is no longer responsible for the mitigation.</dd>
-  <dt>SIG-006</dt>
+  <dt>SIG-007</dt>
   <dd style="margin-left: 8">Mitigation Lifetime: DOTS servers MUST support mitigations for a negotiated time interval, and MUST terminate a mitigation when the lifetime elapses.  DOTS servers also MUST support renewal of mitigation lifetimes in mitigation requests from DOTS clients, allowing clients to extend mitigation as necessary for the duration of an attack.</dd>
   <dt></dt>
   <dd style="margin-left: 8">DOTS servers MUST treat a mitigation terminated due to lifetime expiration exactly as if the DOTS client originating the mitigation had asked to end the mitigation, including the active-but-terminating period, as described above in SIG-005.</dd>
@@ -608,7 +612,7 @@
   <dd style="margin-left: 8">DOTS clients MUST include a mitigation lifetime in all mitigation requests.</dd>
   <dt></dt>
   <dd style="margin-left: 8">DOTS servers SHOULD support indefinite mitigation lifetimes, enabling architectures in which the mitigator is always in the traffic path to the resources for which the DOTS client is requesting protection. DOTS clients MUST be prepared to not be granted mitigations with indefinite lifetimes. DOTS servers MAY refuse mitigations with indefinite lifetimes, for policy reasons.  The reasons themselves are out of scope. If the DOTS server does not grant a mitigation request with an indefinite mitigation lifetime, it MUST set the lifetime to a value that is configured locally. That value MUST be returned in a reply to the requesting DOTS client.</dd>
-  <dt>SIG-007</dt>
+  <dt>SIG-008</dt>
   <dd style="margin-left: 8">Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The scope type will vary depending on the resources requiring mitigation. All DOTS agent implementations MUST support the following required scope types: <ul><li>IPv4 prefixes in CIDR notation <a href="#RFC4632">[RFC4632]</a></li><li>IPv6 prefixes <a href="#RFC4291">[RFC4291]</a><a href="#RFC5952">[RFC5952]</a></li><li>Domain names <a href="#RFC1035">[RFC1035]</a></li></ul><p> </p></dd>
   <dt></dt>
   <dd style="margin-left: 8">The following mitigation scope types are OPTIONAL: <ul><li>Uniform Resource Identifiers <a href="#RFC3986">[RFC3986]</a></li></ul><p> </p></dd>
@@ -622,11 +626,11 @@
   <dd style="margin-left: 8">As an active attack evolves, DOTS clients MUST be able to adjust as necessary the scope of requested mitigation by refining the scope of resources requiring mitigation.</dd>
   <dt></dt>
   <dd style="margin-left: 8">A DOTS client may obtain the mitigation scope through direct provisioning or through implementation-specific methods of discovery. DOTS clients MUST support at least one mechanism to obtain mitigation scope.</dd>
-  <dt>SIG-008</dt>
-  <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request is active, DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the DOTS server. DOTS servers MAY use the efficacy metric to adjust countermeasures activated on a mitigator on behalf of a DOTS client.</dd>
   <dt>SIG-009</dt>
-  <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a single administrative entity may send conflicting mitigation requests as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers in the same administrative domain attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers in a single administrative domain SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
+  <dd style="margin-left: 8">Mitigation Efficacy: When a mitigation request is active, DOTS clients SHOULD transmit a metric of perceived mitigation efficacy to the DOTS server. DOTS servers MAY use the efficacy metric to adjust countermeasures activated on a mitigator on behalf of a DOTS client.</dd>
   <dt>SIG-010</dt>
+  <dd style="margin-left: 8">Conflict Detection and Notification: Multiple DOTS clients controlled by a single administrative entity may send conflicting mitigation requests as a result of misconfiguration, operator error, or compromised DOTS clients. DOTS servers in the same administrative domain attempting to honor conflicting requests may flap network route or DNS information, degrading the networks attempting to participate in attack response with the DOTS clients. DOTS servers in a single administrative domain SHALL detect such conflicting requests, and SHALL notify the DOTS clients in conflict. The notification SHOULD indicate the nature and scope of the conflict, for example, the overlapping prefix range in a conflicting mitigation request.</dd>
+  <dt>SIG-011</dt>
   <dd style="margin-left: 8">Network Address Translator Traversal: DOTS clients may be deployed behind a Network Address Translator (NAT), and need to communicate with DOTS servers through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.</dd>
   <dt></dt>
   <dd style="margin-left: 8">If UDP is used as the transport for the DOTS signal channel, all considerations in "Middlebox Traversal Guidelines" in <a href="#RFC8085">[RFC8085]</a> apply to DOTS.  Regardless of transport, DOTS protocols MUST follow established best common practices established in BCP 127 for NAT traversal <a href="#RFC4787">[RFC4787]</a><a href="#RFC6888">[RFC6888]</a><a href="#RFC7857">[RFC7857]</a>.</dd>
@@ -938,7 +942,7 @@
 		<span class="family-name">Reddy</span>
 	  </span>
 	</span>
-	<span class="org vcardline">McAfee, Inc.</span>
+	<span class="org vcardline">McAfee</span>
 	<span class="adr">
 	  <span class="vcardline">Embassy Golf Link Business Park</span>
 
