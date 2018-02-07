@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-12
+docname: draft-ietf-dots-requirements-13
 date: @DATE@
 
 area: Security
@@ -38,7 +38,7 @@ author:
       -
         ins: T. Reddy
         name: Tirumaleswar Reddy
-        org: McAfee, Inc.
+        org: McAfee
         street:
         - Embassy Golf Link Business Park
         city: Bangalore, Karnataka
@@ -304,15 +304,6 @@ GEN-002
   Head of Line Blocking.
 
 GEN-003
-: Bidirectionality: To support peer health detection, to maintain an active
-  signal channel, and increase the probability of signal delivery during an
-  attack, the signal channel MUST be bidirectional, with client and server
-  transmitting signals to each other at regular intervals, regardless of any
-  client request for mitigation. Unidirectional messages MUST be supported
-  within the bidirectional signal channel to allow for unsolicited message
-  delivery, enabling asynchronous notifications between DOTS agents.
-
-GEN-004
 : Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also
   significantly augment attack response coordination, permitting such tasks as
   population of black- or white-listed source addresses; address or prefix group
@@ -322,6 +313,23 @@ GEN-004
 : As the resilience requirements for the DOTS signal channel mandate small
   signal message size, a separate, secure data channel utilizing a reliable
   transport protocol MUST be used for bulk data exchange.
+
+GEN-004
+: Mitigation Hinting: DOTS clients may have access to attack details which can
+  be used to inform mitigation techniques. Example attack details might include
+  locally collected fingerprints for an on-going attack, or anticipated or
+  active attack focal points based on other threat intelligence. DOTS clients
+  MAY send mitigation hints derived from attack details to DOTS servers, in the
+  full understanding that the DOTS server MAY ignore mitigation hints.
+  Mitigation hints MAY be transmitted across either signal or data channel. DOTS
+  server treatment of mitigation hints, and how such hints shape mitigation, are
+  implementation-specific.
+
+GEN-005
+: Loop Handling: In specific scenarios, it may be possible for communication
+  between DOTS agents to loop, for example as a result of misconfiguration or
+  aggressive caching. Signal and data channel implementations should be prepared
+  to detect and terminate such loops to prevent service disruption.
 
 
 Signal Channel Requirements        {#signal-channel-requirements}
@@ -350,6 +358,15 @@ SIG-002
   576 bytes, as discussed in [RFC0791] and [RFC1122].
 
 SIG-003
+: Bidirectionality: To support peer health detection, to maintain an active
+  signal channel, and increase the probability of signal delivery during an
+  attack, the signal channel MUST be bidirectional, with client and server
+  transmitting signals to each other at regular intervals, regardless of any
+  client request for mitigation. Unidirectional messages MUST be supported
+  within the bidirectional signal channel to allow for unsolicited message
+  delivery, enabling asynchronous notifications between DOTS agents.
+
+SIG-004
 : Channel Health Monitoring: DOTS agents MUST support exchange of heartbeat
   messages over the signal channel to monitor channel health. Peer DOTS agents
   SHOULD regularly send heartbeats to each other while a mitigation request is
@@ -378,7 +395,7 @@ SIG-003
   other available sources, and MAY use the absence of attack traffic and lack of
   client heartbeats as an indication the signal channel is defunct.
 
-SIG-004
+SIG-005
 : Channel Redirection: In order to increase DOTS operational flexibility and
   scalability, DOTS servers SHOULD be able to redirect DOTS clients to another
   DOTS server at any time. DOTS clients MUST NOT assume the redirection target
@@ -391,7 +408,7 @@ SIG-004
   during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled
   during an active attack against a target in the DOTS client's domain.
 
-SIG-005
+SIG-006
 : Mitigation Requests and Status:
   Authorized DOTS clients MUST be able to request scoped mitigation from DOTS
   servers. DOTS servers MUST send status to the DOTS clients about mitigation
@@ -437,7 +454,7 @@ SIG-005
   MUST treat the mitigation as terminated, as the DOTS client is no longer
   responsible for the mitigation.
 
-SIG-006
+SIG-007
 : Mitigation Lifetime: DOTS servers MUST support mitigations for a negotiated
   time interval, and MUST terminate a mitigation when the lifetime elapses.
   DOTS servers also MUST support renewal of mitigation lifetimes in mitigation
@@ -461,7 +478,7 @@ SIG-006
   lifetime to a value that is configured locally. That value MUST be returned in
   a reply to the requesting DOTS client.
 
-SIG-007
+SIG-008
 : Mitigation Scope: DOTS clients MUST indicate desired mitigation scope. The
   scope type will vary depending on the resources requiring mitigation. All DOTS
   agent implementations MUST support the following required scope types:
@@ -501,13 +518,13 @@ SIG-007
   or through implementation-specific methods of discovery. DOTS clients MUST
   support at least one mechanism to obtain mitigation scope.
 
-SIG-008
+SIG-009
 : Mitigation Efficacy: When a mitigation request is active, DOTS clients SHOULD
   transmit a metric of perceived mitigation efficacy to the DOTS server. DOTS
   servers MAY use the efficacy metric to adjust countermeasures activated on a
   mitigator on behalf of a DOTS client.
 
-SIG-009
+SIG-010
 : Conflict Detection and Notification: Multiple DOTS clients controlled by a
   single administrative entity may send conflicting mitigation requests as a
   result of misconfiguration, operator error, or compromised DOTS clients. DOTS
@@ -519,7 +536,7 @@ SIG-009
   SHOULD indicate the nature and scope of the conflict, for example, the
   overlapping prefix range in a conflicting mitigation request.
 
-SIG-010
+SIG-011
 : Network Address Translator Traversal: DOTS clients may be deployed behind a
   Network Address Translator (NAT), and need to communicate with DOTS servers
   through the NAT. DOTS protocols MUST therefore be capable of traversing NATs.
