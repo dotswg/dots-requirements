@@ -400,8 +400,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Mortensen, A., Moskowitz, R., and T. Reddy" />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-13" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-2-07" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-dots-requirements-14" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-2-08" />
   <meta name="dct.abstract" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols enabling coordinated response to DDoS attacks." />
   <meta name="description" content="This document defines the requirements for the Distributed Denial of Service (DDoS) Open Threat Signaling (DOTS) protocols enabling coordinated response to DDoS attacks." />
 
@@ -425,7 +425,7 @@
   <td class="right">R. Moskowitz</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 11, 2018</td>
+  <td class="left">Expires: August 12, 2018</td>
   <td class="right">Huawei</td>
 </tr>
 <tr>
@@ -438,7 +438,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 07, 2018</td>
+  <td class="right">February 08, 2018</td>
 </tr>
 
     	
@@ -446,7 +446,7 @@
   </table>
 
   <p class="title">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements<br />
-  <span class="filename">draft-ietf-dots-requirements-13</span></p>
+  <span class="filename">draft-ietf-dots-requirements-14</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
@@ -458,7 +458,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 11, 2018.</p>
+<p>This Internet-Draft will expire on August 12, 2018.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -564,9 +564,9 @@
   <dt></dt>
   <dd style="margin-left: 8">As the resilience requirements for the DOTS signal channel mandate small signal message size, a separate, secure data channel utilizing a reliable transport protocol MUST be used for bulk data exchange.</dd>
   <dt>GEN-004</dt>
-  <dd style="margin-left: 8">Mitigation Hinting: DOTS clients may have access to attack details which can be used to inform mitigation techniques. Example attack details might include locally collected fingerprints for an on-going attack, or anticipated or active attack focal points based on other threat intelligence. DOTS clients MAY send mitigation hints derived from attack details to DOTS servers, in the full understanding that the DOTS server MAY ignore mitigation hints.  Mitigation hints MAY be transmitted across either signal or data channel. DOTS server treatment of mitigation hints, and how such hints shape mitigation, are implementation-specific.</dd>
+  <dd style="margin-left: 8">Mitigation Hinting: DOTS clients may have access to attack details which can be used to inform mitigation techniques. Example attack details might include locally collected fingerprints for an on-going attack, or anticipated or active attack focal points based on other threat intelligence. DOTS clients MAY send mitigation hints derived from attack details to DOTS servers, in the full understanding that the DOTS server MAY ignore mitigation hints.  Mitigation hints MAY be transmitted across either signal or data channel. DOTS server handling of mitigation hints is implementation-specific.</dd>
   <dt>GEN-005</dt>
-  <dd style="margin-left: 8">Loop Handling: In specific scenarios, it may be possible for communication between DOTS agents to loop, for example as a result of misconfiguration or aggressive caching. Signal and data channel implementations should be prepared to detect and terminate such loops to prevent service disruption.</dd>
+  <dd style="margin-left: 8">Loop Handling: In certain scenarios, typically involving misconfiguration of DNS or routing policy, it may be possible for communication between DOTS agents to loop. Signal and data channel implementations should be prepared to detect and terminate such loops to prevent service disruption.</dd>
 </dl>
 <h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#signal-channel-requirements" id="signal-channel-requirements">Signal Channel Requirements</a></h1>
 <p/>

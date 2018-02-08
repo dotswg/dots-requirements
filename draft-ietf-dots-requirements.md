@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-13
+docname: draft-ietf-dots-requirements-14
 date: @DATE@
 
 area: Security
@@ -322,14 +322,13 @@ GEN-004
   MAY send mitigation hints derived from attack details to DOTS servers, in the
   full understanding that the DOTS server MAY ignore mitigation hints.
   Mitigation hints MAY be transmitted across either signal or data channel. DOTS
-  server treatment of mitigation hints, and how such hints shape mitigation, are
-  implementation-specific.
+  server handling of mitigation hints is implementation-specific.
 
 GEN-005
-: Loop Handling: In specific scenarios, it may be possible for communication
-  between DOTS agents to loop, for example as a result of misconfiguration or
-  aggressive caching. Signal and data channel implementations should be prepared
-  to detect and terminate such loops to prevent service disruption.
+: Loop Handling: In certain scenarios, typically involving misconfiguration of
+  DNS or routing policy, it may be possible for communication between DOTS
+  agents to loop. Signal and data channel implementations should be prepared to
+  detect and terminate such loops to prevent service disruption.
 
 
 Signal Channel Requirements        {#signal-channel-requirements}
@@ -746,7 +745,6 @@ security considerations of its own. However, operators should be aware of
 potential risks involved in deploying DOTS. DOTS agent impersonation and signal
 blocking are discussed here. Additional DOTS security considerations may be
 found in [I-D.ietf-dots-architecture] and DOTS protocol documents.
-
 
 Impersonation of either DOTS server or DOTS client could have catastrophic
 impact on operations in either domain. If an attacker has the ability to
