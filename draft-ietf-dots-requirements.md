@@ -1,7 +1,7 @@
 ---
 title: Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
 abbrev: DOTS Requirements
-docname: draft-ietf-dots-requirements-14
+docname: draft-ietf-dots-requirements-15
 date: @DATE@
 
 area: Security
@@ -206,7 +206,7 @@ Heartbeat:
   keep-alive and to measure peer health.
 
 Data channel:
-: A bidirectional, mutually authentication communincation channel between two
+: A bidirectional, mutually authentication communication channel between two
   DOTS agents used for infrequent but reliable bulk exchange of data not easily
   or appropriately communicated through the signal channel under attack
   conditions.

@@ -5,14 +5,14 @@
 DOTS                                                        A. Mortensen
 Internet-Draft                                            Arbor Networks
 Intended status: Informational                              R. Moskowitz
-Expires: August 12, 2018                                          Huawei
+Expires: March 2, 2019                                            Huawei
                                                                 T. Reddy
                                                                   McAfee
-                                                       February 08, 2018
+                                                         August 29, 2018
 
 
 Distributed Denial of Service (DDoS) Open Threat Signaling Requirements
-                    draft-ietf-dots-requirements-14
+                    draft-ietf-dots-requirements-15
 
 Abstract
 
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 12, 2018.
+   This Internet-Draft will expire on March 2, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 1]
+Mortensen, et al.         Expires March 2, 2019                 [Page 1]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 2]
+Mortensen, et al.         Expires March 2, 2019                 [Page 2]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    capable of participating in the attack mitigation.  As a result of
@@ -165,9 +165,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 3]
+Mortensen, et al.         Expires March 2, 2019                 [Page 3]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    Mitigation:  A set of countermeasures enforced against traffic
@@ -221,18 +221,18 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 4]
+Mortensen, et al.         Expires March 2, 2019                 [Page 4]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    Heartbeat:  A message transmitted between DOTS agents over the signal
       channel, used as a keep-alive and to measure peer health.
 
-   Data channel:  A bidirectional, mutually authentication
-      communincation channel between two DOTS agents used for infrequent
-      but reliable bulk exchange of data not easily or appropriately
-      communicated through the signal channel under attack conditions.
+   Data channel:  A bidirectional, mutually authentication communication
+      channel between two DOTS agents used for infrequent but reliable
+      bulk exchange of data not easily or appropriately communicated
+      through the signal channel under attack conditions.
 
    Filter:  A specification of a matching network traffic flow or set of
       flows.  The filter will typically have a policy associated with
@@ -277,9 +277,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 5]
+Mortensen, et al.         Expires March 2, 2019                 [Page 5]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    clients need to justify withdrawing help requests: the decision is
@@ -333,9 +333,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 6]
+Mortensen, et al.         Expires March 2, 2019                 [Page 6]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       DOTS signals SHOULD be conveyed over a transport not susceptible
@@ -389,9 +389,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 7]
+Mortensen, et al.         Expires March 2, 2019                 [Page 7]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       DOTS agents SHOULD attempt to learn the PMTU through mechanisms
@@ -445,9 +445,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 8]
+Mortensen, et al.         Expires March 2, 2019                 [Page 8]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       attack traffic and lack of client heartbeats as an indication the
@@ -501,9 +501,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018                [Page 9]
+Mortensen, et al.         Expires March 2, 2019                 [Page 9]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       To protect against route or DNS flapping caused by a client
@@ -557,9 +557,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 10]
+Mortensen, et al.         Expires March 2, 2019                [Page 10]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       resources requiring mitigation.  All DOTS agent implementations
@@ -613,9 +613,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 11]
+Mortensen, et al.         Expires March 2, 2019                [Page 11]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    SIG-010  Conflict Detection and Notification: Multiple DOTS clients
@@ -669,9 +669,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 12]
+Mortensen, et al.         Expires March 2, 2019                [Page 12]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       sending agent (see Section 4 below).  Consequently data sent over
@@ -725,9 +725,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 13]
+Mortensen, et al.         Expires March 2, 2019                [Page 13]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       In order for DOTS protocols to remain secure despite advancements
@@ -781,9 +781,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 14]
+Mortensen, et al.         Expires March 2, 2019                [Page 14]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
       MUST allow references to describe the overall data model's
@@ -837,9 +837,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 15]
+Mortensen, et al.         Expires March 2, 2019                [Page 15]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    requirements above, DOTS signal channel implementations SHOULD
@@ -893,9 +893,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 16]
+Mortensen, et al.         Expires March 2, 2019                [Page 16]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    monitor and audit DOTS agents, while employing current secure network
@@ -949,9 +949,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 17]
+Mortensen, et al.         Expires March 2, 2019                [Page 17]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    [RFC0793]  Postel, J., "Transmission Control Protocol", STD 7, RFC
@@ -1005,9 +1005,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 18]
+Mortensen, et al.         Expires March 2, 2019                [Page 18]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    [RFC6888]  Perreault, S., Ed., Yamagata, I., Miyakawa, S., Nakagawa,
@@ -1037,13 +1037,13 @@ Internet-Draft              DOTS Requirements              February 2018
               christopher_gray3@cable.comcast.com, c., Compton, R., and
               N. Teague, "Distributed-Denial-of-Service Open Threat
               Signaling (DOTS) Architecture", draft-ietf-dots-
-              architecture-05 (work in progress), October 2017.
+              architecture-06 (work in progress), March 2018.
 
    [I-D.ietf-dots-use-cases]
               Dobbins, R., Migault, D., Fouant, S., Moskowitz, R.,
               Teague, N., Xia, L., and K. Nishizuka, "Use cases for DDoS
-              Open Threat Signaling", draft-ietf-dots-use-cases-09 (work
-              in progress), November 2017.
+              Open Threat Signaling", draft-ietf-dots-use-cases-16 (work
+              in progress), July 2018.
 
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -1061,9 +1061,9 @@ Internet-Draft              DOTS Requirements              February 2018
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 19]
+Mortensen, et al.         Expires March 2, 2019                [Page 19]
 
-Internet-Draft              DOTS Requirements              February 2018
+Internet-Draft              DOTS Requirements                August 2018
 
 
    [RFC4732]  Handley, M., Ed., Rescorla, E., Ed., and IAB, "Internet
@@ -1117,4 +1117,4 @@ Authors' Addresses
 
 
 
-Mortensen, et al.        Expires August 12, 2018               [Page 20]
+Mortensen, et al.         Expires March 2, 2019                [Page 20]
