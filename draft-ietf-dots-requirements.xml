@@ -15,10 +15,11 @@
 <!ENTITY RFC4632 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4632.xml">
 <!ENTITY RFC4787 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4787.xml">
 <!ENTITY RFC4821 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4821.xml">
+<!ENTITY RFC5952 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml">
 <!ENTITY RFC6888 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6888.xml">
 <!ENTITY RFC7857 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7857.xml">
 <!ENTITY RFC8085 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8085.xml">
-<!ENTITY RFC5952 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml">
+<!ENTITY RFC8174 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY I-D.ietf-dots-architecture SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-architecture.xml">
 <!ENTITY I-D.ietf-dots-use-cases SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dots-use-cases.xml">
 <!ENTITY RFC3261 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
@@ -31,7 +32,7 @@
 <?rfc sortrefs="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc docName="draft-ietf-dots-requirements-15" category="info">
+<rfc docName="draft-ietf-dots-requirements-16" category="info">
 
   <front>
     <title abbrev="DOTS Requirements">Distributed Denial of Service (DDoS) Open Threat Signaling Requirements</title>
@@ -73,7 +74,7 @@
       </address>
     </author>
 
-    <date year="2018" month="August" day="29"/>
+    <date year="2018" month="October" day="19"/>
 
     <area>Security</area>
     <workgroup>DOTS</workgroup>
@@ -122,8 +123,8 @@ unable to assist in the defense.</t>
 <t>A standardized method to coordinate a real-time response among involved
 operators will increase the speed and effectiveness of DDoS attack mitigation,
 and reduce the impact of these attacks. This document describes the required
-characteristics of protocols that enable attack coordination and mitigation of
-DDoS attacks.</t>
+characteristics of protocols that enable attack response coordination and
+mitigation of DDoS attacks.</t>
 
 <t>DDoS Open Threat Signaling (DOTS) communicates the need for defensive action in
 anticipation of or in response to an attack, but does not dictate the
@@ -135,7 +136,8 @@ from <xref target="I-D.ietf-dots-use-cases"></xref> and <xref target="I-D.ietf-d
 
 <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+document are to be interpreted as described in BCP14 <xref target="RFC2119"/> <xref target="RFC8174"/>,
+when, and only when, they appear in all capitals.</t>
 
 <t>This document adopts the following terms:</t>
 
@@ -168,9 +170,9 @@ document.</t>
   <t hangText='Mitigator:'>
   An entity, typically a network element, capable of performing mitigation of a
 detected or reported DDoS attack. The means by which this entity performs
-these mitigations and how they are requested of it are out of scope. The
-mitigator and DOTS server receiving a mitigation request are assumed to belong
-to the same administrative entity.</t>
+these mitigations and how they are requested of it are out of scope for this
+document. The mitigator and DOTS server receiving a mitigation request are
+assumed to belong to the same administrative entity.</t>
   <t hangText='DOTS client:'>
   A DOTS-aware software module responsible for requesting attack response
 coordination with other DOTS-aware elements.</t>
@@ -200,17 +202,18 @@ are in the DOTS server's domain. DOTS gateways are described further in
 agents that is resilient even in conditions leading to severe packet loss,
 such as a volumetric DDoS attack causing network congestion.</t>
   <t hangText='DOTS signal:'>
-  A concise authenticated status/control message transmitted over the signal
-channel between DOTS agents, used to indicate the client's need for
-mitigation, as well as to convey the status of any requested mitigation.</t>
+  A concise status/control message transmitted over the signal channel between
+DOTS agents, used to indicate the client's need for mitigation, or to convey
+the status of any requested mitigation.</t>
   <t hangText='Heartbeat:'>
   A message transmitted between DOTS agents over the signal channel, used as a
 keep-alive and to measure peer health.</t>
   <t hangText='Data channel:'>
-  A bidirectional, mutually authentication communication channel between two
+  A bidirectional, mutually authenticated communication channel between two
 DOTS agents used for infrequent but reliable bulk exchange of data not easily
-or appropriately communicated through the signal channel under attack
-conditions.</t>
+or appropriately communicated through the signal channel. Reliable bulk data
+exchange may not function well or at all during attacks causing network
+congestion. The data channel is not expected to operate in such conditions.</t>
   <t hangText='Filter:'>
   A specification of a matching network traffic flow or set of flows. The filter
 will typically have a policy associated with it, e.g., rate-limiting or
@@ -247,30 +250,30 @@ between DOTS clients and servers enables a common understanding of the DOTS
 agents' health and activity.</t>
 
 <t>The DOTS protocol must at a minimum make it possible for a DOTS client to
-request aid mounting a defense, coordinated by a DOTS server, against a
-suspected attack, signaling within or between domains as requested by local
-operators. DOTS clients should similarly be able to withdraw aid requests.  DOTS
-requires no justification from DOTS clients for requests for help, nor do DOTS
-clients need to justify withdrawing help requests: the decision is local to the
-DOTS clients' domain. Multi-homed DOTS clients must be able to select the
-appropriate DOTS server(s) to which a mitigation request is to be sent. The
-method for selecting the appropriate DOTS server in a multi-homed environment is
-out of scope.</t>
+request aid mounting a defense against a suspected attack. This defense could be
+coordinated by a DOTS server and include signaling within or between domains as
+requested by local operators. DOTS clients should similarly be able to withdraw
+aid requests.  DOTS requires no justification from DOTS clients for requests for
+help, nor do DOTS clients need to justify withdrawing help requests: the
+decision is local to the DOTS clients' domain. Multi-homed DOTS clients must be
+able to select the appropriate DOTS server(s) to which a mitigation request is
+to be sent. The method for selecting the appropriate DOTS server in a
+multi-homed environment is out of scope for this document.</t>
 
 <t>DOTS protocol implementations face competing operational goals when maintaining
 this bidirectional communication stream.  On the one hand, DOTS must include
-protections ensuring message confidentiality, integrity and authenticity to keep
-the protocols from becoming additional vectors for the very attacks it is meant
-to help fight off. On the other hand, the protocol must be resilient under
-extremely hostile network conditions, providing continued contact between DOTS
-agents even as attack traffic saturates the link. Such resiliency may be
-developed several ways, but characteristics such as small message size,
-asynchronous, redundant message delivery and minimal connection overhead (when
-possible given local network policy) will tend to contribute to the robustness
-demanded by a viable DOTS protocol. Operators of peer DOTS-enabled domains may
-enable quality- or class-of-service traffic tagging to increase the probability
-of successful DOTS signal delivery, but DOTS does not require such policies be
-in place, and should be viable in their absence.</t>
+measures to ensure message confidentiality, integrity, authenticity, and replay
+protection to keep the protocols from becoming additional vectors for the very
+attacks it is meant to help fight off. On the other hand, the protocol must be
+resilient under extremely hostile network conditions, providing continued
+contact between DOTS agents even as attack traffic saturates the link. Such
+resiliency may be developed several ways, but characteristics such as small
+message size, asynchronous, redundant message delivery and minimal connection
+overhead (when possible given local network policy) will tend to contribute to
+the robustness demanded by a viable DOTS protocol. Operators of peer
+DOTS-enabled domains may enable quality- or class-of-service traffic tagging to
+increase the probability of successful DOTS signal delivery, but DOTS does not
+require such policies be in place, and should be viable in their absence.</t>
 
 <t>The DOTS server and client must also have some standardized method of defining
 the scope of any mitigation, as well as managing other mitigation-related
@@ -286,18 +289,16 @@ superseded by the other operational requirements.</t>
   <t hangText='GEN-001'>
   Extensibility: Protocols and data models developed as part of DOTS MUST be
 extensible in order to keep DOTS adaptable to operational and proprietary
-DDoS defenses. Future extensions MUST be backward compatible. DOTS protocols
-MUST use a version number system to distinguish protocol revisions.
-Implementations of older protocol versions SHOULD ignore information added
-to DOTS messages as part of newer protocol versions.</t>
+DDoS defenses. Future extensions MUST be backward compatible. Implementations
+of older protocol versions SHOULD ignore information added to DOTS messages as
+part of newer protocol versions.</t>
   <t hangText='GEN-002'>
   Resilience and Robustness: The signaling protocol MUST be designed to maximize
 the probability of signal delivery even under the severely constrained network
-conditions caused by particular attack traffic. The protocol MUST be
-resilient, that is, continue operating despite message loss and out-of-order
-or redundant message delivery. In support of signaling protocol robustness,
-DOTS signals SHOULD be conveyed over a transport not susceptible to
-Head of Line Blocking.</t>
+conditions caused by attack traffic. The protocol MUST be resilient, that is,
+continue operating despite message loss and out-of-order or redundant message
+delivery. In support of signaling protocol robustness, DOTS signals SHOULD be
+conveyed over a transport not susceptible to Head of Line Blocking.</t>
   <t hangText='GEN-003'>
   Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also
 significantly augment attack response coordination, permitting such tasks as
@@ -306,7 +307,8 @@ aliasing; exchange of incident reports; and other hinting or configuration
 supplementing attack response.</t>
   <t>As the resilience requirements for the DOTS signal channel mandate small
 signal message size, a separate, secure data channel utilizing a reliable
-transport protocol MUST be used for bulk data exchange.</t>
+transport protocol MUST be used for bulk data exchange. However, reliable bulk
+data exchange may not be possible during attacks causing network congestion.</t>
   <t hangText='GEN-004'>
   Mitigation Hinting: DOTS clients may have access to attack details which can
 be used to inform mitigation techniques. Example attack details might include
@@ -314,8 +316,9 @@ locally collected fingerprints for an on-going attack, or anticipated or
 active attack focal points based on other threat intelligence. DOTS clients
 MAY send mitigation hints derived from attack details to DOTS servers, in the
 full understanding that the DOTS server MAY ignore mitigation hints.
-Mitigation hints MAY be transmitted across either signal or data channel. DOTS
-server handling of mitigation hints is implementation-specific.</t>
+Mitigation hints MUST be transmitted across the signal channel, as the data
+channel may not be functional during an attack. DOTS server handling of
+mitigation hints is implementation-specific.</t>
   <t hangText='GEN-005'>
   Loop Handling: In certain scenarios, typically involving misconfiguration of
 DNS or routing policy, it may be possible for communication between DOTS
@@ -344,16 +347,15 @@ headers, and transport- or message-level security.</t>
 MTU Discovery <xref target="RFC1191"></xref> or Packetization Layer Path MTU Discovery <xref target="RFC4821"></xref>.
 If the PMTU cannot be discovered, DOTS agents SHOULD assume a PMTU of 1280
 bytes.  If IPv4 support on legacy or otherwise unusual networks is a
-consideration and PMTU is unknown, DOTS implementations MAY rely on a PMTU of
-576 bytes, as discussed in <xref target="RFC0791"></xref> and <xref target="RFC1122"></xref>.</t>
+consideration and the PMTU is unknown, DOTS implementations MAY rely on a PMTU
+of 576 bytes, as discussed in <xref target="RFC0791"></xref> and <xref target="RFC1122"></xref>.</t>
   <t hangText='SIG-003'>
   Bidirectionality: To support peer health detection, to maintain an active
-signal channel, and increase the probability of signal delivery during an
+signal channel, and to increase the probability of signal delivery during an
 attack, the signal channel MUST be bidirectional, with client and server
 transmitting signals to each other at regular intervals, regardless of any
-client request for mitigation. Unidirectional messages MUST be supported
-within the bidirectional signal channel to allow for unsolicited message
-delivery, enabling asynchronous notifications between DOTS agents.</t>
+client request for mitigation. The bidirectional signal channel MUST support
+unidirectional messaging to enable notifications between DOTS agents.</t>
   <t hangText='SIG-004'>
   Channel Health Monitoring: DOTS agents MUST support exchange of heartbeat
 messages over the signal channel to monitor channel health. Peer DOTS agents
@@ -387,7 +389,9 @@ DOTS server at any time. DOTS clients MUST NOT assume the redirection target
 DOTS server shares security state with the redirecting DOTS server. DOTS
 clients are free to attempt abbreviated security negotiation methods supported
 by the protocol, such as DTLS session resumption, but MUST be prepared to
-negotiate new security state with the redirection target DOTS server.</t>
+negotiate new security state with the redirection target DOTS server. The
+authentication domain of the redirection target DOTS server MAY be different
+than that of the redirecting DOTS server.</t>
   <t>Due to the increased likelihood of packet loss caused by link congestion
 during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled
 during an active attack against a target in the DOTS client's domain.</t>
@@ -420,15 +424,19 @@ acknowledge a DOTS client's request to stop mitigation.</t>
 mitigation, and to dampen the effect of oscillating attacks, DOTS servers MAY
 allow mitigation to continue for a limited period after acknowledging a DOTS
 client's withdrawal of a mitigation request. During this period, DOTS server
-status messages SHOULD indicate that mitigation is active but terminating.</t>
+status messages SHOULD indicate that mitigation is active but terminating.
+DOTS clients MAY reverse the mitigation termination during this
+active-but-terminating  period with a new mitigation request for the same
+scope. The DOTS server MUST treat this request as a mitigation lifetime
+extension (see SIG-007 below).</t>
   <t>The initial active-but-terminating period is implementation- and deployment-
 specific, but SHOULD be sufficiently long to absorb latency incurred by route
-propagation. If the client requests mitigation again before the initial
-active-but-terminating period elapses, the DOTS server MAY exponentially
-increase the active-but-terminating period up to a maximum of 300 seconds (5
-minutes). After the active-but-terminating period elapses, the DOTS server
-MUST treat the mitigation as terminated, as the DOTS client is no longer
-responsible for the mitigation.</t>
+propagation. If a DOTS client refreshes the mitigation before the
+active-but-terminating period elapses, the DOTS server MAY increase the
+active-but-terminating period up to a maximum of 300 seconds (5 minutes).
+After the active-but-terminating period elapses, the DOTS server MUST treat
+the mitigation as terminated, as the DOTS client is no longer responsible for
+the mitigation.</t>
   <t hangText='SIG-007'>
   Mitigation Lifetime: DOTS servers MUST support mitigations for a negotiated
 time interval, and MUST terminate a mitigation when the lifetime elapses.
@@ -455,7 +463,7 @@ scope type will vary depending on the resources requiring mitigation. All DOTS
 agent implementations MUST support the following required scope types:
 
       <list style="symbols">
-        <t>IPv4 prefixes in CIDR notation <xref target="RFC4632"></xref></t>
+        <t>IPv4 prefixes <xref target="RFC4632"></xref></t>
         <t>IPv6 prefixes <xref target="RFC4291"></xref><xref target="RFC5952"/></t>
         <t>Domain names <xref target="RFC1035"></xref></t>
       </list>
@@ -534,19 +542,20 @@ reliably, in order sent.</t>
   <t hangText='DATA-002'>
   Data privacy and integrity: Transmissions over the data channel are likely to
 contain operationally or privacy-sensitive information or instructions from
-the remote DOTS agent. Theft or modification of data channel transmissions
-could lead to information leaks or malicious transactions on behalf of the
-sending agent (see <xref target="security-considerations"/> below). Consequently data sent
-over the data channel MUST be encrypted and authenticated using current
-IETF best practices. DOTS servers MUST enable means to prevent leaking
-operationally or privacy-sensitive data. Although administrative entities
-participating in DOTS may detail what data may be revealed to third-party DOTS
-agents, such considerations are not in scope for this document.</t>
+the remote DOTS agent. Theft, modification, or replay of data channel
+transmissions could lead to information leaks or malicious transactions on
+behalf of the sending agent (see <xref target="security-considerations"/> below).
+Consequently data sent over the data channel MUST be encrypted and
+authenticated using current IETF best practices. DOTS servers MUST enable
+means to prevent leaking operationally or privacy-sensitive data. Although
+administrative entities participating in DOTS may detail what data may be
+revealed to third-party DOTS agents, such considerations are not in scope for
+this document.</t>
   <t hangText='DATA-003'>
   Resource Configuration: To help meet the general and signal channel
 requirements in <xref target="general-requirements"/> and <xref target="signal-channel-requirements"/>,
 DOTS server implementations MUST provide an interface to configure resource
-identifiers, as described in SIG-007.
+identifiers, as described in SIG-008.
 
 DOTS server implementations MAY expose additional configurability. Additional
 configurability is implementation-specific.</t>
@@ -572,8 +581,9 @@ enabling or supplementing the very attacks DOTS purports to mitigate.</t>
   <t hangText='SEC-001'>
   Peer Mutual Authentication: DOTS agents MUST authenticate each other before a
 DOTS signal or data channel is considered valid. The method of authentication
-is not specified, but should follow current industry best practices with
-respect to any cryptographic mechanisms to authenticate the remote peer.</t>
+is not specified in this document, but should follow current industry best
+practices with respect to any cryptographic mechanisms to authenticate the
+remote peer.</t>
   <t hangText='SEC-002'>
   Message Confidentiality, Integrity and Authenticity: DOTS protocols MUST take
 steps to protect the confidentiality, integrity and authenticity of messages
@@ -581,9 +591,10 @@ sent between client and server. While specific transport- and message-level
 security options are not specified, the protocols MUST follow current industry
 best practices for encryption and message authentication.</t>
   <t>In order for DOTS protocols to remain secure despite advancements in
-cryptanalysis and traffic analysis, DOTS agents MUST be able to negotiate the
-terms and mechanisms of protocol security, subject to the interoperability and
-signal message size requirements in <xref target="signal-channel-requirements"/>.</t>
+cryptanalysis and traffic analysis, DOTS agents MUST support secure
+negotiatation of the terms and mechanisms of protocol security, subject to
+the interoperability and signal message size requirements in
+<xref target="signal-channel-requirements"/>.</t>
   <t>While the interfaces between downstream DOTS server and upstream DOTS client
 within a DOTS gateway are implementation-specific, those interfaces
 nevertheless MUST provide security equivalent to that of the signal channels
@@ -634,8 +645,8 @@ mitigation status, including failures and their causes.</t>
   <t hangText='DM-004'>
   Mitigation Scope Representation: The data model MUST support representation of
 a requested mitigation's scope. As mitigation scope may be represented in
-several different ways, per SIG-007 above, the data model MUST be capable of
-flexible representation of mitigation scope.</t>
+several different ways, per SIG-007 above, the data model MUST include
+extensible representation of mitigation scope.</t>
   <t hangText='DM-005'>
   Mitigation Lifetime Representation: The data model MUST support representation
 of a mitigation request's lifetime, including mitigations with no specified
@@ -647,7 +658,9 @@ through a mitigation request.</t>
   <t hangText='DM-007'>
   Acceptable Signal Loss Representation: The data model MUST be able to
 represent the DOTS agent's preference for acceptable signal loss when
-establishing a signal channel, as described in GEN-002.</t>
+establishing a signal channel, as described in GEN-002. Measurements of loss
+might include, but are not restricted to, number of consecutive missed
+heartbeat messages, retransmission count, or request timeouts.</t>
   <t hangText='DM-008'>
   Heartbeat Interval Representation: The data model MUST be able to represent
 the DOTS agent's preferred heartbeat interval, which the client may include
@@ -691,7 +704,7 @@ potential risks involved in deploying DOTS. DOTS agent impersonation and signal
 blocking are discussed here. Additional DOTS security considerations may be
 found in <xref target="I-D.ietf-dots-architecture"></xref> and DOTS protocol documents.</t>
 
-<t>Impersonation of either DOTS server or DOTS client could have catastrophic
+<t>Impersonation of either a DOTS server or a DOTS client could have catastrophic
 impact on operations in either domain. If an attacker has the ability to
 impersonate a DOTS client, that attacker can affect policy on the network path
 to the DOTS client's domain, up to and including instantiation of blacklists
@@ -718,7 +731,7 @@ function of DOTS, which is to request mitigation of active or expected DDoS
 attacks. The DOTS signal channel is expected to operate over congested inbound
 links, and, as described in <xref target="signal-channel-requirements"/>, the signal channel
 protocol must be designed for minimal data transfer to reduce the incidence of
-signal blocking.</t>
+signal loss.</t>
 
 </section>
 <section anchor="iana-considerations" title="IANA Considerations">
@@ -772,10 +785,11 @@ signal blocking.</t>
 &RFC4632;
 &RFC4787;
 &RFC4821;
+&RFC5952;
 &RFC6888;
 &RFC7857;
 &RFC8085;
-&RFC5952;
+&RFC8174;
 
 
     </references>
@@ -797,279 +811,284 @@ signal blocking.</t>
   </back>
 
 <!-- ##markdown-source:
-H4sIAPKlhlsAA619WW8byZLue/2KQp+Hti9IHi/tpTUYoGWruy2Mt7HkORgY
-xkWSlSTrqFjFqUUy2/B/v/FFRG7FkuyDO/3QlsRiLpGREV+sNZ/Ps77sK3uS
-n5Vd35bLobdFfmbr0lR5s84vbHtdrmx+7+ysubifv9vbOr/cttb0+UW5qU1V
-1pv8g/2foWztztZ9l5nlsrXXNN67y4v0k6JZ1WZHUxWtWffz0vbredH03byN
-npo/fJIVpqensszQPCe0hNXQlv0hu9nIqNnVzUl+Xve2rW0/P8Ng2cr0J3lZ
-r5ssWzUFLeokH7q56VZlme3LkyzP+2Z1kh9sRz92Tdu3dt2d5HWDXw87+Q2f
-Zmbot02Lb+C/uf6b0+D0xOkif0NftnVna/+JbOq0Llp7M/Fx09JiTttl0+Zv
-bX/TtFed/4xIbi2t/NGzR8/yi0V+0dPW6f/+gRVtHGPXMsIsf3MePmsKmveX
-5w8f/BL9baj7lr7ysS5xkjxgmM/uTFmd5GbnVvmbwbALIuT0hj9gw91Vc1P2
-f402/KFZ2raf+Jg3/GowN7Ycb9T/Ph/t8J25yt+b9mpqg4+eP372L26w3ex+
-2/b9fNXU3VD1i1Wzm97f5YJ4tCgOo71dlu2wM5Xtbkw7eoB392Z1urb29t3l
-v++WpusO+Z9Ntc5fl/VV/mLoytp2HW9ztPsXpt6YqmntLP8P09amN1dmRIUn
-Tx88ePbwmAzndVGa8fbj5fPq/+9/NHVhfpNlMzWyuml3pi+vLZb94Y+XD549
-fe5//PVh+PGx/vjwweMn7seHjx75H/2zj+hn/fHxr8+f6o+/PPIP/PL0sfva
-L8+eP3M/Pn/kHnj6/Llbw7PnT9wDzx88dxM/+fUJjZDhokerP5+fLYI0Me1q
-S6yx6od24tOhs/OV6WznVvroqZv92YNfw/LCSn/9hXaVzefz3CzpoM2qz7LL
-bdnlJM8GyKy8sGscbd5vbR7LspxWyX+8U7Zmd8rWe5B49/N925AAa6out7VZ
-8ierpmlJ0hkM2tpuT6xuScplGC03fW9WV91CFr4ri6KyWUZCs22KYdWXTZ1H
-/339G42/rOyu+5b9e/Rflr1sSM5+6XNTF3TTieAG38WgE/9lP6RDdGm5Wa+r
-ctXntQpFPGqqKr8q66KbZfvKbAbsUz/Pm71tTd+09M0+73RMWvd1WVj8kVZo
-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
-e9IK368LJCa0zO+VyP4f8jPt+DSQAAA=
+H4sIALYCylsAA619W4/bSJLuO38F0fPQ9kLS+G53LRbost1uF9Zle+3yGSwa
+xkFKTEnsokgtL1VWG/7vG19E5I1ilT3nTD/MlCUqL5GREV9cOZ/Ps77sK3uS
+vyy7vi2XQ2+L/KWtS1PlzTr/aNurcmXzOy9fNh/v5u/2ts4vtq01ff6x3NSm
+KutN/sH+z1C2dmfrvsvMctnaKxrv3cXH9JuiWdVmR1MVrVn389L263nR9N28
+jZ6a33+SFaanp7LM0DwntITV0Jb9IbveyKjZ5fVJflb3tq1tP3+JwbKV6U/y
+sl43WbZqClrUST50c9OtyjLblydZnvfN6iQ/2I7+7Jq2b+26O8nrBv887ORf
++DYzQ79tWvwC/831/3ManJ44XeTn9GNbd7b238imTuuitdcTXzctLea0XTZt
+/tb210172fnviOTW0sofPH3wNP+4yD/2tHX6X//AijaOsWsZYZafn4XvmoLm
+ffTs/r1H0WdD3bf0k091iZPkAcN8dmfK6iQ3O7fKXw2GXRAhpzf8ARvuLpvr
+sv9rtOEPzdK2/cTXvOHXg7m25Xij/t/z0Q7fmcv8vWkvpzb44NnDp//kBtvN
+7tdt389XTd0NVb9YNbvp/V0siEeL4jDa20XZDjtT2e7atKMHeHfnq9O1tTfv
+Lv9ttzRdd8h/b6p1/qasL/PnQ1fWtut4m6PdPzf1xlRNa2f5f5q2Nr25NCMq
+PH5y797T+8dkOKuL0oy3Hy+fV/9//7OpC/OrLJupkdVNuzN9eWWx7A+vXtx7
++uSZ//OX++HPh/rn/XsPH7s/7z944P/0zz6gv/XPh788e6J/PnrgH3j05KH7
+2aOnz566P589cA88/uWxe+DJs2duOU+fPXbPPrv3zK3h2f2nj06yDHc+2sjZ
+/OUiCBbTrrbEJat+aCe+HTo7X5nOdm7RD564hTy990tYaVj0L49og9l8Ps/N
+ks7crPosu9iWXU6ibYD4ygu7xinn/dbmsVjLaZX84a1iNrtVzN6B8Lub79uG
+ZFlTdbmtzZK/WTVNS0LPYNDWdnvieksCL8Nouel7s7rsFrLwXVkUlc0ykp9t
+UwyrvmzqPPrv699o/GVld9237D+i/7LsRUMi90ufm7qgS08EN/gtBp34L/sh
+daJLy816XZWrPq9VPuJRU1X5ZVkX3SzbV2YzYJ/6fd7sbWv6pqVf9nmnY9K6
+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
+QGJCy/yukex/Addt+hRwkwAA
 
 -->
 
