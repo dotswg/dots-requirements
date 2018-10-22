@@ -632,7 +632,7 @@ SEC-002
 
 : In order for DOTS protocols to remain secure despite advancements in
   cryptanalysis and traffic analysis, DOTS agents MUST support secure
-  negotiatation of the terms and mechanisms of protocol security, subject to
+  negotiation of the terms and mechanisms of protocol security, subject to
   the interoperability and signal message size requirements in
   {{signal-channel-requirements}}.
 
@@ -817,7 +817,8 @@ Dave Dolson
 Acknowledgments
 ===============
 
-Thanks to Roman Danyliw and Matt Richardson for careful reading and feedback.
+Thanks to Roman Danyliw, Matt Richardson, and Jon Shallow for careful reading
+and feedback.
 
 
 --- back

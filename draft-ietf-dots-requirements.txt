@@ -743,7 +743,7 @@ Internet-Draft              DOTS Requirements               October 2018
 
       In order for DOTS protocols to remain secure despite advancements
       in cryptanalysis and traffic analysis, DOTS agents MUST support
-      secure negotiatation of the terms and mechanisms of protocol
+      secure negotiation of the terms and mechanisms of protocol
       security, subject to the interoperability and signal message size
       requirements in Section 2.2.
 
@@ -956,8 +956,8 @@ Internet-Draft              DOTS Requirements               October 2018
 
 7.  Acknowledgments
 
-   Thanks to Roman Danyliw and Matt Richardson for careful reading and
-   feedback.
+   Thanks to Roman Danyliw, Matt Richardson, and Jon Shallow for careful
+   reading and feedback.
 
 8.  References
 
