@@ -199,9 +199,9 @@ Signal channel:
   such as a volumetric DDoS attack causing network congestion.
 
 DOTS signal:
-: A concise status/control message transmitted over the signal channel between
-  DOTS agents, used to indicate the client's need for mitigation, or to convey
-  the status of any requested mitigation.
+: A concise status/control message transmitted over the authenticated signal
+  channel between DOTS agents, used to indicate the client's need for
+  mitigation, or to convey the status of any requested mitigation.
 
 Heartbeat:
 : A message transmitted between DOTS agents over the signal channel, used as a
@@ -219,11 +219,11 @@ Filter:
   will typically have a policy associated with it, e.g., rate-limiting or
   discarding matching traffic [RFC4949].
 
-Blacklist:
+Drop-list:
 : A list of filters indicating sources from which traffic should be blocked,
   regardless of traffic content.
 
-Whitelist:
+Accept-list:
 : A list of filters indicating sources from which traffic should always be
   allowed, regardless of contradictory data gleaned in a detected attack.
 
@@ -307,7 +307,7 @@ GEN-002
 GEN-003
 : Bulk Data Exchange: Infrequent bulk data exchange between DOTS agents can also
   significantly augment attack response coordination, permitting such tasks as
-  population of black- or white-listed source addresses; address or prefix group
+  population of drop- or accept-listed source addresses; address or prefix group
   aliasing; exchange of incident reports; and other hinting or configuration
   supplementing attack response.
 
@@ -404,8 +404,8 @@ SIG-005
   clients are free to attempt abbreviated security negotiation methods supported
   by the protocol, such as DTLS session resumption, but MUST be prepared to
   negotiate new security state with the redirection target DOTS server. The
-  authentication domain of the redirection target DOTS server MAY be different
-  than that of the redirecting DOTS server.
+  authentication domain of the redirection target DOTS server MUST be the same
+  as the authentication domain of the redirecting DOTS server.
 
 : Due to the increased likelihood of packet loss caused by link congestion
   during an attack, DOTS servers SHOULD NOT redirect while mitigation is enabled
@@ -597,15 +597,15 @@ DATA-003
   configurability is implementation-specific.
 
 DATA-004
-: Black- and whitelist management: DOTS servers MUST provide methods for
-  DOTS clients to manage black- and white-lists of traffic destined for
-  resources belonging to a client.
+: Policy management: DOTS servers MUST provide methods for DOTS clients to
+  manage drop- and accept-lists of traffic destined for resources belonging to
+  a client.
 
-: For example, a DOTS client should be able to create a black- or whitelist
+: For example, a DOTS client should be able to create a drop- or accept-list
   entry, retrieve a list of current entries from either list, update the content
   of either list, and delete entries as necessary.
 
-: How a DOTS server authorizes DOTS client management of black- and white-list
+: How a DOTS server authorizes DOTS client management of drop- and accept-list
   entries is implementation-specific.
 
 
@@ -662,7 +662,7 @@ SEC-004
   is not authorized to manage.
 
 : Likewise, DOTS servers MUST refuse to allow creation, modification or deletion
-  of scope aliases and black-/white-lists when the DOTS client is unauthorized.
+  of scope aliases and drop-/accept-lists when the DOTS client is unauthorized.
 
 : The modes of authorization are implementation-specific.
 
@@ -762,7 +762,7 @@ found in [I-D.ietf-dots-architecture] and DOTS protocol documents.
 Impersonation of either a DOTS server or a DOTS client could have catastrophic
 impact on operations in either domain. If an attacker has the ability to
 impersonate a DOTS client, that attacker can affect policy on the network path
-to the DOTS client's domain, up to and including instantiation of blacklists
+to the DOTS client's domain, up to and including instantiation of drop-lists
 blocking all inbound traffic to networks for which the DOTS client is authorized
 to request mitigation.
 
